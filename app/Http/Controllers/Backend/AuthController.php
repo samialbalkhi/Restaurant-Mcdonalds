@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use GuzzleHttp\Promise\Create;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Backend\loginRequest;
 use App\Http\Requests\Backend\RegisterRequest;

@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\AuthController;
+use App\Http\Controllers\Backend\CategorieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
+
+    ///
+    Route::group(['prefix' => 'category'], function () {
+        Route::get('/index', [CategorieController::class, 'index']);
+        Route::post('/store', [CategorieController::class, 'store']);
+        Route::get('/edit/{id}', [CategorieController::class, 'edit']);
+        Route::post('/update/{id}', [CategorieController::class, 'update']);
+        Route::delete('/destroy/{id}', [CategorieController::class, 'destroy']);
+    });
 });
 Route::group(['prefix' => 'Auth'], function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
 });
+
+// Route::get('/orders', function () {
+//     // Token has both "check-status" and "place-orders" abilities...
+//     })->middleware(['auth:sanctum', 'abilities:check-status,place-orders']);
