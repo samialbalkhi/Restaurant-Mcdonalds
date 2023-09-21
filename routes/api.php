@@ -18,8 +18,12 @@ use App\Http\Controllers\Backend\CategorieController;
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
+});
 
-    ///
+
+
+Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () {
+    
     Route::group(['prefix' => 'category'], function () {
         Route::get('/index', [CategorieController::class, 'index']);
         Route::post('/store', [CategorieController::class, 'store']);
@@ -28,11 +32,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::delete('/destroy/{id}', [CategorieController::class, 'destroy']);
     });
 });
+
+
+
 Route::group(['prefix' => 'Auth'], function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
 });
-
-// Route::get('/orders', function () {
-//     // Token has both "check-status" and "place-orders" abilities...
-//     })->middleware(['auth:sanctum', 'abilities:check-status,place-orders']);

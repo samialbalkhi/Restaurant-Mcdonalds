@@ -23,7 +23,7 @@ class AuthController extends Controller
                 401,
             );
         } else {
-            return $user->createToken('token-name')->plainTextToken;
+            return $user->createToken('token-name',['customer'])->plainTextToken;
         }
     }
 

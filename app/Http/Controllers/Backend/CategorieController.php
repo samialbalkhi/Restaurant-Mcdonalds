@@ -7,11 +7,22 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Backend\CategoryRequest;
+use App\Models\User;
 
 class CategorieController extends Controller
 {
     public function index()
     {
+        ///4|DHtSRWzkHGLMR9XDlAQ02Joai3mTBlCFep6r04wRb459befa
+        if (
+            !auth()
+                ->user()
+                ->tokenCan('admin')
+        ) {
+            return response()->json([
+                'message' => 'unauthorized',403
+            ]);
+        }
         $Category = Category::all();
 
         $respones = [
@@ -84,8 +95,9 @@ class CategorieController extends Controller
      */
     public function destroy(string $id)
     {
-        if (Storage::exists('public/' .'images_Category'.$id )) {
-            Storage::delete('public/' . 'images_Category'.$id);
+        $CategoryImage = Category::get()->find($id);
+        if (Storage::exists('public/' . $CategoryImage->image)) {
+            Storage::delete('public/' . $CategoryImage->image);
         }
         Category::findOrFail($id)->delete();
 
