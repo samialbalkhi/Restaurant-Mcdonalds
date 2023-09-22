@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Section;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,16 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('sections', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->string('description');
+            $table->string('message')->nullable();
             $table->string('image');
             $table->string('status')->default(0);
-            $table
-                ->foreignIdFor(Section::class)
-                ->constrained()
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('sections');
     }
 };

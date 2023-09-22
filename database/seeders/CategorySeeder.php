@@ -16,23 +16,79 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $faker = Factory::create();
-       
-            Category::create([
-                'name' => 'foods',
-                'description'=>$faker->paragraph,
-                'message' => 'Gutscheine gültig vom 04.09. – 29.09.2023. In allen teilnehmenden Restaurants. In Frühstücksrestaurants ab 10 Uhr (samstags, sonn- und feiertags ab 11 Uhr). ',
-                'image'=>'pizza.jpeg'
-            ]);
 
-            Category::create([
-                'name' => 'McCafe',
-                'description'=>$faker->paragraph,
-                'message' => 'In allen teilnehmenden Restaurants. Solange der Vorrat reicht. Iced Coffee Shake täglich ab 10 Uhr erhältlich (samstags, sonn- und feiertags ab 11 Uhr).',
-                'image'=>'cafe.jpg'
-            ]);
+        Category::create([
+            'name' => 'Highlights',
+            'image' => 'Highlights.jpeg',
+            'status' => rand(0, 1),
+            'section_id' => 1,
+        ]);
+        Category::create([
+            'name' => 'McSmart Menü.jpeg',
+            'image' => 'McSmart Menü.jpeg',
+            'status' => rand(0, 1),
+            'section_id' => 1,
+        ]);
+        Category::create([
+            'name' => 'Burger',
+            'image' => 'Burger.jpeg',
+            'status' => rand(0, 1),
+            'section_id' => 1,
+        ]);
+        Category::create([
+            'name' => 'McNuggets® & Fingerfood',
+            'image' => 'McNuggets® & Fingerfood.jpeg',
+            'status' => rand(0, 1),
+            'section_id' => 1,
+        ]);
 
+        Category::create([
+            'name' => 'McPlant',
+            'image' => 'McPlant.jpeg',
+            'status' => rand(0, 1),
+            'section_id' => 1,
+        ]);
 
-        }
+        Category::create([
+            'name' => 'Happy Meal',
+            'image' => 'Happy Meal.jpeg',
+            'status' => rand(0, 1),
+            'section_id' => 1,
+        ]);
 
+        Category::create([
+            'name' => 'Beilagen & Extras',
+            'image' => 'Beilagen & Extras.jpeg',
+            'status' => rand(0, 1),
+            'section_id' => 1,
+        ]);
+
+        Category::create([
+            'name' => 'Frühstück',
+            'image' => 'Frühstück.jpeg',
+            'status' => rand(0, 1),
+            'section_id' => 1,
+        ]);
+
+        Category::create([
+            'name' => 'Getränke',
+            'image' => 'Getränke.jpeg',
+            'status' => rand(0, 1),
+            'section_id' => 1,
+        ]);
+
+        Category::create([
+            'name' => 'Desserts',
+            'image' => 'Desserts.jpeg',
+            'status' => 1,
+            'section_id' => rand(0, 5),
+        ]);
+
+        Category::create([
+            'name' => 'McCafé',
+            'image' => 'McCafé.jpeg',
+            'status' => rand(0, 1),
+            'section_id' => 1,
+        ]);
     }
-
+}

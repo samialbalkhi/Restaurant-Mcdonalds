@@ -13,16 +13,6 @@ class CategorieController extends Controller
 {
     public function index()
     {
-        ///4|DHtSRWzkHGLMR9XDlAQ02Joai3mTBlCFep6r04wRb459befa
-        if (
-            !auth()
-                ->user()
-                ->tokenCan('admin')
-        ) {
-            return response()->json([
-                'message' => 'unauthorized',403
-            ]);
-        }
         $Category = Category::all();
 
         $respones = [
@@ -40,6 +30,7 @@ class CategorieController extends Controller
             'description' => $request->description,
             'message' => $request->message,
             'image' => $path,
+            'section_id'=>$request->section_id,
         ]);
 
         $respones = [
@@ -80,6 +71,8 @@ class CategorieController extends Controller
             'description' => $request->description,
             'message' => $request->message,
             'image' => $path,
+            'section_id'=>$request->section_id,
+
         ]);
 
         $respones = [

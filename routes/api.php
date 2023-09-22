@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AuthController;
+use App\Http\Controllers\Backend\SectionController;
 use App\Http\Controllers\Backend\CategorieController;
 
 /*
@@ -20,10 +22,18 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
 });
 
-
-
 Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () {
-    
+    ///////          Section        //////////
+
+    Route::group(['prefix' => 'section'], function () {
+        Route::get('/index', [SectionController::class, 'index']);
+        Route::post('/store', [SectionController::class, 'store']);
+        Route::get('/edit/{id}', [SectionController::class, 'edit']);
+        Route::post('/update/{id}', [SectionController::class, 'update']);
+        Route::delete('/destroy/{id}', [SectionController::class, 'destroy']);
+    });
+
+    /////         category      ///////////
     Route::group(['prefix' => 'category'], function () {
         Route::get('/index', [CategorieController::class, 'index']);
         Route::post('/store', [CategorieController::class, 'store']);
@@ -32,8 +42,6 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::delete('/destroy/{id}', [CategorieController::class, 'destroy']);
     });
 });
-
-
 
 Route::group(['prefix' => 'Auth'], function () {
     Route::post('/login', [AuthController::class, 'login']);
