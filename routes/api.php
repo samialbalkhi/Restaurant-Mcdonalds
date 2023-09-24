@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthAdminController;
 use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,18 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
 });
 
+
+Route::group(['prefix' => 'customer'], function () {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+});
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::post('/login', [AuthAdminController::class, 'login']);
+});
+
+
+
 Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () {
     ///////          Section        //////////
 
@@ -43,7 +56,12 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     });
 });
 
-Route::group(['prefix' => 'Auth'], function () {
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
-});
+
+
+
+
+
+
+
+
+

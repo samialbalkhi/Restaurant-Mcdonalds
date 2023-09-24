@@ -12,7 +12,7 @@ class SectionController extends Controller
 {
     public function index()
     {
-        $Section = Section::all();
+        $Section = Section::whereStatus(1)->get();
 
         $respones = [
             'Section' => $Section,
@@ -57,7 +57,7 @@ class SectionController extends Controller
         if (Storage::exists('public/' . $SectionImage->image)) {
             Storage::delete('public/' . $SectionImage->image);
         }
-        $path = $request->image->store('images_Section' . $SectionImage->id, 'public');
+        $path = $request->image->store('images_Section', 'public');
 
         $SectionImage->update([
             'name' => $request->name,

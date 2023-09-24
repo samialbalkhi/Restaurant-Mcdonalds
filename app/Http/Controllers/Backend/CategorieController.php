@@ -13,7 +13,7 @@ class CategorieController extends Controller
 {
     public function index()
     {
-        $Category = Category::all();
+        $Category = Category::with(['section:id,name'])->get();
 
         $respones = [
             'Category' => $Category,
@@ -27,8 +27,7 @@ class CategorieController extends Controller
         $path = $request->image->store('images_Category', 'public');
         $Category = Category::create([
             'name' => $request->name,
-            'description' => $request->description,
-            'message' => $request->message,
+            'status' => $request->status,
             'image' => $path,
             'section_id'=>$request->section_id,
         ]);
@@ -45,8 +44,8 @@ class CategorieController extends Controller
      */
     public function edit(string $id)
     {
-        $Category = Category::findOrFail($id);
-
+        $Category = Category::with(['section:id,name'])->findOrFail($id);
+        
         $respones = [
             'Category' => $Category,
         ];
@@ -68,8 +67,7 @@ class CategorieController extends Controller
 
         $CategoryImage->update([
             'name' => $request->name,
-            'description' => $request->description,
-            'message' => $request->message,
+            'status' => $request->status,
             'image' => $path,
             'section_id'=>$request->section_id,
 

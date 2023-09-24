@@ -24,6 +24,7 @@ class SectionRequest extends FormRequest
      */
     public function rules(): array
     {
+
         switch ($this->method()) {
             case 'POST':
                 return [
@@ -37,7 +38,7 @@ class SectionRequest extends FormRequest
             case 'PATCH':
             case 'PUT':
                 return [
-                    'name' => ['required', Rule::unique('sections', 'name')->ignore($this->route()->section)],
+                    'name' => ['required', Rule::unique('sections', 'name')->ignore($this->route()->edit)],
                     'description' => ['required'],
                     'message' => ['nullable'],
                     'status' => ['required'],
