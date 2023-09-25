@@ -12,7 +12,7 @@ class SectionController extends Controller
 {
     public function index()
     {
-        $Section = Section::whereStatus(1)->get();
+        $Section = Section::all();
 
         $respones = [
             'Section' => $Section,

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\SectionController;
 use App\Http\Controllers\Backend\CategorieController;
+use App\Http\Controllers\Backend\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,15 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::post('/update/{id}', [CategorieController::class, 'update']);
         Route::delete('/destroy/{id}', [CategorieController::class, 'destroy']);
     });
+
+    ////  Products  /////////////////
+
+    Route::group(['prefix' => 'product'], function () {
+        Route::resource('/product',ProductController::class);
+
+    });
+
+
 });
 
 
