@@ -10,9 +10,6 @@ use App\Http\Requests\Backend\ProductRequest;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $Product = Product::with('category:id,name')->get();
@@ -24,17 +21,6 @@ class ProductController extends Controller
         return response($respones, 201);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(ProductRequest $request)
     {
         $path = $request->image->store('images_Product', 'public');
@@ -58,17 +44,6 @@ class ProductController extends Controller
         return response($respones, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $Product = Product::with(['category:id,name'])->findOrFail($id);
@@ -102,7 +77,7 @@ class ProductController extends Controller
             'quantity' => $request->quantity,
             'featured' => $request->featured,
             'status' => $request->status,
-            'category_id' => $request->status,
+            'category_id' => $request->category_id,
             'image' => $path,
         ]);
 

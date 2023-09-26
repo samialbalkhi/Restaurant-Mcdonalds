@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\MyCafeSeeder;
 use Database\Seeders\EntrustSeeder;
 use Database\Seeders\ProductSeeder;
 use Database\Seeders\SectionSeeder;
@@ -20,8 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EntrustSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(ProductSeeder::class);
-
-
-        
+        $this->call(MyCafeSeeder::class);
     }
 }
