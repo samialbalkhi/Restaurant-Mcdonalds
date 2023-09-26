@@ -6,6 +6,7 @@ use App\Models\MyCafe;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Backend\MycafeRequest;
 
 class MycafeController extends Controller
 {
@@ -20,7 +21,7 @@ class MycafeController extends Controller
         return response($respones, 201);
     }
 
-    public function store(Request $request)
+    public function store(MycafeRequest $request)
     {
         $pathi_mage_drinks = $request->image_drinks->store('image_drinks', 'public');
         $path_image_sweets = $request->image_sweets->store('image_sweets', 'public');
@@ -53,7 +54,7 @@ class MycafeController extends Controller
         return response($respones, 201);
     }
 
-    public function update(Request $request, string $id)
+    public function update(MycafeRequest $request, string $id)
     {
         $MyCafeImage = MyCafe::get()->find($id);
 

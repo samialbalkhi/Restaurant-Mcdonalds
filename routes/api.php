@@ -5,11 +5,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\Backend\AuthController;
+use App\Http\Controllers\Backend\FamilyController;
+use App\Http\Controllers\Backend\MycafeController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SectionController;
 use App\Http\Controllers\Backend\ProductsController;
 use App\Http\Controllers\Backend\CategorieController;
-use App\Http\Controllers\Backend\MycafeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,4 +72,14 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::post('/update/{id}', [MycafeController::class, 'update']);
         Route::delete('/destroy/{id}', [MycafeController::class, 'destroy']);
     });
+
+    Route::group(['prefix' => 'family'], function () {
+        Route::get('/index', [FamilyController::class, 'index']);
+        Route::post('/store', [FamilyController::class, 'store']);
+        Route::get('/edit/{id}', [FamilyController::class, 'edit']);
+        Route::post('/update/{id}', [FamilyController::class, 'update']);
+        Route::delete('/destroy/{id}', [FamilyController::class, 'destroy']);
+    });
+
+
 });
