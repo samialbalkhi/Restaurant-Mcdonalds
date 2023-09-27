@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SectionController;
 use App\Http\Controllers\Backend\ProductsController;
 use App\Http\Controllers\Backend\CategorieController;
+use App\Http\Controllers\Backend\OurRestaurantController;
 use App\Http\Controllers\Backend\OurResponsibilityController;
 
 /*
@@ -38,8 +39,6 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () {
-    ///////          Section        //////////
-
     Route::group(['prefix' => 'section'], function () {
         Route::get('/index', [SectionController::class, 'index']);
         Route::post('/store', [SectionController::class, 'store']);
@@ -48,7 +47,6 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::delete('/destroy/{id}', [SectionController::class, 'destroy']);
     });
 
-    /////         category      ///////////
     Route::group(['prefix' => 'category'], function () {
         Route::get('/index', [CategorieController::class, 'index']);
         Route::post('/store', [CategorieController::class, 'store']);
@@ -57,7 +55,6 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::delete('/destroy/{id}', [CategorieController::class, 'destroy']);
     });
 
-    ////  Products  /////////////////
     Route::group(['prefix' => 'product'], function () {
         Route::get('/index', [ProductController::class, 'index']);
         Route::post('/store', [ProductController::class, 'store']);
@@ -82,5 +79,10 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('/edit/{id}', [OurResponsibilityController::class, 'edit']);
         Route::post('/update/{id}', [OurResponsibilityController::class, 'update']);
         Route::delete('/destroy/{id}', [OurResponsibilityController::class, 'destroy']);
+    });
+
+    Route::group(['prefix' => 'OurRestaurant'], function () {
+        Route::get('/index', [OurRestaurantController::class, 'index']);
+        Route::post('/store/{id}', [OurRestaurantController::class, 'store']);
     });
 });
