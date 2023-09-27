@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class MycafeRequest extends FormRequest
 {
@@ -45,4 +47,15 @@ class MycafeRequest extends FormRequest
             ];
         }
     }
+
+    public function failedValidation(Validator $validator)
+    {
+            throw new HttpResponseException(
+                response()->json([
+                    'success' => false,
+                    'message' => 'Validation errors',
+                    'data' => $validator->errors(),
+                ]),
+            );
+        }
 }

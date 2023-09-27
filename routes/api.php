@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SectionController;
 use App\Http\Controllers\Backend\ProductsController;
 use App\Http\Controllers\Backend\CategorieController;
+use App\Http\Controllers\Backend\OurResponsibilityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,19 +68,19 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
 
     Route::group(['prefix' => 'mycafe'], function () {
         Route::get('/index', [MycafeController::class, 'index']);
-        Route::post('/store', [MycafeController::class, 'store']);
-        Route::get('/edit/{id}', [MycafeController::class, 'edit']);
-        Route::post('/update/{id}', [MycafeController::class, 'update']);
-        Route::delete('/destroy/{id}', [MycafeController::class, 'destroy']);
+        Route::post('/store/{id}', [MycafeController::class, 'store']);
     });
 
     Route::group(['prefix' => 'family'], function () {
         Route::get('/index', [FamilyController::class, 'index']);
-        Route::post('/store', [FamilyController::class, 'store']);
-        Route::get('/edit/{id}', [FamilyController::class, 'edit']);
-        Route::post('/update/{id}', [FamilyController::class, 'update']);
-        Route::delete('/destroy/{id}', [FamilyController::class, 'destroy']);
+        Route::post('/store/{id}', [FamilyController::class, 'store']);
     });
 
-
+    Route::group(['prefix' => 'ourresponsibility'], function () {
+        Route::get('/index', [OurResponsibilityController::class, 'index']);
+        Route::post('/store', [OurResponsibilityController::class, 'store']);
+        Route::get('/edit/{id}', [OurResponsibilityController::class, 'edit']);
+        Route::post('/update/{id}', [OurResponsibilityController::class, 'update']);
+        Route::delete('/destroy/{id}', [OurResponsibilityController::class, 'destroy']);
+    });
 });

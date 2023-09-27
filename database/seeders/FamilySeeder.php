@@ -19,6 +19,7 @@ class FamilySeeder extends Seeder
             Hier sind Spiel, Spaß und ganz viele Überraschungen für Groß und Klein garantiert.',
             'description' => 'Eine abwechslungsreiche Produktauswahl, tolle Spielzeuge oder auch spannende Bücher als Alternative sorgen für jede Menge Spaß im Happy Meal®!',
             'image' => 'Family.jpg',
+            'section_id' => 3 ,
         ]);
     }
 }

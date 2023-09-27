@@ -43,7 +43,7 @@ class SectionSeeder extends Seeder
         ]);
 
         Section::create([
-            'name' => 'Unsere verantwortung',
+            'name' => 'Our responsibility',
             'description' => $faker->paragraph,
             'message' => 'In allen teilnehmenden Restaurants. Solange der Vorrat reicht. Iced Coffee Shake täglich ab 10 Uhr erhältlich (samstags, sonn- und feiertags ab 11 Uhr).',
             'image' => 'cafe.jpg',
