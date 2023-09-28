@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\Backend\AuthController;
+use App\Http\Controllers\Backend\CareerController;
 use App\Http\Controllers\Backend\FamilyController;
 use App\Http\Controllers\Backend\MycafeController;
 use App\Http\Controllers\Backend\ProductController;
@@ -84,5 +85,10 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     Route::group(['prefix' => 'OurRestaurant'], function () {
         Route::get('/index', [OurRestaurantController::class, 'index']);
         Route::post('/store/{id}', [OurRestaurantController::class, 'store']);
+    });
+
+    Route::group(['prefix' => 'career'], function () {
+        Route::get('/index', [CareerController::class, 'index']);
+        Route::post('/store/{id}', [CareerController::class, 'store']);
     });
 });

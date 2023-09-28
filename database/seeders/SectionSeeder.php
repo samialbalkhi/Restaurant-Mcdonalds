@@ -21,7 +21,7 @@ class SectionSeeder extends Seeder
             'description' => $faker->paragraph,
             'message' => 'Gutscheine gültig vom 04.09. – 29.09.2023. In allen teilnehmenden Restaurants. In Frühstücksrestaurants ab 10 Uhr (samstags, sonn- und feiertags ab 11 Uhr). ',
             'image' => 'pizza.jpeg',
-            'status' => rand(0,1),
+            'status' => rand(0, 1),
         ]);
 
         Section::create([
@@ -29,8 +29,7 @@ class SectionSeeder extends Seeder
             'description' => $faker->paragraph,
             'message' => 'In allen teilnehmenden Restaurants. Solange der Vorrat reicht. Iced Coffee Shake täglich ab 10 Uhr erhältlich (samstags, sonn- und feiertags ab 11 Uhr).',
             'image' => 'cafe.jpg',
-            'status' => rand(0,1),
-
+            'status' => rand(0, 1),
         ]);
 
         Section::create([
@@ -38,8 +37,7 @@ class SectionSeeder extends Seeder
             'description' => $faker->paragraph,
             'message' => 'In allen teilnehmenden Restaurants. Solange der Vorrat reicht. Iced Coffee Shake täglich ab 10 Uhr erhältlich (samstags, sonn- und feiertags ab 11 Uhr).',
             'image' => 'cafe.jpg',
-            'status' => rand(0,1),
-
+            'status' => rand(0, 1),
         ]);
 
         Section::create([
@@ -47,8 +45,7 @@ class SectionSeeder extends Seeder
             'description' => $faker->paragraph,
             'message' => 'In allen teilnehmenden Restaurants. Solange der Vorrat reicht. Iced Coffee Shake täglich ab 10 Uhr erhältlich (samstags, sonn- und feiertags ab 11 Uhr).',
             'image' => 'cafe.jpg',
-            'status' => rand(0,1),
-
+            'status' => rand(0, 1),
         ]);
 
         Section::create([
@@ -56,8 +53,15 @@ class SectionSeeder extends Seeder
             'description' => $faker->paragraph,
             'message' => 'In allen teilnehmenden Restaurants. Solange der Vorrat reicht. Iced Coffee Shake täglich ab 10 Uhr erhältlich (samstags, sonn- und feiertags ab 11 Uhr).',
             'image' => 'cafe.jpg',
-            'status' => rand(0,1),
+            'status' => rand(0, 1),
+        ]);
 
+        Section::create([
+            'name' => ' Career',
+            'description' => $faker->paragraph,
+            'message' => 'In allen teilnehmenden Restaurants. Solange der Vorrat reicht. Iced Coffee Shake täglich ab 10 Uhr erhältlich (samstags, sonn- und feiertags ab 11 Uhr).',
+            'image' => 'StartseitenTeaser1.webp',
+            'status' => rand(0, 1),
         ]);
     }
 }

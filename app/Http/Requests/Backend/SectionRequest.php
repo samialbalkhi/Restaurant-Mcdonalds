@@ -24,29 +24,22 @@ class SectionRequest extends FormRequest
      */
     public function rules(): array
     {
-
-        switch ($this->method()) {
-            case 'POST':
-                return [
-                    'name' => ['required', 'unique:sections,name'],
-                    'description' => ['required'],
-                    'message' => ['nullable'],
-                    'status' => ['required'],
-                    'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-                ];
-
-            case 'PATCH':
-            case 'PUT':
-                return [
-                    'name' => ['required', Rule::unique('sections', 'name')->ignore($this->route()->edit)],
-                    'description' => ['required'],
-                    'message' => ['nullable'],
-                    'status' => ['required'],
-                    'image' => ['required', 'max:2048'],
-                ];
-
-            default:
-                break;
+        if ($this->method('post')) {
+            return [
+                'name' => ['required', 'unique:sections,name'],
+                'description' => ['required'],
+                'message' => ['nullable'],
+                'status' => ['required'],
+                'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            ];
+        } else {
+            return [
+                'name' => ['required', Rule::unique('sections', 'name')->ignore($this->route()->edit)],
+                'description' => ['required'],
+                'message' => ['nullable'],
+                'status' => ['required'],
+                'image' => ['required', 'max:2048'],
+            ];
         }
     }
 

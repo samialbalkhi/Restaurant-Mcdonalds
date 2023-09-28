@@ -2,12 +2,11 @@
 
 namespace App\Http\Requests\Backend;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CategoryRequest extends FormRequest
+class CareerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,21 +23,13 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->method('post')) {
-            return [
-                'name' => ['required', 'unique:categories,name'],
-                'description' => ['required'],
-                'message' => ['nullable'],
-                'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-            ];
-        } else {
-            return [
-                'name' => ['required', Rule::unique('categories', 'name')->ignore($this->route()->category)],
-                'description' => ['required'],
-                'message' => ['nullable'],
-                'image' => ['required', 'max:2048'],
-            ];
-        }
+        return [
+            'title' => ['required'],
+            'description' => ['required'],
+            'message' => ['nullable'],
+            'section_id' => ['required'],
+            'image' => ['required'],
+        ];
     }
 
     public function failedValidation(Validator $validator)
