@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use Database\Seeders\JobSeeder;
 use Illuminate\Database\Seeder;
 use Database\Seeders\CareerSeeder;
 use Database\Seeders\FamilySeeder;
@@ -12,6 +13,7 @@ use Database\Seeders\EntrustSeeder;
 use Database\Seeders\ProductSeeder;
 use Database\Seeders\SectionSeeder;
 use Database\Seeders\CategorySeeder;
+use Database\Seeders\JobOfferSeeder;
 use Database\Seeders\OurrestaurantSeeder;
 use Database\Seeders\OurresponsibilitySeeder;
 
@@ -31,5 +33,9 @@ class DatabaseSeeder extends Seeder
         $this->call(OurresponsibilitySeeder::class);
         $this->call(OurrestaurantSeeder::class);
         $this->call(CareerSeeder::class);
+        $this->call(JobSeeder::class);
+        $this->call(JobOfferSeeder::class);
+
+
     }
 }

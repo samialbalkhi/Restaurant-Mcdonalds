@@ -4,12 +4,14 @@ use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthAdminController;
+use App\Http\Controllers\Backend\JobController;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\CareerController;
 use App\Http\Controllers\Backend\FamilyController;
 use App\Http\Controllers\Backend\MycafeController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SectionController;
+use App\Http\Controllers\Backend\JobOfferController;
 use App\Http\Controllers\Backend\ProductsController;
 use App\Http\Controllers\Backend\CategorieController;
 use App\Http\Controllers\Backend\OurRestaurantController;
@@ -91,4 +93,22 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('/index', [CareerController::class, 'index']);
         Route::post('/store/{id}', [CareerController::class, 'store']);
     });
+
+    Route::group(['prefix' => 'job'], function () {
+        Route::get('/index', [JobController::class, 'index']);
+        Route::post('/store', [JobController::class, 'store']);
+        Route::get('/edit/{id}', [JobController::class, 'edit']);
+        Route::post('/update/{id}', [JobController::class, 'update']);
+        Route::delete('/destroy/{id}', [JobController::class, 'destroy']);
+    });
+
+    Route::group(['prefix' => 'JobOffer'], function () {
+        Route::get('/index', [JobOfferController::class, 'index']);
+        Route::post('/store', [JobOfferController::class, 'store']);
+        Route::get('/edit/{id}', [JobOfferController::class, 'edit']);
+        Route::post('/update/{id}', [JobOfferController::class, 'update']);
+        Route::delete('/destroy/{id}', [JobOfferController::class, 'destroy']);
+    });
+
+
 });
