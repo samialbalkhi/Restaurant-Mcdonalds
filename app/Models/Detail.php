@@ -13,6 +13,6 @@ class Detail extends Model
 
     public function Job_offer()
     {
-        return $this->belongsTo(Job_offer::class);
+        return $this->belongsTo(Job_offer::class,'job_offer_id');
     }
 }

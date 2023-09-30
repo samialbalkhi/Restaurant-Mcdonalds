@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 use App\Http\Requests\Backend\JobOfferRequest;
 
 class JobOfferController extends Controller
@@ -25,7 +26,7 @@ class JobOfferController extends Controller
 
         return response($respones, 201);
     }
-    public function store(JobOfferRequest $request)
+    public function store(Request $request)
     {
         $path = $request->image->store('image_Job_offer', 'public');
         $Job_offer = Job_offer::create([
@@ -36,21 +37,22 @@ class JobOfferController extends Controller
             'job_id' => $request->job_id,
         ]);
         $Job_offer_id = $Job_offer->id;
-
+        $createdDetails = [];
         for ($i = 0; $i < count($request->listOfDetails); $i++) {
             $details = Detail::create([
                 'details' => $request->listOfDetails[$i]['details'],
                 'job_offer_id' => $Job_offer_id,
             ]);
-
-            $respones = [
-                'Job_offer' => $Job_offer,
-                'details' => $details,
-            ];
-
-            return response($respones, 201);
         }
+        $createdDetails[] = $details;
+        $respones = [
+            'Job_offer' => $Job_offer,
+            'details' => $createdDetails,
+        ];
+
+        return response()->json($respones);
     }
+
     public function edit($id)
     {
         $Job_offer = Job_offer::with(['Jobs:id,name'])->findOrFail($id);
