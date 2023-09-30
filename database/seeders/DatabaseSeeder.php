@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use Database\Seeders\JobSeeder;
 use Illuminate\Database\Seeder;
 use Database\Seeders\CareerSeeder;
+use Database\Seeders\DetailSeeder;
 use Database\Seeders\FamilySeeder;
 use Database\Seeders\MyCafeSeeder;
 use Database\Seeders\EntrustSeeder;
@@ -35,7 +36,9 @@ class DatabaseSeeder extends Seeder
         $this->call(CareerSeeder::class);
         $this->call(JobSeeder::class);
         $this->call(JobOfferSeeder::class);
+        $this->call(DetailSeeder::class);
 
+        
 
     }
 }

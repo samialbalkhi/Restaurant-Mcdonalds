@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Detail;
 use App\Models\Job_offer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Backend\JobOfferRequest;
@@ -12,10 +14,13 @@ class JobOfferController extends Controller
 {
     public function index()
     {
-        $Job_offer = Job_offer::with(['Jobs:id,name'])->get();
+        $Job_offerid = Job_offer::pluck('id');
+        $jobOffers = Job_offer::whereIn('id', $Job_offerid)
+            ->with(['Jobs:id,name', 'details:job_offer_id,details'])
+            ->get();
 
         $respones = [
-            'Job_offer' => $Job_offer,
+            'Job_offer' => $jobOffers,
         ];
 
         return response($respones, 201);
@@ -28,23 +33,32 @@ class JobOfferController extends Controller
             'franchisee' => $request->franchisee,
             'description' => $request->description,
             'image' => $path,
-            'title' => $request->title,
             'job_id' => $request->job_id,
         ]);
+        $Job_offer_id = $Job_offer->id;
 
-        $respones = [
-            'Job_offer' => $Job_offer,
-        ];
+        for ($i = 0; $i < count($request->listOfDetails); $i++) {
+            $details = Detail::create([
+                'details' => $request->listOfDetails[$i]['details'],
+                'job_offer_id' => $Job_offer_id,
+            ]);
 
-        return response($respones, 201);
+            $respones = [
+                'Job_offer' => $Job_offer,
+                'details' => $details,
+            ];
+
+            return response($respones, 201);
+        }
     }
-
     public function edit($id)
     {
         $Job_offer = Job_offer::with(['Jobs:id,name'])->findOrFail($id);
+        $detail = Detail::where('job_offer_id', $id)->get();
 
         $respones = [
             'Job_offer' => $Job_offer,
+            'detail' => $detail,
         ];
 
         return response($respones, 201);

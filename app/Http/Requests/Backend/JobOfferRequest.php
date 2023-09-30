@@ -31,6 +31,9 @@ class JobOfferRequest extends FormRequest
                 'image' => ['required'],
                 'title' => ['nullable'],
                 'job_id' => ['required'],
+                'listOfDetails' => ['array', 'required'],
+                'listOfDetails.*.details' => ['required', 'min:3'],
+                'job_offer_id' => ['required'],
             ];
         } else {
             return [
@@ -40,6 +43,8 @@ class JobOfferRequest extends FormRequest
                 'image' => ['required'],
                 'title' => ['nullable'],
                 'job_id' => ['required'],
+                'details' => ['required', 'array'],
+                'job_offer_id' => ['required'],
             ];
         }
     }

@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->string('franchisee');
             $table->longText('description');
             $table->string('image');
-            $table->longText('title')->nullable();
             $table
                 ->foreignIdFor(Job::class)
                 ->constrained()
