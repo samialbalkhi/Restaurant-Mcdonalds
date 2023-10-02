@@ -14,9 +14,9 @@ class Job_offer extends Model
 
     public function Jobs()
     {
-        return $this->belongsTo(Job::class,'job_id');
+        return $this->belongsTo(Job::class, 'job_id');
     }
-    
+
     public function details()
     {
         return $this->hasMany(Detail::class);

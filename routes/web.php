@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\MailController;
 use App\Http\Controllers\Backend\CategoriesController;
 
 /*
@@ -18,5 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/category',CategoriesController::class);
+Route::get('sendmail',[MailController::class,'sendmail']);
+
 

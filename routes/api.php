@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\SectionController;
 use App\Http\Controllers\Backend\JobOfferController;
 use App\Http\Controllers\Backend\ProductsController;
 use App\Http\Controllers\Backend\CategorieController;
+use App\Http\Controllers\Backend\MailController;
 use App\Http\Controllers\Backend\OurRestaurantController;
 use App\Http\Controllers\Backend\OurResponsibilityController;
 
@@ -111,11 +112,10 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::delete('/destroy/{id}', [JobOfferController::class, 'destroy']);
     });
 
-
-   Route::group(['prefix' => 'Detail'], function () {
-       Route::get('/edit/{id}', [DetailsController::class, 'edit']);
-       Route::post('/update/{id}', [DetailsController::class, 'update']);
-       Route::delete('/destroy/{id}', [DetailsController::class, 'destroy']);
-
-});
+    Route::group(['prefix' => 'Detail'], function () {
+        Route::get('/edit/{id}', [DetailsController::class, 'edit']);
+        Route::post('/update/{id}', [DetailsController::class, 'update']);
+        Route::delete('/destroy/{id}', [DetailsController::class, 'destroy']);
+    });
+  
 });

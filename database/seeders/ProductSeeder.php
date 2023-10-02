@@ -19,9 +19,9 @@ class ProductSeeder extends Seeder
         $faker = Factory::create();
         $categories = Category::pluck('id');
         $values = ['large', 'small', 'medium'];
-        $randomValue = $values[array_rand($values)];
-
+        
         for ($i = 1; $i <= 1000; $i++) {
+            $randomValue = $values[array_rand($values)];
             $products[] = [
                 'name' => $faker->sentence(2, true),
                 'description' => $faker->paragraph,

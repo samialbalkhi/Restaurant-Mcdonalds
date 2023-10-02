@@ -17,6 +17,7 @@ use Database\Seeders\CategorySeeder;
 use Database\Seeders\JobOfferSeeder;
 use Database\Seeders\OurrestaurantSeeder;
 use Database\Seeders\OurresponsibilitySeeder;
+use Database\Seeders\EmploymentApplicationSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -37,8 +38,7 @@ class DatabaseSeeder extends Seeder
         $this->call(JobSeeder::class);
         $this->call(JobOfferSeeder::class);
         $this->call(DetailSeeder::class);
-
-        
+        $this->call(EmploymentApplicationSeeder::class);
 
     }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests\Backend\JobOfferRequest;
+use App\Models\Job;
 
 class JobOfferController extends Controller
 {
@@ -26,6 +27,7 @@ class JobOfferController extends Controller
 
         return response($respones, 201);
     }
+
     public function store(Request $request)
     {
         $path = $request->image->store('image_Job_offer', 'public');
@@ -56,11 +58,10 @@ class JobOfferController extends Controller
     public function edit($id)
     {
         $Job_offer = Job_offer::findOrFail($id);
-        $detail = Detail::where('job_offer_id', $id)->get();
-
+        $job = job::get(['id', 'name']);
         $respones = [
             'Job_offer' => $Job_offer,
-            'detail' => $detail,
+            'job' => $job,
         ];
 
         return response($respones, 201);
@@ -104,5 +105,4 @@ class JobOfferController extends Controller
             'message' => 'Deleted successfully',
         ]);
     }
-   
 }
