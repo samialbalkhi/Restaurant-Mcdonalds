@@ -55,7 +55,7 @@ class JobOfferController extends Controller
 
     public function edit($id)
     {
-        $Job_offer = Job_offer::with(['Jobs:id,name'])->findOrFail($id);
+        $Job_offer = Job_offer::findOrFail($id);
         $detail = Detail::where('job_offer_id', $id)->get();
 
         $respones = [
@@ -66,7 +66,7 @@ class JobOfferController extends Controller
         return response($respones, 201);
     }
 
-    public function update(JobOfferRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $Job_offer = Job_offer::with(['Jobs:id,name'])->find($id);
         if (Storage::exists('public/' . $Job_offer->image)) {
@@ -80,15 +80,16 @@ class JobOfferController extends Controller
             'franchisee' => $request->franchisee,
             'description' => $request->description,
             'image' => $path,
-            'title' => $request->title,
             'job_id' => $request->job_id,
         ]);
 
         $respones = [
-            'Job_offer' => 'Updateed Product successfully',
+            'Job_offer' => $Job_offer,
         ];
-        return response($respones, 201);
+
+        return response()->json($respones);
     }
+
     public function destroy($id)
     {
         $Job_offer = Job_offer::get()->find($id);
@@ -103,4 +104,5 @@ class JobOfferController extends Controller
             'message' => 'Deleted successfully',
         ]);
     }
+   
 }

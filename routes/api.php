@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\CareerController;
 use App\Http\Controllers\Backend\FamilyController;
 use App\Http\Controllers\Backend\MycafeController;
+use App\Http\Controllers\Backend\DetailsController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SectionController;
 use App\Http\Controllers\Backend\JobOfferController;
@@ -111,4 +112,10 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     });
 
 
+   Route::group(['prefix' => 'Detail'], function () {
+       Route::get('/edit/{id}', [DetailsController::class, 'edit']);
+       Route::post('/update/{id}', [DetailsController::class, 'update']);
+       Route::delete('/destroy/{id}', [DetailsController::class, 'destroy']);
+
+});
 });
