@@ -47,4 +47,5 @@ class CareerController extends Controller
 
         return response($respones, 201);
     }
+    
 }

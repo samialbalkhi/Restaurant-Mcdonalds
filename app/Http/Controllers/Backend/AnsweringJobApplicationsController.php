@@ -35,4 +35,32 @@ class AnsweringJobApplicationsController extends Controller
             'Answering_job_application' => $Answering_job_application,
         ]);
     }
+    public function index()
+    {
+        $Answering_job_application = Answering_job_application::with(['employment_application:id,email,first_name'])->get();
+
+        $respones = [
+            'Answering_job_application' => $Answering_job_application,
+        ];
+
+        return response($respones, 201);
+    }
+    public function getAnswering($id)
+    {
+        $Answering_job_application = Answering_job_application::findOrFail($id);
+
+        $respones = [
+            'Answering_job_application' => $Answering_job_application,
+        ];
+
+        return response($respones, 201);
+    }
+    public function destroy($id)
+    {
+        Answering_job_application::findOrFail($id)->delete();
+
+        return response()->json([
+            'message' => 'Deleted successfully',
+        ]);
+    }
 }

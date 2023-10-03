@@ -42,6 +42,7 @@ Route::group(['prefix' => 'customer'], function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Route::post('/login', [AuthAdminController::class, 'login']);
+
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () {
@@ -119,6 +120,11 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::delete('/destroy/{id}', [DetailsController::class, 'destroy']);
     });
 
-  Route::post('sendmail/{id}',[AnsweringJobApplicationsController::class,'sendmail']);
-  
+    Route::group(['prefix' => 'AnsweringJobApplications'], function () {
+        Route::get('index', [AnsweringJobApplicationsController::class, 'index']);
+        Route::post('sendmail/{id}', [AnsweringJobApplicationsController::class, 'sendmail']);
+        Route::get('getAnswering/{id}', [AnsweringJobApplicationsController::class, 'getAnswering']);
+        Route::delete('destroy/{id}', [AnsweringJobApplicationsController::class, 'destroy']);
+
+    });
 });

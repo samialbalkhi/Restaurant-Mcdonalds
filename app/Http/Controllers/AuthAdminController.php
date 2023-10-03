@@ -23,4 +23,16 @@ class AuthAdminController extends Controller
             return $user->createToken('token-name',['admin'])->plainTextToken;
         }
     }
+
+    public function logout()
+    {
+        auth()
+            ->user()
+            ->tokens()
+            ->delete();
+
+        return response()->json([
+            'message' => 'logout',
+        ]);
+    }
 }
