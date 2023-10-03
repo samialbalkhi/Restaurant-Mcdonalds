@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\Backend\JobController;
 use App\Http\Controllers\Backend\AuthController;
+use App\Http\Controllers\Backend\MailController;
 use App\Http\Controllers\Backend\CareerController;
 use App\Http\Controllers\Backend\FamilyController;
 use App\Http\Controllers\Backend\MycafeController;
@@ -15,9 +16,9 @@ use App\Http\Controllers\Backend\SectionController;
 use App\Http\Controllers\Backend\JobOfferController;
 use App\Http\Controllers\Backend\ProductsController;
 use App\Http\Controllers\Backend\CategorieController;
-use App\Http\Controllers\Backend\MailController;
 use App\Http\Controllers\Backend\OurRestaurantController;
 use App\Http\Controllers\Backend\OurResponsibilityController;
+use App\Http\Controllers\Backend\AnsweringJobApplicationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,5 +118,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::post('/update/{id}', [DetailsController::class, 'update']);
         Route::delete('/destroy/{id}', [DetailsController::class, 'destroy']);
     });
+
+  Route::post('sendmail/{id}',[AnsweringJobApplicationsController::class,'sendmail']);
   
 });

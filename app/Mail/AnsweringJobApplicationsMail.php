@@ -9,16 +9,18 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class Employment_application extends Mailable
+class AnsweringJobApplicationsMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $data=[];
+
     /**
      * Create a new message instance.
      */
     public function __construct($data)
     {
         $this->data =$data ;
+        
     }
 
     /**
@@ -27,7 +29,7 @@ class Employment_application extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Employment Application',
+            subject: 'Answering Job Applications Mail',
         );
     }
 
@@ -50,5 +52,4 @@ class Employment_application extends Mailable
     {
         return [];
     }
-
 }

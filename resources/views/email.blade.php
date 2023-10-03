@@ -9,7 +9,7 @@
 
 <body>
     <h1>{{$data['name']}}</h1>
-    <h1>{{$data['email']}}</h1>
-    <h1>{{$data['messge']}}</h1>
+    <h1>{{$data['description']}}</h1>
+    <h1>{{$data['message']}}</h1>
 </body>
 </html>
