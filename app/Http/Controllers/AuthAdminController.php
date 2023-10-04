@@ -24,15 +24,4 @@ class AuthAdminController extends Controller
         }
     }
 
-    public function logout()
-    {
-        auth()
-            ->user()
-            ->tokens()
-            ->delete();
-
-        return response()->json([
-            'message' => 'logout',
-        ]);
-    }
 }

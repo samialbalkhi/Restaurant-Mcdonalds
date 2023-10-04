@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend;
 
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -24,20 +25,25 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->method('post')) {
-            return [
-                'name' => ['required', 'unique:categories,name'],
-                'description' => ['required'],
-                'message' => ['nullable'],
-                'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-            ];
-        } else {
-            return [
-                'name' => ['required', Rule::unique('categories', 'name')->ignore($this->route()->category)],
-                'description' => ['required'],
-                'message' => ['nullable'],
-                'image' => ['required', 'max:2048'],
-            ];
+        $id = Route::current()->parameter('id');
+        switch ($this->method()) {
+            case 'POST':
+                return [
+                    'name' => ['required', 'unique:categories,name', 'max:30', 'min:3'],
+                    'description' => ['required'],
+                    'message' => ['nullable'],
+                    'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+                ];
+            case 'PUT':
+            case 'PATCH':
+                return [
+                    'name' => ['required', 'max:30', 'min:3', Rule::unique('categories', 'name')->ignore($id)],
+                    'description' => ['required'],
+                    'message' => ['nullable'],
+                    'image' => ['required', 'max:2048'],
+                ];
+            default:
+                break;
         }
     }
 

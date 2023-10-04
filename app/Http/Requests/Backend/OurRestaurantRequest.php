@@ -24,8 +24,8 @@ class OurRestaurantRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required'],
-            'description' => ['required'],
+            'title' => ['required','min:10'],
+            'description' => ['required','min:10'],
             'message' => ['nullable'],
             'section_id' => ['required'],
             'image' => ['required'],

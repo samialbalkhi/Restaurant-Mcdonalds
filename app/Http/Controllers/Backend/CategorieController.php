@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\User;
+use App\Models\Section;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Backend\CategoryRequest;
-use App\Models\User;
 
 class CategorieController extends Controller
 {
@@ -29,7 +30,7 @@ class CategorieController extends Controller
             'name' => $request->name,
             'status' => $request->status,
             'image' => $path,
-            'section_id'=>$request->section_id,
+            'section_id' => $request->section_id,
         ]);
 
         $respones = [
@@ -45,7 +46,7 @@ class CategorieController extends Controller
     public function edit(string $id)
     {
         $Category = Category::with(['section:id,name'])->findOrFail($id);
-        
+
         $respones = [
             'Category' => $Category,
         ];
@@ -69,8 +70,7 @@ class CategorieController extends Controller
             'name' => $request->name,
             'status' => $request->status,
             'image' => $path,
-            'section_id'=>$request->section_id,
-
+            'section_id' => $request->section_id,
         ]);
 
         $respones = [

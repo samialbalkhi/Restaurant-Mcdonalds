@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Backend\SectionRequest;
+use Illuminate\Support\Facades\Route;
 
 class SectionController extends Controller
 {
@@ -51,7 +52,7 @@ class SectionController extends Controller
     }
 
     public function update(SectionRequest $request, string $id)
-    {
+    {       
         $SectionImage = Section::get()->find($id);
 
         if (Storage::exists('public/' . $SectionImage->image)) {

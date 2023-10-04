@@ -23,28 +23,30 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->method('post')) {
-            return [
-                'name' => ['required'],
-                'description' => ['required'],
-                'size' => ['required'],
-                'price' => ['required'],
-                'kcal' => ['required'],
-                'featured' => ['required'],
-                'category_id' => ['required'],
-                'image' => ['required','max:2048'],
-            ];
-        } else {
-            return [
-                'name' => ['required'],
-                'description' => ['required'],
-                'size' => ['required'],
-                'price' => ['required'],
-                'kcal' => ['required'],
-                'featured' => ['required'],
-                'category_id' => ['required'],
-                'image' => ['required','max:2048'],
-            ];
+        switch ($this->method()) {
+            case 'POST':
+                return [
+                    'name' => ['required', 'min:3', 'max:50'],
+                    'description' => ['nullable', 'min:3'],
+                    'size' => ['required', 'min:2'],
+                    'price' => ['required', 'numeric'],
+                    'kcal' => ['required', 'numeric'],
+                    'category_id' => ['required'],
+                    'image' => ['required', 'max:2048'],
+                ];
+            case 'PUT':
+            case 'PATCH':
+                return [
+                    'name' => ['required', 'min:3', 'max:50'],
+                    'description' => ['nullable', 'min:3'],
+                    'size' => ['required', 'min:2'],
+                    'price' => ['required', 'numeric'],
+                    'kcal' => ['required', 'numeric'],
+                    'category_id' => ['required'],
+                    'image' => ['required', 'max:2048'],
+                ];
+            default:
+                break;
         }
     }
 

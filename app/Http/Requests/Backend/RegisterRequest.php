@@ -24,20 +24,20 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' =>['required','max:15','min:3'],
-            'email' =>['required','email','unique:users,email'],
-            'password'=>['required','max:20','min:8'],
+            'name' => ['required', 'max:15', 'min:3'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'max:30', 'min:8'],
         ];
     }
 
     public function failedValidation(Validator $validator)
     {
-            throw new HttpResponseException(
-                response()->json([
-                    'success' => false,
-                    'message' => 'Validation errors',
-                    'data' => $validator->errors(),
-                ]),
-            );
-        }
+        throw new HttpResponseException(
+            response()->json([
+                'success' => false,
+                'message' => 'Validation errors',
+                'data' => $validator->errors(),
+            ]),
+        );
+    }
 }

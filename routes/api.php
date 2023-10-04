@@ -46,11 +46,12 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () {
+    
     Route::group(['prefix' => 'section'], function () {
         Route::get('/index', [SectionController::class, 'index']);
         Route::post('/store', [SectionController::class, 'store']);
         Route::get('/edit/{id}', [SectionController::class, 'edit']);
-        Route::post('/update/{id}', [SectionController::class, 'update']);
+        Route::patch('/update/{id}', [SectionController::class, 'update'])->name('updateSection');
         Route::delete('/destroy/{id}', [SectionController::class, 'destroy']);
     });
 
@@ -58,7 +59,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('/index', [CategorieController::class, 'index']);
         Route::post('/store', [CategorieController::class, 'store']);
         Route::get('/edit/{id}', [CategorieController::class, 'edit']);
-        Route::post('/update/{id}', [CategorieController::class, 'update']);
+        Route::patch('/update/{id}', [CategorieController::class, 'update']);
         Route::delete('/destroy/{id}', [CategorieController::class, 'destroy']);
     });
 
@@ -124,7 +125,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('index', [AnsweringJobApplicationsController::class, 'index']);
         Route::post('sendmail/{id}', [AnsweringJobApplicationsController::class, 'sendmail']);
         Route::get('getAnswering/{id}', [AnsweringJobApplicationsController::class, 'getAnswering']);
-        Route::delete('destroy/{id}', [AnsweringJobApplicationsController::class, 'destroy']);
+        // Route::delete('destroy/{id}', [AnsweringJobApplicationsController::class, 'destroy']);   
 
     });
 });

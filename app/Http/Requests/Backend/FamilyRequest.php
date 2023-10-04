@@ -24,9 +24,9 @@ class FamilyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
-            'title' => ['required'],
-            'description' => ['required'],
+            'name' => ['required', 'min:3', 'max:30'],
+            'title' => ['required', 'min:3'],
+            'description' => ['required', 'min:3'],
             'image' => ['required'],
             'section_id' => ['required'],
         ];

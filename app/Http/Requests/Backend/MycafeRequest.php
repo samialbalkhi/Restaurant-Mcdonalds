@@ -23,39 +23,43 @@ class MycafeRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->method('post')) {
-            return [
-                'title_mycafe_drinks' => ['required'],
-                'description_drinks_cold' => ['required'],
-                'cold_drinks' => ['required'],
-                'title_mycafe_sweets' => ['required'],
-                'description_sweets' => ['required'],
-                'image_drinks' => ['required'],
-                'image_sweets' => ['required', 'max:2048'],
-                'section_id' => ['required'],
-            ];
-        } else {
-            return [
-                'title_mycafe_drinks' => ['required'],
-                'description_drinks_cold' => ['required'],
-                'cold_drinks' => ['required'],
-                'title_mycafe_sweets' => ['required'],
-                'description_sweets' => ['required'],
-                'image_drinks' => ['required'],
-                'image_sweets' => ['required', 'max:2048'],
-                'section_id' => ['required'],
-            ];
+        switch ($this->method()) {
+            case 'POST':
+                return [
+                    'title_mycafe_drinks' => ['required', 'min:3'],
+                    'description_drinks_cold' => ['required', 'min:3'],
+                    'cold_drinks' => ['required', 'min:3'],
+                    'title_mycafe_sweets' => ['required', 'min:3'],
+                    'description_sweets' => ['required', 'min:3'],
+                    'image_drinks' => ['required'],
+                    'image_sweets' => ['required', 'max:2048'],
+                    'section_id' => ['required'],
+                ];
+            case 'PUT':
+            case 'PATCH':
+                return [
+                    'title_mycafe_drinks' => ['required', 'min:3'],
+                    'description_drinks_cold' => ['required', 'min:3'],
+                    'cold_drinks' => ['required', 'min:3'],
+                    'title_mycafe_sweets' => ['required', 'min:3'],
+                    'description_sweets' => ['required', 'min:3'],
+                    'image_drinks' => ['required'],
+                    'image_sweets' => ['required', 'max:2048'],
+                    'section_id' => ['required'],
+                ];
+            default:
+                break;
         }
     }
 
     public function failedValidation(Validator $validator)
     {
-            throw new HttpResponseException(
-                response()->json([
-                    'success' => false,
-                    'message' => 'Validation errors',
-                    'data' => $validator->errors(),
-                ]),
-            );
-        }
+        throw new HttpResponseException(
+            response()->json([
+                'success' => false,
+                'message' => 'Validation errors',
+                'data' => $validator->errors(),
+            ]),
+        );
+    }
 }

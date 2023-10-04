@@ -23,22 +23,26 @@ class OurResponsibilityRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->method('post')) {
-            return [
-                'title' => ['required'],
-                'description' => ['required'],
-                'message' => ['nullable'],
-                'section_id' => ['required'],
-                'image' => ['required'],
-            ];
-        } else {
-            return [
-                'title' => ['required'],
-                'description' => ['required'],
-                'message' => ['nullable'],
-                'section_id' => ['required'],
-                'image' => ['required'],
-            ];
+        switch ($this->method()) {
+            case 'POST':
+                return [
+                    'title' => ['required', 'min:10'],
+                    'description' => ['required', 'min:10'],
+                    'message' => ['nullable'],
+                    'section_id' => ['required'],
+                    'image' => ['required'],
+                ];
+            case 'PUT':
+            case 'PATCH':
+                return [
+                    'title' => ['required', 'min:10'],
+                    'description' => ['required', 'min:10'],
+                    'message' => ['nullable'],
+                    'section_id' => ['required'],
+                    'image' => ['required'],
+                ];
+            default:
+                break;
         }
     }
     public function failedValidation(Validator $validator)

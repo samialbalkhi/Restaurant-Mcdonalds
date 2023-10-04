@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend;
 
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -24,22 +25,28 @@ class SectionRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->method('post')) {
-            return [
-                'name' => ['required', 'unique:sections,name'],
-                'description' => ['required'],
-                'message' => ['nullable'],
-                'status' => ['required'],
-                'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-            ];
-        } else {
-            return [
-                'name' => ['required', Rule::unique('sections', 'name')->ignore($this->route()->edit)],
-                'description' => ['required'],
-                'message' => ['nullable'],
-                'status' => ['required'],
-                'image' => ['required', 'max:2048'],
-            ];
+        $id = Route::current()->parameter('id');
+
+        switch ($this->method()) {
+            case 'POST':
+                return [
+                    'name' => ['required', 'unique:sections,name', 'max:30', 'min:3'],
+                    'description' => ['required', 'min:3'],
+                    'message' => ['nullable'],
+                    'status' => ['required'],
+                    'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+                ];
+            case 'PUT':
+            case 'PATCH':
+                return [
+                    'name' => ['required', 'max:30', 'min:3', Rule::unique('sections', 'name')->ignore($id)],
+                    'description' => ['required', 'min:3'],
+                    'message' => ['nullable'],
+                    'status' => ['required'],
+                    'image' => ['required', 'max:2048'],
+                ];
+            default:
+                break;
         }
     }
 
