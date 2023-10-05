@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Models;
-
-use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\ProductReview;
 
 class Product extends Model
 {
@@ -13,7 +12,7 @@ class Product extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function status()
@@ -24,5 +23,8 @@ class Product extends Model
     {
         return $this->featured ? 'Yes' : 'No';
     }
-   
+    public function reviews()
+    {
+        return $this->hasMany(ProductReview::class);
+    }
 }

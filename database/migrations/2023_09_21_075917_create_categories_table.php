@@ -18,8 +18,6 @@ return new class extends Migration {
             $table->boolean('status')->default(false);
             $table
                 ->foreignIdFor(Section::class)
-                // ->constrained()
-                
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();

@@ -32,7 +32,7 @@ class SectionRequest extends FormRequest
                 return [
                     'name' => ['required', 'unique:sections,name', 'max:30', 'min:3'],
                     'description' => ['required', 'min:3'],
-                    'message' => ['nullable'],
+                    'message' => ['required'],
                     'status' => ['required'],
                     'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
                 ];
@@ -41,7 +41,7 @@ class SectionRequest extends FormRequest
                 return [
                     'name' => ['required', 'max:30', 'min:3', Rule::unique('sections', 'name')->ignore($id)],
                     'description' => ['required', 'min:3'],
-                    'message' => ['nullable'],
+                    'message' => ['required'],
                     'status' => ['required'],
                     'image' => ['required', 'max:2048'],
                 ];

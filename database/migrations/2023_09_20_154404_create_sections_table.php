@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name')->unique();
             $table->longText('description');
-            $table->string('message')->nullable();
+            $table->string('message');
             $table->string('image');
             $table->boolean('status')->default(false);
             $table->timestamps();

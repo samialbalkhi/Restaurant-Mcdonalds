@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\JobOfferController;
 use App\Http\Controllers\Backend\ProductsController;
 use App\Http\Controllers\Backend\CategorieController;
 use App\Http\Controllers\Backend\OurRestaurantController;
+use App\Http\Controllers\Backend\ProductReviewController;
 use App\Http\Controllers\Backend\OurResponsibilityController;
 use App\Http\Controllers\Backend\AnsweringJobApplicationsController;
 
@@ -42,11 +43,9 @@ Route::group(['prefix' => 'customer'], function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Route::post('/login', [AuthAdminController::class, 'login']);
-
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () {
-    
     Route::group(['prefix' => 'section'], function () {
         Route::get('/index', [SectionController::class, 'index']);
         Route::post('/store', [SectionController::class, 'store']);
@@ -67,7 +66,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('/index', [ProductController::class, 'index']);
         Route::post('/store', [ProductController::class, 'store']);
         Route::get('/edit/{id}', [ProductController::class, 'edit']);
-        Route::post('/update/{id}', [ProductController::class, 'update']);
+        Route::patch('/update/{id}', [ProductController::class, 'update']);
         Route::delete('/destroy/{id}', [ProductController::class, 'destroy']);
     });
 
@@ -85,7 +84,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('/index', [OurResponsibilityController::class, 'index']);
         Route::post('/store', [OurResponsibilityController::class, 'store']);
         Route::get('/edit/{id}', [OurResponsibilityController::class, 'edit']);
-        Route::post('/update/{id}', [OurResponsibilityController::class, 'update']);
+        Route::patch('/update/{id}', [OurResponsibilityController::class, 'update']);
         Route::delete('/destroy/{id}', [OurResponsibilityController::class, 'destroy']);
     });
 
@@ -103,7 +102,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('/index', [JobController::class, 'index']);
         Route::post('/store', [JobController::class, 'store']);
         Route::get('/edit/{id}', [JobController::class, 'edit']);
-        Route::post('/update/{id}', [JobController::class, 'update']);
+        Route::patch('/update/{id}', [JobController::class, 'update']);
         Route::delete('/destroy/{id}', [JobController::class, 'destroy']);
     });
 
@@ -111,7 +110,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('/index', [JobOfferController::class, 'index']);
         Route::post('/store', [JobOfferController::class, 'store']);
         Route::get('/edit/{id}', [JobOfferController::class, 'edit']);
-        Route::post('/update/{id}', [JobOfferController::class, 'update']);
+        Route::patch('/update/{id}', [JobOfferController::class, 'update']);
         Route::delete('/destroy/{id}', [JobOfferController::class, 'destroy']);
     });
 
@@ -125,7 +124,11 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('index', [AnsweringJobApplicationsController::class, 'index']);
         Route::post('sendmail/{id}', [AnsweringJobApplicationsController::class, 'sendmail']);
         Route::get('getAnswering/{id}', [AnsweringJobApplicationsController::class, 'getAnswering']);
-        // Route::delete('destroy/{id}', [AnsweringJobApplicationsController::class, 'destroy']);   
+        // Route::delete('destroy/{id}', [AnsweringJobApplicationsController::class, 'destroy']);
+    });
 
+    Route::group(['prefix' => 'ProductReview'], function () {
+        Route::get('/index', [ProductReviewController::class, 'index']);
+        Route::delete('destroy/{id}', [ProductReviewController::class, 'destroy']);
     });
 });
