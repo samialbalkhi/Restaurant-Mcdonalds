@@ -4,11 +4,13 @@ namespace App\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use function Validator;
 class ProductReviewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
+    
     public function authorize(): bool
     {
         return true;
@@ -22,14 +24,13 @@ class ProductReviewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required','min:10'],
-            'product_id' => ['required','min:10'],
+            'user_id' => ['required', 'min:10'],
+            'product_id' => ['required', 'min:10'],
             'name' => ['nullable'],
             'rating' => ['required'],
             'comment' => ['required'],
             'review_type' => ['required'],
             'title' => ['required'],
-
         ];
     }
 }

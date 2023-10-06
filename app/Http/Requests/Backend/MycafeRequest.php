@@ -23,33 +23,16 @@ class MycafeRequest extends FormRequest
      */
     public function rules(): array
     {
-        switch ($this->method()) {
-            case 'POST':
-                return [
-                    'title_mycafe_drinks' => ['required', 'min:3'],
-                    'description_drinks_cold' => ['required', 'min:3'],
-                    'cold_drinks' => ['required', 'min:3'],
-                    'title_mycafe_sweets' => ['required', 'min:3'],
-                    'description_sweets' => ['required', 'min:3'],
-                    'image_drinks' => ['required'],
-                    'image_sweets' => ['required', 'max:2048'],
-                    'section_id' => ['required'],
-                ];
-            case 'PUT':
-            case 'PATCH':
-                return [
-                    'title_mycafe_drinks' => ['required', 'min:3'],
-                    'description_drinks_cold' => ['required', 'min:3'],
-                    'cold_drinks' => ['required', 'min:3'],
-                    'title_mycafe_sweets' => ['required', 'min:3'],
-                    'description_sweets' => ['required', 'min:3'],
-                    'image_drinks' => ['required'],
-                    'image_sweets' => ['required', 'max:2048'],
-                    'section_id' => ['required'],
-                ];
-            default:
-                break;
-        }
+        return [
+            'title_mycafe_drinks' => ['required', 'min:3'],
+            'description_drinks_cold' => ['required', 'min:3'],
+            'cold_drinks' => ['required', 'min:3'],
+            'title_mycafe_sweets' => ['required', 'min:3'],
+            'description_sweets' => ['required', 'min:3'],
+            'image_drinks' => ['required'],
+            'image_sweets' => ['required', 'max:2048'],
+            'section_id' => ['required'],
+        ];
     }
 
     public function failedValidation(Validator $validator)

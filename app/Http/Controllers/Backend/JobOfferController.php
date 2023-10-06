@@ -28,7 +28,7 @@ class JobOfferController extends Controller
         return response($respones, 201);
     }
 
-    public function store(Request $request)
+    public function store(JobOfferRequest $request)
     {
         $path = $request->image->store('image_Job_offer', 'public');
         $Job_offer = Job_offer::create([
@@ -58,16 +58,14 @@ class JobOfferController extends Controller
     public function edit($id)
     {
         $Job_offer = Job_offer::findOrFail($id);
-        $job = job::get(['id', 'name']);
         $respones = [
             'Job_offer' => $Job_offer,
-            'job' => $job,
         ];
 
         return response($respones, 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(JobOfferRequest $request, $id)
     {
         $Job_offer = Job_offer::with(['Jobs:id,name'])->find($id);
         if (Storage::exists('public/' . $Job_offer->image)) {

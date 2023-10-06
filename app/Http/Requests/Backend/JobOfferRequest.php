@@ -23,34 +23,24 @@ class JobOfferRequest extends FormRequest
      */
     public function rules(): array
     {
+        $commonRules = [
+            'location' => ['required', 'min:5'],
+            //'Franchisenehmer' 
+            'franchisee' => ['required', 'min:5'],
+            'description' => ['required', 'min:5'],
+            'image' => ['required'],
+            'title' => ['nullable', 'min:3'],
+            'job_id' => ['required'],
+            'listOfDetails' => ['array', 'required'],
+            'listOfDetails.*.details' => ['required', 'min:3'],
+        ];
         switch ($this->method()) {
-            case 'POST':
-                return [
-                    'location' => ['required', 'min:5'],
-                    //'Franchisenehmer'
-                    'franchisee' => ['required', 'min:5'],
-                    'description' => ['required', 'min:5'],
-                    'image' => ['required'],
-                    'title' => ['nullable', 'min:3'],
-                    'job_id' => ['required'],
-                    'listOfDetails' => ['array', 'required'],
-                    'listOfDetails.*.details' => ['required', 'min:3'],
-                    'job_offer_id' => ['required'],
-                ];
             case 'PUT':
             case 'PATCH':
-                return [
-                    'location' => ['required', 'min:5'],
-                    'franchisee' => ['required', 'min:5'],
-                    'description' => ['required', 'min:5'],
-                    'image' => ['required'],
-                    'title' => ['nullable', 'min:3'],
-                    'job_id' => ['required'],
-                    'details' => ['required', 'array'],
-                    'job_offer_id' => ['required'],
-                ];
+                // Add or override rules for 'PUT' and 'PATCH' methods if needed
+                return $commonRules;
             default:
-                break;
+                return $commonRules;
         }
     }
     public function failedValidation(Validator $validator)

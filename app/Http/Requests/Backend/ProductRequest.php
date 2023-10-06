@@ -23,30 +23,22 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
+        $commonRules = [
+            'name' => ['required', 'min:3', 'max:50'],
+            'description' => ['nullable', 'min:3'],
+            'size' => ['required', 'min:2'],
+            'price' => ['required', 'numeric'],
+            'kcal' => ['required', 'numeric'],
+            'category_id' => ['required'],
+            'image' => ['required', 'max:2048'],
+        ];
         switch ($this->method()) {
-            case 'POST':
-                return [
-                    'name' => ['required', 'min:3', 'max:50'],
-                    'description' => ['nullable', 'min:3'],
-                    'size' => ['required', 'min:2'],
-                    'price' => ['required', 'numeric'],
-                    'kcal' => ['required', 'numeric'],
-                    'category_id' => ['required'],
-                    'image' => ['required', 'max:2048'],
-                ];
             case 'PUT':
             case 'PATCH':
-                return [
-                    'name' => ['required', 'min:3', 'max:50'],
-                    'description' => ['nullable', 'min:3'],
-                    'size' => ['required', 'min:2'],
-                    'price' => ['required', 'numeric'],
-                    'kcal' => ['required', 'numeric'],
-                    'category_id' => ['required'],
-                    'image' => ['required', 'max:2048'],
-                ];
+                // Add or override rules for 'PUT' and 'PATCH' methods if needed
+                return $commonRules;
             default:
-                break;
+                return $commonRules;
         }
     }
 

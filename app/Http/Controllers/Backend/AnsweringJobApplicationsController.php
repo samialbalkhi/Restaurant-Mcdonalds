@@ -55,12 +55,5 @@ class AnsweringJobApplicationsController extends Controller
 
         return response($respones, 201);
     }
-    // public function destroy($id)
-    // {
-    //     Answering_job_application::findOrFail($id)->delete();
-
-    //     return response()->json([
-    //         'message' => 'Deleted successfully',
-    //     ]);
-    // }
+    
 }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Models\ProductReview;
 use Illuminate\Http\Request;
+use App\Models\ProductReview;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\ProductReviewRequest;
 
 class ProductReviewController extends Controller
 {
@@ -19,8 +20,9 @@ class ProductReviewController extends Controller
         return response($respones, 201);
     }
 
-    public function destroy($id)
+    public function destroy(ProductReviewRequest $request,$id)
     {
+        
         ProductReview::findOrFail($id)->delete();
 
         return response()->json([

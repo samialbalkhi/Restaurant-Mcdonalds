@@ -25,17 +25,18 @@ class MycafeController extends Controller
     {
         $MyCafeImage = MyCafe::get()->find($id);
 
-        if (Storage::exists('public/' . $MyCafeImage->image_drinks)) {
-            Storage::delete('public/' . $MyCafeImage->image_drinks);
-        }
-
-        if (Storage::exists('public/' . $MyCafeImage->image_sweets)) {
-            Storage::delete('public/' . $MyCafeImage->image_sweets);
+        if ($MyCafeImage) {
+            // Delete existing images if they exist
+            foreach (['image_drinks', 'image_sweets'] as $imageField) {
+                $imagePath = 'public/' . $MyCafeImage->$imageField;
+                if (Storage::exists($imagePath)) {
+                    Storage::delete($imagePath);
+                }
+            }
         }
 
         $path_image_drinks = $request->image_drinks->store('image_drinks', 'public');
         $path_image_sweets = $request->image_sweets->store('image_sweets', 'public');
-
         $MyCafe = MyCafe::updateOrCreate(
             [
                 'section_id' => $request->section_id,

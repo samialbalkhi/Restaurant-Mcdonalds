@@ -124,7 +124,6 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('index', [AnsweringJobApplicationsController::class, 'index']);
         Route::post('sendmail/{id}', [AnsweringJobApplicationsController::class, 'sendmail']);
         Route::get('getAnswering/{id}', [AnsweringJobApplicationsController::class, 'getAnswering']);
-        // Route::delete('destroy/{id}', [AnsweringJobApplicationsController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'ProductReview'], function () {
