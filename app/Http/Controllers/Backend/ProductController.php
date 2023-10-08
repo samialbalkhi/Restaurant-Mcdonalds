@@ -7,24 +7,25 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Backend\ProductRequest;
+use App\Models\Category;
+use App\Traits\ImageUploadTrait;
 
 class ProductController extends Controller
 {
+    use ImageUploadTrait;
     public function index()
     {
-        $Product = Product::with('category:id,name')->get();
+        $product = Product::with('category:id,name')->get();
 
-        $respones = [
-            'Product' => $Product,
-        ];
-
-        return response($respones, 201);
+        return response($product);
     }
 
     public function store(ProductRequest $request)
     {
-        $path = $request->image->store('images_Product', 'public');
-        $product = Product::create([
+        $path = $this->storeImage('images_product');
+
+        $category = Category::find($request->category_id);
+        $product = $category->product()->create([
             'name' => $request->name,
             'description' => $request->description,
             'size' => $request->size,
@@ -33,42 +34,31 @@ class ProductController extends Controller
             'quantity' => $request->quantity,
             'featured' => $request->featured,
             'status' => $request->status,
-            'category_id' => $request->status,
             'image' => $path,
         ]);
 
-        $respones = [
-            'product' => $product,
-        ];
-
-        return response($respones, 201);
+        return response($product, 201);
     }
 
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        $Product = Product::with(['category:id,name'])->findOrFail($id);
+        $categoryWithcategory = $product->load('category:id,name');
 
-        $respones = [
-            'Product' => $Product,
-        ];
-
-        return response($respones, 201);
+        return response()->json($categoryWithcategory);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductRequest $request, string $id)
+    public function update(ProductRequest $request, Product $product)
     {
-        $ProductImage = Product::get()->find($id);
-
-        if (Storage::exists('public/' . $ProductImage->image)) {
-            Storage::delete('public/' . $ProductImage->image);
+        if (Storage::exists('public/' . $product->image)) {
+            Storage::delete('public/' . $product->image);
         }
 
-        $path = $request->image->store('images_Product', 'public');
+        $path = $request->image->store('images_product', 'public');
 
-        $ProductImage->update([
+        $products = $product->update([
             'name' => $request->name,
             'description' => $request->description,
             'size' => $request->size,
@@ -81,25 +71,19 @@ class ProductController extends Controller
             'image' => $path,
         ]);
 
-        $respones = [
-            'Product' => 'Updateed Product successfully',
-            'image' => $path,
-        ];
-        return response($respones, 201);
+        return response()->json(['Updateed Category successfully']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        $ProductImage = Product::get()->find($id);
-
-        if (Storage::exists('public/' . $ProductImage->image)) {
-            Storage::delete('public/' . $ProductImage->image);
+        if (Storage::exists('public/' . $product->image)) {
+            Storage::delete('public/' . $product->image);
         }
 
-        Product::findOrFail($id)->delete();
+        $product->delete();
 
         return response()->json([
             'message' => 'Deleted successfully',

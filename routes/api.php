@@ -65,9 +65,9 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     Route::group(['prefix' => 'product'], function () {
         Route::get('/index', [ProductController::class, 'index']);
         Route::post('/store', [ProductController::class, 'store']);
-        Route::get('/edit/{id}', [ProductController::class, 'edit']);
-        Route::patch('/update/{id}', [ProductController::class, 'update']);
-        Route::delete('/destroy/{id}', [ProductController::class, 'destroy']);
+        Route::get('/edit/{product}', [ProductController::class, 'edit']);
+        Route::post('/update/{product}', [ProductController::class, 'update']);
+        Route::delete('/destroy/{product}', [ProductController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'mycafe'], function () {

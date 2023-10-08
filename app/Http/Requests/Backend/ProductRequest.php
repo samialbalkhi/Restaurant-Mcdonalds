@@ -31,6 +31,9 @@ class ProductRequest extends FormRequest
             'kcal' => ['required', 'numeric'],
             'category_id' => ['required'],
             'image' => ['required', 'max:2048'],
+            'featured'=>['nullable'],
+            'status'=>['nullable'],
+
         ];
         switch ($this->method()) {
             case 'PUT':

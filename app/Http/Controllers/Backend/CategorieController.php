@@ -6,31 +6,35 @@ use App\Models\User;
 use App\Models\Section;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Traits\ImageUploadTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Backend\CategoryRequest;
 
 class CategorieController extends Controller
 {
+    use ImageUploadTrait;
+
     public function index()
     {
         $category = Category::with(['section:id,name'])->get();
 
-        return response($category);
+        return response()->json([$category]);
     }
 
     public function store(CategoryRequest $request)
     {
         $section = Section::find($request->section_id);
 
-        $path = $request->image->store('images_category', 'public');
+        $path = $this->storeImage('images_category');
+
         $category = $section->categories()->create([
             'name' => $request->name,
             'status' => $request->status,
             'image' => $path,
         ]);
 
-        return response($category, 201);
+        return response()->json([$category, 201]);
     }
 
     /**
@@ -38,7 +42,8 @@ class CategorieController extends Controller
      */
     public function edit(Category $category)
     {
-        $categoryWithSection = $category->load('section:id,name');
+        $CategoryId = $category->id;
+        $categoryWithSection = Category::where('id', $CategoryId)->get();
 
         return response()->json($categoryWithSection);
     }
@@ -60,7 +65,7 @@ class CategorieController extends Controller
             'section_id' => $request->section_id,
         ]);
 
-        return response('Updateed Category successfully');
+        return response()->json(['Updateed Category successfully']);
     }
 
     /**
@@ -73,8 +78,6 @@ class CategorieController extends Controller
         }
         $category->delete();
 
-        return response()->json([
-            'message' => 'Deleted successfully',
-        ]);
+        return response()->json(['Deleted successfully', 200]);
     }
 }
