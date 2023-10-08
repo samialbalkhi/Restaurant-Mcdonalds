@@ -30,15 +30,13 @@ class CategoryRequest extends FormRequest
             case 'POST':
                 return [
                     'name' => ['required', 'unique:categories,name', 'max:30', 'min:3'],
-                    'description' => ['required'],
                     'message' => ['nullable'],
-                    'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+                    'image' => ['required', 'image', 'max:2048'],
                 ];
             case 'PUT':
             case 'PATCH':
                 return [
                     'name' => ['required', 'max:30', 'min:3', Rule::unique('categories', 'name')->ignore($id)],
-                    'description' => ['required'],
                     'message' => ['nullable'],
                     'image' => ['required', 'max:2048'],
                 ];

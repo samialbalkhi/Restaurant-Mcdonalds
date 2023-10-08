@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Backend\loginRequest;
 use App\Http\Requests\Backend\RegisterRequest;
 
-class AuthController extends Controller
+    class AuthController extends Controller
 {
     public function login(loginRequest $request)
     {
@@ -32,10 +32,10 @@ class AuthController extends Controller
       $user=  User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
         ]);
 
-        $token = $user->createToken('token-name')->plainTextToken;
+        $token = $user->createToken('token-name',['customer'])->plainTextToken;
         $respones = [
             'user' => $user,
             'token' => $token,

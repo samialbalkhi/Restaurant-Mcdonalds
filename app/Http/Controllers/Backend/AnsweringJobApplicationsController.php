@@ -55,5 +55,4 @@ class AnsweringJobApplicationsController extends Controller
 
         return response($respones, 201);
     }
-    
 }

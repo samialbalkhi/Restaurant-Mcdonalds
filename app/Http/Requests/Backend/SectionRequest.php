@@ -34,7 +34,7 @@ class SectionRequest extends FormRequest
                     'description' => ['required', 'min:3'],
                     'message' => ['required'],
                     'status' => ['required'],
-                    'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+                    'image' => ['required', 'image','max:2048'],
                 ];
             case 'PUT':
             case 'PATCH':

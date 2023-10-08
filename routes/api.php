@@ -49,17 +49,17 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     Route::group(['prefix' => 'section'], function () {
         Route::get('/index', [SectionController::class, 'index']);
         Route::post('/store', [SectionController::class, 'store']);
-        Route::get('/edit/{id}', [SectionController::class, 'edit']);
-        Route::patch('/update/{id}', [SectionController::class, 'update'])->name('updateSection');
-        Route::delete('/destroy/{id}', [SectionController::class, 'destroy']);
+        Route::get('/edit/{section}', [SectionController::class, 'edit']);
+        Route::patch('/update/{section}', [SectionController::class, 'update'])->name('updateSection');
+        Route::delete('/destroy/{section}', [SectionController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'category'], function () {
         Route::get('/index', [CategorieController::class, 'index']);
         Route::post('/store', [CategorieController::class, 'store']);
-        Route::get('/edit/{id}', [CategorieController::class, 'edit']);
-        Route::patch('/update/{id}', [CategorieController::class, 'update']);
-        Route::delete('/destroy/{id}', [CategorieController::class, 'destroy']);
+        Route::get('/edit/{category}', [CategorieController::class, 'edit']);
+        Route::patch('/update/{category}', [CategorieController::class, 'update']);
+        Route::delete('/destroy/{category}', [CategorieController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'product'], function () {

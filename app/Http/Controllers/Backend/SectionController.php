@@ -13,19 +13,15 @@ class SectionController extends Controller
 {
     public function index()
     {
-        $Section = Section::all();
+        $section = Section::all();
 
-        $respones = [
-            'Section' => $Section,
-        ];
-
-        return response($respones, 201);
+        return response($section);
     }
 
     public function store(SectionRequest $request)
     {
-        $path = $request->image->store('images_Section', 'public');
-        $Section = Section::create([
+        $path = $request->image->store('images_section', 'public');
+        $section = Section::create([
             'name' => $request->name,
             'description' => $request->description,
             'message' => $request->message,
@@ -33,34 +29,24 @@ class SectionController extends Controller
             'image' => $path,
         ]);
 
-        $respones = [
-            'Section' => $Section,
-        ];
-
-        return response($respones, 201);
+        return response($section, 201);
     }
 
-    public function edit(string $id)
+    public function edit(Section $section)
     {
-        $Section = Section::findOrFail($id);
+        $section = Section::find($section);
 
-        $respones = [
-            'Section' => $Section,
-        ];
-
-        return response($respones, 201);
+        return response()->json($section);
     }
 
-    public function update(SectionRequest $request, string $id)
-    {       
-        $SectionImage = Section::get()->find($id);
-
-        if (Storage::exists('public/' . $SectionImage->image)) {
-            Storage::delete('public/' . $SectionImage->image);
+    public function update(SectionRequest $request, Section $section)
+    {
+        if (Storage::exists('public/' . $section->image)) {
+            Storage::delete('public/' . $section->image);
         }
-        $path = $request->image->store('images_Section', 'public');
+        $path = $request->image->store('images_section', 'public');
 
-        $SectionImage->update([
+        $respones = $section->update([
             'name' => $request->name,
             'description' => $request->description,
             'message' => $request->message,
@@ -68,23 +54,16 @@ class SectionController extends Controller
             'image' => $path,
         ]);
 
-        $respones = [
-            'Section' => 'Updateed Category successfully',
-            'image' => $path,
-        ];
-        return response($respones, 201);
+        return response($respones, 204);
     }
 
-    public function destroy(string $id)
+    public function destroy(Section $section)
     {
-        $SectionImage = Section::get()->find($id);
-        if (Storage::exists('public/' . $SectionImage->image)) {
-            Storage::delete('public/' . $SectionImage->image);
+        if (Storage::exists('public/' . $section->image)) {
+            Storage::delete('public/' . $section->image);
         }
-        Section::findOrFail($id)->delete();
+        $section->delete();
 
-        return response()->json([
-            'message' => 'Deleted successfully',
-        ]);
+        return response('Deleted successfully', 200);
     }
 }

@@ -14,83 +14,64 @@ class CategorieController extends Controller
 {
     public function index()
     {
-        $Category = Category::with(['section:id,name'])->get();
+        $category = Category::with(['section:id,name'])->get();
 
-        $respones = [
-            'Category' => $Category,
-        ];
-
-        return response($respones, 201);
+        return response($category);
     }
 
     public function store(CategoryRequest $request)
     {
-        $path = $request->image->store('images_Category', 'public');
-        $Category = Category::create([
+        $section = Section::find($request->section_id);
+
+        $path = $request->image->store('images_category', 'public');
+        $category = $section->categories()->create([
             'name' => $request->name,
             'status' => $request->status,
             'image' => $path,
-            'section_id' => $request->section_id,
         ]);
 
-        $respones = [
-            'Category' => $Category,
-        ];
-
-        return response($respones, 201);
+        return response($category, 201);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        $Category = Category::with(['section:id,name'])->findOrFail($id);
+        $categoryWithSection = $category->load('section:id,name');
 
-        $respones = [
-            'Category' => $Category,
-        ];
-
-        return response($respones, 201);
+        return response()->json($categoryWithSection);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, string $id)
+    public function update(CategoryRequest $request, Category $category)
     {
-        $CategoryImage = Category::get()->find($id);
-
-        if (Storage::exists('public/' . $CategoryImage->image)) {
-            Storage::delete('public/' . $CategoryImage->image);
+        if (Storage::exists('public/' . $category->image)) {
+            Storage::delete('public/' . $category->image);
         }
-        $path = $request->image->store('images_Category' . $CategoryImage->id, 'public');
+        $path = $request->image->store('images_category', 'public');
 
-        $CategoryImage->update([
+        $category = $category->update([
             'name' => $request->name,
             'status' => $request->status,
             'image' => $path,
             'section_id' => $request->section_id,
         ]);
 
-        $respones = [
-            'Category' => 'Updateed Category successfully',
-            'image' => $path,
-        ];
-
-        return response($respones, 201);
+        return response('Updateed Category successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        $CategoryImage = Category::get()->find($id);
-        if (Storage::exists('public/' . $CategoryImage->image)) {
-            Storage::delete('public/' . $CategoryImage->image);
+        if (Storage::exists('public/' . $category->image)) {
+            Storage::delete('public/' . $category->image);
         }
-        Category::findOrFail($id)->delete();
+        $category->delete();
 
         return response()->json([
             'message' => 'Deleted successfully',
