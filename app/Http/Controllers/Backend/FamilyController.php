@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Family;
 use App\Models\Section;
 use Illuminate\Http\Request;
+use App\Traits\ImageUploadTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -12,26 +13,23 @@ use App\Http\Requests\Backend\FamilyRequest;
 
 class FamilyController extends Controller
 {
+    use ImageUploadTrait;
+
     public function index()
     {
-        $Family = Family::with(['section:id,name'])->get();
+        $family = Family::with(['section:id,name'])->get();
 
-        $respones = [
-            'Family' => $Family,
-        ];
-        return $respones;
+        return response()->json($family);
     }
 
-    public function store(FamilyRequest $request, $id)
+    public function store(FamilyRequest $request, Family $family)
     {
-        $FamilyImage = Family::get()->find($id);
-
-        if (Storage::exists('public/' . $FamilyImage->image)) {
-            Storage::delete('public/' . $FamilyImage->image);
+        if (Storage::exists('public/' . $family->image)) {
+            Storage::delete('public/' . $family->image);
         }
-        $path = $request->image->store('image_Family', 'public');
+        $path = $this->storeImage('image_family');
 
-        $Family = Family::updateOrCreate(
+        $family = Family::updateOrCreate(
             [
                 'section_id' => $request->section_id,
             ],
@@ -43,10 +41,6 @@ class FamilyController extends Controller
             ],
         );
 
-        $respones = [
-            'Family' => $Family,
-        ];
-
-        return response($respones, 201);
+        return response()->json($family, 201);
     }
 }

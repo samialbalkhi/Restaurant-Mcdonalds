@@ -72,7 +72,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
 
     Route::group(['prefix' => 'mycafe'], function () {
         Route::get('/index', [MycafeController::class, 'index']);
-        Route::post('/store/{id}', [MycafeController::class, 'store']);
+        Route::post('/store/{mycafe}', [MycafeController::class, 'store']);
     });
 
     Route::group(['prefix' => 'family'], function () {
@@ -83,9 +83,9 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     Route::group(['prefix' => 'ourresponsibility'], function () {
         Route::get('/index', [OurResponsibilityController::class, 'index']);
         Route::post('/store', [OurResponsibilityController::class, 'store']);
-        Route::get('/edit/{id}', [OurResponsibilityController::class, 'edit']);
-        Route::patch('/update/{id}', [OurResponsibilityController::class, 'update']);
-        Route::delete('/destroy/{id}', [OurResponsibilityController::class, 'destroy']);
+        Route::get('/edit/{ourresponsibility}', [OurResponsibilityController::class, 'edit']);
+        Route::post('/update/{ourresponsibility}', [OurResponsibilityController::class, 'update']);
+        Route::delete('/destroy/{ourresponsibility}', [OurResponsibilityController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'OurRestaurant'], function () {

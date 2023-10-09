@@ -43,8 +43,7 @@ class CategorieController extends Controller
     public function edit(Category $category)
     {
         $CategoryId = $category->id;
-        $categoryWithSection = Category::where('id', $CategoryId)->get();
-
+        $categoryWithSection = Category::where('id', $CategoryId)->first();
         return response()->json($categoryWithSection);
     }
 

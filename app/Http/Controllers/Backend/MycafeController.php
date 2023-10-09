@@ -10,25 +10,20 @@ use App\Http\Requests\Backend\MycafeRequest;
 
 class MycafeController extends Controller
 {
+    
     public function index()
     {
         $MyCafe = MyCafe::with(['section:id,name'])->get();
 
-        $respones = [
-            'MyCafe' => $MyCafe,
-        ];
-
-        return response($respones, 201);
+        return response()->json($MyCafe);
     }
 
-    public function store(MycafeRequest $request, $id)
+    public function store(MycafeRequest $request, MyCafe $mycafe)
     {
-        $MyCafeImage = MyCafe::get()->find($id);
-
-        if ($MyCafeImage) {
+        if ($mycafe) {
             // Delete existing images if they exist
             foreach (['image_drinks', 'image_sweets'] as $imageField) {
-                $imagePath = 'public/' . $MyCafeImage->$imageField;
+                $imagePath = 'public/' . $mycafe->$imageField;
                 if (Storage::exists($imagePath)) {
                     Storage::delete($imagePath);
                 }
@@ -52,10 +47,6 @@ class MycafeController extends Controller
             ],
         );
 
-        $respones = [
-            'MyCafe' => $MyCafe,
-        ];
-
-        return response($respones, 201);
+        return response()->json($MyCafe, 201);
     }
 }

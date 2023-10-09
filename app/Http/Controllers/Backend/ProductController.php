@@ -42,9 +42,10 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        $categoryWithcategory = $product->load('category:id,name');
+        $ProductId = $product->id;
+        $product = Product::where('id', $ProductId)->first();
 
-        return response()->json($categoryWithcategory);
+        return response()->json($product);
     }
 
     /**
@@ -56,9 +57,9 @@ class ProductController extends Controller
             Storage::delete('public/' . $product->image);
         }
 
-        $path = $request->image->store('images_product', 'public');
+        $path = $this->storeImage('images_product');
 
-        $products = $product->update([
+        $product->update([
             'name' => $request->name,
             'description' => $request->description,
             'size' => $request->size,
@@ -71,7 +72,7 @@ class ProductController extends Controller
             'image' => $path,
         ]);
 
-        return response()->json(['Updateed Category successfully']);
+        return response()->json(['message' => 'Updateed  successfully']);
     }
 
     /**
