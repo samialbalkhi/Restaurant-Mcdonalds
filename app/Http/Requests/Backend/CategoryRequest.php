@@ -25,24 +25,16 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = Route::current()->parameter('id');
-        switch ($this->method()) {
-            case 'POST':
-                return [
-                    'name' => ['required', 'unique:categories,name', 'max:30', 'min:3'],
-                    'message' => ['nullable'],
-                    'image' => ['required', 'image', 'max:2048'],
-                ];
-            case 'PUT':
-            case 'PATCH':
-                return [
-                    'name' => ['required', 'max:30', 'min:3', Rule::unique('categories', 'name')->ignore($id)],
-                    'message' => ['nullable'],
-                    'image' => ['required', 'max:2048'],
-                ];
-            default:
-                break;
+        $rules = [];
+        $rules = [
+            'name' => ['required', 'unique:categories,name', 'max:30', 'min:3'],
+            'section_id' => ['required'],
+            'image' => ['required', 'image', 'max:2048'],
+        ];
+        if ($this->method('PATCH' || 'PUT')) {
+            $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('categories', 'name')->ignore($this->route()->category->id)];
         }
+        return $rules;
     }
 
     public function failedValidation(Validator $validator)

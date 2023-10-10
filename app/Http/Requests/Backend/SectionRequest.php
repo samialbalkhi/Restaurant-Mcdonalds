@@ -25,29 +25,21 @@ class SectionRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = Route::current()->parameter('id');
+        $rules = [];
 
-        switch ($this->method()) {
-            case 'POST':
-                return [
-                    'name' => ['required', 'unique:sections,name', 'max:30', 'min:3'],
-                    'description' => ['required', 'min:3'],
-                    'message' => ['required'],
-                    'status' => ['required'],
-                    'image' => ['required', 'image','max:2048'],
-                ];
-            case 'PUT':
-            case 'PATCH':
-                return [
-                    'name' => ['required', 'max:30', 'min:3', Rule::unique('sections', 'name')->ignore($id)],
-                    'description' => ['required', 'min:3'],
-                    'message' => ['required'],
-                    'status' => ['required'],
-                    'image' => ['required', 'max:2048'],
-                ];
-            default:
-                break;
+        $rules = [
+            'name' => ['required', 'unique:sections,name', 'max:30', 'min:3'],
+            'description' => ['required', 'min:3'],
+            'message' => ['required'],
+            'status' => ['required'],
+            'image' => ['required', 'image', 'max:2048'],
+        ];
+
+        if ($this->method('PATCH' || 'PUT')) {
+            $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('sections', 'name')->ignore($this->route()->section->id)];
         }
+
+        return $rules;
     }
 
     public function failedValidation(Validator $validator)

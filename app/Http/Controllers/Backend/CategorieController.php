@@ -19,7 +19,7 @@ class CategorieController extends Controller
     {
         $category = Category::with(['section:id,name'])->get();
 
-        return response()->json([$category]);
+        return response()->json($category);
     }
 
     public function store(CategoryRequest $request)
@@ -34,7 +34,7 @@ class CategorieController extends Controller
             'image' => $path,
         ]);
 
-        return response()->json([$category, 201]);
+        return response()->json($category, 201);
     }
 
     /**
@@ -42,9 +42,8 @@ class CategorieController extends Controller
      */
     public function edit(Category $category)
     {
-        $CategoryId = $category->id;
-        $categoryWithSection = Category::where('id', $CategoryId)->first();
-        return response()->json($categoryWithSection);
+        $categories = Category::where('id', $category->id)->first();
+        return response()->json($categories);
     }
 
     /**
@@ -52,19 +51,17 @@ class CategorieController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        if (Storage::exists('public/' . $category->image)) {
-            Storage::delete('public/' . $category->image);
-        }
-        $path = $request->image->store('images_category', 'public');
+        $this->UpdateOrDeleteImage($category);
+        $path = $this->storeImage('images_category');
 
-        $category = $category->update([
+        $category->update([
             'name' => $request->name,
             'status' => $request->status,
             'image' => $path,
             'section_id' => $request->section_id,
         ]);
 
-        return response()->json(['Updateed Category successfully']);
+        return response()->json(['messge' => 'Updateed successfully']);
     }
 
     /**
@@ -72,11 +69,10 @@ class CategorieController extends Controller
      */
     public function destroy(Category $category)
     {
-        if (Storage::exists('public/' . $category->image)) {
-            Storage::delete('public/' . $category->image);
-        }
+        $this->UpdateOrDeleteImage($category);
+
         $category->delete();
 
-        return response()->json(['Deleted successfully', 200]);
+        return response()->json('Deleted successfully', 200);
     }
 }

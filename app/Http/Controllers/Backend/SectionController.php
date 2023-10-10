@@ -18,7 +18,7 @@ class SectionController extends Controller
     {
         $section = Section::all();
 
-        return response()->json([$section]);
+        return response()->json($section);
     }
 
     public function store(SectionRequest $request)
@@ -33,24 +33,22 @@ class SectionController extends Controller
             'image' => $path,
         ]);
 
-        return response()->json([$section, 201]);
+        return response()->json($section, 201);
     }
 
     public function edit(Section $section)
     {
-        $section = Section::find($section);
+        $section = Section::where('id', $section->id)->first();
 
-        return response()->json([$section]);
+        return response()->json($section);
     }
 
     public function update(SectionRequest $request, Section $section)
     {
-        if (Storage::exists('public/' . $section->image)) {
-            Storage::delete('public/' . $section->image);
-        }
+        $path = $this->UpdateOrDeleteImage($section);
         $path = $this->storeImage('images_section');
 
-        $respones = $section->update([
+        $section->update([
             'name' => $request->name,
             'description' => $request->description,
             'message' => $request->message,
@@ -58,14 +56,13 @@ class SectionController extends Controller
             'image' => $path,
         ]);
 
-        return response()->json([$respones, 204]);
+        return response()->json(['message' => 'updated successfully']);
     }
 
     public function destroy(Section $section)
     {
-        if (Storage::exists('public/' . $section->image)) {
-            Storage::delete('public/' . $section->image);
-        }
+        $this->UpdateOrDeleteImage($section);
+
         $section->delete();
 
         return response()->json(['Deleted successfully', 200]);
