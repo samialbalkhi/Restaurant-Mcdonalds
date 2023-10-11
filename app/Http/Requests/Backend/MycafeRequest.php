@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Backend;
 
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -23,14 +25,19 @@ class MycafeRequest extends FormRequest
      */
     public function rules(): array
     {
+        $rotename = Request::route()->getName();
+
         $rules = [];
         $rules = [
-            'name' => ['required', 'min:3'],
+            'name' => ['required', 'min:3', 'unique:my_cafes,name'],
             'description' => ['required', 'min:3'],
             'image' => ['required', 'image'],
             'section_id' => ['required'],
         ];
 
+        if ($rotename) {
+            $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('my_cafes', 'name')->ignore($this->route()->mycafe->id)];
+        }
         return $rules;
     }
 

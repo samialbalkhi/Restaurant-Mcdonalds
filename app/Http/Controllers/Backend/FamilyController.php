@@ -53,7 +53,7 @@ class FamilyController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'image' => $path,
-            'section' => $request->section_id,
+            'section_id' => $request->section_id,
         ]);
 
         return response()->json(['message' => 'updated successfully']);

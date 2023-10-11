@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Backend;
 
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
@@ -24,18 +25,19 @@ class FamilyRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [];
+        $rotename=Request::route()->getName();
         $rules = [
             'name' => ['required', 'min:3', 'max:30', 'unique:families,name'],
             'title' => ['nullable'],
             'description' => ['required', 'min:3'],
-            'image' => ['required','image'],
+            'image' => ['required', 'image'],
             'section_id' => ['required'],
         ];
-        if ($this->method('PATCH')) {
+        
+        if ($rotename) {
             $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('families', 'name')->ignore($this->route()->family->id)];
         }
-                                
+        
         return $rules;
     }
 

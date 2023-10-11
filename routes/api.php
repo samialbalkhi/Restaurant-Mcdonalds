@@ -58,7 +58,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('/index', [CategorieController::class, 'index']);
         Route::post('/store', [CategorieController::class, 'store']);
         Route::get('/edit/{category}', [CategorieController::class, 'edit']);
-        Route::patch('/update/{category}', [CategorieController::class, 'update']);
+        Route::post('/update/{category}', [CategorieController::class, 'update'])->name('update_category');
         Route::delete('/destroy/{category}', [CategorieController::class, 'destroy']);
     });
 
@@ -74,7 +74,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('/index', [MycafeController::class, 'index']);
         Route::post('/store', [MycafeController::class, 'store']);
         Route::get('/edit/{mycafe}', [MycafeController::class, 'edit']);
-        Route::post('/update/{mycafe}', [MycafeController::class, 'update']);
+        Route::post('/update/{mycafe}', [MycafeController::class, 'update'])->name('update_mycafe');
         Route::delete('/destroy/{mycafe}', [MycafeController::class, 'destroy']);
     });
 
@@ -82,7 +82,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('/index', [FamilyController::class, 'index']);
         Route::post('/store', [FamilyController::class, 'store']);
         Route::get('/edit/{family}', [FamilyController::class, 'edit']);
-        Route::patch('/update/{family}', [FamilyController::class, 'update']);
+        Route::post('/update/{family}', [FamilyController::class, 'update'])->name('update_family');
         Route::delete('/destroy/{family}', [FamilyController::class, 'destroy']);
     });
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Backend;
 
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Http\FormRequest;
@@ -25,15 +26,17 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        
+        $rotename = Request::route()->getName();
+
         $rules = [];
         $rules = [
             'name' => ['required', 'unique:categories,name', 'max:30', 'min:3'],
             'section_id' => ['required'],
             'image' => ['required', 'image', 'max:2048'],
+            'status' => ['nullable'],
         ];
 
-        if ($this->method('PATCH')) {
+        if ($rotename) {
             $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('categories', 'name')->ignore($this->route()->category->id)];
         }
         return $rules;
