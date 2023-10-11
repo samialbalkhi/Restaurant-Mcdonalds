@@ -13,13 +13,9 @@ return new class extends Migration {
     {
         Schema::create('my_cafes', function (Blueprint $table) {
             $table->id();
-            $table->string('title_mycafe_drinks');
-            $table->longText('description_drinks_cold');
-            $table->string('cold_drinks');
-            $table->string('title_mycafe_sweets');
-            $table->string('description_sweets');
-            $table->string('image_drinks');
-            $table->string('image_sweets');
+            $table->string('name');
+            $table->longText('description');
+            $table->string('image');
             $table
                 ->foreignIdFor(Section::class)
                 ->constrained()

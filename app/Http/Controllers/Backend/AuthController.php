@@ -14,7 +14,6 @@ use App\Http\Requests\Backend\RegisterRequest;
     public function login(loginRequest $request)
     {
         $user = User::where('email', $request->email)->first();
-
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response(
                 [

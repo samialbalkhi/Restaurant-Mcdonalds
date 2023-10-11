@@ -3,50 +3,67 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\MyCafe;
+use App\Models\Section;
 use Illuminate\Http\Request;
+use App\Traits\ImageUploadTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Backend\MycafeRequest;
 
 class MycafeController extends Controller
 {
-    
+    use ImageUploadTrait;
+
     public function index()
     {
-        $MyCafe = MyCafe::with(['section:id,name'])->get();
+        $mycafe = MyCafe::with(['section:id,name'])->get();
 
-        return response()->json($MyCafe);
+        return response()->json($mycafe);
     }
 
-    public function store(MycafeRequest $request, MyCafe $mycafe)
+    public function store(MycafeRequest $request)
     {
-        if ($mycafe) {
-            // Delete existing images if they exist
-            foreach (['image_drinks', 'image_sweets'] as $imageField) {
-                $imagePath = 'public/' . $mycafe->$imageField;
-                if (Storage::exists($imagePath)) {
-                    Storage::delete($imagePath);
-                }
-            }
-        }
+        $section = Section::find($request->section_id);
+        $path = $this->storeImage('image_mycafe');
 
-        $path_image_drinks = $request->image_drinks->store('image_drinks', 'public');
-        $path_image_sweets = $request->image_sweets->store('image_sweets', 'public');
-        $MyCafe = MyCafe::updateOrCreate(
-            [
-                'section_id' => $request->section_id,
-            ],
-            [
-                'title_mycafe_drinks' => $request->title_mycafe_drinks,
-                'description_drinks_cold' => $request->description_drinks_cold,
-                'cold_drinks' => $request->cold_drinks,
-                'title_mycafe_sweets' => $request->title_mycafe_sweets,
-                'description_sweets' => $request->description_sweets,
-                'image_drinks' => $path_image_drinks,
-                'image_sweets' => $path_image_sweets,
-            ],
-        );
+        $mycafe = $section->mycafes()->create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $path,
+        ]);
 
-        return response()->json($MyCafe, 201);
+        return response()->json($mycafe);
+    }
+
+    public function edit(MyCafe $mycafe)
+    {
+        $asd = MyCafe::where('id', $mycafe->id)->first();
+
+        return response()->json($asd);
+    }
+
+    public function update(MycafeRequest $request, MyCafe $mycafe)
+    {
+        $path = $this->UpdateOrDeleteImage($mycafe);
+
+        $path = $this->storeImage('image_mycafe');
+
+        $mycafe->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $path,
+            'section_id' => $request->section_id,
+        ]);
+
+        return response()->json(['message' => 'updated successfully']);
+    }
+
+    public function destroy(MyCafe $mycafe)
+    {
+        $path = $this->UpdateOrDeleteImage($mycafe);
+
+        $mycafe->delete();
+
+        return response()->json(['message' => 'deleted successfully']);
     }
 }

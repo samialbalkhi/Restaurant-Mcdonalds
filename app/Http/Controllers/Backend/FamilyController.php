@@ -24,9 +24,7 @@ class FamilyController extends Controller
 
     public function store(FamilyRequest $request, Family $family)
     {
-        if (Storage::exists('public/' . $family->image)) {
-            Storage::delete('public/' . $family->image);
-        }
+        $path = $this->UpdateOrDeleteImage($family);
         $path = $this->storeImage('image_family');
 
         $family = Family::updateOrCreate(
@@ -41,6 +39,6 @@ class FamilyController extends Controller
             ],
         );
 
-        return response()->json($family, 201);
+        return response()->json($family);
     }
 }

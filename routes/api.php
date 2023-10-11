@@ -72,12 +72,15 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
 
     Route::group(['prefix' => 'mycafe'], function () {
         Route::get('/index', [MycafeController::class, 'index']);
-        Route::post('/store/{mycafe}', [MycafeController::class, 'store']);
+        Route::post('/store', [MycafeController::class, 'store']);
+        Route::get('/edit/{mycafe}', [MycafeController::class, 'edit']);
+        Route::post('/update/{mycafe}', [MycafeController::class, 'update']);
+        Route::delete('/destroy/{mycafe}', [MycafeController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'family'], function () {
         Route::get('/index', [FamilyController::class, 'index']);
-        Route::post('/store/{id}', [FamilyController::class, 'store']);
+        Route::post('/store/{family}', [FamilyController::class, 'store']);
     });
 
     Route::group(['prefix' => 'ourresponsibility'], function () {

@@ -23,16 +23,15 @@ class MycafeRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'title_mycafe_drinks' => ['required', 'min:3'],
-            'description_drinks_cold' => ['required', 'min:3'],
-            'cold_drinks' => ['required', 'min:3'],
-            'title_mycafe_sweets' => ['required', 'min:3'],
-            'description_sweets' => ['required', 'min:3'],
-            'image_drinks' => ['required'],
-            'image_sweets' => ['required', 'max:2048'],
+        $rules = [];
+        $rules = [
+            'name' => ['required', 'min:3'],
+            'description' => ['required', 'min:3'],
+            'image' => ['required', 'image'],
             'section_id' => ['required'],
         ];
+
+        return $rules;
     }
 
     public function failedValidation(Validator $validator)

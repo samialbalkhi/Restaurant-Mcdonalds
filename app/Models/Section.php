@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\MyCafe;
 use App\Models\Category;
 use App\Models\Ourresponsibility;
 use Illuminate\Database\Eloquent\Model;
@@ -25,5 +26,10 @@ class Section extends Model
     {
         return $this->hasMany(Ourresponsibility::class);
 
+    }
+
+    public function mycafes()
+    {
+        return $this->hasMany(MyCafe::class);
     }
 }
