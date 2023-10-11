@@ -81,7 +81,7 @@ class CategorySeeder extends Seeder
             'name' => 'Desserts',
             'image' => 'Desserts.jpeg',
             'status' => 1,
-            'section_id' => rand(0, 5),
+            'section_id' => 1,
         ]);
 
         Category::create([

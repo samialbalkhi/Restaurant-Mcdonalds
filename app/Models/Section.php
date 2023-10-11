@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Family;
 use App\Models\MyCafe;
 use App\Models\Category;
 use App\Models\Ourresponsibility;
@@ -31,5 +32,10 @@ class Section extends Model
     public function mycafes()
     {
         return $this->hasMany(MyCafe::class);
+    }
+
+    public function families()
+    {
+        return $this->hasMany(Family::class);
     }
 }

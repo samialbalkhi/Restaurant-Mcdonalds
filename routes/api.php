@@ -80,7 +80,10 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
 
     Route::group(['prefix' => 'family'], function () {
         Route::get('/index', [FamilyController::class, 'index']);
-        Route::post('/store/{family}', [FamilyController::class, 'store']);
+        Route::post('/store', [FamilyController::class, 'store']);
+        Route::get('/edit/{family}', [FamilyController::class, 'edit']);
+        Route::patch('/update/{family}', [FamilyController::class, 'update']);
+        Route::delete('/destroy/{family}', [FamilyController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'ourresponsibility'], function () {

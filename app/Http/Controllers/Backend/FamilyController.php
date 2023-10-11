@@ -22,23 +22,47 @@ class FamilyController extends Controller
         return response()->json($family);
     }
 
-    public function store(FamilyRequest $request, Family $family)
+    public function store(FamilyRequest $request)
+    {
+        $path = $this->storeImage('image_family');
+        $section = Section::find($request->section_id);
+
+        $family = $section->families()->create([
+            'name' => $request->name,
+            'title' => $request->title,
+            'description' => $request->description,
+            'image' => $path,
+        ]);
+
+        return response()->json($family);
+    }
+    public function edit(Family $family)
+    {
+        $family = Family::where('id', $family->id)->first();
+
+        return response()->json($family);
+    }
+
+    public function update(FamilyRequest $request, Family $family)
     {
         $path = $this->UpdateOrDeleteImage($family);
         $path = $this->storeImage('image_family');
 
-        $family = Family::updateOrCreate(
-            [
-                'section_id' => $request->section_id,
-            ],
-            [
-                'name' => $request->name,
-                'title' => $request->title,
-                'description' => $request->description,
-                'image' => $path,
-            ],
-        );
+        $family->update([
+            'name' => $request->name,
+            'title' => $request->title,
+            'description' => $request->description,
+            'image' => $path,
+            'section' => $request->section_id,
+        ]);
 
-        return response()->json($family);
+        return response()->json(['message' => 'updated successfully']);
+    }
+
+    public function destroy(Family $family)
+    {
+        $this->UpdateOrDeleteImage($family);
+        $family->delete();
+        return response()->json(['message' => 'deleted successfully']);
     }
 }

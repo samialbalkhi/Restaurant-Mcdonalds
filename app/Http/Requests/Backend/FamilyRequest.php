@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Backend;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -23,13 +24,19 @@ class FamilyRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => ['required', 'min:3', 'max:30'],
-            'title' => ['required', 'min:3'],
+        $rules = [];
+        $rules = [
+            'name' => ['required', 'min:3', 'max:30', 'unique:families,name'],
+            'title' => ['nullable'],
             'description' => ['required', 'min:3'],
-            'image' => ['required'],
+            'image' => ['required','image'],
             'section_id' => ['required'],
         ];
+        if ($this->method('PATCH')) {
+            $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('families', 'name')->ignore($this->route()->family->id)];
+        }
+                                
+        return $rules;
     }
 
     public function failedValidation(Validator $validator)

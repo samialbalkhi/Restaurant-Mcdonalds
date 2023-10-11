@@ -14,12 +14,24 @@ class FamilySeeder extends Seeder
     public function run(): void
     {
         Family::create([
-            'name' => 'McDonald’s für Familien',
-            'title' => 'Herzlich willkommen im McDonald’s Family-Bereich.
-            Hier sind Spiel, Spaß und ganz viele Überraschungen für Groß und Klein garantiert.',
+            'name' => 'Junior Club',
             'description' => 'Eine abwechslungsreiche Produktauswahl, tolle Spielzeuge oder auch spannende Bücher als Alternative sorgen für jede Menge Spaß im Happy Meal®!',
             'image' => 'Family.jpg',
-            'section_id' => 3 ,
+            'section_id' => 3,
+        ]);
+
+        Family::create([
+            'name' => 'Kindergeburtstag',
+            'description' => 'Eine abwechslungsreiche Produktauswahl, tolle Spielzeuge oder auch spannende Bücher als Alternative sorgen für jede Menge Spaß im Happy Meal®!',
+            'image' => 'Family.jpg',
+            'section_id' => 3,
+        ]);
+
+        Family::create([
+            'name' => 'Happy Meal® Geschenke',
+            'description' => 'Eine abwechslungsreiche Produktauswahl, tolle Spielzeuge oder auch spannende Bücher als Alternative sorgen für jede Menge Spaß im Happy Meal®!',
+            'image' => 'Family.jpg',
+            'section_id' => 3,
         ]);
     }
 }

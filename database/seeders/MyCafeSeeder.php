@@ -14,14 +14,14 @@ class MyCafeSeeder extends Seeder
     public function run(): void
     {
         MyCafe::create([
-            'name' => 'Summer highlights at McCafé®',
+            'name' => 'McCafé® Vielfalt',
             'description' => 'Discover the McCafé® Cold Drinks',
             'image' => 'image_drinks.jpeg',
             'section_id' => 2,
         ]);
 
         MyCafe::create([
-            'name' => 'Summer highlights at McCafé®',
+            'name' => 'McCafé® Qualität',
             'description' => 'Discover the McCafé® Cold Drinks',
             'image' => 'image_drinks.jpeg',
             'section_id' => 2,

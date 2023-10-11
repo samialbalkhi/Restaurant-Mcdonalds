@@ -13,7 +13,7 @@ return new class extends Migration {
     {
         Schema::create('my_cafes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->longText('description');
             $table->string('image');
             $table

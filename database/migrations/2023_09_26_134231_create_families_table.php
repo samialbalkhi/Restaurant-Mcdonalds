@@ -13,16 +13,16 @@ return new class extends Migration {
     {
         Schema::create('families', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->longText('title');
+            $table->string('name')->unique();
+            $table->longText('title')->nullable();
             $table->longText('description');
             $table->string('image');
 
             $table
-            ->foreignIdFor(Section::class)
-            ->constrained()
-            ->cascadeOnDelete()
-            ->cascadeOnUpdate();
+                ->foreignIdFor(Section::class)
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->timestamps();
         });
     }
