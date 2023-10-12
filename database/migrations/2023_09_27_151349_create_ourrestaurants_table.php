@@ -13,9 +13,8 @@ return new class extends Migration {
     {
         Schema::create('ourrestaurants', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->unique();
             $table->longText('description');
-            $table->longText('message')->nullable();
             $table->string('image');
             $table
                 ->foreignIdFor(Section::class)

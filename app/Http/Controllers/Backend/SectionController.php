@@ -45,7 +45,7 @@ class SectionController extends Controller
 
     public function update(SectionRequest $request, Section $section)
     {
-        $path = $this->UpdateOrDeleteImage($section);
+        $this->deleteImage($section);
         $path = $this->storeImage('images_section');
 
         $section->update([
@@ -61,10 +61,10 @@ class SectionController extends Controller
 
     public function destroy(Section $section)
     {
-        $this->UpdateOrDeleteImage($section);
+        $this->deleteImage($section);
 
         $section->delete();
 
-        return response()->json(['Deleted successfully', 200]);
+        return response()->json(['message' => 'Deleted successfully']);
     }
 }

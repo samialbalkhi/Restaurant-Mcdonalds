@@ -44,7 +44,7 @@ class MycafeController extends Controller
 
     public function update(MycafeRequest $request, MyCafe $mycafe)
     {
-        $path = $this->UpdateOrDeleteImage($mycafe);
+        $this->deleteImage($mycafe);
 
         $path = $this->storeImage('image_mycafe');
 
@@ -60,7 +60,7 @@ class MycafeController extends Controller
 
     public function destroy(MyCafe $mycafe)
     {
-        $path = $this->UpdateOrDeleteImage($mycafe);
+        $this->deleteImage($mycafe);
 
         $mycafe->delete();
 

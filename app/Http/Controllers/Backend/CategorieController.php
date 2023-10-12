@@ -51,7 +51,7 @@ class CategorieController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        $this->UpdateOrDeleteImage($category);
+        $this->deleteImage($category);
         $path = $this->storeImage('images_category');
 
         $category->update([
@@ -69,10 +69,10 @@ class CategorieController extends Controller
      */
     public function destroy(Category $category)
     {
-        $this->UpdateOrDeleteImage($category);
+        $this->deleteImage($category);
 
         $category->delete();
 
-        return response()->json('Deleted successfully', 200);
+        return response()->json(['message' => 'Deleted successfully']);
     }
 }

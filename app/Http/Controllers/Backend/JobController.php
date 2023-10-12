@@ -13,11 +13,7 @@ class JobController extends Controller
     {
         $Job = Job::all();
 
-        $respones = [
-            'Job' => $Job,
-        ];
-
-        return response($respones, 201);
+        return response()->json($Job);
     }
 
     public function store(JobRequest $request)
@@ -28,44 +24,30 @@ class JobController extends Controller
             'vacancies' => $request->vacancies,
         ]);
 
-        $respones = [
-            'Job' => $job,
-        ];
-
-        return response($respones, 201);
+        return response()->json($job, 201);
     }
 
-    public function edit($id)
+    public function edit(Job $job)
     {
-        $Job = Job::findOrFail($id);
+        $Job = Job::where('id', $job->id)->first();
 
-        $respones = [
-            'Job' => $Job,
-        ];
-
-        return response($respones, 201);
+        return response()->json($Job);
     }
 
-    public function update(JobRequest $request, $id)
+    public function update(JobRequest $request, Job $job)
     {
-        $Job = Job::get()->find($id);
-
-        $Job->update([
+        $job->update([
             'name' => $request->name,
             'worktime' => $request->worktime,
             'vacancies' => $request->vacancies,
         ]);
 
-        $respones = [
-            'Job' => 'Updateed Category successfully',
-        ];
-        return response($respones, 201);
+        return response()->json(['Job' => 'Updateed Category successfully']);
     }
 
-    public function destroy($id)
+    public function destroy(Job $job)
     {
-        Job::findOrFail($id)->delete();
-
+        $job->delete();
         return response()->json([
             'message' => 'Deleted successfully',
         ]);

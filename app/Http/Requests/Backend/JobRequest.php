@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Backend;
 
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -25,24 +25,17 @@ class JobRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = Route::current()->parameter('id');
-        switch ($this->method()) {
-            case 'POST':
-                return [
-                    'name' => ['required', 'min:3', 'max:30', 'unique:jobs,name'],
-                    'worktime' => ['required', 'min:3', 'max:30'],
-                    'vacancies' => ['required', 'min:3', 'max:30'],
-                ];
-            case 'PUT':
-            case 'PATCH':
-                return [
-                    'name' => ['required', 'min:3', 'max:30', Rule::unique('jobs', 'name')->ignore($id)],
-                    'worktime' => ['required', 'min:3', 'max:30'],
-                    'vacancies' => ['required', 'min:3', 'max:30'],
-                ];
-            default:
-                break;
+        $rules = [];
+        $rules = [
+            'name' => ['required', 'min:3', 'unique:jobs,name'],
+            'worktime' => ['required'],
+            'vacancies' => ['required', 'numeric'],
+        ];
+
+        if (Request::route()->getName()) {
+            $rules['name'] = ['required', 'min:3', Rule::unique('jobs', 'name')->ignore($this->route()->job->id)];
         }
+        return $rules;
     }
 
     public function failedValidation(Validator $validator)

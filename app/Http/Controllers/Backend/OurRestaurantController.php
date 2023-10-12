@@ -2,50 +2,66 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Section;
 use Illuminate\Http\Request;
 use App\Models\Ourrestaurant;
+use App\Traits\ImageUploadTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Backend\OurRestaurantRequest;
 
 class OurRestaurantController extends Controller
 {
+    use ImageUploadTrait;
+
     public function index()
     {
         $Ourrestaurant = Ourrestaurant::with(['section:id,name'])->get();
 
-        $respones = [
-            'Ourrestaurant' => $Ourrestaurant,
-        ];
-
-        return response($respones, 201);
+        return response()->json($Ourrestaurant);
     }
 
-    public function store(OurRestaurantRequest $request, $id)
+    public function store(OurRestaurantRequest $request)
     {
-        $Ourrestaurant = Ourrestaurant::get()->find($id);
+        $path = $this->storeImage('image_OurRestaurant');
 
-        if (Storage::exists('public/' . $Ourrestaurant->image)) {
-            Storage::delete('public/' . $Ourrestaurant->image);
-        }
-        $path = $request->image->store('image_OurRestaurant', 'public');
+        $section = Section::find($request->section_id);
 
-        $Ourrestaurant = Ourrestaurant::updateOrCreate(
-            [
-                'section_id' => $request->section_id,
-            ],
-            [
-                'title' => $request->title,
-                'description' => $request->description,
-                'message' => $request->message,
-                'image' => $path,
-            ],
-        );
+        $ourRestaurant = $section->ourrestaurants()->create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'image' => $path,
+        ]);
 
-        $respones = [
-            'Ourrestaurant' => $Ourrestaurant,
-        ];
+        return response()->json($ourRestaurant, 201);
+    }
 
-        return response($respones, 201);
+    public function edit(Ourrestaurant $ourRestaurant)
+    {
+        $ourRestaurant = Ourrestaurant::where('id', $ourRestaurant->id)->first();
+
+        return response()->json($ourRestaurant);
+    }
+    
+    public function update(OurRestaurantRequest $request, Ourrestaurant $ourRestaurant)
+    {
+        $this->deleteImage($ourRestaurant);
+        $path = $this->storeImage('image_OurRestaurant');
+
+        $ourRestaurant->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'section_id' => $request->section_id,
+            'image' => $path,
+        ]);
+        return response()->json(['message' => 'updated successfully']);
+    }
+
+    public function destroy(Ourrestaurant $ourRestaurant)
+    {
+        $this->deleteImage($ourRestaurant);
+        $ourRestaurant->delete();
+
+        return response()->json(['message' => 'deleted successfully']);
     }
 }

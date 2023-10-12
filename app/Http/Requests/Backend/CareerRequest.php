@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Backend;
 
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -23,13 +25,17 @@ class CareerRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'title' => ['required'],
-            'description' => ['required'],
-            'message' => ['nullable'],
+        $rules = [];
+        $rules = [
+            'title' => ['required', 'min:10', 'unique:careers,title'],
+            'description' => ['required', 'min:10'],
             'section_id' => ['required'],
             'image' => ['required'],
         ];
+        if (Request::route()->getName()) {
+            $rules['title'] = ['required', 'min:10', Rule::unique('careers', 'title')->ignore($this->route()->career->id)];
+        }
+        return $rules;
     }
 
     public function failedValidation(Validator $validator)

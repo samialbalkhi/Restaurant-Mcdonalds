@@ -25,7 +25,7 @@ class FamilyRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rotename=Request::route()->getName();
+        $rules = [];
         $rules = [
             'name' => ['required', 'min:3', 'max:30', 'unique:families,name'],
             'title' => ['nullable'],
@@ -33,11 +33,11 @@ class FamilyRequest extends FormRequest
             'image' => ['required', 'image'],
             'section_id' => ['required'],
         ];
-        
-        if ($rotename) {
+
+        if (Request::route()->getName()) {
             $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('families', 'name')->ignore($this->route()->family->id)];
         }
-        
+
         return $rules;
     }
 

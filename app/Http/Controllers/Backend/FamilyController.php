@@ -45,7 +45,7 @@ class FamilyController extends Controller
 
     public function update(FamilyRequest $request, Family $family)
     {
-        $path = $this->UpdateOrDeleteImage($family);
+        $this->deleteImage($family);
         $path = $this->storeImage('image_family');
 
         $family->update([
@@ -61,7 +61,7 @@ class FamilyController extends Controller
 
     public function destroy(Family $family)
     {
-        $this->UpdateOrDeleteImage($family);
+        $this->deleteImage($family);
         $family->delete();
         return response()->json(['message' => 'deleted successfully']);
     }

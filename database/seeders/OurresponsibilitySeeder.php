@@ -14,7 +14,6 @@ class OurresponsibilitySeeder extends Seeder
     public function run(): void
     {
         Ourresponsibility::create([
-            'message' => 'Hier findest du alle wichtigen Informationen und Inhalte, die uns aktuell besonders beschäftigen.',
             'title' => 'Discover responsibility, taste quality.',
             'description' => 'Every person has many opportunities to make their world better. We as a company too. Find out here how we take responsibility!',
             'image' => 'Unsere-Verantwortung.jpg',
@@ -22,7 +21,7 @@ class OurresponsibilitySeeder extends Seeder
         ]);
 
         Ourresponsibility::create([
-            'title' => 'Discover responsibility, taste quality.',
+            'title' => 'Discover responsibility, taste qualityasdasdasd.',
             'description' => 'Many small things can make a big difference. Well tell you which suppliers we work with, where our ingredients come from and how we ensure that the best quality is served every day in our restaurants.',
             'image' => 'Discover.jpg',
             'section_id' => 4,

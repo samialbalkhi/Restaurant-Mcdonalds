@@ -25,8 +25,6 @@ class MycafeRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rotename = Request::route()->getName();
-
         $rules = [];
         $rules = [
             'name' => ['required', 'min:3', 'unique:my_cafes,name'],
@@ -35,7 +33,7 @@ class MycafeRequest extends FormRequest
             'section_id' => ['required'],
         ];
 
-        if ($rotename) {
+        if (Request::route()->getName()) {
             $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('my_cafes', 'name')->ignore($this->route()->mycafe->id)];
         }
         return $rules;

@@ -42,8 +42,7 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        $ProductId = $product->id;
-        $product = Product::where('id', $ProductId)->first();
+        $product = Product::where('id', $product->id)->first();
 
         return response()->json($product);
     }
@@ -53,9 +52,7 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        if (Storage::exists('public/' . $product->image)) {
-            Storage::delete('public/' . $product->image);
-        }
+        $this->deleteImage($product);
 
         $path = $this->storeImage('images_product');
 
@@ -80,14 +77,12 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        if (Storage::exists('public/' . $product->image)) {
-            Storage::delete('public/' . $product->image);
-        }
+        $this->deleteImage($product);
 
         $product->delete();
 
         return response()->json([
             'message' => 'Deleted successfully',
         ]);
-    }
+    }   
 }

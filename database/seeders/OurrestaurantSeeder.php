@@ -15,7 +15,6 @@ class OurrestaurantSeeder extends Seeder
     {
         Ourrestaurant::create([
             'title' => 'Welcome to MyMcDonald.',
-            'message' => 'The McDonald’s bonus program*.',
             'description' => 'App works: Here you will find all the benefits you can enjoy with your McDonald’s app.',
             'image' => 'mymcdonalds.jpg',
             'section_id' => 5,

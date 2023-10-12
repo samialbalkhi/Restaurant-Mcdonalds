@@ -14,7 +14,7 @@ trait ImageUploadTrait
         return $path;
     }
 
-    public function UpdateOrDeleteImage($destination)
+    public function deleteImage($destination)
     {
         if (Storage::exists('public/' . $destination->image)) {
             Storage::delete('public/' . $destination->image);

@@ -30,7 +30,6 @@ class OurResponsibilityController extends Controller
         $OurResponsibility = $section->OurResponsibility()->create([
             'title' => $request->title,
             'description' => $request->description,
-            'message' => $request->message,
             'image' => $path,
             'section_id' => $request->section_id,
         ]);
@@ -40,22 +39,19 @@ class OurResponsibilityController extends Controller
 
     public function edit(Ourresponsibility $ourresponsibility)
     {
-        $OurResponsibilityId = $ourresponsibility->id;
-        $OurResponsibility = Ourresponsibility::where('id', $OurResponsibilityId)->first();
+        $OurResponsibility = Ourresponsibility::where('id', $ourresponsibility->id)->first();
         return response()->json($OurResponsibility);
     }
 
     public function update(OurResponsibilityRequest $request, Ourresponsibility $ourresponsibility)
     {
-        if (Storage::exists('public/' . $ourresponsibility->image)) {
-            Storage::delete('public/' . $ourresponsibility->image);
-        }
+        $this->deleteImage($ourresponsibility);
+
         $path = $this->storeImage('images_OurResponsibility');
 
         $ourresponsibility = $ourresponsibility->update([
             'title' => $request->title,
             'description' => $request->description,
-            'message' => $request->message,
             'image' => $path,
             'section_id' => $request->section_id,
         ]);
@@ -67,9 +63,7 @@ class OurResponsibilityController extends Controller
 
     public function destroy(Ourresponsibility $ourresponsibility)
     {
-        if (Storage::exists('public/' . $ourresponsibility->image)) {
-            Storage::delete('public/' . $ourresponsibility->image);
-        }
+        $this->deleteImage($ourresponsibility);
 
         $ourresponsibility->delete();
 

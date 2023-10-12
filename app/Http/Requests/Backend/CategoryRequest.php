@@ -26,7 +26,6 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rotename = Request::route()->getName();
 
         $rules = [];
         $rules = [
@@ -36,7 +35,7 @@ class CategoryRequest extends FormRequest
             'status' => ['nullable'],
         ];
 
-        if ($rotename) {
+        if (Request::route()->getName()) {
             $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('categories', 'name')->ignore($this->route()->category->id)];
         }
         return $rules;

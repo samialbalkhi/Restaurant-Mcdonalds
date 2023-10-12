@@ -13,9 +13,8 @@ return new class extends Migration {
     {
         Schema::create('careers', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->unique();
             $table->longText('description');
-            $table->string('message')->nullable();
             $table->string('image');
             $table
                 ->foreignIdFor(Section::class)

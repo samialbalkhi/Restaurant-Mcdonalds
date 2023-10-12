@@ -90,26 +90,32 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('/index', [OurResponsibilityController::class, 'index']);
         Route::post('/store', [OurResponsibilityController::class, 'store']);
         Route::get('/edit/{ourresponsibility}', [OurResponsibilityController::class, 'edit']);
-        Route::post('/update/{ourresponsibility}', [OurResponsibilityController::class, 'update']);
+        Route::post('/update/{ourresponsibility}', [OurResponsibilityController::class, 'update'])->name('update_ourresponsibility');
         Route::delete('/destroy/{ourresponsibility}', [OurResponsibilityController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'OurRestaurant'], function () {
         Route::get('/index', [OurRestaurantController::class, 'index']);
-        Route::post('/store/{id}', [OurRestaurantController::class, 'store']);
+        Route::post('/store', [OurRestaurantController::class, 'store']);
+        Route::get('/edit/{ourRestaurant}', [OurRestaurantController::class, 'edit']);
+        Route::post('/update/{ourRestaurant}', [OurRestaurantController::class, 'update'])->name('update_ourRestaurant');
+        Route::delete('/destroy/{ourRestaurant}', [OurRestaurantController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'career'], function () {
         Route::get('/index', [CareerController::class, 'index']);
-        Route::post('/store/{id}', [CareerController::class, 'store']);
+        Route::post('/store', [CareerController::class, 'store']);
+        Route::get('/edit/{career}', [CareerController::class, 'edit']);
+        Route::post('/update/{career}', [CareerController::class, 'update'])->name('update_career');
+        Route::delete('/destroy/{career}', [CareerController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'job'], function () {
         Route::get('/index', [JobController::class, 'index']);
         Route::post('/store', [JobController::class, 'store']);
-        Route::get('/edit/{id}', [JobController::class, 'edit']);
-        Route::patch('/update/{id}', [JobController::class, 'update']);
-        Route::delete('/destroy/{id}', [JobController::class, 'destroy']);
+        Route::get('/edit/{job}', [JobController::class, 'edit']);
+        Route::post('/update/{job}', [JobController::class, 'update'])->name('update_job');
+        Route::delete('/destroy/{job}', [JobController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'JobOffer'], function () {
