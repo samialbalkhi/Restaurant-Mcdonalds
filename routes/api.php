@@ -121,9 +121,9 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     Route::group(['prefix' => 'JobOffer'], function () {
         Route::get('/index', [JobOfferController::class, 'index']);
         Route::post('/store', [JobOfferController::class, 'store']);
-        Route::get('/edit/{id}', [JobOfferController::class, 'edit']);
-        Route::patch('/update/{id}', [JobOfferController::class, 'update']);
-        Route::delete('/destroy/{id}', [JobOfferController::class, 'destroy']);
+        Route::get('/edit/{job_offer}', [JobOfferController::class, 'edit']);
+        Route::post('/update/{job_offer}', [JobOfferController::class, 'update'])->name('update_jobOffer');
+        Route::delete('/destroy/{job_offer}', [JobOfferController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'Detail'], function () {

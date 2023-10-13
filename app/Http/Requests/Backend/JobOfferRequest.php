@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Backend;
 
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -23,25 +24,22 @@ class JobOfferRequest extends FormRequest
      */
     public function rules(): array
     {
-        $commonRules = [
+        $rules = [
             'location' => ['required', 'min:5'],
-            //'Franchisenehmer' 
+            //'Franchisenehmer'
             'franchisee' => ['required', 'min:5'],
             'description' => ['required', 'min:5'],
-            'image' => ['required'],
+            'image' => ['required', 'image'],
             'title' => ['nullable', 'min:3'],
             'job_id' => ['required'],
             'listOfDetails' => ['array', 'required'],
             'listOfDetails.*.details' => ['required', 'min:3'],
         ];
-        switch ($this->method()) {
-            case 'PUT':
-            case 'PATCH':
-                // Add or override rules for 'PUT' and 'PATCH' methods if needed
-                return $commonRules;
-            default:
-                return $commonRules;
+        if (Request::route()->getName()) {
+            unset($rules['listOfDetails']);
         }
+
+        return $rules;
     }
     public function failedValidation(Validator $validator)
     {

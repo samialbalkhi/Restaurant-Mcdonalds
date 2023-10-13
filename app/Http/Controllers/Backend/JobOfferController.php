@@ -11,70 +11,54 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests\Backend\JobOfferRequest;
 use App\Models\Job;
+use App\Traits\ImageUploadTrait;
 
 class JobOfferController extends Controller
 {
+    use ImageUploadTrait;
     public function index()
     {
-        $Job_offerid = Job_offer::pluck('id');
-        $jobOffers = Job_offer::whereIn('id', $Job_offerid)
-            ->with(['Jobs:id,name', 'details:job_offer_id,details'])
-            ->get();
+        $jobOffers = Job_offer::with(['Jobs:id,name', 'details:job_offer_id,details'])->get();
 
-        $respones = [
-            'Job_offer' => $jobOffers,
-        ];
-
-        return response($respones, 201);
+        return response()->json($jobOffers);
     }
 
     public function store(JobOfferRequest $request)
     {
-        $path = $request->image->store('image_Job_offer', 'public');
-        $Job_offer = Job_offer::create([
+        $path = $this->storeImage('image_jobOffer');
+        $jop = Job::find($request->job_id);
+
+        $Job_offer = $jop->Job_offers()->create([
             'location' => $request->location,
             'franchisee' => $request->franchisee,
             'description' => $request->description,
             'image' => $path,
-            'job_id' => $request->job_id,
         ]);
-        $Job_offer_id = $Job_offer->id;
-        $createdDetails = [];
+
+        $jobOfferId = Job_offer::find($Job_offer->id);
+        $details = [];
         for ($i = 0; $i < count($request->listOfDetails); $i++) {
-            $details = Detail::create([
+            $detail = $jobOfferId->details()->create([
                 'details' => $request->listOfDetails[$i]['details'],
-                'job_offer_id' => $Job_offer_id,
             ]);
+            $details[] = $detail;
         }
-        $createdDetails[] = $details;
-        $respones = [
-            'Job_offer' => $Job_offer,
-            'details' => $createdDetails,
-        ];
-
-        return response()->json($respones);
+        return response()->json([$Job_offer, $details], 201);
     }
 
-    public function edit($id)
+    public function edit(Job_offer $job_offer)
     {
-        $Job_offer = Job_offer::findOrFail($id);
-        $respones = [
-            'Job_offer' => $Job_offer,
-        ];
+        $Job_offer = Job_offer::where('id', $job_offer->id)->first();
 
-        return response($respones, 201);
+        return response()->json($Job_offer);
     }
 
-    public function update(JobOfferRequest $request, $id)
+    public function update(JobOfferRequest $request, Job_offer $job_offer)
     {
-        $Job_offer = Job_offer::with(['Jobs:id,name'])->find($id);
-        if (Storage::exists('public/' . $Job_offer->image)) {
-            Storage::delete('public/' . $Job_offer->image);
-        }
+        $this->deleteImage($job_offer);
+        $path = $this->storeImage('image_jobOffer');
 
-        $path = $request->image->store('image_Job_offer', 'public');
-
-        $Job_offer->update([
+        $job_offer->update([
             'location' => $request->location,
             'franchisee' => $request->franchisee,
             'description' => $request->description,
@@ -82,22 +66,14 @@ class JobOfferController extends Controller
             'job_id' => $request->job_id,
         ]);
 
-        $respones = [
-            'Job_offer' => $Job_offer,
-        ];
-
-        return response()->json($respones);
+        return response()->json(['message' => 'updated successfully']);
     }
 
-    public function destroy($id)
+    public function destroy(Job_offer $job_offer)
     {
-        $Job_offer = Job_offer::get()->find($id);
+        $this->deleteImage($job_offer);
 
-        if (Storage::exists('public/' . $Job_offer->image)) {
-            Storage::delete('public/' . $Job_offer->image);
-        }
-
-        Job_offer::findOrFail($id)->delete();
+        $job_offer->delete();
 
         return response()->json([
             'message' => 'Deleted successfully',
