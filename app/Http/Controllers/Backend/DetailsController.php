@@ -5,38 +5,30 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Detail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Job_offer;
 
 class DetailsController extends Controller
 {
-    public function edit($id)
+    public function edit(Detail $details)
     {
-        $Job_offer = Detail::where('job_offer_id', $id)->get();
+        $jobOffer = Detail::where('job_offer_id', $details->id)->get();
 
-        $respones = [
-            'Job_offer' => $Job_offer,
-        ];
-
-        return response($respones, 201);
+        return response()->json($jobOffer);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Detail $details)
     {
-        $details = Detail::find($id);
-        $Job_offer = $details->update([
+        $details->update([
             'details' => $request->details,
-            'job_offer_id' => $id,
+            'job_offer_id' => $details->job_offer_id,
         ]);
 
-        $respones = [
-            'Job_offer' => $Job_offer,
-        ];
-
-        return response($respones, 201);
+        return response()->json(['message' => 'updated successfully']);
     }
 
-    public function destroy($id)
+    public function destroy(Detail $details)
     {
-        Detail::findOrFail($id)->delete();
+        $details->delete();
 
         return response()->json([
             'message' => 'Deleted successfully',

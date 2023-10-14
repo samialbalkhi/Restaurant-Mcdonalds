@@ -127,9 +127,9 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     });
 
     Route::group(['prefix' => 'Detail'], function () {
-        Route::get('/edit/{id}', [DetailsController::class, 'edit']);
-        Route::post('/update/{id}', [DetailsController::class, 'update']);
-        Route::delete('/destroy/{id}', [DetailsController::class, 'destroy']);
+        Route::get('/edit/{details}', [DetailsController::class, 'edit']);
+        Route::post('/update/{details}', [DetailsController::class, 'update']);
+        Route::delete('/destroy/{details}', [DetailsController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'AnsweringJobApplications'], function () {
