@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Job;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\EmploymentOpportunity;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class JobSeeder extends Seeder
+class EmploymentOpportunitySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,19 +15,19 @@ class JobSeeder extends Seeder
     {
         $values = ['Full time', 'Part time', 'Mini job'];
         $randomValue = $values[array_rand($values)];
-        Job::create([
+        EmploymentOpportunity::create([
             'name' => 'Restaurant-Mitarbeiter:in',
             'Worktime' => $randomValue,
             'vacancies' => 100,
         ]);
 
-        Job::create([
+        EmploymentOpportunity::create([
             'name' => 'Schichtführer:in',
             'Worktime' => $randomValue,
             'vacancies' => 50,
         ]);
 
-        Job::create([
+        EmploymentOpportunity::create([
             'name' => 'Lieferfahrer:in & Restaurant-Mitarbeiter:in',
             'Worktime' => $randomValue,
             'vacancies' => 150,

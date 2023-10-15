@@ -31,7 +31,7 @@ class JobOfferRequest extends FormRequest
             'description' => ['required', 'min:5'],
             'image' => ['required', 'image'],
             'title' => ['nullable', 'min:3'],
-            'job_id' => ['required'],
+            'employment_opportunity_id' => ['required'],
             'listOfDetails' => ['array', 'required'],
             'listOfDetails.*.details' => ['required', 'min:3'],
         ];

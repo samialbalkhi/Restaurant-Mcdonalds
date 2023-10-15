@@ -4,7 +4,6 @@ use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthAdminController;
-use App\Http\Controllers\Backend\JobController;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\MailController;
 use App\Http\Controllers\Backend\CareerController;
@@ -19,6 +18,7 @@ use App\Http\Controllers\Backend\CategorieController;
 use App\Http\Controllers\Backend\OurRestaurantController;
 use App\Http\Controllers\Backend\ProductReviewController;
 use App\Http\Controllers\Backend\OurResponsibilityController;
+use App\Http\Controllers\Backend\EmploymentOpportunityController;
 use App\Http\Controllers\Backend\AnsweringJobApplicationsController;
 
 /*
@@ -111,11 +111,11 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     });
 
     Route::group(['prefix' => 'job'], function () {
-        Route::get('/index', [JobController::class, 'index']);
-        Route::post('/store', [JobController::class, 'store']);
-        Route::get('/edit/{job}', [JobController::class, 'edit']);
-        Route::post('/update/{job}', [JobController::class, 'update'])->name('update_job');
-        Route::delete('/destroy/{job}', [JobController::class, 'destroy']);
+        Route::get('/index', [EmploymentOpportunityController::class, 'index']);
+        Route::post('/store', [EmploymentOpportunityController::class, 'store']);
+        Route::get('/edit/{employment_opportunities}', [EmploymentOpportunityController::class, 'edit']);
+        Route::post('/update/{employment_opportunities}', [EmploymentOpportunityController::class, 'update'])->name('update_employment_opportunities');
+        Route::delete('/destroy/{employment_opportunities}', [EmploymentOpportunityController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'JobOffer'], function () {

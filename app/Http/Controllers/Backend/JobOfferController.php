@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Detail;
 use App\Models\Job_offer;
 use Illuminate\Http\Request;
+use App\Traits\ImageUploadTrait;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\EmploymentOpportunity;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests\Backend\JobOfferRequest;
-use App\Models\Job;
-use App\Traits\ImageUploadTrait;
 
 class JobOfferController extends Controller
 {
@@ -26,9 +26,9 @@ class JobOfferController extends Controller
     public function store(JobOfferRequest $request)
     {
         $path = $this->storeImage('image_jobOffer');
-        $jop = Job::find($request->job_id);
+        $employmentOpportunity = EmploymentOpportunity::find($request->employment_opportunity_id);
 
-        $Job_offer = $jop->Job_offers()->create([
+        $Job_offer = $employmentOpportunity->Job_offers()->create([
             'location' => $request->location,
             'franchisee' => $request->franchisee,
             'description' => $request->description,
@@ -63,7 +63,7 @@ class JobOfferController extends Controller
             'franchisee' => $request->franchisee,
             'description' => $request->description,
             'image' => $path,
-            'job_id' => $request->job_id,
+            'employment_opportunity_id' => $request->employment_opportunity_id,
         ]);
 
         return response()->json(['message' => 'updated successfully']);

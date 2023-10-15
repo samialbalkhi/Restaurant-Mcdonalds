@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Job;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\EmploymentOpportunity;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration {
     /**
@@ -18,8 +18,8 @@ return new class extends Migration {
             $table->longText('description');
             $table->string('image');
             $table
-                ->foreignIdFor(Job::class)
-                ->constrained()
+                ->foreignIdFor(EmploymentOpportunity::class)
+                // ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();
