@@ -11,20 +11,14 @@ class ProductReviewController extends Controller
 {
     public function index()
     {
-        $ProductReview = ProductReview::with('product:id,name', 'user:id,name')->get();
+        $productReview = ProductReview::with('product:id,name', 'user:id,name')->get();
 
-        $respones = [
-            'ProductReview' => $ProductReview,
-        ];
-
-        return response($respones, 201);
+        return response()->json($productReview);
     }
 
-    public function destroy(ProductReviewRequest $request,$id)
+    public function destroy(ProductReview $productReview)
     {
-        
-        ProductReview::findOrFail($id)->delete();
-
+        $productReview()->delete();
         return response()->json([
             'message' => 'Deleted successfully',
         ]);

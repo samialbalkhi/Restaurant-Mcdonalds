@@ -14,22 +14,21 @@ class EmploymentOpportunitySeeder extends Seeder
     public function run(): void
     {
         $values = ['Full time', 'Part time', 'Mini job'];
-        $randomValue = $values[array_rand($values)];
         EmploymentOpportunity::create([
             'name' => 'Restaurant-Mitarbeiter:in',
-            'Worktime' => $randomValue,
+            'Worktime' => $values[array_rand($values)],
             'vacancies' => 100,
         ]);
 
         EmploymentOpportunity::create([
             'name' => 'Schichtführer:in',
-            'Worktime' => $randomValue,
+            'Worktime' => $values[array_rand($values)],
             'vacancies' => 50,
         ]);
 
         EmploymentOpportunity::create([
             'name' => 'Lieferfahrer:in & Restaurant-Mitarbeiter:in',
-            'Worktime' => $randomValue,
+            'Worktime' => $values[array_rand($values)],
             'vacancies' => 150,
         ]);
     }

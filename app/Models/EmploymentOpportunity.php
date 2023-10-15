@@ -14,6 +14,5 @@ class EmploymentOpportunity extends Model
     public function Job_offers()
     {
         return $this->hasMany(Job_offer::class);
-        
     }
 }

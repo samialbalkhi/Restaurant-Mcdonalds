@@ -19,8 +19,7 @@ class AuthAdminController extends Controller
                 401,
             );
         } else {
-            return $user->createToken('token-name',['admin'])->plainTextToken;
+            return $user->createToken('token-name', ['admin'])->plainTextToken;
         }
     }
-
 }

@@ -12,29 +12,23 @@ use Illuminate\Support\Facades\Mail;
 
 class AnsweringJobApplicationsController extends Controller
 {
-    public function sendmail(Request $request, $id)
+    public function sendmail(Request $request, Employment_application $employment_application)
     {
-        SendMail::dispatch($id, $request->all());
+        SendMail::dispatch($employment_application->id, $request->all());
         return response()->json(['message' => 'send mail successfully']);
     }
+
     public function index()
     {
-        $Answering_job_application = Answering_job_application::with(['employment_application:id,email,first_name'])->get();
+        $answeringJobApplication = Answering_job_application::with(['employment_application:id,email,first_name'])->get();
 
-        $respones = [
-            'Answering_job_application' => $Answering_job_application,
-        ];
-
-        return response($respones, 201);
+        return response()->json($answeringJobApplication);
     }
-    public function getAnswering($id)
+
+    public function getAnswering(Answering_job_application $Answering_job_application)
     {
-        $Answering_job_application = Answering_job_application::findOrFail($id);
+        $Answering_job_application = Answering_job_application::where('id', $Answering_job_application->id)->first();
 
-        $respones = [
-            'Answering_job_application' => $Answering_job_application,
-        ];
-
-        return response($respones, 201);
+        return response()->json($Answering_job_application);
     }
 }

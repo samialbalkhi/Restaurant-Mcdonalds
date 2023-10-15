@@ -110,7 +110,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::delete('/destroy/{career}', [CareerController::class, 'destroy']);
     });
 
-    Route::group(['prefix' => 'job'], function () {
+    Route::group(['prefix' => 'EmploymentOpportunity'], function () {
         Route::get('/index', [EmploymentOpportunityController::class, 'index']);
         Route::post('/store', [EmploymentOpportunityController::class, 'store']);
         Route::get('/edit/{employment_opportunities}', [EmploymentOpportunityController::class, 'edit']);
@@ -134,12 +134,12 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
 
     Route::group(['prefix' => 'AnsweringJobApplications'], function () {
         Route::get('index', [AnsweringJobApplicationsController::class, 'index']);
-        Route::post('sendmail/{id}', [AnsweringJobApplicationsController::class, 'sendmail']);
-        Route::get('getAnswering/{id}', [AnsweringJobApplicationsController::class, 'getAnswering']);
+        Route::post('sendmail/{employment_application}', [AnsweringJobApplicationsController::class, 'sendmail']);
+        Route::get('getAnswering/{Answering_job_application}', [AnsweringJobApplicationsController::class, 'getAnswering']);
     });
 
     Route::group(['prefix' => 'ProductReview'], function () {
         Route::get('/index', [ProductReviewController::class, 'index']);
-        Route::delete('destroy/{id}', [ProductReviewController::class, 'destroy']);
+        Route::delete('destroy/{productReview}', [ProductReviewController::class, 'destroy']);
     });
 });

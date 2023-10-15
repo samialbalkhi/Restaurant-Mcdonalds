@@ -14,9 +14,9 @@ class EmploymentOpportunityController extends Controller
      */
     public function index()
     {
-        $Job = EmploymentOpportunity::all();
+        $employmentOpportunity = EmploymentOpportunity::all();
 
-        return response()->json($Job);
+        return response()->json($employmentOpportunity);
     }
 
     public function store(EmploymentOpportunityRequest $request)
@@ -45,7 +45,7 @@ class EmploymentOpportunityController extends Controller
             'vacancies' => $request->vacancies,
         ]);
 
-        return response()->json(['Job' => 'Updateed Category successfully']);
+        return response()->json(['message' => 'Updateed Category successfully']);
     }
 
     public function destroy(EmploymentOpportunity $employment_opportunities)

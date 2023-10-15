@@ -16,12 +16,12 @@ return new class extends Migration {
             $table->id();
             $table
                 ->foreignIdFor(Product::class)
-                ->constrained()
+                // ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table
                 ->foreignIdFor(User::class)
-                ->constrained()
+                // ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->string('name');

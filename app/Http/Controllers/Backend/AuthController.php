@@ -21,7 +21,7 @@ use App\Http\Requests\Backend\RegisterRequest;
                 ],
                 401,
             );
-        } else {
+        } else {    
             return $user->createToken('token-name',['customer'])->plainTextToken;
         }
     }

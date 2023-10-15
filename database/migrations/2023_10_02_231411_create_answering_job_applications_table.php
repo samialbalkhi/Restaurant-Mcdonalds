@@ -15,10 +15,10 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->longText('description');
-            $table->string('message');
+            $table->longText('message');
             $table
-            
-            ->foreignIdFor(Employment_application::class)
+
+                ->foreignIdFor(Employment_application::class)
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();

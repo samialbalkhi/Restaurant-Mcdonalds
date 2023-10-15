@@ -18,7 +18,7 @@ class JobOfferController extends Controller
     use ImageUploadTrait;
     public function index()
     {
-        $jobOffers = Job_offer::with(['Jobs:id,name', 'details:job_offer_id,details'])->get();
+        $jobOffers = Job_offer::with(['employment_opportunitie:id,name', 'details:job_offer_id,details'])->get();
 
         return response()->json($jobOffers);
     }
