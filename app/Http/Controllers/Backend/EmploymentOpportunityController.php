@@ -30,16 +30,16 @@ class EmploymentOpportunityController extends Controller
         return response()->json($employmentOpportunity, 201);
     }
 
-    public function edit(EmploymentOpportunity $employment_opportunities)
+    public function edit(EmploymentOpportunity $employmentOpportunities)
     {
-        $employmentOpportunity = EmploymentOpportunity::where('id', $employment_opportunities->id)->first();
+        $employmentOpportunity = EmploymentOpportunity::where('id', $employmentOpportunities->id)->first();
 
         return response()->json($employmentOpportunity);
     }
 
-    public function update(EmploymentOpportunityRequest $request, EmploymentOpportunity $employment_opportunities)
+    public function update(EmploymentOpportunityRequest $request, EmploymentOpportunity $employmentOpportunities)
     {
-        $employment_opportunities->update([
+        $employmentOpportunities->update([
             'name' => $request->name,
             'worktime' => $request->worktime,
             'vacancies' => $request->vacancies,
@@ -48,11 +48,14 @@ class EmploymentOpportunityController extends Controller
         return response()->json(['message' => 'Updateed Category successfully']);
     }
 
-    public function destroy(EmploymentOpportunity $employment_opportunities)
+    public function destroy(EmploymentOpportunity $employmentOpportunities)
     {
-        $employment_opportunities->delete();
-        return response()->json([
-            'message' => 'Deleted successfully',
-        ]);
+        $employmentOpportunities->delete();
+        return response()->json(
+            [
+                'message' => 'Deleted successfully',
+            ],
+            202,
+        );
     }
 }

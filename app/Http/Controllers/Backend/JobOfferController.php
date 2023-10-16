@@ -46,19 +46,19 @@ class JobOfferController extends Controller
         return response()->json([$Job_offer, $details], 201);
     }
 
-    public function edit(Job_offer $job_offer)
+    public function edit(Job_offer $jobOffer)
     {
-        $Job_offer = Job_offer::where('id', $job_offer->id)->first();
+        $jobOffer = Job_offer::where('id', $jobOffer->id)->first();
 
-        return response()->json($Job_offer);
+        return response()->json($jobOffer);
     }
 
-    public function update(JobOfferRequest $request, Job_offer $job_offer)
+    public function update(JobOfferRequest $request, Job_offer $jobOffer)
     {
-        $this->deleteImage($job_offer);
+        $this->deleteImage($jobOffer);
         $path = $this->storeImage('image_jobOffer');
 
-        $job_offer->update([
+        $jobOffer->update([
             'location' => $request->location,
             'franchisee' => $request->franchisee,
             'description' => $request->description,
@@ -69,14 +69,17 @@ class JobOfferController extends Controller
         return response()->json(['message' => 'updated successfully']);
     }
 
-    public function destroy(Job_offer $job_offer)
+    public function destroy(Job_offer $jobOffer)
     {
-        $this->deleteImage($job_offer);
+        $this->deleteImage($jobOffer);
 
-        $job_offer->delete();
+        $jobOffer->delete();
 
-        return response()->json([
-            'message' => 'Deleted successfully',
-        ]);
+        return response()->json(
+            [
+                'message' => 'Deleted successfully',
+            ],
+            202,
+        );
     }
 }

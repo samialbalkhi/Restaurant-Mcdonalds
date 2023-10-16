@@ -18,9 +18,12 @@ class ProductReviewController extends Controller
 
     public function destroy(ProductReview $productReview)
     {
-        $productReview()->delete();
-        return response()->json([
-            'message' => 'Deleted successfully',
-        ]);
+        $productReview->delete();
+        return response()->json(
+            [
+                'message' => 'Deleted successfully',
+            ],
+            202,
+        );
     }
 }

@@ -17,7 +17,7 @@ class ProductController extends Controller
     {
         $product = Product::with('category:id,name')->get();
 
-        return response($product);
+        return response()->json($product);
     }
 
     public function store(ProductRequest $request)
@@ -37,7 +37,7 @@ class ProductController extends Controller
             'image' => $path,
         ]);
 
-        return response($product, 201);
+        return response()->json($product, 201);
     }
 
     public function edit(Product $product)
@@ -81,8 +81,11 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return response()->json([
-            'message' => 'Deleted successfully',
-        ]);
-    }   
+        return response()->json(
+            [
+                'message' => 'Deleted successfully',
+            ],
+            202,
+        );
+    }
 }

@@ -73,6 +73,6 @@ class CategorieController extends Controller
 
         $category->delete();
 
-        return response()->json(['message' => 'Deleted successfully']);
+        return response()->json(['message' => 'Deleted successfully'],202);
     }
 }

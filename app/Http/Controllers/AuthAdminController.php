@@ -12,12 +12,7 @@ class AuthAdminController extends Controller
     {
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return response(
-                [
-                    'message' => 'password or email is incorrect',
-                ],
-                401,
-            );
+            return response()->json(['message' => 'password or email is incorrect'], 401);
         } else {
             return $user->createToken('token-name', ['admin'])->plainTextToken;
         }

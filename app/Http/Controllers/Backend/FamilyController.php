@@ -34,7 +34,7 @@ class FamilyController extends Controller
             'image' => $path,
         ]);
 
-        return response()->json($family);
+        return response()->json($family, 201);
     }
     public function edit(Family $family)
     {
@@ -63,6 +63,6 @@ class FamilyController extends Controller
     {
         $this->deleteImage($family);
         $family->delete();
-        return response()->json(['message' => 'deleted successfully']);
+        return response()->json(['message' => 'deleted successfully'], 202);
     }
 }

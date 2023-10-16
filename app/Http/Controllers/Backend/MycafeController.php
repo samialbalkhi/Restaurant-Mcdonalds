@@ -17,7 +17,6 @@ class MycafeController extends Controller
     public function index()
     {
         $mycafe = MyCafe::with(['section:id,name'])->get();
-
         return response()->json($mycafe);
     }
 
@@ -32,14 +31,14 @@ class MycafeController extends Controller
             'image' => $path,
         ]);
 
-        return response()->json($mycafe);
+        return response()->json($mycafe, 201);
     }
 
     public function edit(MyCafe $mycafe)
     {
-        $asd = MyCafe::where('id', $mycafe->id)->first();
+        $mycafe = MyCafe::where('id', $mycafe->id)->first();
 
-        return response()->json($asd);
+        return response()->json($mycafe);
     }
 
     public function update(MycafeRequest $request, MyCafe $mycafe)
@@ -64,6 +63,6 @@ class MycafeController extends Controller
 
         $mycafe->delete();
 
-        return response()->json(['message' => 'deleted successfully']);
+        return response()->json(['message' => 'deleted successfully'], 202);
     }
 }

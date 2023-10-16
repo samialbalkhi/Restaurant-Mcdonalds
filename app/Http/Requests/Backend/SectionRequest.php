@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Backend;
 
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Http\FormRequest;
@@ -35,7 +36,7 @@ class SectionRequest extends FormRequest
             'image' => ['required', 'image', 'max:2048'],
         ];
 
-        if ($this->method('PATCH' || 'PUT')) {
+        if (Request::route()->getName()) {
             $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('sections', 'name')->ignore($this->route()->section->id)];
         }
 

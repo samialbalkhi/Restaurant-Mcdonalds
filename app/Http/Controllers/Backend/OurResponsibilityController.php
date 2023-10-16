@@ -27,29 +27,29 @@ class OurResponsibilityController extends Controller
 
         $section = Section::find($request->section_id);
 
-        $OurResponsibility = $section->OurResponsibility()->create([
+        $ourResponsibility = $section->OurResponsibility()->create([
             'title' => $request->title,
             'description' => $request->description,
             'image' => $path,
             'section_id' => $request->section_id,
         ]);
 
-        return response()->json($OurResponsibility, 201);
+        return response()->json($ourResponsibility, 201);
     }
 
-    public function edit(Ourresponsibility $ourresponsibility)
+    public function edit(Ourresponsibility $ourResponsibility)
     {
-        $OurResponsibility = Ourresponsibility::where('id', $ourresponsibility->id)->first();
+        $OurResponsibility = Ourresponsibility::where('id', $ourResponsibility->id)->first();
         return response()->json($OurResponsibility);
     }
 
-    public function update(OurResponsibilityRequest $request, Ourresponsibility $ourresponsibility)
+    public function update(OurResponsibilityRequest $request, Ourresponsibility $ourResponsibility)
     {
-        $this->deleteImage($ourresponsibility);
+        $this->deleteImage($ourResponsibility);
 
-        $path = $this->storeImage('images_OurResponsibility');
+        $path = $this->storeImage('images_ourResponsibility');
 
-        $ourresponsibility = $ourresponsibility->update([
+        $ourResponsibility->update([
             'title' => $request->title,
             'description' => $request->description,
             'image' => $path,
@@ -61,14 +61,17 @@ class OurResponsibilityController extends Controller
         ]);
     }
 
-    public function destroy(Ourresponsibility $ourresponsibility)
+    public function destroy(Ourresponsibility $ourResponsibility)
     {
-        $this->deleteImage($ourresponsibility);
+        $this->deleteImage($ourResponsibility);
 
-        $ourresponsibility->delete();
+        $ourResponsibility->delete();
 
-        return response()->json([
-            'message' => 'Deleted successfully',
-        ]);
+        return response()->json(
+            [
+                'message' => 'Deleted successfully',
+            ],
+            202,
+        );
     }
 }

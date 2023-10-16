@@ -16,14 +16,14 @@ class OurRestaurantController extends Controller
 
     public function index()
     {
-        $Ourrestaurant = Ourrestaurant::with(['section:id,name'])->get();
+        $ourRestaurant = Ourrestaurant::with(['section:id,name'])->get();
 
-        return response()->json($Ourrestaurant);
+        return response()->json($ourRestaurant);
     }
 
     public function store(OurRestaurantRequest $request)
     {
-        $path = $this->storeImage('image_OurRestaurant');
+        $path = $this->storeImage('image_ourRestaurant');
 
         $section = Section::find($request->section_id);
 
@@ -38,15 +38,15 @@ class OurRestaurantController extends Controller
 
     public function edit(Ourrestaurant $ourRestaurant)
     {
-        $ourRestaurant = Ourrestaurant::where('id', $ourRestaurant->id)->first();
+        $OurRestaurant = Ourrestaurant::where('id', $ourRestaurant->id)->first();
 
-        return response()->json($ourRestaurant);
+        return response()->json($OurRestaurant);
     }
-    
+
     public function update(OurRestaurantRequest $request, Ourrestaurant $ourRestaurant)
     {
         $this->deleteImage($ourRestaurant);
-        $path = $this->storeImage('image_OurRestaurant');
+        $path = $this->storeImage('image_ourRestaurant');
 
         $ourRestaurant->update([
             'title' => $request->title,
@@ -62,6 +62,6 @@ class OurRestaurantController extends Controller
         $this->deleteImage($ourRestaurant);
         $ourRestaurant->delete();
 
-        return response()->json(['message' => 'deleted successfully']);
+        return response()->json(['message' => 'deleted successfully'], 202);
     }
 }

@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Mail;
 
 class AnsweringJobApplicationsController extends Controller
 {
-    public function sendmail(Request $request, Employment_application $employment_application)
+    public function sendmail(Request $request, Employment_application $employmentApplication)
     {
-        SendMail::dispatch($employment_application->id, $request->all());
+        SendMail::dispatch($employmentApplication->id, $request->all());
         return response()->json(['message' => 'send mail successfully']);
     }
 

@@ -33,7 +33,7 @@ class OurResponsibilityRequest extends FormRequest
             'image' => ['required'],
         ];
         if (Request::route()->getName()) {
-            $rules['title'] = ['required', 'min:10', Rule::unique('ourresponsibilities', 'title')->ignore($this->route()->ourresponsibility->id)];
+            $rules['title'] = ['required', 'min:10', Rule::unique('ourresponsibilities', 'title')->ignore($this->route()->ourResponsibility->id)];
         }
         return $rules;
     }

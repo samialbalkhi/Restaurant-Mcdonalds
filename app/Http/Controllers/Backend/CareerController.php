@@ -60,6 +60,6 @@ class CareerController extends Controller
         $this->deleteImage($career);
         $career->delete();
 
-        return response()->json(['message' => 'deleted successfully']);
+        return response()->json(['message' => 'deleted successfully'],202);
     }
 }

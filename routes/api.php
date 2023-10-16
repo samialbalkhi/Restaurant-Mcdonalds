@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('/index', [SectionController::class, 'index']);
         Route::post('/store', [SectionController::class, 'store']);
         Route::get('/edit/{section}', [SectionController::class, 'edit']);
-        Route::patch('/update/{section}', [SectionController::class, 'update'])->name('updateSection');
+        Route::post('/update/{section}', [SectionController::class, 'update'])->name('updateSection');
         Route::delete('/destroy/{section}', [SectionController::class, 'destroy']);
     });
 
@@ -58,7 +58,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('/index', [CategorieController::class, 'index']);
         Route::post('/store', [CategorieController::class, 'store']);
         Route::get('/edit/{category}', [CategorieController::class, 'edit']);
-        Route::post('/update/{category}', [CategorieController::class, 'update'])->name('update_category');
+        Route::post('/update/{category}', [CategorieController::class, 'update'])->name('updateCategory');
         Route::delete('/destroy/{category}', [CategorieController::class, 'destroy']);
     });
 
@@ -74,7 +74,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('/index', [MycafeController::class, 'index']);
         Route::post('/store', [MycafeController::class, 'store']);
         Route::get('/edit/{mycafe}', [MycafeController::class, 'edit']);
-        Route::post('/update/{mycafe}', [MycafeController::class, 'update'])->name('update_mycafe');
+        Route::post('/update/{mycafe}', [MycafeController::class, 'update'])->name('updateMycafe');
         Route::delete('/destroy/{mycafe}', [MycafeController::class, 'destroy']);
     });
 
@@ -82,23 +82,23 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('/index', [FamilyController::class, 'index']);
         Route::post('/store', [FamilyController::class, 'store']);
         Route::get('/edit/{family}', [FamilyController::class, 'edit']);
-        Route::post('/update/{family}', [FamilyController::class, 'update'])->name('update_family');
+        Route::post('/update/{family}', [FamilyController::class, 'update'])->name('updateFamily');
         Route::delete('/destroy/{family}', [FamilyController::class, 'destroy']);
     });
 
-    Route::group(['prefix' => 'ourresponsibility'], function () {
+    Route::group(['prefix' => 'ourResponsibility'], function () {
         Route::get('/index', [OurResponsibilityController::class, 'index']);
         Route::post('/store', [OurResponsibilityController::class, 'store']);
-        Route::get('/edit/{ourresponsibility}', [OurResponsibilityController::class, 'edit']);
-        Route::post('/update/{ourresponsibility}', [OurResponsibilityController::class, 'update'])->name('update_ourresponsibility');
-        Route::delete('/destroy/{ourresponsibility}', [OurResponsibilityController::class, 'destroy']);
+        Route::get('/edit/{ourResponsibility}', [OurResponsibilityController::class, 'edit']);
+        Route::post('/update/{ourResponsibility}', [OurResponsibilityController::class, 'update'])->name('updateOurResponsibility');
+        Route::delete('/destroy/{ourResponsibility}', [OurResponsibilityController::class, 'destroy']);
     });
 
-    Route::group(['prefix' => 'OurRestaurant'], function () {
+    Route::group(['prefix' => 'ourRestaurant'], function () {
         Route::get('/index', [OurRestaurantController::class, 'index']);
         Route::post('/store', [OurRestaurantController::class, 'store']);
         Route::get('/edit/{ourRestaurant}', [OurRestaurantController::class, 'edit']);
-        Route::post('/update/{ourRestaurant}', [OurRestaurantController::class, 'update'])->name('update_ourRestaurant');
+        Route::post('/update/{ourRestaurant}', [OurRestaurantController::class, 'update'])->name('updateOurRestaurant');
         Route::delete('/destroy/{ourRestaurant}', [OurRestaurantController::class, 'destroy']);
     });
 
@@ -106,24 +106,24 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('/index', [CareerController::class, 'index']);
         Route::post('/store', [CareerController::class, 'store']);
         Route::get('/edit/{career}', [CareerController::class, 'edit']);
-        Route::post('/update/{career}', [CareerController::class, 'update'])->name('update_career');
+        Route::post('/update/{career}', [CareerController::class, 'update'])->name('updateCareer');
         Route::delete('/destroy/{career}', [CareerController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'EmploymentOpportunity'], function () {
         Route::get('/index', [EmploymentOpportunityController::class, 'index']);
         Route::post('/store', [EmploymentOpportunityController::class, 'store']);
-        Route::get('/edit/{employment_opportunities}', [EmploymentOpportunityController::class, 'edit']);
-        Route::post('/update/{employment_opportunities}', [EmploymentOpportunityController::class, 'update'])->name('update_employment_opportunities');
-        Route::delete('/destroy/{employment_opportunities}', [EmploymentOpportunityController::class, 'destroy']);
+        Route::get('/edit/{employmentOpportunities}', [EmploymentOpportunityController::class, 'edit']);
+        Route::post('/update/{employmentOpportunities}', [EmploymentOpportunityController::class, 'update'])->name('updateEmploymentOpportunities');
+        Route::delete('/destroy/{employmentOpportunities}', [EmploymentOpportunityController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'JobOffer'], function () {
         Route::get('/index', [JobOfferController::class, 'index']);
         Route::post('/store', [JobOfferController::class, 'store']);
-        Route::get('/edit/{job_offer}', [JobOfferController::class, 'edit']);
-        Route::post('/update/{job_offer}', [JobOfferController::class, 'update'])->name('update_jobOffer');
-        Route::delete('/destroy/{job_offer}', [JobOfferController::class, 'destroy']);
+        Route::get('/edit/{jobOffer}', [JobOfferController::class, 'edit']);
+        Route::post('/update/{jobOffer}', [JobOfferController::class, 'update'])->name('updateJobOffer');
+        Route::delete('/destroy/{jobOffer}', [JobOfferController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'Detail'], function () {
@@ -134,7 +134,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
 
     Route::group(['prefix' => 'AnsweringJobApplications'], function () {
         Route::get('index', [AnsweringJobApplicationsController::class, 'index']);
-        Route::post('sendmail/{employment_application}', [AnsweringJobApplicationsController::class, 'sendmail']);
+        Route::post('sendmail/{employmentApplication}', [AnsweringJobApplicationsController::class, 'sendmail']);
         Route::get('getAnswering/{Answering_job_application}', [AnsweringJobApplicationsController::class, 'getAnswering']);
     });
 

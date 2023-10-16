@@ -23,7 +23,7 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        $commonRules = [
+        $rules = [
             'name' => ['required', 'min:3', 'max:50'],
             'description' => ['nullable', 'min:3'],
             'size' => ['required', 'min:2'],
@@ -31,18 +31,11 @@ class ProductRequest extends FormRequest
             'kcal' => ['required', 'numeric'],
             'category_id' => ['required'],
             'image' => ['required', 'max:2048'],
-            'featured'=>['nullable'],
-            'status'=>['nullable'],
-
+            'featured' => ['nullable'],
+            'status' => ['nullable'],
         ];
-        switch ($this->method()) {
-            case 'PUT':
-            case 'PATCH':
-                // Add or override rules for 'PUT' and 'PATCH' methods if needed
-                return $commonRules;
-            default:
-                return $commonRules;
-        }
+
+        return $rules;
     }
 
     public function failedValidation(Validator $validator)
