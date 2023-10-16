@@ -39,8 +39,7 @@ class OurResponsibilityController extends Controller
 
     public function edit(Ourresponsibility $ourResponsibility)
     {
-        $OurResponsibility = Ourresponsibility::where('id', $ourResponsibility->id)->first();
-        return response()->json($OurResponsibility);
+        return response()->json($ourResponsibility->find($ourResponsibility->id));
     }
 
     public function update(OurResponsibilityRequest $request, Ourresponsibility $ourResponsibility)

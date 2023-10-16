@@ -36,9 +36,7 @@ class MycafeController extends Controller
 
     public function edit(MyCafe $mycafe)
     {
-        $mycafe = MyCafe::where('id', $mycafe->id)->first();
-
-        return response()->json($mycafe);
+        return response()->json($mycafe->find($mycafe->id));
     }
 
     public function update(MycafeRequest $request, MyCafe $mycafe)

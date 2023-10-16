@@ -16,9 +16,7 @@ class SectionController extends Controller
 
     public function index()
     {
-        $section = Section::all();
-
-        return response()->json($section);
+        return response()->json(Section::all());
     }
 
     public function store(SectionRequest $request)
@@ -38,9 +36,7 @@ class SectionController extends Controller
 
     public function edit(Section $section)
     {
-        $section = Section::where('id', $section->id)->first();
-
-        return response()->json($section);
+        return response()->json($section->find($section->id));
     }
 
     public function update(SectionRequest $request, Section $section)
@@ -65,6 +61,6 @@ class SectionController extends Controller
 
         $section->delete();
 
-        return response()->json(['message' => 'Deleted successfully'],202);
+        return response()->json(['message' => 'Deleted successfully'], 202);
     }
 }

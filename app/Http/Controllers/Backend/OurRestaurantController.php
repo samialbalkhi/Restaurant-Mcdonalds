@@ -38,9 +38,7 @@ class OurRestaurantController extends Controller
 
     public function edit(Ourrestaurant $ourRestaurant)
     {
-        $OurRestaurant = Ourrestaurant::where('id', $ourRestaurant->id)->first();
-
-        return response()->json($OurRestaurant);
+        return response()->json($ourRestaurant->find($ourRestaurant->id));
     }
 
     public function update(OurRestaurantRequest $request, Ourrestaurant $ourRestaurant)

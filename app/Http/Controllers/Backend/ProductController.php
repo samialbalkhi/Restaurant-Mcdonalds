@@ -15,9 +15,7 @@ class ProductController extends Controller
     use ImageUploadTrait;
     public function index()
     {
-        $product = Product::with('category:id,name')->get();
-
-        return response()->json($product);
+        return response()->json(Product::with('category:id,name')->paginate());
     }
 
     public function store(ProductRequest $request)
@@ -42,9 +40,7 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        $product = Product::where('id', $product->id)->first();
-
-        return response()->json($product);
+        return response()->json($product->find($product->id));
     }
 
     /**

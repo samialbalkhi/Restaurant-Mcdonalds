@@ -32,9 +32,7 @@ class EmploymentOpportunityController extends Controller
 
     public function edit(EmploymentOpportunity $employmentOpportunities)
     {
-        $employmentOpportunity = EmploymentOpportunity::where('id', $employmentOpportunities->id)->first();
-
-        return response()->json($employmentOpportunity);
+        return response()->json($employmentOpportunities->find($employmentOpportunities->id));
     }
 
     public function update(EmploymentOpportunityRequest $request, EmploymentOpportunity $employmentOpportunities)

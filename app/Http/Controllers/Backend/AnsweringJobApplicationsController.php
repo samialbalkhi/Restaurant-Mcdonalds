@@ -20,15 +20,11 @@ class AnsweringJobApplicationsController extends Controller
 
     public function index()
     {
-        $answeringJobApplication = Answering_job_application::with(['employment_application:id,email,first_name'])->get();
-
-        return response()->json($answeringJobApplication);
+        return response()->json(Answering_job_application::with(['employment_application:id,email,first_name'])->paginate());
     }
 
     public function getAnswering(Answering_job_application $Answering_job_application)
     {
-        $Answering_job_application = Answering_job_application::where('id', $Answering_job_application->id)->first();
-
-        return response()->json($Answering_job_application);
+        return response()->json($Answering_job_application->find($Answering_job_application->id));
     }
 }

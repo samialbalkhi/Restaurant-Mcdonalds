@@ -38,9 +38,8 @@ class FamilyController extends Controller
     }
     public function edit(Family $family)
     {
-        $family = Family::where('id', $family->id)->first();
 
-        return response()->json($family);
+        return response()->json($family->find($family->id));
     }
 
     public function update(FamilyRequest $request, Family $family)

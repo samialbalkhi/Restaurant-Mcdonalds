@@ -36,9 +36,7 @@ class CareerController extends Controller
 
     public function edit(Career $career)
     {
-        $career = Career::where('id', $career->id)->first();
-
-        return response()->json($career);
+        return response()->json($career->find($career->id));
     }
 
     public function update(CareerRequest $request, Career $career)
@@ -60,6 +58,6 @@ class CareerController extends Controller
         $this->deleteImage($career);
         $career->delete();
 
-        return response()->json(['message' => 'deleted successfully'],202);
+        return response()->json(['message' => 'deleted successfully'], 202);
     }
 }

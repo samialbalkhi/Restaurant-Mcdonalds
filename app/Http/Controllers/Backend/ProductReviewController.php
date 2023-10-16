@@ -11,9 +11,7 @@ class ProductReviewController extends Controller
 {
     public function index()
     {
-        $productReview = ProductReview::with('product:id,name', 'user:id,name')->get();
-
-        return response()->json($productReview);
+        return response()->json(ProductReview::with('product:id,name', 'user:id,name')->paginate());
     }
 
     public function destroy(ProductReview $productReview)

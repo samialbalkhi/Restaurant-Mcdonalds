@@ -17,9 +17,7 @@ class CategorieController extends Controller
 
     public function index()
     {
-        $category = Category::with(['section:id,name'])->get();
-
-        return response()->json($category);
+        return response()->json(Category::with(['section:id,name'])->paginate());
     }
 
     public function store(CategoryRequest $request)
@@ -42,8 +40,7 @@ class CategorieController extends Controller
      */
     public function edit(Category $category)
     {
-        $categories = Category::where('id', $category->id)->first();
-        return response()->json($categories);
+        return response()->json($category->find($category->id));
     }
 
     /**
@@ -73,6 +70,6 @@ class CategorieController extends Controller
 
         $category->delete();
 
-        return response()->json(['message' => 'Deleted successfully'],202);
+        return response()->json(['message' => 'Deleted successfully'], 202);
     }
 }
