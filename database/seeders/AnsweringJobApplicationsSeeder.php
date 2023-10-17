@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Answering_job_application;
+use App\Models\Employment_application;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
-use App\Models\Employment_application;
-use App\Models\Answering_job_application;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class AnsweringJobApplicationsSeeder extends Seeder
 {

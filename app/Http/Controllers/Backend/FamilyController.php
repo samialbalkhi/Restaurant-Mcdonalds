@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\FamilyRequest;
 use App\Models\Family;
 use App\Models\Section;
-use Illuminate\Http\Request;
 use App\Traits\ImageUploadTrait;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\Backend\FamilyRequest;
 
 class FamilyController extends Controller
 {
@@ -17,9 +14,9 @@ class FamilyController extends Controller
 
     public function index()
     {
-        $family = Family::with(['section:id,name'])->get();
 
-        return response()->json($family);
+        return response()->json(
+            Family::with(['section:id,name'])->get());
     }
 
     public function store(FamilyRequest $request)
@@ -36,10 +33,12 @@ class FamilyController extends Controller
 
         return response()->json($family, 201);
     }
+
     public function edit(Family $family)
     {
 
-        return response()->json($family->find($family->id));
+        return response()->json(
+            $family->find($family->id));
     }
 
     public function update(FamilyRequest $request, Family $family)
@@ -62,6 +61,7 @@ class FamilyController extends Controller
     {
         $this->deleteImage($family);
         $family->delete();
+
         return response()->json(['message' => 'deleted successfully'], 202);
     }
 }

@@ -2,12 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Employment_application;
 use DateTime;
-use Carbon\Carbon;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
-use App\Models\Employment_application;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class EmploymentApplicationSeeder extends Seeder
 {
@@ -22,11 +20,11 @@ class EmploymentApplicationSeeder extends Seeder
         for ($i = 1; $i <= 500; $i++) {
             $randomValue = $values[array_rand($values)];
 
-            $twoYearsAgo = new DateTime();
+            $twoYearsAgo = new DateTime;
             $twoYearsAgo->modify('-2 years');
             $startDate = $twoYearsAgo->format('Y-m-d H:i:s');
 
-            $forYearsAgo = new DateTime();
+            $forYearsAgo = new DateTime;
             $forYearsAgo->modify('-4 years');
             $expireDate = $twoYearsAgo->format('Y-m-d H:i:s');
 

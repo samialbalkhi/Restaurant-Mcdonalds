@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use App\Models\Detail;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Job_offer;
 
 class DetailsController extends Controller
 {
     public function edit(Detail $details)
     {
-        $jobOffer = Detail::where('job_offer_id', $details->id)->get();
-
-        return response()->json($jobOffer);
+        return response()->json(Detail::where('job_offer_id', $details->id)->get());
     }
 
     public function update(Request $request, Detail $details)

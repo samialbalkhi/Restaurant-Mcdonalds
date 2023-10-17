@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-use App\Models\Job_offer;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +12,6 @@ class Detail extends Model
 
     public function Job_offer()
     {
-        return $this->belongsTo(Job_offer::class,'job_offer_id');
+        return $this->belongsTo(Job_offer::class, 'job_offer_id');
     }
 }

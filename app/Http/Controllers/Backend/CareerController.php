@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Career;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Backend\CareerRequest;
+use App\Models\Career;
 use App\Models\Section;
 use App\Traits\ImageUploadTrait;
 
 class CareerController extends Controller
 {
     use ImageUploadTrait;
+
     public function index()
     {
-        $career = Career::with(['section:id,name'])->get();
 
-        return response()->json($career);
+        return response()->json(
+            Career::with(['section:id,name'])->get());
     }
 
     public function store(CareerRequest $request)
@@ -36,7 +35,8 @@ class CareerController extends Controller
 
     public function edit(Career $career)
     {
-        return response()->json($career->find($career->id));
+        return response()->json(
+            $career->find($career->id));
     }
 
     public function update(CareerRequest $request, Career $career)
@@ -53,6 +53,7 @@ class CareerController extends Controller
 
         return response()->json(['message' => 'updated successfully']);
     }
+
     public function destroy(Career $career)
     {
         $this->deleteImage($career);

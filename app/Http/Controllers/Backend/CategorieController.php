@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\User;
-use App\Models\Section;
-use App\Models\Category;
-use Illuminate\Http\Request;
-use App\Traits\ImageUploadTrait;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Backend\CategoryRequest;
+use App\Models\Category;
+use App\Models\Section;
+use App\Traits\ImageUploadTrait;
+use Illuminate\Support\Facades\Storage;
 
 class CategorieController extends Controller
 {
@@ -17,7 +15,8 @@ class CategorieController extends Controller
 
     public function index()
     {
-        return response()->json(Category::with(['section:id,name'])->paginate());
+        return response()->json(
+            Category::with(['section:id,name'])->paginate());
     }
 
     public function store(CategoryRequest $request)
@@ -40,7 +39,8 @@ class CategorieController extends Controller
      */
     public function edit(Category $category)
     {
-        return response()->json($category->find($category->id));
+        return response()->json(
+            $category->find($category->id));
     }
 
     /**

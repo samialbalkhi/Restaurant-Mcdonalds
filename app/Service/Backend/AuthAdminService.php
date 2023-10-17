@@ -1,14 +1,13 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\Service\Backend;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Backend\loginRequest;
 
-class AuthAdminController extends Controller
+class AuthAdminService
 {
-    public function login(Request $request)
+    public function login(loginRequest $request)
     {
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password)) {

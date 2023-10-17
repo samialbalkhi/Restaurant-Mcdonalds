@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\MycafeRequest;
 use App\Models\MyCafe;
 use App\Models\Section;
-use Illuminate\Http\Request;
 use App\Traits\ImageUploadTrait;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\Backend\MycafeRequest;
 
 class MycafeController extends Controller
 {
@@ -16,8 +14,8 @@ class MycafeController extends Controller
 
     public function index()
     {
-        $mycafe = MyCafe::with(['section:id,name'])->get();
-        return response()->json($mycafe);
+        return response()->json(
+            MyCafe::with(['section:id,name'])->get());
     }
 
     public function store(MycafeRequest $request)
@@ -36,7 +34,8 @@ class MycafeController extends Controller
 
     public function edit(MyCafe $mycafe)
     {
-        return response()->json($mycafe->find($mycafe->id));
+        return response()->json(
+            $mycafe->find($mycafe->id));
     }
 
     public function update(MycafeRequest $request, MyCafe $mycafe)

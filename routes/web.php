@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\MailController;
-use App\Http\Controllers\Backend\CategoriesController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +19,3 @@ Route::get('/', function () {
 });
 
 // Route::get('sendmail',[MailController::class,'sendmail']);
-
-

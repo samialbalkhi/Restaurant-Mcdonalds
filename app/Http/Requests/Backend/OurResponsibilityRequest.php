@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Backend;
 
-use Illuminate\Http\Request;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class OurResponsibilityRequest extends FormRequest
@@ -35,8 +35,10 @@ class OurResponsibilityRequest extends FormRequest
         if (Request::route()->getName()) {
             $rules['title'] = ['required', 'min:10', Rule::unique('ourresponsibilities', 'title')->ignore($this->route()->ourResponsibility->id)];
         }
+
         return $rules;
     }
+
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(

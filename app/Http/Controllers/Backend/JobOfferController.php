@@ -2,23 +2,20 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Detail;
-use App\Models\Job_offer;
-use Illuminate\Http\Request;
-use App\Traits\ImageUploadTrait;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\EmploymentOpportunity;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Response;
 use App\Http\Requests\Backend\JobOfferRequest;
+use App\Models\EmploymentOpportunity;
+use App\Models\Job_offer;
+use App\Traits\ImageUploadTrait;
 
 class JobOfferController extends Controller
 {
     use ImageUploadTrait;
+
     public function index()
     {
-        return response()->json(Job_offer::with(['employment_opportunitie:id,name', 'details:job_offer_id,details'])->paginate());
+        return response()->json(
+            Job_offer::with(['employment_opportunitie:id,name', 'details:job_offer_id,details'])->paginate());
     }
 
     public function store(JobOfferRequest $request)
@@ -41,14 +38,15 @@ class JobOfferController extends Controller
             ]);
             $details[] = $detail;
         }
+
         return response()->json([$Job_offer, $details], 201);
     }
 
     public function edit(Job_offer $jobOffer)
     {
-        $jobOffer = Job_offer::where('id', $jobOffer->id)->first();
 
-        return response()->json($jobOffer);
+        return response()->json(
+            $jobOffer->find($jobOffer->id));
     }
 
     public function update(JobOfferRequest $request, Job_offer $jobOffer)

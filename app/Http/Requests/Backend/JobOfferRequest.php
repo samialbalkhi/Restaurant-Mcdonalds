@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Backend;
 
-use Illuminate\Http\Request;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Request;
 
 class JobOfferRequest extends FormRequest
 {
@@ -41,6 +41,7 @@ class JobOfferRequest extends FormRequest
 
         return $rules;
     }
+
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(

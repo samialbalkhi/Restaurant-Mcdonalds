@@ -40,7 +40,6 @@ return [
             'provider' => 'users',
         ],
 
-       
     ],
 
     /*

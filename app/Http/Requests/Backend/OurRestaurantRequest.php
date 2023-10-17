@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests\Backend;
 
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class OurRestaurantRequest extends FormRequest
 {
@@ -35,6 +35,7 @@ class OurRestaurantRequest extends FormRequest
         if (Request::route()->getName()) {
             $rules['title'] = ['required', 'min:10', Rule::unique('ourrestaurants', 'title')->ignore($this->route()->ourRestaurant->id)];
         }
+
         return $rules;
     }
 

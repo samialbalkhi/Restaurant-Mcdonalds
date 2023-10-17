@@ -168,7 +168,6 @@ return [
             // App\Providers\BroadcastServiceProvider::class,
             App\Providers\EventServiceProvider::class,
             App\Providers\RouteServiceProvider::class,
-            Mindscms\Entrust\EntrustServiceProvider::class,
         ])
         ->toArray(),
 
@@ -185,7 +184,6 @@ return [
 
     'aliases' => Facade::defaultAliases()
         ->merge([
-            'Entrust' => Mindscms\Entrust\EntrustFacade::class,
             // 'Example' => App\Facades\Example::class,
         ])
         ->toArray(),

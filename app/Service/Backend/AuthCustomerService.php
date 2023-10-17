@@ -1,15 +1,12 @@
 <?php
-
-namespace App\Http\Controllers\Backend;
+namespace App\Service\Backend;
 
 use App\Models\User;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Backend\loginRequest;
 use App\Http\Requests\Backend\RegisterRequest;
 
-class AuthController extends Controller
+class AuthCustomerService
 {
     public function login(loginRequest $request)
     {
@@ -23,17 +20,12 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-        ]);
+        $user = User::create($request->validated());
 
         $token = $user->createToken('token-name', ['customer'])->plainTextToken;
 
-        return response()->json([$user, $token], 201);
+        return response()->json(['user' => $user, 'token' => $token], 201);
     }
-
     public function logout()
     {
         auth()

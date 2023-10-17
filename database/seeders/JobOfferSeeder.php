@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\EmploymentOpportunity;
 use App\Models\Job_offer;
 use Illuminate\Database\Seeder;
-use App\Models\EmploymentOpportunity;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class JobOfferSeeder extends Seeder
 {

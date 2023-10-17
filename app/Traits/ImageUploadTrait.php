@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 trait ImageUploadTrait
@@ -11,6 +10,7 @@ trait ImageUploadTrait
     {
         $request = request();
         $path = $request->file('image')->store($destination, 'public');
+
         return $path;
     }
 
@@ -19,6 +19,6 @@ trait ImageUploadTrait
         if (Storage::exists('public/' . $destination->image)) {
             Storage::delete('public/' . $destination->image);
         }
-        
+
     }
 }

@@ -2,14 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Career;
-use App\Models\Family;
-use App\Models\MyCafe;
-use App\Models\Category;
-use App\Models\Ourrestaurant;
-use App\Models\Ourresponsibility;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Section extends Model
 {
@@ -25,6 +19,7 @@ class Section extends Model
     {
         return $this->hasMany(Category::class);
     }
+
     public function OurResponsibility()
     {
         return $this->hasMany(Ourresponsibility::class);
@@ -39,6 +34,7 @@ class Section extends Model
     {
         return $this->hasMany(Family::class);
     }
+
     public function ourrestaurants()
     {
         return $this->hasMany(Ourrestaurant::class);

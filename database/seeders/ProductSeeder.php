@@ -2,12 +2,10 @@
 
 namespace Database\Seeders;
 
-use Faker\Factory;
-use App\Models\Product;
-
 use App\Models\Category;
+use App\Models\Product;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ProductSeeder extends Seeder
 {
@@ -19,7 +17,7 @@ class ProductSeeder extends Seeder
         $faker = Factory::create();
         $categories = Category::pluck('id');
         $values = ['large', 'small', 'medium'];
-        
+
         for ($i = 1; $i <= 1000; $i++) {
             $randomValue = $values[array_rand($values)];
             $products[] = [

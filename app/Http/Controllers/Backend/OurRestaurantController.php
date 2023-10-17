@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Section;
-use Illuminate\Http\Request;
-use App\Models\Ourrestaurant;
-use App\Traits\ImageUploadTrait;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Backend\OurRestaurantRequest;
+use App\Models\Ourrestaurant;
+use App\Models\Section;
+use App\Traits\ImageUploadTrait;
 
 class OurRestaurantController extends Controller
 {
@@ -16,9 +14,9 @@ class OurRestaurantController extends Controller
 
     public function index()
     {
-        $ourRestaurant = Ourrestaurant::with(['section:id,name'])->get();
 
-        return response()->json($ourRestaurant);
+        return response()->json(
+            Ourrestaurant::with(['section:id,name'])->get());
     }
 
     public function store(OurRestaurantRequest $request)
@@ -38,7 +36,8 @@ class OurRestaurantController extends Controller
 
     public function edit(Ourrestaurant $ourRestaurant)
     {
-        return response()->json($ourRestaurant->find($ourRestaurant->id));
+        return response()->json(
+            $ourRestaurant->find($ourRestaurant->id));
     }
 
     public function update(OurRestaurantRequest $request, Ourrestaurant $ourRestaurant)
@@ -52,6 +51,7 @@ class OurRestaurantController extends Controller
             'section_id' => $request->section_id,
             'image' => $path,
         ]);
+
         return response()->json(['message' => 'updated successfully']);
     }
 

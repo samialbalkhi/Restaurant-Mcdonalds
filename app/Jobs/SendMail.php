@@ -2,15 +2,15 @@
 
 namespace App\Jobs;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Mail;
-use App\Models\Employment_application;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use App\Mail\AnsweringJobApplicationsMail;
+use App\Models\Employment_application;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Mail;
+use Throwable;
 
 class SendMail implements ShouldQueue
 {
@@ -19,7 +19,6 @@ class SendMail implements ShouldQueue
     /**
      * Create a new job instance.
      */
-
     protected $id;
     protected $data;
 
@@ -43,7 +42,8 @@ class SendMail implements ShouldQueue
 
         Mail::to($Employment_application->email)->send(new AnsweringJobApplicationsMail($data));
     }
-    public function failed(\Throwable $e)
+
+    public function failed(Throwable $e)
     {
         info('Email was not sent');
     }

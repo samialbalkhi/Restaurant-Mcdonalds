@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\EmploymentOpportunity;
 use App\Http\Requests\Backend\EmploymentOpportunityRequest;
+use App\Models\EmploymentOpportunity;
 
 class EmploymentOpportunityController extends Controller
 {
@@ -14,9 +13,9 @@ class EmploymentOpportunityController extends Controller
      */
     public function index()
     {
-        $employmentOpportunity = EmploymentOpportunity::all();
 
-        return response()->json($employmentOpportunity);
+        return response()->json(
+            EmploymentOpportunity::all());
     }
 
     public function store(EmploymentOpportunityRequest $request)
@@ -32,7 +31,8 @@ class EmploymentOpportunityController extends Controller
 
     public function edit(EmploymentOpportunity $employmentOpportunities)
     {
-        return response()->json($employmentOpportunities->find($employmentOpportunities->id));
+        return response()->json(
+            $employmentOpportunities->find($employmentOpportunities->id));
     }
 
     public function update(EmploymentOpportunityRequest $request, EmploymentOpportunity $employmentOpportunities)
@@ -49,6 +49,7 @@ class EmploymentOpportunityController extends Controller
     public function destroy(EmploymentOpportunity $employmentOpportunities)
     {
         $employmentOpportunities->delete();
+
         return response()->json(
             [
                 'message' => 'Deleted successfully',

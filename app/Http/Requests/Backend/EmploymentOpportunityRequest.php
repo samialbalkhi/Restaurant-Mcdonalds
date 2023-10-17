@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests\Backend;
 
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Validation\Rule;
 
 class EmploymentOpportunityRequest extends FormRequest
 {
@@ -35,6 +35,7 @@ class EmploymentOpportunityRequest extends FormRequest
         if (Request::route()->getName()) {
             $rules['name'] = ['required', 'min:3', Rule::unique('employment_opportunities', 'name')->ignore($this->route()->employmentOpportunities->id)];
         }
+
         return $rules;
     }
 

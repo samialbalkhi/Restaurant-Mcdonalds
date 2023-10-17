@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Section;
-use Illuminate\Http\Request;
-use App\Traits\ImageUploadTrait;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Backend\SectionRequest;
+use App\Models\Section;
+use App\Traits\ImageUploadTrait;
 
 class SectionController extends Controller
 {
@@ -16,7 +13,8 @@ class SectionController extends Controller
 
     public function index()
     {
-        return response()->json(Section::all());
+        return response()->json(
+            Section::all());
     }
 
     public function store(SectionRequest $request)
@@ -36,7 +34,8 @@ class SectionController extends Controller
 
     public function edit(Section $section)
     {
-        return response()->json($section->find($section->id));
+        return response()->json(
+            $section->find($section->id));
     }
 
     public function update(SectionRequest $request, Section $section)

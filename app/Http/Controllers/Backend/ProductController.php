@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Backend\ProductRequest;
 use App\Models\Category;
+use App\Models\Product;
 use App\Traits\ImageUploadTrait;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     use ImageUploadTrait;
+
     public function index()
     {
-        return response()->json(Product::with('category:id,name')->paginate());
+        return response()->json(
+            Product::with('category:id,name')->paginate());
     }
 
     public function store(ProductRequest $request)
@@ -40,7 +41,8 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        return response()->json($product->find($product->id));
+        return response()->json(
+            $product->find($product->id));
     }
 
     /**

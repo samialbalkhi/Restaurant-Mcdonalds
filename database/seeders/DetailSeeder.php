@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use Faker\Factory;
 use App\Models\Detail;
 use App\Models\Job_offer;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DetailSeeder extends Seeder
 {

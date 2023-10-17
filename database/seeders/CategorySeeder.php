@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use Faker\Factory;
 use App\Models\Category;
-use Illuminate\Support\Str;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CategorySeeder extends Seeder
 {

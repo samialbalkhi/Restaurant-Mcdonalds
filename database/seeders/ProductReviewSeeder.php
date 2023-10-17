@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Faker\Factory;
 use App\Models\Product;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ProductReviewSeeder extends Seeder
 {
@@ -18,10 +17,10 @@ class ProductReviewSeeder extends Seeder
 
         Product::all()->each(function ($product) use ($faker) {
             $values = ['Service', 'Food'];
-        
+
             for ($i = 1; $i < rand(1, 3); $i++) {
                 $randomValue = $values[array_rand($values)];
-        
+
                 $product->reviews()->create([
                     'user_id' => rand(2, 22),
                     'name' => $faker->userName,
@@ -32,6 +31,6 @@ class ProductReviewSeeder extends Seeder
                 ]);
             }
         });
-        
+
     }
 }

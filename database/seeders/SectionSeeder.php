@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Section;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SectionSeeder extends Seeder
 {

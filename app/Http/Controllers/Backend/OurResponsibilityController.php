@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Section;
-use Illuminate\Http\Request;
-use App\Traits\ImageUploadTrait;
-use App\Models\Ourresponsibility;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Backend\OurResponsibilityRequest;
+use App\Models\Ourresponsibility;
+use App\Models\Section;
+use App\Traits\ImageUploadTrait;
 
 class OurResponsibilityController extends Controller
 {
@@ -16,9 +14,9 @@ class OurResponsibilityController extends Controller
 
     public function index()
     {
-        $OurResponsibility = Ourresponsibility::with(['section:id,name'])->get();
 
-        return response()->json($OurResponsibility);
+        return response()->json(
+            Ourresponsibility::with(['section:id,name'])->get());
     }
 
     public function store(OurResponsibilityRequest $request)
@@ -39,7 +37,8 @@ class OurResponsibilityController extends Controller
 
     public function edit(Ourresponsibility $ourResponsibility)
     {
-        return response()->json($ourResponsibility->find($ourResponsibility->id));
+        return response()->json(
+            $ourResponsibility->find($ourResponsibility->id));
     }
 
     public function update(OurResponsibilityRequest $request, Ourresponsibility $ourResponsibility)

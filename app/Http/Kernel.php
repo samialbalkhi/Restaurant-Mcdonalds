@@ -61,8 +61,5 @@ class Kernel extends HttpKernel
         'abilities' => \Laravel\Sanctum\Http\Middleware\CheckAbilities::class,
         'ability' => \Laravel\Sanctum\Http\Middleware\CheckForAnyAbility::class,
         'roles' => \App\Http\Middleware\Roles::class,
-        'role' => \Mindscms\Entrust\Middleware\EntrustRole::class,
-        'permission' => \Mindscms\Entrust\Middleware\EntrustPermission::class,
-        'ability' => \Mindscms\Entrust\Middleware\EntrustAbility::class,
     ];
 }

@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Detail;
-use App\Models\EmploymentOpportunity;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Job_offer extends Model
 {
