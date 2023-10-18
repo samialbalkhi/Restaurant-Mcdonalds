@@ -3,53 +3,44 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\EmploymentOpportunityRequest;
 use App\Models\EmploymentOpportunity;
+use App\Service\Backend\EmploymentOpportunityService;
+use App\Http\Requests\Backend\EmploymentOpportunityRequest;
 
 class EmploymentOpportunityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   private $EmploymentOpportunityService ;
+   public function __construct(EmploymentOpportunityService $employmentOpportunityService)
+   {
+    $this->EmploymentOpportunityService = $employmentOpportunityService;
+   }
     public function index()
     {
-
         return response()->json(
-            EmploymentOpportunity::all());
+           $this->EmploymentOpportunityService->index());
     }
 
     public function store(EmploymentOpportunityRequest $request)
     {
-        $employmentOpportunity = EmploymentOpportunity::create([
-            'name' => $request->name,
-            'worktime' => $request->worktime,
-            'vacancies' => $request->vacancies,
-        ]);
-
+        $employmentOpportunity=$this->EmploymentOpportunityService->store($request);
         return response()->json($employmentOpportunity, 201);
     }
 
     public function edit(EmploymentOpportunity $employmentOpportunities)
     {
         return response()->json(
-            $employmentOpportunities->find($employmentOpportunities->id));
+            $this->EmploymentOpportunityService->edit($employmentOpportunities));
     }
 
     public function update(EmploymentOpportunityRequest $request, EmploymentOpportunity $employmentOpportunities)
     {
-        $employmentOpportunities->update([
-            'name' => $request->name,
-            'worktime' => $request->worktime,
-            'vacancies' => $request->vacancies,
-        ]);
-
+        $this->EmploymentOpportunityService->update($request, $employmentOpportunities);
         return response()->json(['message' => 'Updateed Category successfully']);
     }
 
     public function destroy(EmploymentOpportunity $employmentOpportunities)
     {
-        $employmentOpportunities->delete();
-
+        $this->EmploymentOpportunityService->destroy($employmentOpportunities);
         return response()->json(
             [
                 'message' => 'Deleted successfully',

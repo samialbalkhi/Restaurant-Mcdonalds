@@ -2,36 +2,36 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\CategoryRequest;
-use App\Models\Category;
 use App\Models\Section;
+use App\Models\Category;
 use App\Traits\ImageUploadTrait;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Service\Backend\CategoryService;
+use App\Http\Requests\Backend\CategoryRequest;
 
 class CategorieController extends Controller
 {
     use ImageUploadTrait;
 
+    private $CategoryService;
+
+    public function __construct(CategoryService $CategoryService)
+    {
+        $this->CategoryService = $CategoryService;
+    }
+
     public function index()
     {
         return response()->json(
-            Category::with(['section:id,name'])->paginate());
+            $this->CategoryService->index());
     }
 
     public function store(CategoryRequest $request)
     {
-        $section = Section::find($request->section_id);
-
-        $path = $this->storeImage('images_category');
-
-        $category = $section->categories()->create([
-            'name' => $request->name,
-            'status' => $request->status,
-            'image' => $path,
-        ]);
-
-        return response()->json($category, 201);
+         
+          $category=  $this->CategoryService->store($request);
+         return response()->json($category,201);
     }
 
     /**
@@ -40,7 +40,7 @@ class CategorieController extends Controller
     public function edit(Category $category)
     {
         return response()->json(
-            $category->find($category->id));
+            $this->CategoryService->edit($category));
     }
 
     /**
@@ -48,17 +48,9 @@ class CategorieController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        $this->deleteImage($category);
-        $path = $this->storeImage('images_category');
-
-        $category->update([
-            'name' => $request->name,
-            'status' => $request->status,
-            'image' => $path,
-            'section_id' => $request->section_id,
-        ]);
-
+            $this->CategoryService->update($request, $category);
         return response()->json(['messge' => 'Updateed successfully']);
+
     }
 
     /**
@@ -66,10 +58,8 @@ class CategorieController extends Controller
      */
     public function destroy(Category $category)
     {
-        $this->deleteImage($category);
-
-        $category->delete();
-
+            $this->CategoryService->destroy($category);
         return response()->json(['message' => 'Deleted successfully'], 202);
+
     }
 }

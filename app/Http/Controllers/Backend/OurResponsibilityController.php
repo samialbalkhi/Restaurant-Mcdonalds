@@ -2,58 +2,42 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\OurResponsibilityRequest;
-use App\Models\Ourresponsibility;
 use App\Models\Section;
 use App\Traits\ImageUploadTrait;
+use App\Models\Ourresponsibility;
+use App\Http\Controllers\Controller;
+use App\Service\Backend\OurResponsibilityService;
+use App\Http\Requests\Backend\OurResponsibilityRequest;
 
 class OurResponsibilityController extends Controller
 {
     use ImageUploadTrait;
-
+    private $OurResponsibilityService ;
+    public function __construct(OurResponsibilityService $OurResponsibilityService)
+    {
+        $this->OurResponsibilityService = $OurResponsibilityService;
+    }
     public function index()
     {
-
         return response()->json(
-            Ourresponsibility::with(['section:id,name'])->get());
+          $this->OurResponsibilityService->index());
     }
 
     public function store(OurResponsibilityRequest $request)
     {
-        $path = $this->storeImage('images_OurResponsibility');
-
-        $section = Section::find($request->section_id);
-
-        $ourResponsibility = $section->OurResponsibility()->create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'image' => $path,
-            'section_id' => $request->section_id,
-        ]);
-
+        $ourResponsibility=$this->OurResponsibilityService->store($request);
         return response()->json($ourResponsibility, 201);
     }
 
     public function edit(Ourresponsibility $ourResponsibility)
     {
         return response()->json(
-            $ourResponsibility->find($ourResponsibility->id));
+           $this->OurResponsibilityService->edit($ourResponsibility));
     }
 
     public function update(OurResponsibilityRequest $request, Ourresponsibility $ourResponsibility)
     {
-        $this->deleteImage($ourResponsibility);
-
-        $path = $this->storeImage('images_ourResponsibility');
-
-        $ourResponsibility->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'image' => $path,
-            'section_id' => $request->section_id,
-        ]);
-
+       $this->OurResponsibilityService->update($request,$ourResponsibility);
         return response()->json([
             'message' => 'Updateed  successfully',
         ]);
@@ -61,10 +45,8 @@ class OurResponsibilityController extends Controller
 
     public function destroy(Ourresponsibility $ourResponsibility)
     {
-        $this->deleteImage($ourResponsibility);
-
-        $ourResponsibility->delete();
-
+     
+        $this->OurResponsibilityService->destroy($ourResponsibility);
         return response()->json(
             [
                 'message' => 'Deleted successfully',

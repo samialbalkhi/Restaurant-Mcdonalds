@@ -36,7 +36,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 Route::group(['prefix' => 'customer'], function () {
     Route::post('login', [AuthCustomerController::class, 'login']);
     Route::post('register', [AuthCustomerController::class, 'register']);
-
 });
 
 Route::group(['prefix' => 'admin'], function () {

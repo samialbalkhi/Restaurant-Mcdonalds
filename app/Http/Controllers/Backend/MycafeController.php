@@ -2,32 +2,31 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\MycafeRequest;
 use App\Models\MyCafe;
 use App\Models\Section;
 use App\Traits\ImageUploadTrait;
+use App\Http\Controllers\Controller;
+use App\Service\Backend\MycafeService;
+use App\Http\Requests\Backend\MycafeRequest;
 
 class MycafeController extends Controller
 {
     use ImageUploadTrait;
 
+    private $MycafeService ;
+    public function __construct(MycafeService $MycafeService)
+    {
+        $this->MycafeService = $MycafeService;
+    }
     public function index()
     {
         return response()->json(
-            MyCafe::with(['section:id,name'])->get());
+            $this->MycafeService->index());
     }
 
     public function store(MycafeRequest $request)
     {
-        $section = Section::find($request->section_id);
-        $path = $this->storeImage('image_mycafe');
-
-        $mycafe = $section->mycafes()->create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' => $path,
-        ]);
+          $mycafe=  $this->MycafeService->store($request);
 
         return response()->json($mycafe, 201);
     }
@@ -35,30 +34,19 @@ class MycafeController extends Controller
     public function edit(MyCafe $mycafe)
     {
         return response()->json(
-            $mycafe->find($mycafe->id));
+            $this->MycafeService->edit($mycafe));
     }
 
     public function update(MycafeRequest $request, MyCafe $mycafe)
     {
-        $this->deleteImage($mycafe);
-
-        $path = $this->storeImage('image_mycafe');
-
-        $mycafe->update([
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' => $path,
-            'section_id' => $request->section_id,
-        ]);
+       $this->MycafeService->update($request, $mycafe);
 
         return response()->json(['message' => 'updated successfully']);
     }
 
     public function destroy(MyCafe $mycafe)
     {
-        $this->deleteImage($mycafe);
-
-        $mycafe->delete();
+        $this->MycafeService->destroy($mycafe);
 
         return response()->json(['message' => 'deleted successfully'], 202);
     }

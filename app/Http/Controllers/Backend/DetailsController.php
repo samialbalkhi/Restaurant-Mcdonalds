@@ -2,30 +2,35 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use App\Models\Detail;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Service\Backend\DetailsService;
+use App\Http\Requests\Backend\DetailRequest;
 
 class DetailsController extends Controller
 {
-    public function edit(Detail $details)
+    private $DetailsService ;
+    public function __construct(DetailsService $DetailsService)
     {
-        return response()->json(Detail::where('job_offer_id', $details->id)->get());
+        $this->DetailsService = $DetailsService;
     }
 
-    public function update(Request $request, Detail $details)
+    public function edit(Detail $details)
     {
-        $details->update([
-            'details' => $request->details,
-            'job_offer_id' => $details->job_offer_id,
-        ]);
+        return response()->json(
+            $this->DetailsService->edit($details));
+    }
 
+    public function update(DetailRequest $request, Detail $details)
+    {
+        $this->DetailsService->update($request, $details);
         return response()->json(['message' => 'updated successfully']);
     }
 
     public function destroy(Detail $details)
     {
-        $details->delete();
+        $this->DetailsService->destroy($details);
 
         return response()->json(
             [

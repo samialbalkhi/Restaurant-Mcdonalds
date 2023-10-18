@@ -2,21 +2,26 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use App\Models\ProductReview;
+use App\Http\Controllers\Controller;
+use App\Service\Backend\ProductReviewService;
 
 class ProductReviewController extends Controller
 {
+    private $ProductReviewService;
+    public function __construct(ProductReviewService $productReviewService)
+    {
+        $this->ProductReviewService = $productReviewService;
+    }
     public function index()
     {
         return response()->json(
-            ProductReview::with('product:id,name', 'user:id,name')->paginate());
+            $this->ProductReviewService->index());
     }
 
     public function destroy(ProductReview $productReview)
     {
-        $productReview->delete();
-
+        $this->ProductReviewService->destroy($productReview);
         return response()->json(
             [
                 'message' => 'Deleted successfully',

@@ -2,65 +2,49 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\FamilyRequest;
 use App\Models\Family;
 use App\Models\Section;
 use App\Traits\ImageUploadTrait;
+use App\Http\Controllers\Controller;
+use App\Service\Backend\FamilyService;
+use App\Http\Requests\Backend\FamilyRequest;
 
 class FamilyController extends Controller
 {
     use ImageUploadTrait;
 
+    private $FamilyService;
+    public function __construct(FamilyService $FamilyService)
+    {
+        $this->FamilyService = $FamilyService;
+    }
     public function index()
     {
-
         return response()->json(
-            Family::with(['section:id,name'])->get());
+           $this->FamilyService->index());
     }
 
     public function store(FamilyRequest $request)
     {
-        $path = $this->storeImage('image_family');
-        $section = Section::find($request->section_id);
-
-        $family = $section->families()->create([
-            'name' => $request->name,
-            'title' => $request->title,
-            'description' => $request->description,
-            'image' => $path,
-        ]);
-
+        $family= $this->FamilyService->store($request);
         return response()->json($family, 201);
     }
 
     public function edit(Family $family)
     {
-
         return response()->json(
-            $family->find($family->id));
+           $this->FamilyService->edit($family));
     }
 
     public function update(FamilyRequest $request, Family $family)
     {
-        $this->deleteImage($family);
-        $path = $this->storeImage('image_family');
-
-        $family->update([
-            'name' => $request->name,
-            'title' => $request->title,
-            'description' => $request->description,
-            'image' => $path,
-            'section_id' => $request->section_id,
-        ]);
-
+        $this->FamilyService->update($request, $family);
         return response()->json(['message' => 'updated successfully']);
     }
 
     public function destroy(Family $family)
     {
-        $this->deleteImage($family);
-        $family->delete();
+        $this->FamilyService->destroy($family);
 
         return response()->json(['message' => 'deleted successfully'], 202);
     }

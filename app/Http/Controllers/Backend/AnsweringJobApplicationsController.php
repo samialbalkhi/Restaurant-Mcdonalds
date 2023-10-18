@@ -2,30 +2,36 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use App\Jobs\SendMail;
-use App\Models\Answering_job_application;
-use App\Models\Employment_application;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Employment_application;
+use App\Models\Answering_job_application;
+use App\Service\Backend\AnsweringJobApplicationsService;
+use App\Http\Requests\Backend\AnsweringJobApplicationsRequest;
 
 class AnsweringJobApplicationsController extends Controller
 {
-    public function sendmail(Request $request, Employment_application $employmentApplication)
+    private $AnsweringJobApplicationsService ;
+    public function __construct(AnsweringJobApplicationsService $AnsweringJobApplicationsService)
     {
-        SendMail::dispatch($employmentApplication->id, $request->all());
-
+        $this->AnsweringJobApplicationsService = $AnsweringJobApplicationsService;
+    }
+    public function sendmail(Employment_application $employmentApplication,AnsweringJobApplicationsRequest $request)
+    {
+        $this->AnsweringJobApplicationsService->sendmail($employmentApplication,$request);
         return response()->json(['message' => 'send mail successfully']);
     }
 
     public function index()
     {
         return response()->json(
-            Answering_job_application::with(['employment_application:id,email,first_name'])->paginate());
+           $this->AnsweringJobApplicationsService->index());
     }
 
     public function getAnswering(Answering_job_application $Answering_job_application)
     {
         return response()->json(
-            $Answering_job_application->find($Answering_job_application->id));
+        $this->AnsweringJobApplicationsService->getAnswering($Answering_job_application));
     }
 }

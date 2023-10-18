@@ -24,7 +24,7 @@ class AuthCustomerService
 
         $token = $user->createToken('token-name', ['customer'])->plainTextToken;
 
-        return response()->json(['user' => $user, 'token' => $token], 201);
+        return ['user' => $user, 'token' => $token];
     }
     public function logout()
     {
@@ -32,12 +32,5 @@ class AuthCustomerService
             ->user()
             ->tokens()
             ->delete();
-
-        return response()->json(
-            [
-                'message' => 'logout success',
-            ],
-            200,
-        );
     }
 }

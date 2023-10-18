@@ -2,64 +2,53 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\SectionRequest;
 use App\Models\Section;
 use App\Traits\ImageUploadTrait;
+use App\Http\Controllers\Controller;
+use App\Service\Backend\SectionService;
+use App\Http\Requests\Backend\SectionRequest;
 
 class SectionController extends Controller
 {
     use ImageUploadTrait;
 
+    private $SectionService;
+    public function __construct(SectionService $SectionService)
+    {
+        $this->SectionService = $SectionService;
+    }
     public function index()
     {
         return response()->json(
-            Section::all());
+            $this->SectionService->index());
     }
 
     public function store(SectionRequest $request)
     {
-        $path = $this->storeImage('images_section');
+           $section = $this->SectionService->store($request);
+        return response()->json($section,201);
 
-        $section = Section::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'message' => $request->message,
-            'status' => $request->status,
-            'image' => $path,
-        ]);
-
-        return response()->json($section, 201);
     }
 
     public function edit(Section $section)
     {
         return response()->json(
-            $section->find($section->id));
+            $this->SectionService->edit($section));
     }
 
     public function update(SectionRequest $request, Section $section)
     {
-        $this->deleteImage($section);
-        $path = $this->storeImage('images_section');
-
-        $section->update([
-            'name' => $request->name,
-            'description' => $request->description,
-            'message' => $request->message,
-            'status' => $request->status,
-            'image' => $path,
-        ]);
-
+        
+            $this->SectionService->update($request, $section);
         return response()->json(['message' => 'updated successfully']);
+
     }
 
     public function destroy(Section $section)
     {
-        $this->deleteImage($section);
-
-        $section->delete();
-
+        
+            $this->SectionService->destroy($section);
         return response()->json(['message' => 'Deleted successfully'], 202);
+
     }
 }
