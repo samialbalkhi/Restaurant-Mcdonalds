@@ -10,11 +10,6 @@ class Section extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function status()
-    {
-        return $this->status ? 'Active' : 'Anactive';
-    }
-
     public function categories()
     {
         return $this->hasMany(Category::class);
@@ -44,4 +39,10 @@ class Section extends Model
     {
         return $this->hasMany(Career::class);
     }
+
+    public function scopeActive($query)
+    {
+        return $query->whereStatus(true);
+    }
+
 }

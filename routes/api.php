@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Service\Frontend\Home\ShowLastProduct;
 use App\Http\Controllers\Backend\CareerController;
 use App\Http\Controllers\Backend\FamilyController;
 use App\Http\Controllers\Backend\MycafeController;
@@ -11,11 +12,14 @@ use App\Http\Controllers\Backend\SectionController;
 use App\Http\Controllers\Backend\JobOfferController;
 use App\Http\Controllers\Backend\AuthAdminController;
 use App\Http\Controllers\Backend\CategorieController;
+use App\Http\Controllers\Backend\EmailsSentController;
 use App\Http\Controllers\Backend\AuthCustomerController;
 use App\Http\Controllers\Backend\OurRestaurantController;
 use App\Http\Controllers\Backend\ProductReviewController;
+use App\Http\Controllers\Frontend\Home\GetSectionController;
 use App\Http\Controllers\Backend\OurResponsibilityController;
 use App\Http\Controllers\Backend\EmploymentOpportunityController;
+use App\Http\Controllers\Frontend\Home\ShowLastProductController;
 use App\Http\Controllers\Backend\AnsweringJobApplicationsController;
 
 /*
@@ -130,13 +134,23 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     });
 
     Route::group(['prefix' => 'AnsweringJobApplications'], function () {
-        Route::get('index', [AnsweringJobApplicationsController::class, 'index']);
         Route::post('sendmail/{employmentApplication}', [AnsweringJobApplicationsController::class, 'sendmail']);
-        Route::get('getAnswering/{Answering_job_application}', [AnsweringJobApplicationsController::class, 'getAnswering']);
+    });
+
+    Route::group(['prefix' => 'EmailsSentController'], function () {
+        Route::get('index', [EmailsSentController::class, 'index']);
+        Route::get('getAnswering/{Answering_job_application}', [EmailsSentController::class, 'getAnswering']);
     });
 
     Route::group(['prefix' => 'ProductReview'], function () {
         Route::get('index', [ProductReviewController::class, 'index']);
         Route::delete('destroy/{productReview}', [ProductReviewController::class, 'destroy']);
     });
+});
+
+/////////////////    frontend         //////////////////////
+Route::group(['prefix' => 'Home'], function () {
+    Route::get('getSection', GetSectionController::class);
+    Route::get('Show_the_last_three_products', [ShowLastProductController::class, 'Show_the_last_three_products']);
+    Route::get('FeaturedItems', [ShowLastProductController::class, 'FeaturedItems']);
 });
