@@ -1,9 +1,10 @@
 <?php
 namespace App\Service\Frontend\Home;
 
+
 use App\Models\Product;
 
-class ShowProductService
+class ShowProductHome
 {
     public function Show_the_last_three_products()
     {
@@ -12,11 +13,13 @@ class ShowProductService
             ->get(['id','name','description','image']);
     }
 
-    public function FeaturedItems()
+    public function FeaturedProduct()
     {
         return Product::where('featured', 1)
         ->orderBy('id', 'desc')
         ->take(4)
         ->get(['id','name','description','image']);
     }
+
+   
 }

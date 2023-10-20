@@ -2,12 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Service\Frontend\Home\ShowLastProduct;
 use App\Http\Controllers\Backend\CareerController;
 use App\Http\Controllers\Backend\FamilyController;
 use App\Http\Controllers\Backend\MycafeController;
 use App\Http\Controllers\Backend\DetailsController;
-use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SectionController;
 use App\Http\Controllers\Backend\JobOfferController;
 use App\Http\Controllers\Backend\AuthAdminController;
@@ -19,8 +17,10 @@ use App\Http\Controllers\Backend\ProductReviewController;
 use App\Http\Controllers\Frontend\Home\GetSectionController;
 use App\Http\Controllers\Backend\OurResponsibilityController;
 use App\Http\Controllers\Backend\EmploymentOpportunityController;
-use App\Http\Controllers\Frontend\Home\ShowLastProductController;
 use App\Http\Controllers\Backend\AnsweringJobApplicationsController;
+use App\Http\Controllers\Frontend\Home\ShowProductsAtHomeController;
+use App\Http\Controllers\Frontend\ShowProduct\ShowProductController;
+use App\Http\Controllers\Frontend\ShowCategory\ShowCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -151,6 +151,9 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
 /////////////////    frontend         //////////////////////
 Route::group(['prefix' => 'Home'], function () {
     Route::get('getSection', GetSectionController::class);
-    Route::get('Show_the_last_three_products', [ShowLastProductController::class, 'Show_the_last_three_products']);
-    Route::get('FeaturedItems', [ShowLastProductController::class, 'FeaturedItems']);
+    Route::get('Show_the_last_three_products', [ShowProductsAtHomeController::class, 'Show_the_last_three_products']);
+    Route::get('FeaturedProduct', [ShowProductsAtHomeController::class, 'FeaturedProduct']);
+    
 });
+Route::get('getCategory/{category}',ShowCategoryController::class);
+Route::get('ShowProduct/{product}', [ShowProductController::class, 'ShowProduct']);
