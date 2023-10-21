@@ -15,4 +15,10 @@ class ShowProductController extends Controller
             $ShowProductService->ShowProduct($product)
         );
     }
+    public function getOneProduct(Product $product,ShowProductService $ShowProductService)
+    {
+        return response()->json(
+            $ShowProductService->getOneProduct($product)
+        );
+    }
 }

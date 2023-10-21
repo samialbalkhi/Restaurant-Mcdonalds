@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\MycafeController;
 use App\Http\Controllers\Backend\DetailsController;
 use App\Http\Controllers\Backend\SectionController;
 use App\Http\Controllers\Backend\JobOfferController;
+use App\Http\Controllers\Backend\WorkTimeController;
 use App\Http\Controllers\Backend\AuthAdminController;
 use App\Http\Controllers\Backend\CategorieController;
 use App\Http\Controllers\Backend\EmailsSentController;
@@ -21,6 +22,12 @@ use App\Http\Controllers\Backend\AnsweringJobApplicationsController;
 use App\Http\Controllers\Frontend\Home\ShowProductsAtHomeController;
 use App\Http\Controllers\Frontend\ShowProduct\ShowProductController;
 use App\Http\Controllers\Frontend\ShowCategory\ShowCategoryController;
+use App\Http\Controllers\Frontend\ShowSectioMycafe\ShowSectioMycafeController;
+use App\Http\Controllers\Frontend\ShowOurRestaurant\ShowOurRestaurantController;
+use App\Http\Controllers\Frontend\ShowSectioFamily\ShowSectioMyFamilyController;
+use App\Http\Controllers\Frontend\ShowSectionCareer\ShowSectionCareerController;
+use App\Http\Controllers\Frontend\ShowOurResponsibiliy\ShowOurResponsibiliyController;
+use App\Http\Controllers\Frontend\ShowSectionCareer\ShowEmploymentOpportunitiesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -119,6 +126,12 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::delete('destroy/{employmentOpportunities}', [EmploymentOpportunityController::class, 'destroy']);
     });
 
+    Route::group(['prefix' => 'WorkTime'], function () {
+        Route::get('edit/{worktime}', [WorkTimeController::class, 'edit']);
+        Route::post('update/{worktime}', [WorkTimeController::class, 'update']);
+        Route::delete('destroy/{worktime}', [WorkTimeController::class, 'destroy']);
+    });
+
     Route::group(['prefix' => 'JobOffer'], function () {
         Route::get('index', [JobOfferController::class, 'index']);
         Route::post('store', [JobOfferController::class, 'store']);
@@ -151,9 +164,31 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
 /////////////////    frontend         //////////////////////
 Route::group(['prefix' => 'Home'], function () {
     Route::get('getSection', GetSectionController::class);
+    //////////// Display the products on the home page, the last three products and the last four featured products     ////////////////////
+
     Route::get('Show_the_last_three_products', [ShowProductsAtHomeController::class, 'Show_the_last_three_products']);
     Route::get('FeaturedProduct', [ShowProductsAtHomeController::class, 'FeaturedProduct']);
-    
 });
-Route::get('getCategory/{category}',ShowCategoryController::class);
+//////////     View category information   ///////////////////////
+Route::get('getCategory/{category}', ShowCategoryController::class);
+
+/////        Display the products + display the product itself    /////
 Route::get('ShowProduct/{product}', [ShowProductController::class, 'ShowProduct']);
+Route::get('getOneProduct/{product}', [ShowProductController::class, 'getOneProduct']);
+
+//// View the mycafy section + all its contents /////
+Route::get('ShowSectioMycafe/{section}', ShowSectioMycafeController::class);
+
+/////////////////////       Show information section Family            /////////////////////
+Route::get('ShowSectioMyFamily/{section}', ShowSectioMyFamilyController::class);
+
+//////////////       View our responsibility section information        /////////////////
+Route::get('ShowOurResponsibiliy/{section}', ShowOurResponsibiliyController::class);
+
+//////////   View information in our restaurant section //////////////////
+Route::get('ShowOurRestaurant/{section}', ShowOurRestaurantController::class);
+
+//////    View information in the Career section    ////////////////
+Route::get('ShowSectionCareer/{section}', ShowSectionCareerController::class);
+Route::get('ShowEmploymentOpportunities', [ShowEmploymentOpportunitiesController::class,'ShowEmploymentOpportunities']);
+

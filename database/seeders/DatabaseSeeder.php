@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\WorkTimeSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,5 +29,9 @@ class DatabaseSeeder extends Seeder
         $this->call(EmploymentApplicationSeeder::class);
         $this->call(ProductReviewSeeder::class);
         $this->call(AnsweringJobApplicationsSeeder::class);
+        $this->call(WorkTimeSeeder::class);
+
+        
+        
     }
 }

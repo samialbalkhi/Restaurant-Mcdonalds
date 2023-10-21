@@ -11,7 +11,6 @@ return new class extends Migration
         Schema::create('employment_opportunities', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('worktime');
             $table->double('vacancies');
             $table->timestamps();
         });

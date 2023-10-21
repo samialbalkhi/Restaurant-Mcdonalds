@@ -2,13 +2,11 @@
 
 namespace App\Http\Requests\Backend;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Validation\Rule;
 
-class EmploymentOpportunityRequest extends FormRequest
+class WorkTimeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,22 +23,10 @@ class EmploymentOpportunityRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [];
-        $rules = [
-            'name' => ['required', 'min:3', 'unique:employment_opportunities,name'],
-            'vacancies' => ['required', 'numeric'],
-            'listOfworktime' => ['array', 'required'],
-            'listOfworktime.*.worktime' => ['required', 'min:3'],
+        return [
+            'name'=>['required','min:3']
         ];
-
-        if (Request::route()->getName()) {
-            $rules['name'] = ['required', 'min:3', Rule::unique('employment_opportunities', 'name')->ignore($this->route()->employmentOpportunities->id)];
-            unset($rules['listOfworktime']);
-        }
-
-        return $rules;
     }
-
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(
