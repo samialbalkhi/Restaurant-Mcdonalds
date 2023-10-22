@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\EmailsSentController;
 use App\Http\Controllers\Backend\AuthCustomerController;
 use App\Http\Controllers\Backend\OurRestaurantController;
 use App\Http\Controllers\Backend\ProductReviewController;
+use App\Http\Controllers\Backend\WorkTimeOfferController;
 use App\Http\Controllers\Frontend\Home\GetSectionController;
 use App\Http\Controllers\Backend\OurResponsibilityController;
 use App\Http\Controllers\Backend\EmploymentOpportunityController;
@@ -127,9 +128,18 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     });
 
     Route::group(['prefix' => 'WorkTime'], function () {
-        Route::get('edit/{worktime}', [WorkTimeController::class, 'edit']);
-        Route::post('update/{worktime}', [WorkTimeController::class, 'update']);
-        Route::delete('destroy/{worktime}', [WorkTimeController::class, 'destroy']);
+        Route::get('index', [WorkTimeController::class, 'index']);
+        Route::post('store', [WorkTimeController::class, 'store']);
+        Route::get('edit/{WorkTime}', [WorkTimeController::class, 'edit']);
+        Route::post('update/{WorkTime}', [WorkTimeController::class, 'update'])->name('updateCareer');
+        Route::delete('destroy/{WorkTime}', [WorkTimeController::class, 'destroy']);
+    });
+
+
+    Route::group(['prefix' => 'WorkTimeOffer'], function () {
+        Route::get('edit/{JobOfferTime}', [WorkTimeOfferController::class, 'edit']);
+        Route::post('update/{JobOfferTime}', [WorkTimeOfferController::class, 'update']);
+        Route::delete('destroy/{JobOfferTime}', [WorkTimeOfferController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'JobOffer'], function () {
@@ -190,5 +200,11 @@ Route::get('ShowOurRestaurant/{section}', ShowOurRestaurantController::class);
 
 //////    View information in the Career section    ////////////////
 Route::get('ShowSectionCareer/{section}', ShowSectionCareerController::class);
+ ////////////      View job opportunities in the Career section           /////////////////////
 Route::get('ShowEmploymentOpportunities', [ShowEmploymentOpportunitiesController::class,'ShowEmploymentOpportunities']);
+////////////     View the job offer in the Professional Life section                ////////////////////////
+Route::get('ShowJobOffer/{jobOffer}', [ShowEmploymentOpportunitiesController::class,'ShowJobOffer']);
+Route::get('ViewOneJobOffer/{jobOffer}', [ShowEmploymentOpportunitiesController::class,'ViewOneJobOffer']);
+
+
 

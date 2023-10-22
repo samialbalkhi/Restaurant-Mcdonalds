@@ -37,7 +37,18 @@ class JobOfferService
             $details[] = $detail;
         }
 
-        return ['Job_offer'=> $Job_offer,'details'=> $details];
+        $jobOfferId = Job_offer::find($Job_offer->id);
+        $worktimes = []; 
+
+        for ($i = 0; $i < count($request->listOfworktime); $i++) {
+            $worktime = $jobOfferId->jobOfferTimes()->create([
+                'name' => $request->listOfworktime[$i]['worktime'],
+            ]);
+
+            $worktimes[] = $worktime; 
+        }
+
+        return ['Job_offer'=> $Job_offer,'details'=> $details,'worktimes'=>$worktimes];
     }
 
     public function edit(Job_offer $jobOffer)

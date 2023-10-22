@@ -34,9 +34,13 @@ class JobOfferRequest extends FormRequest
             'employment_opportunity_id' => ['required'],
             'listOfDetails' => ['array', 'required'],
             'listOfDetails.*.details' => ['required', 'min:3'],
+            'listOfworktime' => ['array', 'required'],
+            'listOfworktime.*.worktime' => ['required', 'min:3'],
         ];
         if (Request::route()->getName()) {
             unset($rules['listOfDetails']);
+            unset($rules['listOfworktime']);
+
         }
 
         return $rules;

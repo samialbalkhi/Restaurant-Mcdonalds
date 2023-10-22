@@ -8,7 +8,7 @@ class EmploymentOpportunityService
 {
     public function index()
     {
-        return EmploymentOpportunity::all();
+        return EmploymentOpportunity::with('worktimes')->get();
     }
 
     public function store(EmploymentOpportunityRequest $request)
@@ -18,19 +18,19 @@ class EmploymentOpportunityService
             'vacancies' => $request->vacancies,
         ]);
 
-        $EmploymentOpportunityId = EmploymentOpportunity::find($employmentOpportunity->id);
-        $worktimes = []; 
+        // $EmploymentOpportunityId = EmploymentOpportunity::find($employmentOpportunity->id);
+        // $worktimes = []; 
 
-        for ($i = 0; $i < count($request->listOfworktime); $i++) {
-            $worktime = $EmploymentOpportunityId->worktimes()->create([
-                'name' => $request->listOfworktime[$i]['worktime'],
-            ]);
+        // for ($i = 0; $i < count($request->listOfworktime); $i++) {
+        //     $worktime = $EmploymentOpportunityId->worktimes()->create([
+        //         'name' => $request->listOfworktime[$i]['worktime'],
+        //     ]);
 
-            $worktimes[] = $worktime; 
-        }
+        //     $worktimes[] = $worktime; 
+        
 
         // Move the return statement outside of the loop
-        return ['employmentOpportunity' => $employmentOpportunity, 'worktime' => $worktimes];
+        return ['employmentOpportunity' => $employmentOpportunity];
     }
     public function edit(EmploymentOpportunity $employmentOpportunities)
     {

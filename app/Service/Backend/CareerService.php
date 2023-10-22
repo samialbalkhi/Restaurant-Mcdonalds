@@ -12,9 +12,7 @@ class CareerService
 
     public function index()
     {
-
-        return 
-            Career::with(['section:id,name'])->get();
+        return Career::with(['section:id,name'])->get();
     }
 
     public function store(CareerRequest $request)
@@ -33,8 +31,7 @@ class CareerService
 
     public function edit(Career $career)
     {
-        return 
-            $career->find($career->id);
+        return $career->find($career->id);
     }
 
     public function update(CareerRequest $request, Career $career)
@@ -48,13 +45,11 @@ class CareerService
             'image' => $path,
             'section_id' => $request->section_id,
         ]);
-
     }
 
     public function destroy(Career $career)
     {
         $this->deleteImage($career);
         $career->delete();
-
     }
 }

@@ -14,9 +14,10 @@ class JobOfferSeeder extends Seeder
     public function run(): void
     {
         $JobIDs = EmploymentOpportunity::pluck('id')->toArray(); // Convert the collection to an array
-
+        
         for ($i = 1; $i <= 500; $i++) {
-            $randomJobID = $JobIDs[array_rand($JobIDs)]; // Select a random job ID from the array
+            $randomJobID = $JobIDs[array_rand($JobIDs)];
+        // Select a random job ID from the array
             $Job_offer[] = [
                 'location' => 'Koblenzer Str. 160, 56727 Mayen',
                 'franchisee' => 'in HuFro Restaurations GmbH',

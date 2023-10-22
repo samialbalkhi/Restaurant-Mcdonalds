@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\EmploymentOpportunity;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -13,12 +12,7 @@ return new class extends Migration {
     {
         Schema::create('work_times', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table
-                ->foreignIdFor(EmploymentOpportunity::class)
-                // ->constrained()
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
+            $table->string('name');              
             $table->timestamps();
         });
     }

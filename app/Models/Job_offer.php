@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Worktime;
+use App\Models\JobOfferTime;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Job_offer extends Model
 {
@@ -18,5 +20,10 @@ class Job_offer extends Model
     public function details()
     {
         return $this->hasMany(Detail::class);
+    }
+
+    public function jobOfferTimes()
+    {
+        return $this->hasMany(JobOfferTime::class);
     }
 }

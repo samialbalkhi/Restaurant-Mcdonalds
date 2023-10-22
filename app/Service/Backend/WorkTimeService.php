@@ -1,27 +1,39 @@
 <?php
 namespace App\Service\Backend;
 
-use App\Models\WorkTime;
-use Illuminate\Http\Request;
 use App\Http\Requests\Backend\WorkTimeRequest;
+use App\Models\WorkTime;
 
 class WorkTimeService
 {
-    public function edit(WorkTime $worktime)
+    public function index()
     {
-        return WorkTime::where('employment_opportunity_id', $worktime->id)->get();
+        return WorkTime::all();
     }
 
-    public function update(WorkTimeRequest $request, WorkTime $worktime)
+    public function store(WorkTimeRequest $request)
     {
-         $worktime->update([
+        $WorkTime = WorkTime::create([
             'name' => $request->name,
-            'employment_opportunity_id' => $worktime->employment_opportunity_id,
+        ]);
+        return $WorkTime;
+    }
+
+    public function edit(WorkTime $WorkTime)
+    {
+        return $WorkTime->find($WorkTime->id);
+    }
+
+    public function update(WorkTimeRequest $request, WorkTime $WorkTime)
+    {
+        $WorkTime->update([
+            'name' => $request->name,
         ]);
     }
-    public function destroy(WorkTime $worktime){
 
-        $worktime->delete();
+    public function destroy(WorkTime $WorkTime)
+    {
+        $WorkTime->delete();
     }
-
 }
+?>

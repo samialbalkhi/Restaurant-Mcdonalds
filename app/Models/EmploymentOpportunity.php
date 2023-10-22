@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Worktime;
+use App\Models\Job_offer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -16,8 +16,5 @@ class EmploymentOpportunity extends Model
     {
         return $this->hasMany(Job_offer::class);
     }
-    public function worktimes()
-{
-    return $this->hasMany(Worktime::class);
-}
+  
 }
