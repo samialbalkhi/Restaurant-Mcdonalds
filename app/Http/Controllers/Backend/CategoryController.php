@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Section;
 use App\Models\Category;
-use App\Traits\ImageUploadTrait;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use App\Service\Backend\CategoryService;
 use App\Http\Requests\Backend\CategoryRequest;
 
-class CategorieController extends Controller
+class CategoryController extends Controller
 {
-    use ImageUploadTrait;
 
     private $CategoryService;
 
@@ -20,18 +17,38 @@ class CategorieController extends Controller
     {
         $this->CategoryService = $CategoryService;
     }
-
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         return response()->json(
             $this->CategoryService->index());
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(CategoryRequest $request)
     {
-         
-          $category=  $this->CategoryService->store($request);
-         return response()->json($category,201);
+        $category=  $this->CategoryService->store($request);
+        return response()->json($category,201);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        
     }
 
     /**
@@ -48,9 +65,8 @@ class CategorieController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-            $this->CategoryService->update($request, $category);
+        $this->CategoryService->update($request, $category);
         return response()->json(['messge' => 'Updateed successfully']);
-
     }
 
     /**
@@ -58,8 +74,7 @@ class CategorieController extends Controller
      */
     public function destroy(Category $category)
     {
-            $this->CategoryService->destroy($category);
+        $this->CategoryService->destroy($category);
         return response()->json(['message' => 'Deleted successfully'], 202);
-
     }
 }

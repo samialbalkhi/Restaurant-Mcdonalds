@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests\Backend;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CategoryRequest extends FormRequest
 {
@@ -25,7 +26,6 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-
         $rules = [];
         $rules = [
             'name' => ['required', 'unique:categories,name', 'max:30', 'min:3'],
@@ -33,9 +33,8 @@ class CategoryRequest extends FormRequest
             'image' => ['required', 'image', 'max:2048'],
             'status' => ['nullable'],
         ];
-
-        if (Request::route()->getName()) {
-            $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('categories', 'name')->ignore($this->route()->category->id)];
+        if (Request::route()->getName() == 'category.update') {
+            $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('categories', 'name')->ignore($this->category->id)];
         }
 
         return $rules;

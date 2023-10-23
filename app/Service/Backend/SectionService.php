@@ -11,14 +11,14 @@ class SectionService
 
     public function index()
     {
-        return Section::all();
+        return  Section::all();
     }
 
-    public function store(SectionRequest $request)
+    public function store(SectionRequest $request): Section
     {
         $path = $this->storeImage('images_section');
 
-        $section = Section::create([
+        return  Section::create([
             'name' => $request->name,
             'description' => $request->description,
             'message' => $request->message,
@@ -26,7 +26,6 @@ class SectionService
             'image' => $path,
         ]);
 
-        return $section;
     }
 
     public function edit(Section $section)

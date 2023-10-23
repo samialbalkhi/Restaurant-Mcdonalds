@@ -2,15 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\tsetController;
 use App\Http\Controllers\Backend\CareerController;
 use App\Http\Controllers\Backend\FamilyController;
 use App\Http\Controllers\Backend\MycafeController;
 use App\Http\Controllers\Backend\DetailsController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SectionController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\JobOfferController;
 use App\Http\Controllers\Backend\WorkTimeController;
 use App\Http\Controllers\Backend\AuthAdminController;
-use App\Http\Controllers\Backend\CategorieController;
 use App\Http\Controllers\Backend\EmailsSentController;
 use App\Http\Controllers\Backend\AuthCustomerController;
 use App\Http\Controllers\Backend\OurRestaurantController;
@@ -29,7 +31,6 @@ use App\Http\Controllers\Frontend\ShowSectioFamily\ShowSectioMyFamilyController;
 use App\Http\Controllers\Frontend\ShowSectionCareer\ShowSectionCareerController;
 use App\Http\Controllers\Frontend\ShowOurResponsibiliy\ShowOurResponsibiliyController;
 use App\Http\Controllers\Frontend\ShowSectionCareer\ShowEmploymentOpportunitiesController;
-use App\Http\Controllers\tsetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,24 +55,12 @@ Route::group(['prefix' => 'customer'], function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::post('login', [AuthAdminController::class, 'login']);
 });
+Route::resource('/category',CategoryController::class);
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () {
-    Route::group(['prefix' => 'section'], function () {
-        Route::get('index', [SectionController::class, 'index']);
-        Route::post('store', [SectionController::class, 'store']);
-        Route::get('edit/{section}', [SectionController::class, 'edit']);
-        Route::post('update/{section}', [SectionController::class, 'update'])->name('updateSection');
-        Route::delete('destroy/{section}', [SectionController::class, 'destroy']);
-    });
+    
+        Route::resource('/section',SectionController::class);
 
-    Route::group(['prefix' => 'category'], function () {
-        Route::get('index', [CategorieController::class, 'index']);
-        Route::post('store', [CategorieController::class, 'store']);
-        Route::get('edit/{category}', [CategorieController::class, 'edit']);
-        Route::post('update/{category}', [CategorieController::class, 'update'])->name('updateCategory');
-        Route::delete('destroy/{category}', [CategorieController::class, 'destroy']);
-    });
-        
     Route::group(['prefix' => 'product'], function () {
         Route::get('index', [ProductController::class, 'index']);
         Route::post('store', [ProductController::class, 'store']);
@@ -206,5 +195,3 @@ Route::get('ShowEmploymentOpportunities', [ShowEmploymentOpportunitiesController
 Route::get('ShowJobOffer/{jobOffer}', [ShowEmploymentOpportunitiesController::class,'ShowJobOffer']);
 Route::get('ViewOneJobOffer/{jobOffer}', [ShowEmploymentOpportunitiesController::class,'ViewOneJobOffer']);
 
-
-Route::resource('/test',tsetController::class);

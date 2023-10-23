@@ -17,19 +17,18 @@ class CategoryService
            
     }
 
-    public function store(CategoryRequest $request)
+    public function store(CategoryRequest $request): Category
     {
         $section = Section::find($request->section_id);
 
         $path = $this->storeImage('images_category');
 
-        $category = $section->categories()->create([
+        return $section->categories()->create([
             'name' => $request->name,
             'status' => $request->status,
             'image' => $path,
         ]);
 
-        return $category;
     }
 
     /**
