@@ -29,6 +29,7 @@ use App\Http\Controllers\Frontend\ShowSectioFamily\ShowSectioMyFamilyController;
 use App\Http\Controllers\Frontend\ShowSectionCareer\ShowSectionCareerController;
 use App\Http\Controllers\Frontend\ShowOurResponsibiliy\ShowOurResponsibiliyController;
 use App\Http\Controllers\Frontend\ShowSectionCareer\ShowEmploymentOpportunitiesController;
+use App\Http\Controllers\tsetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,7 +71,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::post('update/{category}', [CategorieController::class, 'update'])->name('updateCategory');
         Route::delete('destroy/{category}', [CategorieController::class, 'destroy']);
     });
-
+        
     Route::group(['prefix' => 'product'], function () {
         Route::get('index', [ProductController::class, 'index']);
         Route::post('store', [ProductController::class, 'store']);
@@ -134,7 +135,6 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::post('update/{WorkTime}', [WorkTimeController::class, 'update'])->name('updateCareer');
         Route::delete('destroy/{WorkTime}', [WorkTimeController::class, 'destroy']);
     });
-
 
     Route::group(['prefix' => 'WorkTimeOffer'], function () {
         Route::get('edit/{JobOfferTime}', [WorkTimeOfferController::class, 'edit']);
@@ -207,4 +207,4 @@ Route::get('ShowJobOffer/{jobOffer}', [ShowEmploymentOpportunitiesController::cl
 Route::get('ViewOneJobOffer/{jobOffer}', [ShowEmploymentOpportunitiesController::class,'ViewOneJobOffer']);
 
 
-
+Route::resource('/test',tsetController::class);

@@ -11,11 +11,10 @@ class AuthCustomerService
     public function login(loginRequest $request)
     {
         $user = User::where('email', $request->email)->first();
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['message' => 'password or email is incorrect'], 401);
-        } else {
-            return $user->createToken('token-name', ['customer'])->plainTextToken;
-        }
+        if (!$user || !Hash::check($request->password, $user->password)) 
+          return response()->json(['message' => 'password or email is incorrect'], 401);
+        
+        return $user->createToken('token-name', ['customer'])->plainTextToken;
     }
 
     public function register(RegisterRequest $request)
@@ -24,7 +23,7 @@ class AuthCustomerService
 
         $token = $user->createToken('token-name', ['customer'])->plainTextToken;
 
-        return ['user' => $user, 'token' => $token];
+        return ['token' => $token];
     }
     public function logout()
     {

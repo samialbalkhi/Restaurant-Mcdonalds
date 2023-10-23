@@ -10,7 +10,6 @@ use App\Http\Requests\Backend\SectionRequest;
 
 class SectionController extends Controller
 {
-    use ImageUploadTrait;
 
     private $SectionService;
     public function __construct(SectionService $SectionService)

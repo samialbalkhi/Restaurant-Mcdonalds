@@ -10,10 +10,10 @@ class AuthAdminService
     public function login(loginRequest $request)
     {
         $user = User::where('email', $request->email)->first();
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) 
             return response()->json(['message' => 'password or email is incorrect'], 401);
-        } else {
+
             return $user->createToken('token-name', ['admin'])->plainTextToken;
-        }
+        
     }
 }
