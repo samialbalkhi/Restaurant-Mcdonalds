@@ -38,8 +38,8 @@ class SectionController extends Controller
      */
     public function store(SectionRequest $request)
     {
-        $section = $this->SectionService->store($request);
-        return response()->json($section,201);
+        return response()->json(
+            $this->SectionService->store($request),201);
     }
 
     /**

@@ -16,18 +16,17 @@ class MycafeService
             MyCafe::with(['section:id,name'])->get();
     }
 
-    public function store(MycafeRequest $request)
+    public function store(MycafeRequest $request) : MyCafe
     {
         $section = Section::find($request->section_id);
         $path = $this->storeImage('image_mycafe');
 
-        $mycafe = $section->mycafes()->create([
+        return $section->mycafes()->create([
             'name' => $request->name,
             'description' => $request->description,
             'image' => $path,
         ]);
 
-        return $mycafe;
     }
 
     public function edit(MyCafe $mycafe)

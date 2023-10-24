@@ -2,50 +2,82 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\EmploymentOpportunity;
-use App\Service\Backend\EmploymentOpportunityService;
+use App\Service\Backend\employmentOpportunityService;
 use App\Http\Requests\Backend\EmploymentOpportunityRequest;
 
-class EmploymentOpportunityController extends Controller
+class employmentOpportunityController extends Controller
 {
-   private $EmploymentOpportunityService ;
-   public function __construct(EmploymentOpportunityService $employmentOpportunityService)
-   {
-    $this->EmploymentOpportunityService = $employmentOpportunityService;
-   }
+    private $employmentOpportunityService;
+    public function __construct(employmentOpportunityService $employmentOpportunityService)
+    {
+        $this->employmentOpportunityService = $employmentOpportunityService;
+    }
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         return response()->json(
-           $this->EmploymentOpportunityService->index());
+            $this->employmentOpportunityService->index());
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(EmploymentOpportunityRequest $request)
     {
-        $employmentOpportunity=$this->EmploymentOpportunityService->store($request);
-        return response()->json($employmentOpportunity, 201);
+        return response()->json(
+            $this->employmentOpportunityService->store($request), 201);
     }
 
-    public function edit(EmploymentOpportunity $employmentOpportunities)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(EmploymentOpportunity $employmentOpportunity)
     {
         return response()->json(
-            $this->EmploymentOpportunityService->edit($employmentOpportunities));
+            $this->employmentOpportunityService->edit($employmentOpportunity));
     }
 
-    public function update(EmploymentOpportunityRequest $request, EmploymentOpportunity $employmentOpportunities)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(EmploymentOpportunityRequest $request, EmploymentOpportunity $employmentOpportunity)
     {
-        $this->EmploymentOpportunityService->update($request, $employmentOpportunities);
+        $this->employmentOpportunityService->update($request, $employmentOpportunity);
         return response()->json(['message' => 'Updateed Category successfully']);
     }
 
-    public function destroy(EmploymentOpportunity $employmentOpportunities)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(EmploymentOpportunity $employmentOpportunity)
     {
-        $this->EmploymentOpportunityService->destroy($employmentOpportunities);
+        $this->employmentOpportunityService->destroy($employmentOpportunity);
         return response()->json(
             [
                 'message' => 'Deleted successfully',
             ],
-            202,
+            200,
         );
     }
 }

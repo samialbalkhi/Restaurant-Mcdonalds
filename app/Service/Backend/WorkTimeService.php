@@ -4,36 +4,36 @@ namespace App\Service\Backend;
 use App\Http\Requests\Backend\WorkTimeRequest;
 use App\Models\WorkTime;
 
-class WorkTimeService
+class workTimeService
 {
     public function index()
     {
         return WorkTime::all();
     }
 
-    public function store(WorkTimeRequest $request)
+    public function store(WorkTimeRequest $request) : WorkTime
     {
-        $WorkTime = WorkTime::create([
+        return WorkTime::create([
             'name' => $request->name,
         ]);
-        return $WorkTime;
+         
     }
 
-    public function edit(WorkTime $WorkTime)
+    public function edit(WorkTime $workTime)
     {
-        return $WorkTime->find($WorkTime->id);
+        return $workTime->find($workTime->id);
     }
 
-    public function update(WorkTimeRequest $request, WorkTime $WorkTime)
+    public function update(WorkTimeRequest $request, WorkTime $workTime)
     {
-        $WorkTime->update([
+        $workTime->update([
             'name' => $request->name,
         ]);
     }
 
-    public function destroy(WorkTime $WorkTime)
+    public function destroy(WorkTime $workTime)
     {
-        $WorkTime->delete();
+        $workTime->delete();
     }
 }
 ?>

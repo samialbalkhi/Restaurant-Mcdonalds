@@ -6,7 +6,7 @@ use App\Traits\ImageUploadTrait;
 use App\Models\Ourresponsibility;
 use App\Http\Requests\Backend\OurResponsibilityRequest;
 
-class OurResponsibilityService
+class ourResponsibilityService
 {
     use ImageUploadTrait;
 
@@ -17,20 +17,20 @@ class OurResponsibilityService
             Ourresponsibility::with(['section:id,name'])->get();
     }
 
-    public function store(OurResponsibilityRequest $request)
+    public function store(OurResponsibilityRequest $request): Ourresponsibility
     {
         $path = $this->storeImage('images_OurResponsibility');
 
         $section = Section::find($request->section_id);
 
-        $ourResponsibility = $section->OurResponsibility()->create([
+        return $section->OurResponsibility()->create([
             'title' => $request->title,
             'description' => $request->description,
             'image' => $path,
             'section_id' => $request->section_id,
         ]);
 
-        return $ourResponsibility;
+        
     }
 
     public function edit(Ourresponsibility $ourResponsibility)

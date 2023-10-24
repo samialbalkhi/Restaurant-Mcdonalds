@@ -31,9 +31,8 @@ class EmploymentOpportunityRequest extends FormRequest
             'vacancies' => ['required', 'numeric'],
          
         ];
-
-        if (Request::route()->getName()) {
-            $rules['name'] = ['required', 'min:3', Rule::unique('employment_opportunities', 'name')->ignore($this->route()->employmentOpportunities->id)];
+        if (Request::route()->getName()=='employmentOpportunity.update') {
+            $rules['name'] = ['required', 'min:3', Rule::unique('employment_opportunities', 'name')->ignore($this->employmentOpportunity->id)];
             
         }
 

@@ -32,8 +32,8 @@ class CareerRequest extends FormRequest
             'section_id' => ['required'],
             'image' => ['required'],
         ];
-        if (Request::route()->getName()) {
-            $rules['title'] = ['required', 'min:10', Rule::unique('careers', 'title')->ignore($this->route()->career->id)];
+        if (Request::route()->getName() == 'careers.update') {
+            $rules['title'] = ['required', 'min:10', Rule::unique('careers', 'title')->ignore($this->career->id)];
         }
 
         return $rules;

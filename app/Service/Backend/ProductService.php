@@ -17,12 +17,12 @@ class ProductService
             Product::with('category:id,name')->paginate();
     }
 
-    public function store(ProductRequest $request)
+    public function store(ProductRequest $request) : Product
     {
         $path = $this->storeImage('images_product');
 
         $category = Category::find($request->category_id);
-        $product = $category->product()->create([
+        return $category->product()->create([
             'name' => $request->name,
             'description' => $request->description,
             'size' => $request->size,
@@ -33,7 +33,7 @@ class ProductService
             'status' => $request->status,
             'image' => $path,
         ]);
-        return $product ;
+         
 
     }
 

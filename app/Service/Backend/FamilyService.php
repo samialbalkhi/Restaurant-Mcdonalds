@@ -17,19 +17,18 @@ class FamilyService
             Family::with(['section:id,name'])->get();
     }
 
-    public function store(FamilyRequest $request)
+    public function store(FamilyRequest $request) : Family
     {
         $path = $this->storeImage('image_family');
         $section = Section::find($request->section_id);
 
-        $family = $section->families()->create([
+        return $section->families()->create([
             'name' => $request->name,
             'title' => $request->title,
             'description' => $request->description,
             'image' => $path,
         ]);
 
-        return $family;
     }
 
     public function edit(Family $family)

@@ -2,56 +2,83 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Section;
-use App\Traits\ImageUploadTrait;
+use Illuminate\Http\Request;
 use App\Models\Ourresponsibility;
 use App\Http\Controllers\Controller;
-use App\Service\Backend\OurResponsibilityService;
+use App\Service\Backend\ourResponsibilityService;
 use App\Http\Requests\Backend\OurResponsibilityRequest;
 
-class OurResponsibilityController extends Controller
+class ourResponsibilityController extends Controller
 {
-    use ImageUploadTrait;
-    private $OurResponsibilityService ;
-    public function __construct(OurResponsibilityService $OurResponsibilityService)
+    private $ourResponsibilityService;
+    public function __construct(ourResponsibilityService $ourResponsibilityService)
     {
-        $this->OurResponsibilityService = $OurResponsibilityService;
+        $this->ourResponsibilityService = $ourResponsibilityService;
     }
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        return response()->json(
-          $this->OurResponsibilityService->index());
+        return response()->json($this->ourResponsibilityService->index());
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(OurResponsibilityRequest $request)
     {
-        $ourResponsibility=$this->OurResponsibilityService->store($request);
-        return response()->json($ourResponsibility, 201);
+        // $ourResponsibility = ;
+        return response()->json(
+            $this->ourResponsibilityService->store($request), 201);
     }
 
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit(Ourresponsibility $ourResponsibility)
     {
-        return response()->json(
-           $this->OurResponsibilityService->edit($ourResponsibility));
+        return response()->json($this->ourResponsibilityService->edit($ourResponsibility));
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(OurResponsibilityRequest $request, Ourresponsibility $ourResponsibility)
     {
-       $this->OurResponsibilityService->update($request,$ourResponsibility);
+        $this->ourResponsibilityService->update($request, $ourResponsibility);
         return response()->json([
             'message' => 'Updateed  successfully',
         ]);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(Ourresponsibility $ourResponsibility)
     {
-     
-        $this->OurResponsibilityService->destroy($ourResponsibility);
+        $this->ourResponsibilityService->destroy($ourResponsibility);
         return response()->json(
             [
                 'message' => 'Deleted successfully',
             ],
-            202,
+            200,
         );
     }
 }

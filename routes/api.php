@@ -11,16 +11,16 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SectionController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\JobOfferController;
-use App\Http\Controllers\Backend\WorkTimeController;
+use App\Http\Controllers\Backend\workTimeController;
 use App\Http\Controllers\Backend\AuthAdminController;
 use App\Http\Controllers\Backend\EmailsSentController;
 use App\Http\Controllers\Backend\AuthCustomerController;
-use App\Http\Controllers\Backend\OurRestaurantController;
+use App\Http\Controllers\Backend\ourRestaurantController;
 use App\Http\Controllers\Backend\ProductReviewController;
 use App\Http\Controllers\Backend\WorkTimeOfferController;
 use App\Http\Controllers\Frontend\Home\GetSectionController;
-use App\Http\Controllers\Backend\OurResponsibilityController;
-use App\Http\Controllers\Backend\EmploymentOpportunityController;
+use App\Http\Controllers\Backend\ourResponsibilityController;
+use App\Http\Controllers\Backend\employmentOpportunityController;
 use App\Http\Controllers\Backend\AnsweringJobApplicationsController;
 use App\Http\Controllers\Frontend\Home\ShowProductsAtHomeController;
 use App\Http\Controllers\Frontend\ShowProduct\ShowProductController;
@@ -55,75 +55,19 @@ Route::group(['prefix' => 'customer'], function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::post('login', [AuthAdminController::class, 'login']);
 });
-Route::resource('/category',CategoryController::class);
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () {
     
-        Route::resource('/section',SectionController::class);
-
-    Route::group(['prefix' => 'product'], function () {
-        Route::get('index', [ProductController::class, 'index']);
-        Route::post('store', [ProductController::class, 'store']);
-        Route::get('edit/{product}', [ProductController::class, 'edit']);
-        Route::post('update/{product}', [ProductController::class, 'update']);
-        Route::delete('destroy/{product}', [ProductController::class, 'destroy']);
-    });
-
-    Route::group(['prefix' => 'mycafe'], function () {
-        Route::get('index', [MycafeController::class, 'index']);
-        Route::post('store', [MycafeController::class, 'store']);
-        Route::get('edit/{mycafe}', [MycafeController::class, 'edit']);
-        Route::post('update/{mycafe}', [MycafeController::class, 'update'])->name('updateMycafe');
-        Route::delete('destroy/{mycafe}', [MycafeController::class, 'destroy']);
-    });
-
-    Route::group(['prefix' => 'family'], function () {
-        Route::get('index', [FamilyController::class, 'index']);
-        Route::post('store', [FamilyController::class, 'store']);
-        Route::get('edit/{family}', [FamilyController::class, 'edit']);
-        Route::post('update/{family}', [FamilyController::class, 'update'])->name('updateFamily');
-        Route::delete('destroy/{family}', [FamilyController::class, 'destroy']);
-    });
-
-    Route::group(['prefix' => 'ourResponsibility'], function () {
-        Route::get('index', [OurResponsibilityController::class, 'index']);
-        Route::post('store', [OurResponsibilityController::class, 'store']);
-        Route::get('edit/{ourResponsibility}', [OurResponsibilityController::class, 'edit']);
-        Route::post('update/{ourResponsibility}', [OurResponsibilityController::class, 'update'])->name('updateOurResponsibility');
-        Route::delete('destroy/{ourResponsibility}', [OurResponsibilityController::class, 'destroy']);
-    });
-
-    Route::group(['prefix' => 'ourRestaurant'], function () {
-        Route::get('index', [OurRestaurantController::class, 'index']);
-        Route::post('store', [OurRestaurantController::class, 'store']);
-        Route::get('edit/{ourRestaurant}', [OurRestaurantController::class, 'edit']);
-        Route::post('update/{ourRestaurant}', [OurRestaurantController::class, 'update'])->name('updateOurRestaurant');
-        Route::delete('destroy/{ourRestaurant}', [OurRestaurantController::class, 'destroy']);
-    });
-
-    Route::group(['prefix' => 'career'], function () {
-        Route::get('index', [CareerController::class, 'index']);
-        Route::post('store', [CareerController::class, 'store']);
-        Route::get('edit/{career}', [CareerController::class, 'edit']);
-        Route::post('update/{career}', [CareerController::class, 'update'])->name('updateCareer');
-        Route::delete('destroy/{career}', [CareerController::class, 'destroy']);
-    });
-
-    Route::group(['prefix' => 'EmploymentOpportunity'], function () {
-        Route::get('index', [EmploymentOpportunityController::class, 'index']);
-        Route::post('store', [EmploymentOpportunityController::class, 'store']);
-        Route::get('edit/{employmentOpportunities}', [EmploymentOpportunityController::class, 'edit']);
-        Route::post('update/{employmentOpportunities}', [EmploymentOpportunityController::class, 'update'])->name('updateEmploymentOpportunities');
-        Route::delete('destroy/{employmentOpportunities}', [EmploymentOpportunityController::class, 'destroy']);
-    });
-
-    Route::group(['prefix' => 'WorkTime'], function () {
-        Route::get('index', [WorkTimeController::class, 'index']);
-        Route::post('store', [WorkTimeController::class, 'store']);
-        Route::get('edit/{WorkTime}', [WorkTimeController::class, 'edit']);
-        Route::post('update/{WorkTime}', [WorkTimeController::class, 'update'])->name('updateCareer');
-        Route::delete('destroy/{WorkTime}', [WorkTimeController::class, 'destroy']);
-    });
+    Route::resource('/sections',SectionController::class);
+    Route::resource('/categories',CategoryController::class); 
+    Route::resource('/products',ProductController::class); 
+    Route::resource('/mycafes',MycafeController::class); 
+    Route::resource('/familys',FamilyController::class);
+    Route::resource('/ourResponsibilitys',ourResponsibilityController::class);
+    Route::resource('/ourRestaurants',ourRestaurantController::class); 
+    Route::resource('/careers',CareerController::class); 
+    Route::resource('/employmentOpportunity',employmentOpportunityController::class); 
+    Route::resource('/workTimes',workTimeController::class); 
 
     Route::group(['prefix' => 'WorkTimeOffer'], function () {
         Route::get('edit/{JobOfferTime}', [WorkTimeOfferController::class, 'edit']);

@@ -32,8 +32,9 @@ class OurResponsibilityRequest extends FormRequest
             'section_id' => ['required'],
             'image' => ['required'],
         ];
-        if (Request::route()->getName()) {
-            $rules['title'] = ['required', 'min:10', Rule::unique('ourresponsibilities', 'title')->ignore($this->route()->ourResponsibility->id)];
+        // dd(Request::route()->getName());
+        if (Request::route()->getName() == 'ourResponsibilitys.update') {
+            $rules['title'] = ['required', 'min:10', Rule::unique('ourresponsibilities', 'title')->ignore($this->ourResponsibility->id)];
         }
 
         return $rules;

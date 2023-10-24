@@ -34,8 +34,8 @@ class FamilyRequest extends FormRequest
             'section_id' => ['required'],
         ];
 
-        if (Request::route()->getName()) {
-            $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('families', 'name')->ignore($this->route()->family->id)];
+        if (Request::route()->getName()== 'familys.update') {
+            $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('families', 'name')->ignore($this->family->id)];
         }
 
         return $rules;

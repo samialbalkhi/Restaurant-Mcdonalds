@@ -33,7 +33,7 @@ class CategoryRequest extends FormRequest
             'image' => ['required', 'image', 'max:2048'],
             'status' => ['nullable'],
         ];
-        if (Request::route()->getName() == 'category.update') {
+        if (Request::route()->getName() == 'categories.update') {
             $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('categories', 'name')->ignore($this->category->id)];
         }
 

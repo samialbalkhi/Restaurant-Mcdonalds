@@ -15,18 +15,18 @@ class CareerService
         return Career::with(['section:id,name'])->get();
     }
 
-    public function store(CareerRequest $request)
+    public function store(CareerRequest $request) : Career
     {
         $section = Section::find($request->section_id);
         $path = $this->storeImage('image_career');
 
-        $career = $section->careers()->create([
+        return  $section->careers()->create([
             'title' => $request->title,
             'description' => $request->description,
             'image' => $path,
         ]);
 
-        return $career;
+         
     }
 
     public function edit(Career $career)

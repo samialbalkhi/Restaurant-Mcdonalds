@@ -33,7 +33,7 @@ class MycafeRequest extends FormRequest
             'section_id' => ['required'],
         ];
 
-        if (Request::route()->getName()) {
+        if (Request::route()->getName() == 'mycafes.update') {
             $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('my_cafes', 'name')->ignore($this->route()->mycafe->id)];
         }
 

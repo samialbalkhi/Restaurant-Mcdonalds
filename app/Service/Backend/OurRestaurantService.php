@@ -6,7 +6,7 @@ use App\Models\Ourrestaurant;
 use App\Traits\ImageUploadTrait;
 use App\Http\Requests\Backend\OurRestaurantRequest;
 
-class OurRestaurantService
+class ourRestaurantService
 {
     use ImageUploadTrait;
 

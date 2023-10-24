@@ -39,8 +39,8 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $category=  $this->CategoryService->store($request);
-        return response()->json($category,201);
+        return response()->json(
+            $this->CategoryService->store($request),201);
     }
 
     /**

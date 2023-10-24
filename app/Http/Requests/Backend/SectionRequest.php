@@ -36,7 +36,7 @@ class SectionRequest extends FormRequest
             'image' => ['required', 'image', 'max:2048'],
         ];
             
-        if (Request::route()->getName() == 'section.update') {
+        if (Request::route()->getName() == 'sections.update') {
             $rules['name'] = ['required', 'max:30', 'min:3', Rule::unique('sections', 'name')->ignore($this->section->id)];
         }
 

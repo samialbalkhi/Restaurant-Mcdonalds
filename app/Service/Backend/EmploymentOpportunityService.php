@@ -4,48 +4,35 @@ namespace App\Service\Backend;
 use App\Models\EmploymentOpportunity;
 use App\Http\Requests\Backend\EmploymentOpportunityRequest;
 
-class EmploymentOpportunityService
+class employmentOpportunityService
 {
     public function index()
     {
-        return EmploymentOpportunity::with('worktimes')->get();
+        return EmploymentOpportunity::all();
     }
 
-    public function store(EmploymentOpportunityRequest $request)
+    public function store(EmploymentOpportunityRequest $request) : EmploymentOpportunity
     {
-        $employmentOpportunity = EmploymentOpportunity::create([
+        return   EmploymentOpportunity::create([
             'name' => $request->name,
             'vacancies' => $request->vacancies,
         ]);
 
-        // $EmploymentOpportunityId = EmploymentOpportunity::find($employmentOpportunity->id);
-        // $worktimes = []; 
-
-        // for ($i = 0; $i < count($request->listOfworktime); $i++) {
-        //     $worktime = $EmploymentOpportunityId->worktimes()->create([
-        //         'name' => $request->listOfworktime[$i]['worktime'],
-        //     ]);
-
-        //     $worktimes[] = $worktime; 
-        
-
-        // Move the return statement outside of the loop
-        return ['employmentOpportunity' => $employmentOpportunity];
     }
-    public function edit(EmploymentOpportunity $employmentOpportunities)
+    public function edit(EmploymentOpportunity $employmentOpportunity)
     {
-        return $employmentOpportunities->find($employmentOpportunities->id);
+        return $employmentOpportunity->find($employmentOpportunity->id);
     }
 
-    public function update(EmploymentOpportunityRequest $request, EmploymentOpportunity $employmentOpportunities)
+    public function update(EmploymentOpportunityRequest $request, EmploymentOpportunity $employmentOpportunity)
     {
-        $employmentOpportunities->update($request->validated());
+        $employmentOpportunity->update($request->validated());
 
         return response()->json(['message' => 'Updateed successfully']);
     }
 
-    public function destroy(EmploymentOpportunity $employmentOpportunities)
+    public function destroy(EmploymentOpportunity $employmentOpportunity)
     {
-        $employmentOpportunities->delete();
+        $employmentOpportunity->delete();
     }
 }

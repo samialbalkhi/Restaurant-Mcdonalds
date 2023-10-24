@@ -3,51 +3,82 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\MyCafe;
-use App\Models\Section;
-use App\Traits\ImageUploadTrait;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service\Backend\MycafeService;
 use App\Http\Requests\Backend\MycafeRequest;
 
 class MycafeController extends Controller
 {
-    use ImageUploadTrait;
-
     private $MycafeService ;
-    public function __construct(MycafeService $MycafeService)
-    {
-        $this->MycafeService = $MycafeService;
-    }
+public function __construct(MycafeService $MycafeService)
+{
+    $this->MycafeService = $MycafeService;
+}
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         return response()->json(
             $this->MycafeService->index());
     }
 
-    public function store(MycafeRequest $request)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-          $mycafe=  $this->MycafeService->store($request);
-
-        return response()->json($mycafe, 201);
+        //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(MycafeRequest $request)
+    {
+
+        return response()->json(
+            $this->MycafeService->store($request), 201);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit(MyCafe $mycafe)
     {
         return response()->json(
             $this->MycafeService->edit($mycafe));
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(MycafeRequest $request, MyCafe $mycafe)
     {
-       $this->MycafeService->update($request, $mycafe);
+        $this->MycafeService->update($request, $mycafe);
 
         return response()->json(['message' => 'updated successfully']);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(MyCafe $mycafe)
     {
         $this->MycafeService->destroy($mycafe);
 
-        return response()->json(['message' => 'deleted successfully'], 202);
+    return response()->json(['message' => 'deleted successfully'], 200);
     }
 }
+
+
+

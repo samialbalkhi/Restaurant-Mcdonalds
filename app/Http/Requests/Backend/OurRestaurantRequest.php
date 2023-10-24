@@ -32,7 +32,7 @@ class OurRestaurantRequest extends FormRequest
             'section_id' => ['required'],
             'image' => ['required'],
         ];
-        if (Request::route()->getName()) {
+        if (Request::route()->getName() == 'ourRestaurants.update') {
             $rules['title'] = ['required', 'min:10', Rule::unique('ourrestaurants', 'title')->ignore($this->route()->ourRestaurant->id)];
         }
 
