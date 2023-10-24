@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Job_offer;
+use App\Models\Joboffer;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +13,8 @@ return new class extends Migration
             $table->id();
             $table->longText('details');
             $table
-                ->foreignIdFor(Job_offer::class)
-                ->constrained()
+                ->foreignIdFor(Joboffer::class)
+                // ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();

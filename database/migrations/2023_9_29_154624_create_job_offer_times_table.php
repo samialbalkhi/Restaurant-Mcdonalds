@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Joboffer;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Job_offer;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table
-                ->foreignIdFor(Job_offer::class)
+                ->foreignIdFor(Joboffer::class)
                 // ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();

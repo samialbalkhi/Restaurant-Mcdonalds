@@ -37,12 +37,12 @@ class JobOfferRequest extends FormRequest
             'listOfworktime' => ['array', 'required'],
             'listOfworktime.*.worktime' => ['required', 'min:3'],
         ];
-        if (Request::route()->getName()) {
+        if (Request::route()->getName()== 'jobOffers.update') {
             unset($rules['listOfDetails']);
             unset($rules['listOfworktime']);
 
         }
-
+        
         return $rules;
     }
 

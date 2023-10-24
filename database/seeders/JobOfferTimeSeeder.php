@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\JobOfferTime;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Job_offer;
+use App\Models\Joboffer;
 
 class JobOfferTimeSeeder extends Seeder
 {
@@ -14,7 +14,7 @@ class JobOfferTimeSeeder extends Seeder
      */
     public function run(): void
     {
-        $JobOfferTime = Job_offer::pluck('id')->toArray();
+        $JobOfferTime = Joboffer::pluck('id')->toArray();
         $values = ['Mini job', 'Part time', 'fulltime'];
         
         foreach ($JobOfferTime as $JobOfferTimeID) {
@@ -32,7 +32,7 @@ class JobOfferTimeSeeder extends Seeder
         
                 $WorkTime[] = [
                     'name' => $randomValue,
-                    'job_offer_id' => $JobOfferTimeID,
+                    'joboffer_id' => $JobOfferTimeID,
                 ];
             }
         }

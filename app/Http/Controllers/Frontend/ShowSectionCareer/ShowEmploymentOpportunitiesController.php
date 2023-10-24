@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend\ShowSectionCareer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service\Frontend\ShowSectionCareer\ShowEmploymentOpportunitiesService;
-use App\Models\Job_offer;
+use App\Models\Joboffer;
 
 class ShowEmploymentOpportunitiesController extends Controller
 {
@@ -21,14 +21,14 @@ class ShowEmploymentOpportunitiesController extends Controller
         );
     }
     
-    public function ShowJobOffer(Job_offer $jobOffer)
+    public function ShowJobOffer(Joboffer $jobOffer)
     {
         return response()->json(
             $this->ShowEmploymentOpportunitiesService->ShowJobOffer($jobOffer)
         );
     }
 
-    public function ViewOneJobOffer(Job_offer $jobOffer){
+    public function ViewOneJobOffer(Joboffer $jobOffer){
         return response()->json(
             $this->ShowEmploymentOpportunitiesService->ViewOneJobOffer($jobOffer)
         );

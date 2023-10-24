@@ -7,23 +7,23 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Backend\WorkTimeRequest;
 use App\Http\Requests\Backend\JobOfferTimeRequest;
 
-class WorkTimeOfferService
+class workTimeOfferService
 {
-    public function edit(JobOfferTime $JobOfferTime)
+    public function edit(JobOfferTime $workTimeOffer)
     {
-        return JobOfferTime::where('job_offer_id', $JobOfferTime->id)->get();
+        return JobOfferTime::where('joboffer_id', $workTimeOffer->id)->get();
     }
 
-    public function update(JobOfferTimeRequest $request, JobOfferTime $JobOfferTime)
+    public function update(JobOfferTimeRequest $request, JobOfferTime $workTimeOffer)
     {
-         $JobOfferTime->update([
+         $workTimeOffer->update([
             'name' => $request->name,
-            'job_offer_id' => $JobOfferTime->job_offer_id,
+            'joboffer_id' => $workTimeOffer->Joboffer_id,
         ]);
     }
-    public function destroy(JobOfferTime $JobOfferTime){
+    public function destroy(JobOfferTime $workTimeOffer){
 
-        $JobOfferTime->delete();
+        $workTimeOffer->delete();
     }
 
 }

@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\Worktime;
+use App\Models\Detail;
 use App\Models\JobOfferTime;
+use App\Models\EmploymentOpportunity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Job_offer extends Model
+class Joboffer extends Model
 {
     use HasFactory;
     protected $guarded = [];

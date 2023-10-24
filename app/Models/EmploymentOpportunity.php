@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Job_offer;
+use App\Models\Joboffer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -12,9 +12,9 @@ class EmploymentOpportunity extends Model
 
     protected $guarded = [];
 
-    public function Job_offers()
+    public function Joboffers()
     {
-        return $this->hasMany(Job_offer::class);
+        return $this->hasMany(Joboffer::class);
     }
   
 }

@@ -1,19 +1,19 @@
 <?php
 namespace App\Service\Backend;
 
-use App\Models\Job_offer;
+use App\Models\Joboffer;
 use App\Traits\ImageUploadTrait;
 use App\Models\EmploymentOpportunity;
 use App\Http\Requests\Backend\JobOfferRequest;
 
-class JobOfferService
+class jobOfferService
 {
     use ImageUploadTrait;
 
     public function index()
     {
         return 
-            Job_offer::with(['employment_opportunitie:id,name', 'details:job_offer_id,details'])->paginate();
+            Joboffer::with(['employment_opportunitie:id,name', 'details:joboffer_id,details'])->paginate();
     }
 
     public function store(JobOfferRequest $request)
@@ -21,14 +21,14 @@ class JobOfferService
         $path = $this->storeImage('image_jobOffer');
         $employmentOpportunity = EmploymentOpportunity::find($request->employment_opportunity_id);
 
-        $Job_offer = $employmentOpportunity->Job_offers()->create([
+        $Joboffer = $employmentOpportunity->Joboffers()->create([
             'location' => $request->location,
             'franchisee' => $request->franchisee,
             'description' => $request->description,
             'image' => $path,
         ]);
 
-        $jobOfferId = Job_offer::find($Job_offer->id);
+        $jobOfferId = Joboffer::find($Joboffer->id);
         $details = [];
         for ($i = 0; $i < count($request->listOfDetails); $i++) {
             $detail = $jobOfferId->details()->create([
@@ -37,7 +37,7 @@ class JobOfferService
             $details[] = $detail;
         }
 
-        $jobOfferId = Job_offer::find($Job_offer->id);
+        $jobOfferId = Joboffer::find($Joboffer->id);
         $worktimes = []; 
 
         for ($i = 0; $i < count($request->listOfworktime); $i++) {
@@ -48,17 +48,17 @@ class JobOfferService
             $worktimes[] = $worktime; 
         }
 
-        return ['Job_offer'=> $Job_offer,'details'=> $details,'worktimes'=>$worktimes];
+        return ['Joboffer'=> $Joboffer,'details'=> $details,'worktimes'=>$worktimes];
     }
 
-    public function edit(Job_offer $jobOffer)
+    public function edit(Joboffer $jobOffer)
     {
 
         return 
             $jobOffer->find($jobOffer->id);
     }
 
-    public function update(JobOfferRequest $request, Job_offer $jobOffer)
+    public function update(JobOfferRequest $request, Joboffer $jobOffer)
     {
         $this->deleteImage($jobOffer);
         $path = $this->storeImage('image_jobOffer');
@@ -73,7 +73,7 @@ class JobOfferService
 
     }
 
-    public function destroy(Job_offer $jobOffer)
+    public function destroy(Joboffer $jobOffer)
     {
         $this->deleteImage($jobOffer);
 

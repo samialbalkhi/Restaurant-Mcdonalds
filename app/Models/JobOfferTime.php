@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Job_offer;
+use App\Models\Joboffer;
 
 class JobOfferTime extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
-    public function job_offer()
+    protected $table = 'job_offer_times';
+    public function Joboffer()
     {
-        return $this->belongsTo(Job_offer::class);
+        return $this->belongsTo(Joboffer::class);
     }
 }

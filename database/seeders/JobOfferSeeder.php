@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\EmploymentOpportunity;
-use App\Models\Job_offer;
+use App\Models\Joboffer;
 use Illuminate\Database\Seeder;
 
 class JobOfferSeeder extends Seeder
@@ -18,7 +18,7 @@ class JobOfferSeeder extends Seeder
         for ($i = 1; $i <= 500; $i++) {
             $randomJobID = $JobIDs[array_rand($JobIDs)];
         // Select a random job ID from the array
-            $Job_offer[] = [
+            $Joboffer[] = [
                 'location' => 'Koblenzer Str. 160, 56727 Mayen',
                 'franchisee' => 'in HuFro Restaurations GmbH',
                 'description' => 'Treat yourself to a safe, exciting and varied job. Prepare orders in the kitchen and serve guests in the restaurant or at the McDrive®.',
@@ -27,9 +27,9 @@ class JobOfferSeeder extends Seeder
             ];
         }
 
-        $chunks = array_chunk($Job_offer, 50);
+        $chunks = array_chunk($Joboffer, 50);
         foreach ($chunks as $chunk) {
-            Job_offer::insert($chunk);
+            Joboffer::insert($chunk);
         }
     }
 }

@@ -2,54 +2,85 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Job_offer;
-use App\Traits\ImageUploadTrait;
+use App\Models\Joboffer;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\EmploymentOpportunity;
-use App\Service\Backend\JobOfferService;
+use App\Service\Backend\jobOfferService;
 use App\Http\Requests\Backend\JobOfferRequest;
 
-class JobOfferController extends Controller
+class jobOfferController extends Controller
 {
-    private $JobOfferService ;
-    public function __construct(JobOfferService $JobOfferService)
+    private $jobOfferService;
+    public function __construct(jobOfferService $jobOfferService)
     {
-        $this->JobOfferService = $JobOfferService;
+        $this->jobOfferService = $jobOfferService;
     }
-    use ImageUploadTrait;
+    /**
+     * Display a listing of the resource.
+     */
 
     public function index()
     {
         return response()->json(
-            $this->JobOfferService->index());
+            $this->jobOfferService->index());
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(JobOfferRequest $request)
     {
-     $Job_offer = $this->JobOfferService->store($request);
-        return response()->json($Job_offer, 201);
+        return response()->json( 
+            $this->jobOfferService->store($request), 201);
     }
 
-    public function edit(Job_offer $jobOffer)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Joboffer $jobOffer)
     {
         return response()->json(
-            $this->JobOfferService->edit($jobOffer));
+            $this->jobOfferService->edit($jobOffer));
     }
 
-    public function update(JobOfferRequest $request, Job_offer $jobOffer)
+    /**
+     * Update the specified resource in storage.
+     */
+
+    public function update(JobOfferRequest $request, Joboffer $jobOffer)
     {
-      $this->JobOfferService->update($request, $jobOffer);
+        $this->jobOfferService->update($request, $jobOffer);
         return response()->json(['message' => 'updated successfully']);
     }
 
-    public function destroy(Job_offer $jobOffer)
-    {
-        $this->JobOfferService->destroy($jobOffer);
+    /**
+     * Remove the specified resource from storage.
+     */
+
+    public function destroy(Joboffer $jobOffer)
+    {   
+        $this->jobOfferService->destroy($jobOffer);
         return response()->json(
             [
                 'message' => 'Deleted successfully',
             ],
-            202,
+            200,
         );
     }
 }

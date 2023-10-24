@@ -10,7 +10,7 @@ class DetailsService
     public function edit(Detail $details)
     {
         return 
-        Detail::where('job_offer_id', $details->id)->get();
+        Detail::where('joboffer_id', $details->id)->get();
     }
 
     public function update(DetailRequest $request, Detail $details)
@@ -18,7 +18,7 @@ class DetailsService
         
         $details->update([
             'details' => $request->details,
-            'job_offer_id' => $details->job_offer_id,
+            'joboffer_id' => $details->joboffer_id,
         ]);
 
 

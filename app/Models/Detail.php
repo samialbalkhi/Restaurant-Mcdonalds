@@ -10,8 +10,8 @@ class Detail extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function Job_offer()
+    public function Joboffer()
     {
-        return $this->belongsTo(Job_offer::class, 'job_offer_id');
+        return $this->belongsTo(Joboffer::class, 'joboffer_id');
     }
 }
