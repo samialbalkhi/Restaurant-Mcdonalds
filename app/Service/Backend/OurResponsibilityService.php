@@ -19,7 +19,7 @@ class ourResponsibilityService
 
     public function store(OurResponsibilityRequest $request): Ourresponsibility
     {
-        $path = $this->storeImage('images_OurResponsibility');
+        $path = $this->uploadImage('images_OurResponsibility');
 
         $section = Section::find($request->section_id);
 
@@ -41,9 +41,9 @@ class ourResponsibilityService
 
     public function update(OurResponsibilityRequest $request, Ourresponsibility $ourResponsibility)
     {
-        $this->deleteImage($ourResponsibility);
+        $this->updateImage($ourResponsibility);
 
-        $path = $this->storeImage('images_ourResponsibility');
+        $path = $this->uploadImage('images_ourResponsibility');
 
         $ourResponsibility->update([
             'title' => $request->title,

@@ -16,7 +16,7 @@ class SectionService
 
     public function store(SectionRequest $request): Section
     {
-        $path = $this->storeImage('images_section');
+        $path = $this->uploadImage('images_section');
 
         return  Section::create([
             'name' => $request->name,
@@ -35,8 +35,8 @@ class SectionService
 
     public function update(SectionRequest $request, Section $section)
     {
-        $this->deleteImage($section);
-        $path = $this->storeImage('images_section');
+        $this->updateImage($section);
+        $path = $this->uploadImage('images_section');
 
         $section->update([
             'name' => $request->name,

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Storage;
 
 trait ImageUploadTrait
 {
-    public function storeImage($folder)
+    public function uploadImage($folder)
     {
         $request = request();
         $path = $request->file('image')->store($folder, 'public');
@@ -19,6 +19,10 @@ trait ImageUploadTrait
         if (Storage::exists('public/' . $folder->image)) {
             Storage::delete('public/' . $folder->image);
         }
+    }
 
+    public function updateImage($folder)
+    {
+      $this->deleteImage($folder);
     }
 }

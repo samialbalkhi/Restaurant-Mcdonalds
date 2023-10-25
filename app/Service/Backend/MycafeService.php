@@ -19,7 +19,7 @@ class MycafeService
     public function store(MycafeRequest $request) : MyCafe
     {
         $section = Section::find($request->section_id);
-        $path = $this->storeImage('image_mycafe');
+        $path = $this->uploadImage('image_mycafe');
 
         return $section->mycafes()->create([
             'name' => $request->name,
@@ -37,9 +37,9 @@ class MycafeService
 
     public function update(MycafeRequest $request, MyCafe $mycafe)
     {
-        $this->deleteImage($mycafe);
+        $this->updateImage($mycafe);
 
-        $path = $this->storeImage('image_mycafe');
+        $path = $this->uploadImage('image_mycafe');
 
         $mycafe->update([
             'name' => $request->name,

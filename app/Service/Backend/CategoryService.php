@@ -21,7 +21,7 @@ class CategoryService
     {
         $section = Section::find($request->section_id);
 
-        $path = $this->storeImage('images_category');
+        $path = $this->uploadImage('images_category');
 
         return $section->categories()->create([
             'name' => $request->name,
@@ -45,8 +45,8 @@ class CategoryService
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        $this->deleteImage($category);
-        $path = $this->storeImage('images_category');
+        $this->updateImage($category);
+        $path = $this->uploadImage('images_category');
 
         $category->update([
             'name' => $request->name,

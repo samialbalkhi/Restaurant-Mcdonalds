@@ -19,7 +19,7 @@ class FamilyService
 
     public function store(FamilyRequest $request) : Family
     {
-        $path = $this->storeImage('image_family');
+        $path = $this->uploadImage('image_family');
         $section = Section::find($request->section_id);
 
         return $section->families()->create([
@@ -40,8 +40,8 @@ class FamilyService
 
     public function update(FamilyRequest $request, Family $family)
     {
-        $this->deleteImage($family);
-        $path = $this->storeImage('image_family');
+        $this->updateImage($family);
+        $path = $this->uploadImage('image_family');
 
         $family->update([
             'name' => $request->name,

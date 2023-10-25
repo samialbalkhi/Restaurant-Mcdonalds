@@ -19,7 +19,7 @@ class ProductService
 
     public function store(ProductRequest $request) : Product
     {
-        $path = $this->storeImage('images_product');
+        $path = $this->uploadImage('images_product');
 
         $category = Category::find($request->category_id);
         return $category->product()->create([
@@ -46,9 +46,9 @@ class ProductService
    
     public function update(ProductRequest $request, Product $product)
     {
-        $this->deleteImage($product);
+        $this->updateImage($product);
 
-        $path = $this->storeImage('images_product');
+        $path = $this->uploadImage('images_product');
 
         $product->update([
             'name' => $request->name,

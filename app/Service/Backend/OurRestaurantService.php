@@ -19,7 +19,7 @@ class ourRestaurantService
 
     public function store(OurRestaurantRequest $request)
     {
-        $path = $this->storeImage('image_ourRestaurant');
+        $path = $this->uploadImage('image_ourRestaurant');
 
         $section = Section::find($request->section_id);
 
@@ -40,8 +40,8 @@ class ourRestaurantService
 
     public function update(OurRestaurantRequest $request, Ourrestaurant $ourRestaurant)
     {
-        $this->deleteImage($ourRestaurant);
-        $path = $this->storeImage('image_ourRestaurant');
+        $this->updateImage($ourRestaurant);
+        $path = $this->uploadImage('image_ourRestaurant');
 
         $ourRestaurant->update([
             'title' => $request->title,

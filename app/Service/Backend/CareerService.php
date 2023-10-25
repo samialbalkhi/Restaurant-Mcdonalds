@@ -18,7 +18,7 @@ class CareerService
     public function store(CareerRequest $request) : Career
     {
         $section = Section::find($request->section_id);
-        $path = $this->storeImage('image_career');
+        $path = $this->uploadImage('image_career');
 
         return  $section->careers()->create([
             'title' => $request->title,
@@ -36,8 +36,8 @@ class CareerService
 
     public function update(CareerRequest $request, Career $career)
     {
-        $this->deleteImage($career);
-        $path = $this->storeImage('image_career');
+        $this->updateImage($career);
+        $path = $this->uploadImage('image_career');
 
         $career->update([
             'title' => $request->title,

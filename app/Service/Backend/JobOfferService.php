@@ -18,7 +18,7 @@ class jobOfferService
 
     public function store(JobOfferRequest $request)
     {
-        $path = $this->storeImage('image_jobOffer');
+        $path = $this->uploadImage('image_jobOffer');
         $employmentOpportunity = EmploymentOpportunity::find($request->employment_opportunity_id);
 
         $Joboffer = $employmentOpportunity->Joboffers()->create([
@@ -60,8 +60,8 @@ class jobOfferService
 
     public function update(JobOfferRequest $request, Joboffer $jobOffer)
     {
-        $this->deleteImage($jobOffer);
-        $path = $this->storeImage('image_jobOffer');
+        $this->updateImage($jobOffer);
+        $path = $this->uploadImage('image_jobOffer');
 
         $jobOffer->update([
             'location' => $request->location,
