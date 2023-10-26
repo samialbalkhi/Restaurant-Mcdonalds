@@ -19,16 +19,15 @@ return new class extends Migration
             $table->string('email')->unique();
 
             /////// Experience
-            $table->string('title');
+            $table->longText('title');
             $table->string('company_name')->nullable();
             $table->string('office_location')->nullable();
             $table->longText('description')->nullable();
-            $table->date('start_date');
-            $table->date('expire_date');
+            $table->date('start_date')->nullable();
+            $table->date('expire_date')->nullable();
             $table->boolean('i_currently_work_here')->default(false);
             $table->string('resume');
             $table->longText('message')->nullable();
-
             $table->timestamps();
         });
     }

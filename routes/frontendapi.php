@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\Home\GetSectionController;
+use App\Http\Controllers\Frontend\WishList\WishListController;
 use App\Http\Controllers\Frontend\Home\ShowProductsAtHomeController;
 use App\Http\Controllers\Frontend\ShowProduct\ShowProductController;
 use App\Http\Controllers\Frontend\ShowCategory\ShowCategoryController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\Frontend\ShowSectioMycafe\ShowSectioMycafeController;
 use App\Http\Controllers\Frontend\ShowOurRestaurant\ShowOurRestaurantController;
 use App\Http\Controllers\Frontend\ShowSectioFamily\ShowSectioMyFamilyController;
 use App\Http\Controllers\Frontend\ShowSectionCareer\ShowSectionCareerController;
+use App\Http\Controllers\Frontend\ShowSectionCareer\EmploymentApplicationController;
 use App\Http\Controllers\Frontend\ShowOurResponsibiliy\ShowOurResponsibiliyController;
 use App\Http\Controllers\Frontend\ShowSectionCareer\ShowEmploymentOpportunitiesController;
 
@@ -40,9 +42,11 @@ Route::get('ShowOurRestaurant/{section}', ShowOurRestaurantController::class);
 
 //////    View information in the Career section    ////////////////
 Route::get('ShowSectionCareer/{section}', ShowSectionCareerController::class);
- ////////////      View job opportunities in the Career section           /////////////////////
-Route::get('ShowEmploymentOpportunities', [ShowEmploymentOpportunitiesController::class,'ShowEmploymentOpportunities']);
+////////////      View job opportunities in the Career section           /////////////////////
+Route::get('ShowEmploymentOpportunities', [ShowEmploymentOpportunitiesController::class, 'ShowEmploymentOpportunities']);
 ////////////     View the job offer in the Professional Life section                ////////////////////////
-Route::get('ShowJobOffer/{jobOffer}', [ShowEmploymentOpportunitiesController::class,'ShowJobOffer']);
-Route::get('ViewOneJobOffer/{jobOffer}', [ShowEmploymentOpportunitiesController::class,'ViewOneJobOffer']);
+Route::get('ShowJobOffer/{jobOffer}', [ShowEmploymentOpportunitiesController::class, 'ShowJobOffer']);
+Route::get('ViewOneJobOffer/{jobOffer}', [ShowEmploymentOpportunitiesController::class, 'ViewOneJobOffer']);
+////         Submit a job request by the user    ///////////////////////////// 
+Route::post('/employmentApplication', EmploymentApplicationController::class);
 

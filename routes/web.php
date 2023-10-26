@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Backend\MailController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\MailController;
+use App\Http\Controllers\Frontend\WishList\WishListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +19,3 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('sendmail',[MailController::class,'sendmail']);
