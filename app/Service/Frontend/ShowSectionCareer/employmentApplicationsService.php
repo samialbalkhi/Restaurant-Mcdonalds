@@ -2,16 +2,16 @@
 
 namespace App\Service\Frontend\ShowSectionCareer;
 
-use App\Models\Employment_application;
+use App\Models\EmploymentApplication;
 use App\Http\Requests\Backend\EmploymentApplicationRequest;
 
 class employmentApplicationsService
 {
-    public function store(EmploymentApplicationRequest $request): Employment_application
+    public function store(EmploymentApplicationRequest $request): EmploymentApplication
     {
         
         $path = $request->resume->store('resume', 'public');
-        return  Employment_application::create([
+        return  EmploymentApplication::create([
             'gender' => $request->gender,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,

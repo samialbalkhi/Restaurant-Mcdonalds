@@ -10,8 +10,8 @@ class Answering_job_application extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function employment_application()
+    public function EmploymentApplication()
     {
-        return $this->belongsTo(Employment_application::class, 'employment_application_id');
+        return $this->belongsTo(EmploymentApplication::class, 'employment_application_id');
     }
 }

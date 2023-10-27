@@ -8,7 +8,7 @@ class EmailsSent
     public function index()
     {
         return 
-        Answering_job_application::with(['employment_application:id,email,first_name'])->paginate();
+        Answering_job_application::with(['EmploymentApplication:id,email,first_name'])->paginate();
     }
 
     public function getAnswering(Answering_job_application $Answering_job_application)

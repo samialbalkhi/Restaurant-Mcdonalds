@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Employment_application;
+use App\Models\EmploymentApplication;
 use DateTime;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
@@ -28,7 +28,7 @@ class EmploymentApplicationSeeder extends Seeder
             $forYearsAgo->modify('-4 years');
             $expireDate = $twoYearsAgo->format('Y-m-d H:i:s');
 
-            $employment_applications[] = [
+            $EmploymentApplications[] = [
                 'gender' => $randomValue,
                 'first_name' => $faker->firstName(),
                 'last_name' => $faker->lastName(),
@@ -48,9 +48,9 @@ class EmploymentApplicationSeeder extends Seeder
             ];
         }
 
-        $chunks = array_chunk($employment_applications, 50);
+        $chunks = array_chunk($EmploymentApplications, 50);
         foreach ($chunks as $chunk) {
-            Employment_application::insert($chunk);
+            EmploymentApplication::insert($chunk);
         }
     }
 }

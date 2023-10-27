@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Answering_job_application;
-use App\Models\Employment_application;
+use App\Models\EmploymentApplication;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 
@@ -15,13 +15,13 @@ class AnsweringJobApplicationsSeeder extends Seeder
     public function run(): void
     {
         $faker = Factory::create();
-        $Employment_application = Employment_application::pluck('id');
+        $EmploymentApplication = EmploymentApplication::pluck('id');
         for ($i = 1; $i <= 100; $i++) {
             $AnsweringJob[] = [
                 'name' => $faker->userName(),
                 'description' => $faker->paragraph(),
                 'message' => $faker->text(),
-                'employment_application_id' => $Employment_application->random(),
+                'employment_application_id' => $EmploymentApplication->random(),
             ];
         }
         $chunks = array_chunk($AnsweringJob, 10);

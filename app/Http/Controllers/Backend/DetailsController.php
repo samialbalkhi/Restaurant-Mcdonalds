@@ -36,7 +36,7 @@ class DetailsController extends Controller
             [
                 'message' => 'Deleted successfully',
             ],
-            202,
+            200,
         );
     }
 }

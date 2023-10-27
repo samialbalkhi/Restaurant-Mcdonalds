@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\Home\GetSectionController;
 use App\Http\Controllers\Frontend\WishList\WishListController;
+use App\Http\Controllers\Frontend\VerifyCity\VerifyCityController;
 use App\Http\Controllers\Frontend\Home\ShowProductsAtHomeController;
 use App\Http\Controllers\Frontend\ShowProduct\ShowProductController;
 use App\Http\Controllers\Frontend\ShowCategory\ShowCategoryController;
@@ -17,7 +18,6 @@ use App\Http\Controllers\Frontend\ShowSectionCareer\ShowEmploymentOpportunitiesC
 Route::group(['prefix' => 'Home'], function () {
     Route::get('getSection', GetSectionController::class);
     //////////// Display the products on the home page, the last three products and the last four featured products     ////////////////////
-
     Route::get('Show_the_last_three_products', [ShowProductsAtHomeController::class, 'Show_the_last_three_products']);
     Route::get('FeaturedProduct', [ShowProductsAtHomeController::class, 'FeaturedProduct']);
 });
@@ -47,6 +47,8 @@ Route::get('ShowEmploymentOpportunities', [ShowEmploymentOpportunitiesController
 ////////////     View the job offer in the Professional Life section                ////////////////////////
 Route::get('ShowJobOffer/{jobOffer}', [ShowEmploymentOpportunitiesController::class, 'ShowJobOffer']);
 Route::get('ViewOneJobOffer/{jobOffer}', [ShowEmploymentOpportunitiesController::class, 'ViewOneJobOffer']);
-////         Submit a job request by the user    ///////////////////////////// 
+////         Submit a job request by the user    /////////////////////////////
 Route::post('/employmentApplication', EmploymentApplicationController::class);
+
+Route::post('/verifyCities', VerifyCityController::class);
 

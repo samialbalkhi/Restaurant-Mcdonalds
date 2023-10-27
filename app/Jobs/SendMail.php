@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Mail\AnsweringJobApplicationsMail;
-use App\Models\Employment_application;
+use App\Models\EmploymentApplication;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -33,14 +33,14 @@ class SendMail implements ShouldQueue
      */
     public function handle(): void
     {
-        $Employment_application = Employment_application::find($this->id);
+        $EmploymentApplication = EmploymentApplication::find($this->id);
         $data = [
             'name' => $this->data['name'],
             'message' => $this->data['message'],
             'description' => $this->data['description'],
         ];
 
-        Mail::to($Employment_application->email)->send(new AnsweringJobApplicationsMail($data));
+        Mail::to($EmploymentApplication->email)->send(new AnsweringJobApplicationsMail($data));
     }
 
     public function failed(Throwable $e)

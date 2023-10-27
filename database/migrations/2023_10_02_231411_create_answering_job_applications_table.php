@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Employment_application;
+use App\Models\EmploymentApplication;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +16,7 @@ return new class extends Migration
             $table->longText('message');
             $table
 
-                ->foreignIdFor(Employment_application::class)
+                ->foreignIdFor(EmploymentApplication::class)
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
