@@ -27,7 +27,7 @@ class ViewJobApplicationController extends Controller
     public function downloadCv(EmploymentApplication $employmentApplication)
     {
 
-        return response()->json(
-            $this->ViewJobApplicationService->downloadCv($employmentApplication));
+        return 
+            $this->ViewJobApplicationService->downloadCv($employmentApplication);
     }
 }

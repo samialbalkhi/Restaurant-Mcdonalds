@@ -85,8 +85,6 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
 
     Route::get('index', [ViewJobApplicationController::class, 'index']);
     Route::get('show/{employmentApplication}', [ViewJobApplicationController::class, 'show']);
-    
-    
+    Route::get('downloadCv/{employmentApplication}', [ViewJobApplicationController::class, 'downloadCv']);
     
 });
-Route::get('downloadCv/{employmentApplication}', [ViewJobApplicationController::class, 'downloadCv']);

@@ -17,8 +17,7 @@ class ViewJobApplicationService
     }
     public function downloadCv(EmploymentApplication $employmentApplication)
     {
-            $path = Storage::path('public/' . $employmentApplication->resume);
-        
-            return response()->download($path);
+        $path = Storage::path('public/' . $employmentApplication->resume);
+        return response()->download($path);
     }
 }
