@@ -58,9 +58,15 @@ Route::post('/verifyCities', VerifyCityController::class);
 ///////           View  in the delivery section     //////////////////////
 Route::get('/showAllCategory', ShowAllCategoryController::class);
 Route::get('/showAllProduct/{product}', ShowAllProductController::class);
-Route::get('/addToCard', [AddToCardController::class,'store']);
-Route::get('/numberOfContent', [AddToCardController::class,'numberOfContent']);
-// Route::get('/destroy/{rowId}', [AddToCardController::class,'destroy']);
+
+Route::group(['middleware' => ['web']], function () {
+    // Your routes here
+    Route::get('/store', [AddToCardController::class,'store']);
+    Route::get('/numberOfProduct', [AddToCardController::class,'numberOfProduct']);
+    Route::get('/show', [AddToCardController::class,'show']);
+    Route::get('/delete/{rowId}', [AddToCardController::class,'delete']);
+
+});
 
 
 

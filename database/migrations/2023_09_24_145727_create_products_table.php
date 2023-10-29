@@ -13,10 +13,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longText('description')->nullable();
-            $table->string('size');
             $table->double('price');
             $table->double('kcal');
-            $table->double('quantity');
             $table->string('image');
             $table->boolean('featured')->default(false);
             $table->boolean('status')->default(false);

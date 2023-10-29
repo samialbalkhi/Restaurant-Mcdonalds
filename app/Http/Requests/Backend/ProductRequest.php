@@ -26,7 +26,6 @@ class ProductRequest extends FormRequest
         $rules = [
             'name' => ['required', 'min:3', 'max:50'],
             'description' => ['nullable', 'min:3'],
-            'size' => ['required', 'min:2'],
             'price' => ['required', 'numeric'],
             'kcal' => ['required', 'numeric'],
             'category_id' => ['required'],

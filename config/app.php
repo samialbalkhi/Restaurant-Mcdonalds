@@ -156,6 +156,7 @@ return [
 
     'providers' => ServiceProvider::defaultProviders()
         ->merge([
+
             /*
              * Package Service Providers...
              */
@@ -186,6 +187,7 @@ return [
         ->merge([
             // 'Example' => App\Facades\Example::class,
             'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+
         ])
         ->toArray(),
 ];

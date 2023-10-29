@@ -4,21 +4,32 @@ namespace App\Http\Controllers\Frontend\DeliverySection;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Service\Frontend\DeliverySection\AddToCardService;
 
 class AddToCardController extends Controller
 {
-    public function store(Request $request,AddToCardService $AddToCardService)
+    private $AddToCardService ;
+    public function __construct(AddToCardService $AddToCardService)
     {
-        return $AddToCardService->store($request);
+        $this->AddToCardService = $AddToCardService;
     }
-    public function  numberOfContent(AddToCardService $AddToCardService)
+    public function store(Request $request)
     {
-        return $AddToCardService->numberOfContent();
+        return response()->json($this->AddToCardService->store($request));
     }
-    public function  destroy(AddToCardService $AddToCardService)
+    public function  numberOfProduct()
     {
+        return $this->AddToCardService->numberOfProduct();
+    }
+    public function  show()
+    {
+        return $this->AddToCardService->show();
+    }
+  
+    public function  delete($rowId)
+    {
+        return $this->AddToCardService->delete($rowId);
     }
 
-   
 }

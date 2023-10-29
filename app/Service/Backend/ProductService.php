@@ -25,10 +25,8 @@ class ProductService
         return $category->product()->create([
             'name' => $request->name,
             'description' => $request->description,
-            'size' => $request->size,
             'price' => $request->price,
             'kcal' => $request->kcal,
-            'quantity' => $request->quantity,
             'featured' => $request->featured,
             'status' => $request->status,
             'image' => $path,
@@ -53,10 +51,8 @@ class ProductService
         $product->update([
             'name' => $request->name,
             'description' => $request->description,
-            'size' => $request->size,
             'price' => $request->price,
             'kcal' => $request->kcal,
-            'quantity' => $request->quantity,
             'featured' => $request->featured,
             'status' => $request->status,
             'category_id' => $request->category_id,

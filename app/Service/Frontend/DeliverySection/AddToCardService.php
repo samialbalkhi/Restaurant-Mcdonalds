@@ -2,8 +2,8 @@
 namespace App\Service\Frontend\DeliverySection;
 
 use App\Models\Product;
-use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class AddToCardService
 {
@@ -11,23 +11,28 @@ class AddToCardService
     {
         $product = Product::findOrFail($request->product_id);
 
-    // Add the product to the cart
- $cart=   Cart::add([
-        'id' => $product->id,
-        'name' => $product->name,
-        'price' => $product->price,
-        'qty' => 1, // You can change this as needed
-    ]);
+        Cart::add([
+            'id' => $product->id,
+            'name' => $product->name,
+            'qty' => $request->quantity,
+            'price' => $product->price,
+        ]);
 
-    // Store the cart in the session
-     Cart::store('cart');
-     return $cart;
+        return 'add successful';
     }
 
-    public function numberOfContent()
+    public function numberOfProduct()
     {
-        Cart::restore('cart');
-        $itemCount = Cart::count();
-        return $itemCount;
+       return Cart::content()->count();
+    }
+
+    public function show()
+    {
+        return Cart::content();
+    }
+    public function delete($rowId)
+    { 
+        Cart::remove($rowId);
+        return 'delete';
     }
 }
