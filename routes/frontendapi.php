@@ -5,7 +5,10 @@ use App\Http\Controllers\Frontend\WishList\WishListController;
 use App\Http\Controllers\Frontend\VerifyCity\VerifyCityController;
 use App\Http\Controllers\Frontend\Home\ShowProductsAtHomeController;
 use App\Http\Controllers\Frontend\ShowProduct\ShowProductController;
+use App\Http\Controllers\Frontend\DeliverySection\AddToCardController;
 use App\Http\Controllers\Frontend\ShowCategory\ShowCategoryController;
+use App\Http\Controllers\Frontend\DeliverySection\ShowAllProductController;
+use App\Http\Controllers\Frontend\DeliverySection\ShowAllCategoryController;
 use App\Http\Controllers\Frontend\ShowSectioMycafe\ShowSectioMycafeController;
 use App\Http\Controllers\Frontend\ShowOurRestaurant\ShowOurRestaurantController;
 use App\Http\Controllers\Frontend\ShowSectioFamily\ShowSectioMyFamilyController;
@@ -50,5 +53,14 @@ Route::get('ViewOneJobOffer/{jobOffer}', [ShowEmploymentOpportunitiesController:
 ////         Submit a job request by the user    /////////////////////////////
 Route::post('/employmentApplication', EmploymentApplicationController::class);
 
+/////////       Verify whether delivery is available in this city or not  //////////////
 Route::post('/verifyCities', VerifyCityController::class);
+///////           View  in the delivery section     //////////////////////
+Route::get('/showAllCategory', ShowAllCategoryController::class);
+Route::get('/showAllProduct/{product}', ShowAllProductController::class);
+Route::get('/addToCard', [AddToCardController::class,'store']);
+Route::get('/numberOfContent', [AddToCardController::class,'numberOfContent']);
+// Route::get('/destroy/{rowId}', [AddToCardController::class,'destroy']);
+
+
 

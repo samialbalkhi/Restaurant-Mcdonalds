@@ -25,7 +25,7 @@ class AuthCustomerService
 
         return ['token' => $token];
     }
-    public function logout()
+    public function logout(Request $request)
     {
         auth()
             ->user()
