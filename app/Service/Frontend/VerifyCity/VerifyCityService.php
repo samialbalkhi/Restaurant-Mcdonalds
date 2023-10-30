@@ -15,6 +15,6 @@ class VerifyCityService
         
             return 'Sorry, there is no delivery to this city !!';
         
-        return 'successfully';
+        return $city;
     }
 }

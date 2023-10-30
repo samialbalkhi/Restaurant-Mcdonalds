@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\ShowSectioMycafe\ShowSectioMycafeController;
 use App\Http\Controllers\Frontend\ShowOurRestaurant\ShowOurRestaurantController;
 use App\Http\Controllers\Frontend\ShowSectioFamily\ShowSectioMyFamilyController;
 use App\Http\Controllers\Frontend\ShowSectionCareer\ShowSectionCareerController;
+use App\Http\Controllers\Frontend\DeliverySection\ShowRestaurantBrancheController;
 use App\Http\Controllers\Frontend\ShowSectionCareer\EmploymentApplicationController;
 use App\Http\Controllers\Frontend\ShowOurResponsibiliy\ShowOurResponsibiliyController;
 use App\Http\Controllers\Frontend\ShowSectionCareer\ShowEmploymentOpportunitiesController;
@@ -64,9 +65,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/store', [AddToCardController::class,'store']);
     Route::get('/numberOfProduct', [AddToCardController::class,'numberOfProduct']);
     Route::get('/show', [AddToCardController::class,'show']);
-    Route::get('/delete/{rowId}', [AddToCardController::class,'delete']);
-
+    Route::get('/subtotal', [AddToCardController::class,'subtotal']);
+    Route::get('/delete/{rowId}/{product}', [AddToCardController::class,'delete']);
 });
+Route::get('/showRestaurantBranche/{restaurantBranche}',ShowRestaurantBrancheController::class);
+
 
 
 

@@ -31,5 +31,10 @@ class AddToCardController extends Controller
     {
         return $this->AddToCardService->delete($rowId);
     }
+    public function  subtotal()
+    {
+        return $this->AddToCardService->subtotal();
+    }
+   
 
 }

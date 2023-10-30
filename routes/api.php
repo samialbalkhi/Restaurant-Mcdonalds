@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Backend\CityController;
 use App\Http\Controllers\Backend\CareerController;
+use App\Http\Controllers\Backend\DriverController;
 use App\Http\Controllers\Backend\FamilyController;
 use App\Http\Controllers\Backend\MycafeController;
 use App\Http\Controllers\Backend\DetailsController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\Backend\ourRestaurantController;
 use App\Http\Controllers\Backend\ProductReviewController;
 use App\Http\Controllers\Backend\workTimeOfferController;
 use App\Http\Controllers\Backend\ourResponsibilityController;
+use App\Http\Controllers\Backend\RestaurantBrancheController;
 use App\Http\Controllers\Backend\ViewJobApplicationController;
 use App\Http\Controllers\Backend\employmentOpportunityController;
 use App\Http\Controllers\Backend\AnsweringJobApplicationsController;
@@ -86,5 +88,9 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     Route::get('index', [ViewJobApplicationController::class, 'index']);
     Route::get('show/{employmentApplication}', [ViewJobApplicationController::class, 'show']);
     Route::get('downloadCv/{employmentApplication}', [ViewJobApplicationController::class, 'downloadCv']);
-    
+
+    Route::resource('/restaurantBranche', RestaurantBrancheController::class);
+    Route::resource('/drivers', DriverController::class);
+
+
 });

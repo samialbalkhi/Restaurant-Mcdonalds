@@ -10,20 +10,23 @@ class AddToCardService
     public function store(Request $request)
     {
         $product = Product::findOrFail($request->product_id);
+        if ($request->quantity > 1) {
+            Cart::add([
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->price,
+                'qty' => $request->quantity,
+            ]);
 
-        Cart::add([
-            'id' => $product->id,
-            'name' => $product->name,
-            'qty' => $request->quantity,
-            'price' => $product->price,
-        ]);
-
-        return 'add successful';
+            return 'Add successful';
+        } else {
+            return 'Quantity must be greater than 1';
+        }
     }
 
     public function numberOfProduct()
     {
-       return Cart::content()->count();
+        return Cart::content()->count();
     }
 
     public function show()
@@ -31,8 +34,12 @@ class AddToCardService
         return Cart::content();
     }
     public function delete($rowId)
-    { 
+    {
         Cart::remove($rowId);
         return 'delete';
+    }
+    public function subtotal()
+    {
+        return Cart::subtotal();
     }
 }

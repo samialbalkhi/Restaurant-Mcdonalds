@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\RestaurantBranche;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class City extends Model
 {
@@ -13,5 +14,9 @@ class City extends Model
     public function scopeActive($query)
     {
         return $query->whereStatus(true);
+    }
+    public function restaurantBranche()
+    {
+        return $this->hasMany(RestaurantBranche::class);
     }
 }
