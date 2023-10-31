@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Database\Seeders\CitySeeder;
+use Database\Seeders\OrderSeeder;
 use Database\Seeders\DriverSeeder;
 use Database\Seeders\WorkTimeSeeder;
 use Database\Seeders\JobOfferTimeSeeder;
@@ -38,7 +39,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CitySeeder::class);
         $this->call(RestaurantBrancheSeeder::class);
         $this->call(DriverSeeder::class);
-        
+        $this->call(OrderSeeder::class);
         
         
         

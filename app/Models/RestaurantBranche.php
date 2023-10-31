@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Order;
 use App\Models\Driver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,4 +21,10 @@ class RestaurantBranche extends Model
     {
         return $this->hasMany(Driver::class);
     }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+  
 }

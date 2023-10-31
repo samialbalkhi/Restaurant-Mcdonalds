@@ -16,18 +16,25 @@ class RestaurantBrancheSeeder extends Seeder
     public function run(): void
     {
         $faker = Factory::create();
-        $city = City::pluck('id');
+        $city = City::pluck('id')->toArray();
+        $addedcity = [];
+        $restaurantBranche = [];
 
         for ($i = 1; $i <= 500; $i++) {
-            $restaurantBranche[] = [
-                'name' => $faker->sentence(2, true),
-                'deliveryprice' => $faker->numberBetween(5.99, 10),
-                'city_id' => $city->random(),
-                'image' => 'Burger.jpeg',
-                'arrivaltime' => rand(30, 50, 60, 20),
-                'status' => rand(true, false),
-            ];
+            $cityId = $city[array_rand($city)];
+            if (!in_array($cityId, $addedcity)) {
+                $restaurantBranche[] = [
+                    'name' => $faker->sentence(2, true),
+                    'deliveryprice' => $faker->numberBetween(5.99, 10),
+                    'city_id' => $cityId,
+                    'image' => 'Burger.jpeg',
+                    'arrivaltime' => rand(20, 30), // Adjusted arrival time range
+                    'status' => rand(0, 1), // Generates random 0 or 1 for status
+                ];
+                $addedcity[] = $cityId;
+            }
         }
+
         $chunks = array_chunk($restaurantBranche, 50);
         foreach ($chunks as $chunk) {
             RestaurantBranche::insert($chunk);
