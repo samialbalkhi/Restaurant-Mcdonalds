@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\Home\GetSectionController;
 use App\Http\Controllers\Frontend\WishList\WishListController;
 use App\Http\Controllers\Frontend\VerifyCity\VerifyCityController;
+use App\Http\Controllers\Frontend\DeliverySection\OrederController;
 use App\Http\Controllers\Frontend\Home\ShowProductsAtHomeController;
 use App\Http\Controllers\Frontend\ShowProduct\ShowProductController;
 use App\Http\Controllers\Frontend\DeliverySection\AddToCardController;
@@ -62,13 +63,18 @@ Route::get('/showAllProduct/{product}', ShowAllProductController::class);
 
 Route::group(['middleware' => ['web']], function () {
     // Your routes here
-    Route::get('/store', [AddToCardController::class,'store']);
-    Route::get('/numberOfProduct', [AddToCardController::class,'numberOfProduct']);
-    Route::get('/show', [AddToCardController::class,'show']);
-    Route::get('/subtotal', [AddToCardController::class,'subtotal']);
-    Route::get('/delete/{rowId}/{product}', [AddToCardController::class,'delete']);
+    Route::group(['prefix' => 'card'], function () {
+        Route::get('/store', [AddToCardController::class, 'store']);
+        Route::get('/numberOfProduct', [AddToCardController::class, 'numberOfProduct']);
+        Route::get('/show', [AddToCardController::class, 'show']);
+        Route::get('/subtotal', [AddToCardController::class, 'subtotal']);
+        Route::get('/delete/{rowId}/{product}', [AddToCardController::class, 'delete']);
+    });
 });
-Route::get('/showRestaurantBranche/{restaurantBranche}',ShowRestaurantBrancheController::class);
 
+Route::get('/showRestaurantBranche/{restaurantBranche}', ShowRestaurantBrancheController::class);
+Route::group(['middleware' => ['web']], function () {
 
+    Route::get('/oreder', [OrederController::class, 'store']);
+});
 

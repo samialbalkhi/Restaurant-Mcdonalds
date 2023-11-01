@@ -1,9 +1,11 @@
 <?php
 namespace App\Service\Backend;
 
+
 use App\Models\Section;
 use App\Traits\ImageUploadTrait;
 use App\Http\Requests\Backend\SectionRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class SectionService
 {
@@ -29,8 +31,8 @@ class SectionService
     }
 
     public function edit(Section $section)
-    {
-        return $section->find($section->id);
+{
+    return Section::findOrFail($section->id);
     }
 
     public function update(SectionRequest $request, Section $section)

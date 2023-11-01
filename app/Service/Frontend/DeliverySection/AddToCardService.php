@@ -16,6 +16,7 @@ class AddToCardService
                 'name' => $product->name,
                 'price' => $product->price,
                 'qty' => $request->quantity,
+                'options' => ['description' => $request->description],
             ]);
 
             return 'Add successful';

@@ -24,10 +24,9 @@ class OrderSeeder extends Seeder
 
             if (!in_array($restaurantBranchId, $addedRestaurantBranches)) {
                 $order[] = [
-                    'description' => $faker->paragraph,
+                    'status' => false,
                     'total_amount' => $faker->numberBetween(5, 200),
                     'restaurant_branche_id' => $restaurantBranchId,
-                    'quantity' => rand(1, 5),
                 ];
 
                 $addedRestaurantBranches[] = $restaurantBranchId;

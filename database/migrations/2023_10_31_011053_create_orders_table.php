@@ -13,9 +13,8 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->longText('description')->nullable();
-            $table->integer('quantity');
             $table->integer('total_amount');
+            $table->boolean('status')->default(false);
             $table
                 ->foreignIdFor(RestaurantBranche::class)
                 ->constrained()
