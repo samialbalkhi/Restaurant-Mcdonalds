@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\RestaurantBranche;
+use App\Models\Order;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,12 +11,18 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('accountings', function (Blueprint $table) {
             $table->id();
-            $table->decimal('total_amount');
-            $table->boolean('status')->default(false);
+            $table->longText('street');
+            $table->longText('note')->nullable();
+            $table->integer('house_number');
+            $table->integer('postal_code');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email');
+            $table->integer('phone');
             $table
-                ->foreignIdFor(RestaurantBranche::class)
+                ->foreignIdFor(Order::class)
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
@@ -29,6 +35,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('accountings');
     }
 };

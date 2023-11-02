@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\DeliverySection\OrederController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-   
-
+Route::get('/success', [OrederController::class, 'success']);

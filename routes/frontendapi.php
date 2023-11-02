@@ -74,7 +74,6 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::get('/showRestaurantBranche/{restaurantBranche}', ShowRestaurantBrancheController::class);
 Route::group(['middleware' => ['web']], function () {
-
-    Route::get('/oreder', [OrederController::class, 'store']);
+    Route::get('/order', [OrederController::class, 'store']);
+        // Route::post('/success', [OrederController::class, 'success']);
 });
-

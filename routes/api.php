@@ -41,17 +41,19 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('logout', [AuthCustomerController::class, 'logout']);
 });
 
+
 Route::group(['prefix' => 'customer'], function () {
     Route::get('login', [AuthCustomerController::class, 'login']);
     Route::post('register', [AuthCustomerController::class, 'register']);
 });
+
 
 Route::group(['prefix' => 'admin'], function () {
     Route::post('login', [AuthAdminController::class, 'login']);
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () {
-    Route::resource('/sections', SectionController::class);
+    Route::resource('/sections', SectionController::class); 
     Route::resource('/categories', CategoryController::class);
     Route::resource('/products', ProductController::class);
     Route::resource('/mycafes', MycafeController::class);

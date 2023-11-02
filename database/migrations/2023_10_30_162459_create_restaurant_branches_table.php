@@ -19,7 +19,7 @@ return new class extends Migration {
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-                $table->float('deliveryprice');
+                $table->decimal('deliveryprice');
                 $table->integer('arrivaltime');
                 $table->string('image');
                 $table->boolean('status')->default(false);

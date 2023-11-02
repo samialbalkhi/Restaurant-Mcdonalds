@@ -26,7 +26,15 @@ class OrderRequest extends FormRequest
         return [
             'total_amount'=>['required'],
             'status'=>['required'],
-            'restaurant_branche_id'=>['required'],
+            'street'=>['required'],
+            'note'=>['nullable'],
+            'house_number'=>['required'],
+            'postal_code'=>['required'],
+            'last_name'=>['required'],
+            'first_name'=>['required'],
+            'email'=>['required'],
+            'phone'=>['required'],
+            
         ];
     }
     public function failedValidation(Validator $validator)

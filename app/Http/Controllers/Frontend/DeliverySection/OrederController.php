@@ -13,4 +13,8 @@ class OrederController extends Controller
     {
         return response()->json($OrederService->store($request));
     }
+    public function success(Request $request,OrederService $OrederService )
+    {
+        return $OrederService->success($request);
+    }
 }
