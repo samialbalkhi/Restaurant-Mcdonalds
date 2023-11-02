@@ -62,7 +62,7 @@ Route::get('/showAllCategory', ShowAllCategoryController::class);
 Route::get('/showAllProduct/{product}', ShowAllProductController::class);
 
 Route::group(['middleware' => ['web']], function () {
-    // Your routes here
+    
     Route::group(['prefix' => 'card'], function () {
         Route::get('/store', [AddToCardController::class, 'store']);
         Route::get('/numberOfProduct', [AddToCardController::class, 'numberOfProduct']);
@@ -75,5 +75,4 @@ Route::group(['middleware' => ['web']], function () {
 Route::get('/showRestaurantBranche/{restaurantBranche}', ShowRestaurantBrancheController::class);
 Route::group(['middleware' => ['web']], function () {
     Route::get('/order', [OrederController::class, 'store']);
-        // Route::post('/success', [OrederController::class, 'success']);
 });

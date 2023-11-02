@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class OrderRequest extends FormRequest
-{
+{   
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -24,7 +24,6 @@ class OrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'total_amount'=>['required'],
             'status'=>['required'],
             'street'=>['required'],
             'note'=>['nullable'],

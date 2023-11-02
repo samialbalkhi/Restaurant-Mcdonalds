@@ -20,3 +20,5 @@ Route::get('/', function () {
 });
 
 Route::get('/success', [OrederController::class, 'success']);
+Route::get('/error', [OrederController::class, 'error']);
+

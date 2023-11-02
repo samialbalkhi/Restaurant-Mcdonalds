@@ -35,10 +35,7 @@ class AddToCardController extends Controller
     {
         return $this->AddToCardService->subtotal();
     }
-    public function tset(){
-        
-        return view('tset');
-    }
+   
    
 
 }
