@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ProductReviewRequest extends FormRequest
+class VerifyPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,7 @@ class ProductReviewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'min:10'],
-            'product_id' => ['required', 'min:10'],
-            'name' => ['nullable'],
-            'rating' => ['required'],
-            'comment' => ['required'],
-            'review_type' => ['required'],
-            'title' => ['required'],
+            'password'=>['required','min:8','max:30']
         ];
     }
     public function failedValidation(Validator $validator)

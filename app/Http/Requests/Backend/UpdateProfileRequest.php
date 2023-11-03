@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ProductReviewRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +23,18 @@ class ProductReviewRequest extends FormRequest
      */
     public function rules(): array
     {
+        if(auth()->user()->id == $this->user->id)
+        
         return [
-            'user_id' => ['required', 'min:10'],
-            'product_id' => ['required', 'min:10'],
-            'name' => ['nullable'],
-            'rating' => ['required'],
-            'comment' => ['required'],
-            'review_type' => ['required'],
-            'title' => ['required'],
+            'name' => ['required','max:15', 'min:3'],
+            'email' => ['required','email'],
+            'password' => ['required','min:8','max:30'],
+        ];
+
+        return [
+            'name' => ['required','max:15', 'min:3'],
+            'email' => ['required','email','unique:users,email'],
+            'password' => ['required','min:8','max:30'],
         ];
     }
     public function failedValidation(Validator $validator)

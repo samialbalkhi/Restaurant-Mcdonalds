@@ -14,4 +14,5 @@ class AuthAdminController extends Controller
         return response()->json(
             $AuthAdminService->login($request));
     }
+  
 }

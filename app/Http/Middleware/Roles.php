@@ -19,6 +19,6 @@ class Roles
             return $next($request);
         }
 
-        abort(403, 'Unauthorized');
+       return response()->json(['message'=> 'unauthorized'],403);
     }
 }

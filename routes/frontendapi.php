@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\Home\GetSectionController;
-use App\Http\Controllers\Frontend\WishList\WishListController;
+use App\Http\Controllers\Frontend\ProfileCustomerController;
 use App\Http\Controllers\Frontend\VerifyCity\VerifyCityController;
 use App\Http\Controllers\Frontend\DeliverySection\OrederController;
 use App\Http\Controllers\Frontend\Home\ShowProductsAtHomeController;
@@ -62,7 +62,6 @@ Route::get('/showAllCategory', ShowAllCategoryController::class);
 Route::get('/showAllProduct/{product}', ShowAllProductController::class);
 
 Route::group(['middleware' => ['web']], function () {
-    
     Route::group(['prefix' => 'card'], function () {
         Route::get('/store', [AddToCardController::class, 'store']);
         Route::get('/numberOfProduct', [AddToCardController::class, 'numberOfProduct']);
@@ -75,4 +74,9 @@ Route::group(['middleware' => ['web']], function () {
 Route::get('/showRestaurantBranche/{restaurantBranche}', ShowRestaurantBrancheController::class);
 Route::group(['middleware' => ['web']], function () {
     Route::get('/order', [OrederController::class, 'store']);
+});
+
+Route::group(['middleware' => ['auth:sanctum', 'abilities:customer']], function () {
+    Route::get('/editProfileCustomer', [ProfileCustomerController::class, 'edit']);
+    Route::post('/updateProfileCustomer/{user}', [ProfileCustomerController::class, 'update']);
 });

@@ -16,9 +16,11 @@ use App\Http\Controllers\Backend\workTimeController;
 use App\Http\Controllers\Backend\AuthAdminController;
 use App\Http\Controllers\Backend\EmailsSentController;
 use App\Http\Controllers\Backend\AuthCustomerController;
+use App\Http\Controllers\Backend\ProfileAdminController;
 use App\Http\Controllers\Backend\ourRestaurantController;
 use App\Http\Controllers\Backend\ProductReviewController;
 use App\Http\Controllers\Backend\workTimeOfferController;
+use App\Http\Controllers\Backend\VerifyPasswordController;
 use App\Http\Controllers\Backend\ourResponsibilityController;
 use App\Http\Controllers\Backend\RestaurantBrancheController;
 use App\Http\Controllers\Backend\ViewJobApplicationController;
@@ -39,21 +41,22 @@ include 'frontendapi.php';
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('logout', [AuthCustomerController::class, 'logout']);
-});
+    Route::post('/verifyPassword', [VerifyPasswordController::class, 'verifyPassword']);
 
+
+});
 
 Route::group(['prefix' => 'customer'], function () {
     Route::get('login', [AuthCustomerController::class, 'login']);
     Route::post('register', [AuthCustomerController::class, 'register']);
 });
 
-
 Route::group(['prefix' => 'admin'], function () {
     Route::post('login', [AuthAdminController::class, 'login']);
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () {
-    Route::resource('/sections', SectionController::class); 
+    Route::resource('/sections', SectionController::class);
     Route::resource('/categories', CategoryController::class);
     Route::resource('/products', ProductController::class);
     Route::resource('/mycafes', MycafeController::class);
@@ -94,5 +97,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     Route::resource('/restaurantBranche', RestaurantBrancheController::class);
     Route::resource('/drivers', DriverController::class);
 
-
+    Route::get('/editProfileAdmin', [ProfileAdminController::class, 'edit']);
+    Route::post('/updateProfileAdmin/{user}', [ProfileAdminController::class, 'update'])->name('asd');
 });
+
