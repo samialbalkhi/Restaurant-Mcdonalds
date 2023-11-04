@@ -10,10 +10,8 @@ use App\Http\Requests\Backend\UpdateProfileRequest;
 
 class ProfileCustomerController extends Controller
 {
-    private $ProfileCustomerService;
-    public function __construct(ProfileCustomerService $ProfileCustomerService)
+    public function __construct(private ProfileCustomerService $ProfileCustomerService)
     {
-        $this->ProfileCustomerService = $ProfileCustomerService;
     }
     public function edit()
     {

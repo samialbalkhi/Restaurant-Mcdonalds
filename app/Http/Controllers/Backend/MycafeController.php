@@ -10,10 +10,9 @@ use App\Http\Requests\Backend\MycafeRequest;
 
 class MycafeController extends Controller
 {
-    private $MycafeService ;
-public function __construct(MycafeService $MycafeService)
+    
+public function __construct(private MycafeService $MycafeService)
 {
-    $this->MycafeService = $MycafeService;
 }
     /**
      * Display a listing of the resource.

@@ -9,10 +9,8 @@ use App\Service\Backend\ViewJobApplicationService;
 
 class ViewJobApplicationController extends Controller
 {
-    private $ViewJobApplicationService;
-    public function __construct(ViewJobApplicationService $ViewJobApplicationService)
+    public function __construct(private ViewJobApplicationService $ViewJobApplicationService)
     {
-        $this->ViewJobApplicationService = $ViewJobApplicationService;
     }
     public function index()
     {

@@ -10,10 +10,8 @@ use App\Http\Requests\Backend\JobOfferTimeRequest;
 
 class workTimeOfferController extends Controller
 {
-    private $workTimeOfferService;
-    public function __construct(workTimeOfferService $workTimeOfferService)
+    public function __construct(private workTimeOfferService $workTimeOfferService)
     {
-        $this->workTimeOfferService = $workTimeOfferService;
     }
     /**
      * Display a listing of the resource.

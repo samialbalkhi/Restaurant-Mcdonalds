@@ -2,11 +2,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\Home\GetSectionController;
 use App\Http\Controllers\Frontend\ProfileCustomerController;
+use App\Http\Controllers\Frontend\DeliverySection\CartController;
 use App\Http\Controllers\Frontend\VerifyCity\VerifyCityController;
 use App\Http\Controllers\Frontend\DeliverySection\OrederController;
 use App\Http\Controllers\Frontend\Home\ShowProductsAtHomeController;
 use App\Http\Controllers\Frontend\ShowProduct\ShowProductController;
-use App\Http\Controllers\Frontend\DeliverySection\AddToCardController;
 use App\Http\Controllers\Frontend\ShowCategory\ShowCategoryController;
 use App\Http\Controllers\Frontend\DeliverySection\ShowAllProductController;
 use App\Http\Controllers\Frontend\DeliverySection\ShowAllCategoryController;
@@ -48,10 +48,13 @@ Route::get('ShowOurRestaurant/{section}', ShowOurRestaurantController::class);
 //////    View information in the Career section    ////////////////
 Route::get('ShowSectionCareer/{section}', ShowSectionCareerController::class);
 ////////////      View job opportunities in the Career section           /////////////////////
-Route::get('ShowEmploymentOpportunities', [ShowEmploymentOpportunitiesController::class, 'ShowEmploymentOpportunities']);
-////////////     View the job offer in the Professional Life section                ////////////////////////
-Route::get('ShowJobOffer/{jobOffer}', [ShowEmploymentOpportunitiesController::class, 'ShowJobOffer']);
-Route::get('ViewOneJobOffer/{jobOffer}', [ShowEmploymentOpportunitiesController::class, 'ViewOneJobOffer']);
+Route::controller(ShowEmploymentOpportunitiesController::class)->group(function () {
+    Route::get('ShowEmploymentOpportunities', 'ShowEmploymentOpportunities');
+    ////////////     View the job offer in the Professional Life section                ////////////////////////
+    Route::get('ShowJobOffer/{jobOffer}', 'ShowJobOffer');
+    Route::get('ViewOneJobOffer/{jobOffer}', 'ViewOneJobOffer');
+});
+
 ////         Submit a job request by the user    /////////////////////////////
 Route::post('/employmentApplication', EmploymentApplicationController::class);
 
@@ -62,12 +65,14 @@ Route::get('/showAllCategory', ShowAllCategoryController::class);
 Route::get('/showAllProduct/{product}', ShowAllProductController::class);
 
 Route::group(['middleware' => ['web']], function () {
-    Route::group(['prefix' => 'card'], function () {
-        Route::get('/store', [AddToCardController::class, 'store']);
-        Route::get('/numberOfProduct', [AddToCardController::class, 'numberOfProduct']);
-        Route::get('/show', [AddToCardController::class, 'show']);
-        Route::get('/subtotal', [AddToCardController::class, 'subtotal']);
-        Route::get('/delete/{rowId}/{product}', [AddToCardController::class, 'delete']);
+    Route::group(['prefix' => 'cart'], function () {
+        Route::controller(CartController::class)->group(function () {
+            Route::post('/store', 'store');
+            Route::get('/numberOfProduct', 'numberOfProduct');
+            Route::get('/show', 'show');
+            Route::get('/subtotal', 'subtotal');
+            Route::delete('/delete/{rowId}', 'delete');
+        });
     });
 });
 

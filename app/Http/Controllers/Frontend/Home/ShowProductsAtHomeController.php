@@ -8,10 +8,8 @@ use App\Service\Frontend\Home\ShowProductHome;
 
 class ShowProductsAtHomeController extends Controller
 {
-    private $ShowProductHome;
-    public function __construct(ShowProductHome $ShowProductHome)
+    public function __construct(private ShowProductHome $ShowProductHome)
     {
-        $this->ShowProductHome = $ShowProductHome;
     }
     public function Show_the_last_three_products()
     {

@@ -10,10 +10,9 @@ use App\Http\Requests\Backend\OurResponsibilityRequest;
 
 class ourResponsibilityController extends Controller
 {
-    private $ourResponsibilityService;
-    public function __construct(ourResponsibilityService $ourResponsibilityService)
+    
+    public function __construct(private ourResponsibilityService $ourResponsibilityService)
     {
-        $this->ourResponsibilityService = $ourResponsibilityService;
     }
     /**
      * Display a listing of the resource.

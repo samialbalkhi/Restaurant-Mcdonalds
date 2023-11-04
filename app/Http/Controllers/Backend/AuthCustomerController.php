@@ -10,10 +10,8 @@ use App\Http\Requests\Backend\RegisterRequest;
 
 class AuthCustomerController extends Controller
 {
-    private $AuthCustomerService;
-    public function __construct(AuthCustomerService $AuthCustomerService)
+    public function __construct(private AuthCustomerService $AuthCustomerService)
     {
-        $this->AuthCustomerService = $AuthCustomerService;
     }
     public function login(loginRequest $request)
     {

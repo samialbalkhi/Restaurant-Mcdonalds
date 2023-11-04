@@ -4,6 +4,7 @@ namespace App\Service\Backend;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Backend\loginRequest;
+use Illuminate\Validation\ValidationException;
 
 class AuthAdminService
 {
@@ -11,7 +12,9 @@ class AuthAdminService
     {
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password)) 
-            return response()->json(['message' => 'password or email is incorrect'], 401);
+        throw ValidationException::withMessages([
+            'email' => ['Email or password not correct']
+        ]);
 
             return $user->createToken('token-name', ['admin'])->plainTextToken;
         

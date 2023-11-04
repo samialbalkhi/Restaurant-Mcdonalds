@@ -9,10 +9,8 @@ use App\Service\Backend\EmailsSent;
 
 class EmailsSentController extends Controller
 {
-   private $EmailsSent ;
-   public function __construct(EmailsSent $EmailsSent)
+   public function __construct(private EmailsSent $EmailsSent)
    {
-        $this->EmailsSent = $EmailsSent;
    }
     public function index()
     {

@@ -10,10 +10,8 @@ use App\Http\Requests\Backend\RestaurantBrancheRequest;
 
 class RestaurantBrancheController extends Controller
 {
-    private $restaurantBranchesService;
-    public function __construct(restaurantBranchesService $restaurantBranchesService)
+    public function __construct(private restaurantBranchesService $restaurantBranchesService)
     {
-        $this->restaurantBranchesService = $restaurantBranchesService;
     }
     /**
      * Display a listing of the resource.

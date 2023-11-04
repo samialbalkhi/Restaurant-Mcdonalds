@@ -10,11 +10,9 @@ use App\Http\Requests\Backend\WorkTimeRequest;
 
 class workTimeController extends Controller
 {
-    private $workTimeService;
 
-    public function __construct(workTimeService $workTimeService)
+    public function __construct(private workTimeService $workTimeService)
     {
-        $this->workTimeService = $workTimeService;
     }
     /**
      * Display a listing of the resource.

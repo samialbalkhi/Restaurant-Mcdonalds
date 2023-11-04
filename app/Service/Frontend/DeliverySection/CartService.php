@@ -5,7 +5,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
-class AddToCardService
+class CartService
 {
     public function store(Request $request)
     {

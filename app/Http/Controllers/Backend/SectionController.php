@@ -10,19 +10,15 @@ use App\Http\Requests\Backend\SectionRequest;
 
 class SectionController extends Controller
 {
-
-    private $SectionService;
-    public function __construct(SectionService $SectionService)
+    public function __construct(private SectionService $SectionService)
     {
-        $this->SectionService = $SectionService;
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return response()->json(
-            $this->SectionService->index());
+        return response()->json($this->SectionService->index());
     }
 
     /**
@@ -38,8 +34,7 @@ class SectionController extends Controller
      */
     public function store(SectionRequest $request)
     {
-        return response()->json(
-            $this->SectionService->store($request),201);
+        return response()->json($this->SectionService->store($request), 201);
     }
 
     /**
@@ -55,8 +50,7 @@ class SectionController extends Controller
      */
     public function edit(Section $section)
     {
-        return response()->json(
-            $this->SectionService->edit($section));
+        return response()->json($this->SectionService->edit($section));
     }
 
     /**

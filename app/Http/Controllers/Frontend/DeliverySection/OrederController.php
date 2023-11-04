@@ -11,11 +11,9 @@ use App\Service\Frontend\DeliverySection\PaymentService;
 
 class OrederController extends Controller
 {
-    private $PaymentService;
 
-    public function __construct(PaymentService $PaymentService)
+    public function __construct(private PaymentService $PaymentService)
     {
-        $this->PaymentService = $PaymentService;
     }
 
     public function store(OrderRequest $request, OrederService $OrederService)

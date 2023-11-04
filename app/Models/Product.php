@@ -25,10 +25,6 @@ class Product extends Model
         return $this->featured ? 'Yes' : 'No';
     }
 
-    public function reviews()
-    {
-        return $this->hasMany(ProductReview::class);
-    }
 
     public function scopeActive($query)
     {

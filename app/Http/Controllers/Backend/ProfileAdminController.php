@@ -12,10 +12,8 @@ use App\Http\Requests\Backend\VerifyPasswordRequest;
 
 class ProfileAdminController extends Controller
 {
-    private $ProfileAdminService;
-    public function __construct(ProfileAdminService $ProfileAdminService)
+    public function __construct(private ProfileAdminService $ProfileAdminService)
     {
-        $this->ProfileAdminService = $ProfileAdminService;
     }
 
     public function edit()

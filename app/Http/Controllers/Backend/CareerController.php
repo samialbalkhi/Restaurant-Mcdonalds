@@ -10,10 +10,8 @@ use App\Http\Requests\Backend\CareerRequest;
 
 class CareerController extends Controller
 {
-    private $CareerService;
-    public function __construct(CareerService $CareerService)
+    public function __construct(private CareerService $CareerService)
     {
-        $this->CareerService = $CareerService;
     }
     /**
      * Display a listing of the resource.

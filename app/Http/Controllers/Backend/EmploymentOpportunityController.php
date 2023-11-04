@@ -10,10 +10,8 @@ use App\Http\Requests\Backend\EmploymentOpportunityRequest;
 
 class employmentOpportunityController extends Controller
 {
-    private $employmentOpportunityService;
-    public function __construct(employmentOpportunityService $employmentOpportunityService)
+    public function __construct(private employmentOpportunityService $employmentOpportunityService)
     {
-        $this->employmentOpportunityService = $employmentOpportunityService;
     }
     /**
      * Display a listing of the resource.

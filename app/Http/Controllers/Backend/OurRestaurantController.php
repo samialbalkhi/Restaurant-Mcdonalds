@@ -10,10 +10,8 @@ use App\Http\Requests\Backend\OurRestaurantRequest;
 
 class ourRestaurantController extends Controller
 {
-    private $ourRestaurantService;
-    public function __construct(ourRestaurantService $ourRestaurantService)
+    public function __construct(private ourRestaurantService $ourRestaurantService)
     {
-        $this->ourRestaurantService = $ourRestaurantService;
     }
 
     /**

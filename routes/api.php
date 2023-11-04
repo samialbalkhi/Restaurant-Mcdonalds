@@ -14,13 +14,14 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\jobOfferController;
 use App\Http\Controllers\Backend\workTimeController;
 use App\Http\Controllers\Backend\AuthAdminController;
+use App\Http\Controllers\Backend\ViewOrderController;
 use App\Http\Controllers\Backend\EmailsSentController;
 use App\Http\Controllers\Backend\AuthCustomerController;
 use App\Http\Controllers\Backend\ProfileAdminController;
 use App\Http\Controllers\Backend\ourRestaurantController;
-use App\Http\Controllers\Backend\ProductReviewController;
 use App\Http\Controllers\Backend\workTimeOfferController;
 use App\Http\Controllers\Backend\VerifyPasswordController;
+use App\Http\Controllers\Backend\RestaurantReviewController;
 use App\Http\Controllers\Backend\ourResponsibilityController;
 use App\Http\Controllers\Backend\RestaurantBrancheController;
 use App\Http\Controllers\Backend\ViewJobApplicationController;
@@ -42,12 +43,10 @@ include 'frontendapi.php';
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('logout', [AuthCustomerController::class, 'logout']);
     Route::post('/verifyPassword', [VerifyPasswordController::class, 'verifyPassword']);
-
-
 });
 
 Route::group(['prefix' => 'customer'], function () {
-    Route::get('login', [AuthCustomerController::class, 'login']);
+    Route::post('login', [AuthCustomerController::class, 'login']);
     Route::post('register', [AuthCustomerController::class, 'register']);
 });
 
@@ -70,9 +69,11 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     Route::resource('/jobOffers', jobOfferController::class);
 
     Route::group(['prefix' => 'Detail'], function () {
-        Route::get('edit/{details}', [DetailsController::class, 'edit']);
-        Route::post('update/{details}', [DetailsController::class, 'update']);
-        Route::delete('destroy/{details}', [DetailsController::class, 'destroy']);
+        Route::controller(DetailsController::class)->group(function () {
+            Route::get('edit/{details}', 'edit');
+            Route::post('update/{details}', 'update');
+            Route::delete('destroy/{details}', 'destroy');
+        });
     });
 
     Route::group(['prefix' => 'AnsweringJobApplications'], function () {
@@ -80,24 +81,34 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     });
 
     Route::group(['prefix' => 'EmailsSentController'], function () {
-        Route::get('index', [EmailsSentController::class, 'index']);
-        Route::get('getAnswering/{Answering_job_application}', [EmailsSentController::class, 'getAnswering']);
+        Route::get('index', [EmailsSentController::class], 'index');
+        Route::get('getAnswering/{Answering_job_application}', [EmailsSentController::class], 'getAnswering');
     });
 
-    Route::group(['prefix' => 'ProductReview'], function () {
-        Route::get('index', [ProductReviewController::class, 'index']);
-        Route::delete('destroy/{productReview}', [ProductReviewController::class, 'destroy']);
+    Route::group(['prefix' => 'RestaurantReview'], function () {
+        Route::get('index', [RestaurantReviewController::class, 'index']);
+        Route::delete('destroy/{restaurantReview}', [RestaurantReviewController::class, 'destroy']);
     });
+
     Route::resource('/cities', CityController::class);
 
-    Route::get('index', [ViewJobApplicationController::class, 'index']);
-    Route::get('show/{employmentApplication}', [ViewJobApplicationController::class, 'show']);
-    Route::get('downloadCv/{employmentApplication}', [ViewJobApplicationController::class, 'downloadCv']);
+    Route::controller(ViewJobApplicationController::class)->group(function () {
+        Route::get('index', 'index');
+        Route::get('show/{employmentApplication}', 'show');
+        Route::get('downloadCv/{employmentApplication}', 'downloadCv');
+    });
 
     Route::resource('/restaurantBranche', RestaurantBrancheController::class);
     Route::resource('/drivers', DriverController::class);
 
     Route::get('/editProfileAdmin', [ProfileAdminController::class, 'edit']);
-    Route::post('/updateProfileAdmin/{user}', [ProfileAdminController::class, 'update'])->name('asd');
-});
+    Route::post('/updateProfileAdmin/{user}', [ProfileAdminController::class, 'update']);
 
+    Route::group(['prefix' => 'order'], function () {
+        Route::controller(ViewOrderController::class)->group(function () {
+            Route::get('/index', 'index');
+            Route::get('/numberOfOrder', 'numberOfOrder');
+            Route::get('/paidOrder', 'paidOrder');
+        });
+    });
+});

@@ -5,8 +5,9 @@ namespace Database\Seeders;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 use App\Models\RestaurantBranche;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class ProductReviewSeeder extends Seeder
+class RestaurantReviewSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -21,9 +22,8 @@ class ProductReviewSeeder extends Seeder
             for ($i = 1; $i < rand(1, 3); $i++) {
                 $randomValue = $values[array_rand($values)];
 
-                $product->reviews()->create([
+                $product->restaurantReviews()->create([
                     'user_id' => rand(2, 22),
-                    'name' => $faker->userName,
                     'comment' => $faker->paragraph,
                     'rating' => rand(1, 5),
                     'review_type' => $randomValue,
@@ -31,6 +31,5 @@ class ProductReviewSeeder extends Seeder
                 ]);
             }
         });
-
     }
 }

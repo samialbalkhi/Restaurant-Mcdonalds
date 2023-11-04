@@ -9,16 +9,19 @@ use App\Service\Frontend\ShowProduct\ShowProductService;
 
 class ShowProductController extends Controller
 {
-    public function ShowProduct(Product $product,ShowProductService $ShowProductService)
+    public function __construct(private ShowProductService $ShowProductService)
+    {
+    }
+    public function ShowProduct(Product $product)
     {
         return response()->json(
-            $ShowProductService->ShowProduct($product)
+            $this->ShowProductService->ShowProduct($product)
         );
     }
-    public function getOneProduct(Product $product,ShowProductService $ShowProductService)
+    public function getOneProduct(Product $product)
     {
         return response()->json(
-            $ShowProductService->getOneProduct($product)
+            $this->ShowProductService->getOneProduct($product)
         );
     }
 }

@@ -4,17 +4,15 @@ namespace App\Http\Controllers\Frontend\DeliverySection;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Product;
-use App\Service\Frontend\DeliverySection\AddToCardService;
+use App\Http\Requests\Frontend\CartRequest;
+use App\Service\Frontend\DeliverySection\CartService;
 
-class AddToCardController extends Controller
+class CartController extends Controller
 {
-    private $AddToCardService ;
-    public function __construct(AddToCardService $AddToCardService)
+    public function __construct(private CartService $AddToCardService)
     {
-        $this->AddToCardService = $AddToCardService;
     }
-    public function store(Request $request)
+    public function store(CartRequest $request)
     {
         return response()->json($this->AddToCardService->store($request));
     }
@@ -35,7 +33,4 @@ class AddToCardController extends Controller
     {
         return $this->AddToCardService->subtotal();
     }
-   
-   
-
 }

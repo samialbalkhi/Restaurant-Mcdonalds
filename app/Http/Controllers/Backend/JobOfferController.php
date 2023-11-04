@@ -10,10 +10,8 @@ use App\Http\Requests\Backend\JobOfferRequest;
 
 class jobOfferController extends Controller
 {
-    private $jobOfferService;
-    public function __construct(jobOfferService $jobOfferService)
+    public function __construct(private jobOfferService $jobOfferService)
     {
-        $this->jobOfferService = $jobOfferService;
     }
     /**
      * Display a listing of the resource.

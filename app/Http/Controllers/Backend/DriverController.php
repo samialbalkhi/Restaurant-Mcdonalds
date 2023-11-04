@@ -10,10 +10,8 @@ use App\Http\Requests\Backend\DriverRequest;
 
 class DriverController extends Controller
 {
-    private $driverService;
-    public function __construct(DriverService $driverService)
+    public function __construct(private DriverService $driverService)
     {
-        $this->driverService = $driverService;
     }
     /**
      * Display a listing of the resource.

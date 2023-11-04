@@ -10,10 +10,8 @@ use App\Http\Requests\Backend\ProductRequest;
 
 class ProductController extends Controller
 {
-    private $ProductService;
-public function __construct(ProductService $ProductService)
+public function __construct(private ProductService $ProductService)
 {
-    $this->ProductService = $ProductService;
 }
     /**
      * Display a listing of the resource.

@@ -11,10 +11,8 @@ use App\Http\Requests\Backend\FamilyRequest;
 class FamilyController extends Controller
 {
 
-    private $FamilyService;
-    public function __construct(FamilyService $FamilyService)
+    public function __construct(private FamilyService $FamilyService)
     {
-        $this->FamilyService = $FamilyService;
     }
     /**
      * Display a listing of the resource.

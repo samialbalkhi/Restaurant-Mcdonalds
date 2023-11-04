@@ -11,11 +11,9 @@ use App\Http\Requests\Backend\CategoryRequest;
 class CategoryController extends Controller
 {
 
-    private $CategoryService;
 
-    public function __construct(CategoryService $CategoryService)
+    function __construct(private CategoryService $CategoryService)
     {
-        $this->CategoryService = $CategoryService;
     }
     /**
      * Display a listing of the resource.

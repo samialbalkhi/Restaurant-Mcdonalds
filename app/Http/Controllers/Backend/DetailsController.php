@@ -10,10 +10,8 @@ use App\Http\Requests\Backend\DetailRequest;
 
 class DetailsController extends Controller
 {
-    private $DetailsService ;
-    public function __construct(DetailsService $DetailsService)
+    public function __construct(private DetailsService $DetailsService)
     {
-        $this->DetailsService = $DetailsService;
     }
 
     public function edit(Detail $details)

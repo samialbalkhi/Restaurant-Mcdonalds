@@ -9,10 +9,8 @@ use App\Models\Joboffer;
 
 class ShowEmploymentOpportunitiesController extends Controller
 {
-    private $ShowEmploymentOpportunitiesService ;
-    public function __construct(ShowEmploymentOpportunitiesService $ShowEmploymentOpportunitiesService)
+    public function __construct(private ShowEmploymentOpportunitiesService $ShowEmploymentOpportunitiesService)
     {
-        $this->ShowEmploymentOpportunitiesService = $ShowEmploymentOpportunitiesService;
     }
     public function ShowEmploymentOpportunities()
     {
