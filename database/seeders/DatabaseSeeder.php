@@ -10,6 +10,7 @@ use Database\Seeders\OrderSeeder;
 use Database\Seeders\DriverSeeder;
 use Database\Seeders\WorkTimeSeeder;
 use Database\Seeders\AccountingSeeder;
+use Database\Seeders\OrderItemsSeeder;
 use Database\Seeders\JobOfferTimeSeeder;
 use Database\Seeders\RestaurantOwnerSeeder;
 use Database\Seeders\RestaurantReviewSeeder;
@@ -45,5 +46,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RestaurantReviewSeeder::class);
         $this->call(RestaurantOwnerSeeder::class);
         $this->call(AccountingSeeder::class);
+        $this->call(OrderItemsSeeder::class);
+
+        
     }
 }
