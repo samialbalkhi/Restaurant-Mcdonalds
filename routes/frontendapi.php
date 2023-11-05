@@ -84,4 +84,5 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['auth:sanctum', 'abilities:customer']], function () {
     Route::get('/editProfileCustomer', [ProfileCustomerController::class, 'edit']);
     Route::post('/updateProfileCustomer/{user}', [ProfileCustomerController::class, 'update']);
+
 });

@@ -27,8 +27,11 @@ use App\Http\Controllers\Backend\RestaurantBrancheController;
 use App\Http\Controllers\Backend\ViewJobApplicationController;
 use App\Http\Controllers\Backend\employmentOpportunityController;
 use App\Http\Controllers\Backend\AnsweringJobApplicationsController;
+use App\Http\Controllers\Backend\RestaurantOwnerController;
 
 include 'frontendapi.php';
+include 'restaurantOwner.php';
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -111,4 +114,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
             Route::get('/paidOrder', 'paidOrder');
         });
     });
+
+    Route::resource('/restaurantOwner', RestaurantOwnerController::class);
+    
 });
