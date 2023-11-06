@@ -16,18 +16,20 @@ use App\Http\Controllers\Backend\workTimeController;
 use App\Http\Controllers\Backend\AuthAdminController;
 use App\Http\Controllers\Backend\ViewOrderController;
 use App\Http\Controllers\Backend\EmailsSentController;
+use App\Http\Controllers\Backend\ShowPaymentController;
 use App\Http\Controllers\Backend\AuthCustomerController;
 use App\Http\Controllers\Backend\ProfileAdminController;
 use App\Http\Controllers\Backend\ourRestaurantController;
 use App\Http\Controllers\Backend\workTimeOfferController;
+use App\Http\Controllers\Backend\ShowAccountingController;
 use App\Http\Controllers\Backend\VerifyPasswordController;
+use App\Http\Controllers\Backend\RestaurantOwnerController;
 use App\Http\Controllers\Backend\RestaurantReviewController;
 use App\Http\Controllers\Backend\ourResponsibilityController;
 use App\Http\Controllers\Backend\RestaurantBrancheController;
 use App\Http\Controllers\Backend\ViewJobApplicationController;
 use App\Http\Controllers\Backend\employmentOpportunityController;
 use App\Http\Controllers\Backend\AnsweringJobApplicationsController;
-use App\Http\Controllers\Backend\RestaurantOwnerController;
 
 include 'frontendapi.php';
 include 'restaurantOwner.php';
@@ -100,12 +102,16 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         Route::get('show/{employmentApplication}', 'show');
         Route::get('downloadCv/{employmentApplication}', 'downloadCv');
     });
-
+    //// /Branches section of the restaurant/// /////
     Route::resource('/restaurantBranche', RestaurantBrancheController::class);
+
+    //// The drivers' section followed the restaurant ////////////////
     Route::resource('/drivers', DriverController::class);
 
-    Route::get('/editProfileAdmin', [ProfileAdminController::class, 'edit']);
-    Route::post('/updateProfileAdmin/{user}', [ProfileAdminController::class, 'update']);
+    Route::group(['prefix' => 'profile'], function () {
+        Route::get('/editProfileAdmin', [ProfileAdminController::class, 'edit']);
+        Route::post('/updateProfileAdmin/{user}', [ProfileAdminController::class, 'update']);
+    });
 
     Route::group(['prefix' => 'order'], function () {
         Route::controller(ViewOrderController::class)->group(function () {
@@ -114,7 +120,12 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
             Route::get('/paidOrder', 'paidOrder');
         });
     });
-
+    ///////////   Building a restaurant owners section      /////////////
     Route::resource('/restaurantOwner', RestaurantOwnerController::class);
+
+    /////////           View all invoices for orders    /////////////////////////////////
+    Route::get('/ShowAccounting', ShowAccountingController::class);
+
     
+    Route::get('/showPayment', ShowPaymentController::class);
 });

@@ -27,4 +27,5 @@ class ProfileAdminController extends Controller
         $this->ProfileAdminService->update($request, $user);
         return response()->json(['message' => 'Updateed  successfully']);
     }
+
 }

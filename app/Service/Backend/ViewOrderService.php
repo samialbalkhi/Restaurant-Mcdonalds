@@ -7,7 +7,7 @@ class ViewOrderService
 {
     public function index()
     {
-        return Order::with('restaurantBranche:id,name')->paginate();
+        return Order::with('restaurantBranche:id,name', 'orderItems:id,quantity,price,order_id')->paginate();
     }
     public function numberOfOrder(Order $order)
     {
@@ -15,7 +15,8 @@ class ViewOrderService
     }
     public function paidOrder()
     {
-        return Order::Active()->paginate();
+        return Order::with('restaurantBranche:id,name', 'orderItems:id,quantity,price,order_id')
+            ->Active()
+            ->paginate();
     }
-
 }

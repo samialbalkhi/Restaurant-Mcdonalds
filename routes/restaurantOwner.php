@@ -25,22 +25,24 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:restaurantowner']], fu
 
     ////////  Display all orders returned to the branch of the restaurant and display orders whose status is true    //////////////
     Route::group(['prefix' => 'showOrderRestaurant'], function () {
-        Route::get('/allOrders', [ShowOrderController::class, 'allOrders']);
-        Route::get('/orderStatusTrue', [ShowOrderController::class, 'orderStatusTrue']);
-        Route::get('/showOneOrder/{id}', [ShowOrderController::class, 'showOneOrder']);
-        Route::get('/total_amount_all_orders', [ShowOrderController::class, 'total_amount_all_orders']);
+        Route::controller(ShowOrderController::class)->group(function () {
+            Route::get('/allOrders', 'allOrders');
+            Route::get('/orderStatusTrue', 'orderStatusTrue');
+            Route::get('/showOneOrder/{id}', 'showOneOrder');
+            Route::get('/total_amount_all_orders', 'total_amount_all_orders');
+        });
     });
 
     //////////////////   View the ratings and comments related to the restaurant belonging to the restaurant branch and to the restaurant owner/////////////////
     Route::group(['prefix' => 'showReviewRestaurant'], function () {
         Route::get('/show', ShowReviewController::class);
     });
-
+    ////////////            The total number follows orders and the total number follows paid orders/////////////
     Route::group(['prefix' => 'numberOfOrder'], function () {
         Route::get('/totalNumberoOfOrder', [ShowNumberOfOrderController::class, 'totalNumberoOfOrder']);
         Route::get('/totalNumberoOfOrderStatusTrue', [ShowNumberOfOrderController::class, 'totalNumberoOfOrderStatusTrue']);
     });
-
+    /// View accounting on demand  ///////
     Route::group(['prefix' => 'showTheOrderAccounting'], function () {
         Route::get('/show/{orderId}', ShowTheOrderAccountingController::class);
     });
