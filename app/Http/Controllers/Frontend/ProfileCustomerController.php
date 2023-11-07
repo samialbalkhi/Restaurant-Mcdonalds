@@ -13,14 +13,13 @@ class ProfileCustomerController extends Controller
     public function __construct(private ProfileCustomerService $ProfileCustomerService)
     {
     }
-    public function edit()
+    public function getProfileCustomer()
     {
-        return response()->json($this->ProfileCustomerService->edit());
+        return response()->json($this->ProfileCustomerService->getProfileCustomer());
     }
-    public function update(UpdateProfileRequest $request, User $user)
+    public function profileCustomer(Request $request)
     {
-        $this->ProfileCustomerService->update($request, $user);
-        return response()->json(['message' => 'Updateed  successfully']);
+       return $this->ProfileCustomerService->profileCustomer($request);
 
     }
 }

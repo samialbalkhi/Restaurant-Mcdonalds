@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use App\Service\Backend\ProfileAdminService;
 use App\Http\Requests\Backend\UpdateProfileRequest;
-use App\Http\Requests\Backend\VerifyPasswordRequest;
 
 class ProfileAdminController extends Controller
 {
@@ -16,16 +13,16 @@ class ProfileAdminController extends Controller
     {
     }
 
-    public function edit()
+    public function getProfile()
     {
         return response()->json(
-            $this->ProfileAdminService->edit());
+            $this->ProfileAdminService->getProfile());
     }
 
-    public function update(UpdateProfileRequest $request, User $user)
+    public function profileAdmin(Request $request)
     {
-        $this->ProfileAdminService->update($request, $user);
-        return response()->json(['message' => 'Updateed  successfully']);
+        return  $this->ProfileAdminService->profileAdmin($request);
     }
+
 
 }

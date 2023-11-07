@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\RestaurantOwner;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -40,6 +42,10 @@ return [
             'provider' => 'users',
         ],
 
+        'restaurantowner' => [
+            'driver' => 'passport',
+            'provider' => 'restaurant_owners',
+        ],
     ],
 
     /*
@@ -64,6 +70,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
             'table' => 'users',
+        ],
+
+        'restaurant_owners' => [
+            'driver' => 'eloquent',
+            'model' => RestaurantOwner::class,
         ],
 
         // 'users' => [

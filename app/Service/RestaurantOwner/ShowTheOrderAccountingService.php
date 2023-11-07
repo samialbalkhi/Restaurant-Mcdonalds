@@ -5,7 +5,7 @@ class ShowTheOrderAccountingService
 {
     public function show($orderId)
     {
-        $owner = auth()->user();
+        $owner = auth()->user('restaurantowner');
 
         $order = $owner->restaurantBranche->orders()->find($orderId);
 

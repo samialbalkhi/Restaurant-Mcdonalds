@@ -22,7 +22,7 @@ class OrederService
             'status' => false,
             'restaurant_branche_id' => $request->restaurant_branche_id,
         ]);
-
+    
         $products = Cart::content();
         foreach ($products as $product) {
             OrderItem::create([

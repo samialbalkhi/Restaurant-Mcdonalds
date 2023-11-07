@@ -7,6 +7,7 @@ use App\Http\Controllers\RestaurantOwner\ShowReviewController;
 use App\Http\Controllers\RestaurantOwner\ShowItemsOrderController;
 use App\Http\Controllers\RestaurantOwner\ShowNumberOfOrderController;
 use App\Http\Controllers\RestaurantOwner\AuthRestaurantOwnerController;
+use App\Http\Controllers\RestaurantOwner\ProfileRestaurantOwnerController;
 use App\Http\Controllers\RestaurantOwner\ShowTheOrderAccountingController;
 
 Route::group(['prefix' => 'AuthRestaurantOwner'], function () {
@@ -51,5 +52,14 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:restaurantowner']], fu
     Route::group(['prefix' => 'showItemsOrder'], function () {
         Route::get('/showItemsOrder/{orderId}', [ShowItemsOrderController::class, 'showItemsOrder']);
         Route::get('/showOneItemOrder/{orderItem}', [ShowItemsOrderController::class, 'showOneItemOrder']);
+    });
+
+    Route::get('/getProfileRestaurantOwner', [ProfileRestaurantOwnerController::class, 'getProfileRestaurantOwner']);
+    Route::post('/profileRestaurantOwner', [ProfileRestaurantOwnerController::class, 'profileRestaurantOwner']);
+
+    Route::group(['middleware' => ['auth:sanctum']], function () {
+        Route::group(['prefix' => 'RestaurantOwnerLogout'], function () {
+            Route::get('logout', [ProfileRestaurantOwnerController::class, 'logout']);
+        });
     });
 });

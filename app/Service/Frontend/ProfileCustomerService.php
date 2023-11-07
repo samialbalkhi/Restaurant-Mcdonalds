@@ -2,20 +2,43 @@
 namespace App\Service\Frontend;
 
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Backend\UpdateProfileRequest;
 
 class ProfileCustomerService
 {
-    public function edit()
+    public function getProfileCustomer()
     {
-        return auth()->user();
+        return User::find(auth()->user()->id);
     }
-    public function update(UpdateProfileRequest $request, User $user)
+
+    public function profileCustomer(Request $request)
     {
-        $user->update([
+        $admin = auth()->user();
+        $nameAndEmail = [
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password
-        ]);
+        ];
+
+        if ($request->old_password) {
+            if (Hash::check($request->old_password, $admin->password) == true) {
+                $nameAndEmail = array_merge($nameAndEmail, [
+                    'password' => $request->new_password,
+                ]);
+                
+            } else {
+                return response()->data(
+                key: 'error',
+                message:'old password  not correct',
+                statusCode: 422);
+            }
+        }
+        auth()->user()->update($nameAndEmail);
+
+        return response()->data(
+            key: 'success',
+            message:'update profile sucessfully',
+            statusCode: 200);
     }
 }

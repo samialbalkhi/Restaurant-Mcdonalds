@@ -22,7 +22,6 @@ use App\Http\Controllers\Backend\ProfileAdminController;
 use App\Http\Controllers\Backend\ourRestaurantController;
 use App\Http\Controllers\Backend\workTimeOfferController;
 use App\Http\Controllers\Backend\ShowAccountingController;
-use App\Http\Controllers\Backend\VerifyPasswordController;
 use App\Http\Controllers\Backend\RestaurantOwnerController;
 use App\Http\Controllers\Backend\RestaurantReviewController;
 use App\Http\Controllers\Backend\ourResponsibilityController;
@@ -47,7 +46,6 @@ include 'restaurantOwner.php';
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('logout', [AuthCustomerController::class, 'logout']);
-    Route::post('/verifyPassword', [VerifyPasswordController::class, 'verifyPassword']);
 });
 
 Route::group(['prefix' => 'customer'], function () {
@@ -109,8 +107,8 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     Route::resource('/drivers', DriverController::class);
 
     Route::group(['prefix' => 'profile'], function () {
-        Route::get('/editProfileAdmin', [ProfileAdminController::class, 'edit']);
-        Route::post('/updateProfileAdmin/{user}', [ProfileAdminController::class, 'update']);
+        Route::get('/getProfile', [ProfileAdminController::class, 'getProfile']);
+        Route::post('/profileAdmin', [ProfileAdminController::class, 'profileAdmin']);
     });
 
     Route::group(['prefix' => 'order'], function () {
@@ -126,6 +124,5 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     /////////           View all invoices for orders    /////////////////////////////////
     Route::get('/ShowAccounting', ShowAccountingController::class);
 
-    
     Route::get('/showPayment', ShowPaymentController::class);
 });

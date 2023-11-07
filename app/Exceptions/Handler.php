@@ -46,12 +46,10 @@ class Handler extends ExceptionHandler
         if ($e instanceof ValidationException) {
             return $this->validationResponse($e);
         } else {
-            return response()->json(
-                [
-                    'error' => 'Unexpected exception',
-                ],
-                500,
-            );
+            return response()->data(
+                key: 'error',
+                message:'An unexpected exception occurred',
+                statusCode: 500);
         }
         parent::render($request, $e);
     }
@@ -59,42 +57,43 @@ class Handler extends ExceptionHandler
     private function modelNotFoundResponse(ModelNotFoundException $exception)
     {
         $modelName = strtolower(class_basename($exception->getModel()));
-        return response()->json(
-            [
-                'message' => "$modelName not found",
-            ],
-            404,
+        return response()->data(
+            key: 'error',
+            message: "$modelName not found",
+            statusCode: 404, 
         );
     }
 
     private function validationResponse(ValidationException $e)
     {
-        return response()->json(['message' => $e->getMessage(), 
-        'errors' => $e->errors()], 422);
+        return response()->data(
+            key: 'error',
+            message:$e->getMessage(),
+            statusCode: 422);
     }
 
     public function notFoundHttpResonse(NotFoundHttpException $e)
     {
-        return response()->json(
-            [
-                'message' => 'The link does not exist',
-            ],
-            404,
-        );
+        return response()->data(
+            key: 'error',
+            message: 'the URL cannot be found',
+            statusCode: 404);
     }
+
     public function authorizationResonse(AuthorizationException $e)
     {
         $message = $e->getMessage();
-        return response()->json(
-            [
-                'error' => $message,
-            ],
-            403,
-        );
+        return response()->data(
+            key: 'error',
+            message: $message,
+            statusCode: 403);
     }
     public function authenticationResonse(AuthenticationException $e)
     {
         $message = $e->getMessage();
-        return response()->json(['error' => "$message"], 401);
+        return response()->data(
+            key: 'error',
+            message: $message,
+            statusCode: 401);
     }
 }

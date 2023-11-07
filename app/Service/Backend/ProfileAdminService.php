@@ -10,13 +10,37 @@ use Illuminate\Auth\Events\Validated;
 
 class ProfileAdminService
 {
-    public function edit()
+    public function getProfile()
     {
-        return auth()->user();
+        return User::find(auth()->user()->id);
     }
 
-    public function update(UpdateProfileRequest $request, User $user)
+    public function profileAdmin(Request $request)
     {
-        $user->update($request->Validated());
+        $admin = auth()->user();
+        $nameAndEmail = [
+            'name' => $request->name,
+            'email' => $request->email,
+        ];
+
+        if ($request->old_password) {
+            if (Hash::check($request->old_password, $admin->password) == true) {
+                $nameAndEmail = array_merge($nameAndEmail, [
+                    'password' => $request->new_password,
+                ]);
+                
+            } else {
+                return response()->data(
+                key: 'error',
+                message:'old password  not correct',
+                statusCode: 422);
+            }
+        }
+        auth()->user()->update($nameAndEmail);
+
+        return response()->data(
+            key: 'success',
+            message:'update profile sucessfully',
+            statusCode: 200);
     }
 }
