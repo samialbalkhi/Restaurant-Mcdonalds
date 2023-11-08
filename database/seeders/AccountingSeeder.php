@@ -25,7 +25,6 @@ class AccountingSeeder extends Seeder
                 'postal_code' => 12345,
                 'first_name' => 'First Name',
                 'last_name' => 'Last Name',
-                'email' => 'email@example.com',
                 'phone' => 1234567890,
                 'order_id' => $order, // Assign the order_id
             ]);

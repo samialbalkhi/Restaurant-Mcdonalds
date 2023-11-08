@@ -16,7 +16,7 @@ class CartService
                 'name' => $product->name,
                 'price' => $product->price,
                 'qty' => $request->quantity,
-                'options' => ['description' => $request->description],
+                'options' => ['description' => $request->description, 'restaurant_branche_id' => $product->restaurant_branche_id],
             ]);
 
             return 'Add successful';

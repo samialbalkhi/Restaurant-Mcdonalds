@@ -19,7 +19,6 @@ return new class extends Migration {
             $table->integer('postal_code');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email');
             $table->integer('phone');
             $table
                 ->foreignIdFor(Order::class)

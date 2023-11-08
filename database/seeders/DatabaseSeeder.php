@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SectionSeeder::class);
         $this->call(UesrSeeder::class);
         $this->call(CategorySeeder::class);
+        $this->call(CitySeeder::class);
+        $this->call(RestaurantBrancheSeeder::class);
         $this->call(ProductSeeder::class);
         $this->call(MyCafeSeeder::class);
         $this->call(FamilySeeder::class);
@@ -39,8 +41,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AnsweringJobApplicationsSeeder::class);
         $this->call(WorkTimeSeeder::class);
         $this->call(JobOfferTimeSeeder::class);
-        $this->call(CitySeeder::class);
-        $this->call(RestaurantBrancheSeeder::class);
         $this->call(DriverSeeder::class);
         $this->call(OrderSeeder::class);
         $this->call(RestaurantReviewSeeder::class);

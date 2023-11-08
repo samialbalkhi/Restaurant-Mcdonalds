@@ -1,9 +1,10 @@
 <?php
 
 use App\Models\Category;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\RestaurantBranche;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -21,6 +22,11 @@ return new class extends Migration
             $table
                 ->foreignIdFor(Category::class)
                 ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+                $table
+                ->foreignIdFor(RestaurantBranche::class)
+                // ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();

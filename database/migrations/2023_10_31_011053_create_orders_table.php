@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->boolean('status')->default(false);
             $table
                 ->foreignIdFor(RestaurantBranche::class)
-                ->constrained()
+                // ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();

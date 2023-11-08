@@ -3,27 +3,34 @@ namespace App\Service\Frontend\DeliverySection;
 
 use Exception;
 
+use Omnipay\Omnipay;
 use App\Models\Order;
-use App\Models\Payment;
 use App\Models\OrderItem;
 use App\Models\Accounting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Requests\Frontend\OrderRequest;
-use Omnipay\Omnipay;
 
 class OrederService
 {
     public function store(OrderRequest $request)
     {
         $cart = Cart::subtotal();
+        $products = Cart::content();
+
+        foreach ($products as $product) {
+            $branshId = $product->options->restaurant_branche_id;
+        }
+
         $order = Order::create([
             'total_amount' => $cart,
             'status' => false,
-            'restaurant_branche_id' => $request->restaurant_branche_id,
+            'restaurant_branche_id' => $branshId,
         ]);
-    
-        $products = Cart::content();
+
+
         foreach ($products as $product) {
             OrderItem::create([
                 'order_id' => $order->id,
@@ -40,7 +47,6 @@ class OrederService
             'postal_code' => $request->postal_code,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
-            'email' => $request->email,
             'phone' => $request->phone,
             'order_id' => $order->id,
         ]);

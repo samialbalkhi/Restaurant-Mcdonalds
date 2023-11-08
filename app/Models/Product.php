@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\RestaurantBranche;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -25,6 +26,10 @@ class Product extends Model
         return $this->featured ? 'Yes' : 'No';
     }
 
+    public function restaurantBranche()
+    {
+        return $this->belongsTo(RestaurantBranche::class,'restaurant_branche_id');
+    }
 
     public function scopeActive($query)
     {

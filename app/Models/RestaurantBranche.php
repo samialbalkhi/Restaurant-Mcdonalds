@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Order;
 use App\Models\Driver;
+use App\Models\Product;
 use App\Models\RestaurantOwner;
 use App\Models\RestaurantReview;
 use Illuminate\Database\Eloquent\Model;
@@ -36,7 +37,11 @@ class RestaurantBranche extends Model
         return $this->hasOne(RestaurantOwner::class);
     }
     public function ordersWithStatusTrue()
-{
-    return $this->hasMany(Order::class)->where('status', true);
-}
+    {
+        return $this->hasMany(Order::class)->where('status', true);
+    }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

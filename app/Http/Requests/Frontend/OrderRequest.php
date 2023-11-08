@@ -31,7 +31,6 @@ class OrderRequest extends FormRequest
             'postal_code'=>['required'],
             'last_name'=>['required'],
             'first_name'=>['required'],
-            'email'=>['required'],
             'phone'=>['required'],
             
         ];

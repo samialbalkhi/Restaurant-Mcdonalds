@@ -24,7 +24,7 @@ class RestaurantBrancheSeeder extends Seeder
             $cityId = $city[array_rand($city)];
             if (!in_array($cityId, $addedcity)) {
                 $restaurantBranche[] = [
-                    'name' => $faker->sentence(2, true),
+                    'name' => $faker->unique()->userName(),
                     'deliveryprice' => $faker->numberBetween(5.99, 10),
                     'city_id' => $cityId,
                     'image' => 'Burger.jpeg',

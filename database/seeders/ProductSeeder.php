@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
-use App\Models\Product;
 use Faker\Factory;
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
+use App\Models\RestaurantBranche;
 
 class ProductSeeder extends Seeder
 {
@@ -16,10 +17,9 @@ class ProductSeeder extends Seeder
     {
         $faker = Factory::create();
         $categories = Category::pluck('id');
-        $values = ['large', 'small', 'medium'];
+        $RestaurantBranche = RestaurantBranche::pluck('id');
 
         for ($i = 1; $i <= 1000; $i++) {
-            $randomValue = $values[array_rand($values)];
             $products[] = [
                 'name' => $faker->sentence(2, true),
                 'description' => $faker->paragraph,
@@ -30,6 +30,7 @@ class ProductSeeder extends Seeder
                 'image' => 'Burger.jpeg',
                 'status' => true,
                 'created_at' => now(),
+                'restaurant_branche_id'=>$RestaurantBranche->random(),
             ];
         }
         $chunks = array_chunk($products, 100);

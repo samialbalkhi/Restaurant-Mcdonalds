@@ -32,6 +32,7 @@ class ProductRequest extends FormRequest
             'image' => ['required', 'max:2048'],
             'featured' => ['nullable'],
             'status' => ['nullable'],
+            'restaurant_branche_id'=>['required']
         ];
 
         return $rules;

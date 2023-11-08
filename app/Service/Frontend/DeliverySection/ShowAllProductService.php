@@ -7,7 +7,9 @@ class ShowAllProductService
 {
     public function index(Product $product)
     {
-        return Product::where('category_id', $product->id)->Active()->get(['id', 'name', 'image','price','description','category_id']);
-
+        return Product::with(['restaurantBranche:id,name', 'category:id,name'])
+            ->where('restaurant_branche_id', $product->id)
+            ->Active()
+            ->get(['id', 'name', 'image', 'price', 'description', 'category_id', 'restaurant_branche_id']);
     }
 }

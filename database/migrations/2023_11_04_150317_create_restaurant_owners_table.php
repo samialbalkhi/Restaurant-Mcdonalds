@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->longText('note')->nullable();
             $table
                 ->foreignIdFor(RestaurantBranche::class)
-                ->constrained()
+                // ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
