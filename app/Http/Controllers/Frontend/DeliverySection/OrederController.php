@@ -18,7 +18,7 @@ class OrederController extends Controller
 
     public function store(OrderRequest $request, OrederService $OrederService)
     {
-        response()->json($OrederService->store($request));
+        response()->json($OrederService->check($request));
         return $this->PaymentService->payment();
     }
 

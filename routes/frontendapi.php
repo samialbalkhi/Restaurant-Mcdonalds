@@ -78,10 +78,10 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::get('/showRestaurantBranche/{restaurantBranche}', ShowRestaurantBrancheController::class);
 Route::group(['middleware' => ['web']], function () {
-    Route::get('/order', [OrederController::class, 'store']);
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:customer']], function () {
+    Route::post('/order', [OrederController::class, 'store']); 
     Route::get('/getProfileCustomer', [ProfileCustomerController::class, 'getProfileCustomer']);
     Route::post('/profileCustomer', [ProfileCustomerController::class, 'profileCustomer']);
 

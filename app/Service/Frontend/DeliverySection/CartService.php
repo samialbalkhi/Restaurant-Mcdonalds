@@ -11,14 +11,13 @@ class CartService
     {
         $product = Product::findOrFail($request->product_id);
         if ($request->quantity > 1) {
-            Cart::add([
+        $cart=    Cart::add([
                 'id' => $product->id,
                 'name' => $product->name,
                 'price' => $product->price,
                 'qty' => $request->quantity,
                 'options' => ['description' => $request->description, 'restaurant_branche_id' => $product->restaurant_branche_id],
             ]);
-
             return 'Add successful';
         } else {
             return 'Quantity must be greater than 1';

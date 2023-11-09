@@ -1,25 +1,20 @@
 <?php
 namespace App\Service\Frontend\DeliverySection;
 
-use Exception;
-
-use Omnipay\Omnipay;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Accounting;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Session;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Requests\Frontend\OrderRequest;
 
 class OrederService
 {
-    public function store(OrderRequest $request)
+    private function store(OrderRequest $request)
     {
         $cart = Cart::subtotal();
         $products = Cart::content();
-
         foreach ($products as $product) {
             $branshId = $product->options->restaurant_branche_id;
         }
@@ -30,7 +25,7 @@ class OrederService
             'restaurant_branche_id' => $branshId,
         ]);
 
-
+        session(['order_id' => $order->id]);
         foreach ($products as $product) {
             OrderItem::create([
                 'order_id' => $order->id,
@@ -50,5 +45,14 @@ class OrederService
             'phone' => $request->phone,
             'order_id' => $order->id,
         ]);
+    }
+    public function check(OrderRequest $request)
+    {
+        if (Auth::check()) {
+            $this->store($request);
+            return response()->json(['message' => 'Order placed successfully.']);
+        } else {
+            return response()->json(['message' => 'Please log in or register to complete your order.'], 401);
+        }
     }
 }

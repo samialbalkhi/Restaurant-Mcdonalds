@@ -3,6 +3,7 @@ namespace App\Service\Frontend\DeliverySection;
 
 use Exception;
 use Omnipay\Omnipay;
+use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -42,6 +43,8 @@ class PaymentService
 
     public function success(Request $request)
     {
+        $order_id = session('order_id');
+
         if ($request->input('paymentId') && $request->input('PayerID')) {
             $transaction = $this->gateway->completePurchase([
                 'payer_id' => $request->input('PayerID'),
@@ -58,7 +61,12 @@ class PaymentService
                     'amount' => $arr['transactions'][0]['amount']['total'],
                     'currency' => env('PAYPAL_CURRENCY'),
                     'payment_status' => $arr['state'],
+                    'order_id' => $order_id,
                 ]);
+                // Update the order status to 1
+                $order = Order::find($order_id);
+                $order->status = 1;
+                $order->save();
                 return 'success';
             } else {
                 $errorMessage = $response->getMessage();
@@ -69,7 +77,7 @@ class PaymentService
             return 'Payment declined';
         }
     }
-    
+
     public function error()
     {
         return 'User declined the payment !!';
