@@ -11,7 +11,7 @@ class CartService
     {
         $product = Product::findOrFail($request->product_id);
         if ($request->quantity > 1) {
-        $cart=    Cart::add([
+            Cart::add([
                 'id' => $product->id,
                 'name' => $product->name,
                 'price' => $product->price,

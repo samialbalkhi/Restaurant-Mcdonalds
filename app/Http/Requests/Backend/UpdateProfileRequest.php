@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Backend;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -23,18 +24,13 @@ class UpdateProfileRequest extends FormRequest
      */
     public function rules(): array
     {
-        if(auth()->user()->id == $this->user->id)
-        
-        return [
-            'name' => ['required','max:15', 'min:3'],
-            'email' => ['required','email'],
-            'password' => ['required','min:8','max:30'],
-        ];
+        $admin = auth()->user();
 
         return [
-            'name' => ['required','max:15', 'min:3'],
-            'email' => ['required','email','unique:users,email'],
-            'password' => ['required','min:8','max:30'],
+            'name' => ['required', 'max:255', 'min:3'],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($admin->id)],
+            'old_password' => ['sometimes', 'required', 'min:8'],
+            'new_password' => ['sometimes', 'required', 'min:8', 'different:old_password'],
         ];
     }
     public function failedValidation(Validator $validator)

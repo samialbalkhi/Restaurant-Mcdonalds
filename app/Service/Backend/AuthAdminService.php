@@ -10,7 +10,7 @@ class AuthAdminService
 {
     public function login(loginRequest $request)
     {
-        $user = User::where('email', $request->email)->first();
+        $user = User::whereEmail($request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password)) 
         throw ValidationException::withMessages([
             'email' => ['Email or password not correct']

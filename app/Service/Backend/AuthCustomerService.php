@@ -12,7 +12,7 @@ class AuthCustomerService
     public function login(loginRequest $request)
     {
         
-        $user = User::where('email', $request->email)->first();
+        $user = User::whereEmail($request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password)) 
 
              throw ValidationException::withMessages([
@@ -22,19 +22,6 @@ class AuthCustomerService
       
     }
 
-    public function register(RegisterRequest $request)
-    {
-        $user = User::create($request->validated());
-
-        $token = $user->createToken('token-name', ['customer'])->plainTextToken;
-
-        return ['token' => $token];
-    }
-    public function logout()
-    {
-        auth()
-            ->user()
-            ->tokens()
-            ->delete();
-    }
+   
+   
 }

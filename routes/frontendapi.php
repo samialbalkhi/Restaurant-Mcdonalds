@@ -67,7 +67,7 @@ Route::get('/showAllProduct/{product}', ShowAllProductController::class);
 Route::group(['middleware' => ['web']], function () {
     Route::group(['prefix' => 'cart'], function () {
         Route::controller(CartController::class)->group(function () {
-            Route::get('/store', 'store');
+            Route::post('/store', 'store');
             Route::get('/numberOfProduct', 'numberOfProduct');
             Route::get('/show', 'show');
             Route::get('/subtotal', 'subtotal');
@@ -78,11 +78,15 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::get('/showRestaurantBranche/{restaurantBranche}', ShowRestaurantBrancheController::class);
 Route::group(['middleware' => ['web']], function () {
+    Route::post('/order', [OrederController::class, 'store']);
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:customer']], function () {
-    Route::post('/order', [OrederController::class, 'store']); 
     Route::get('/getProfileCustomer', [ProfileCustomerController::class, 'getProfileCustomer']);
     Route::post('/profileCustomer', [ProfileCustomerController::class, 'profileCustomer']);
+    Route::get('logout', [ProfileCustomerController::class, 'logout']);
+});
 
+Route::group(['prefix' => 'customer'], function () {
+    Route::post('register', [ProfileCustomerController::class, 'register']);
 });

@@ -44,13 +44,10 @@ include 'restaurantOwner.php';
 |
 */
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('logout', [AuthCustomerController::class, 'logout']);
-});
+Route::group(['middleware' => ['auth:sanctum']], function () {});
 
 Route::group(['prefix' => 'customer'], function () {
     Route::post('login', [AuthCustomerController::class, 'login']);
-    Route::post('register', [AuthCustomerController::class, 'register']);
 });
 
 Route::group(['prefix' => 'admin'], function () {
@@ -109,6 +106,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     Route::group(['prefix' => 'profile'], function () {
         Route::get('/getProfile', [ProfileAdminController::class, 'getProfile']);
         Route::post('/profileAdmin', [ProfileAdminController::class, 'profileAdmin']);
+        Route::get('logout', [ProfileAdminController::class, 'logout']);
     });
 
     Route::group(['prefix' => 'order'], function () {

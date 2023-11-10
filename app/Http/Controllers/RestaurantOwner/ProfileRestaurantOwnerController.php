@@ -5,6 +5,7 @@ namespace App\Http\Controllers\RestaurantOwner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service\RestaurantOwner\profileRestaurantOwnerService;
+use App\Http\Requests\Frontend\UpdateProfileRestaurantOwnerRequest;
 
 class ProfileRestaurantOwnerController extends Controller
 {
@@ -16,7 +17,7 @@ class ProfileRestaurantOwnerController extends Controller
         return response()->json($this->profileRestaurantOwnerService->getProfileRestaurantOwner());
     }
 
-    public function profileRestaurantOwner(Request $request)
+    public function profileRestaurantOwner(UpdateProfileRestaurantOwnerRequest $request)
     {
         return $this->profileRestaurantOwnerService->profileRestaurantOwner($request);
     }

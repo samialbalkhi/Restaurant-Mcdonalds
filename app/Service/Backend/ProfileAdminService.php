@@ -15,7 +15,7 @@ class ProfileAdminService
         return User::find(auth()->user()->id);
     }
 
-    public function profileAdmin(Request $request)
+    public function profileAdmin(UpdateProfileRequest $request)
     {
         $admin = auth()->user();
         $nameAndEmail = [
@@ -28,19 +28,22 @@ class ProfileAdminService
                 $nameAndEmail = array_merge($nameAndEmail, [
                     'password' => $request->new_password,
                 ]);
-                
             } else {
-                return response()->data(
-                key: 'error',
-                message:'old password  not correct',
-                statusCode: 422);
+                return response()->data(key: 'error', message: 'old password  not correct', statusCode: 422);
             }
         }
-        auth()->user()->update($nameAndEmail);
+        auth()
+            ->user()
+            ->update($nameAndEmail);
 
-        return response()->data(
-            key: 'success',
-            message:'update profile sucessfully',
-            statusCode: 200);
+        return response()->data(key: 'success', message: 'update profile sucessfully', statusCode: 200);
+    }
+
+    public function logout()
+    {
+        auth()
+            ->user()
+            ->tokens()
+            ->delete();
     }
 }

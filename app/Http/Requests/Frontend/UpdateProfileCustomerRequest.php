@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests\Frontend;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class PaymentRequest extends FormRequest
+class UpdateProfileCustomerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,13 +24,13 @@ class PaymentRequest extends FormRequest
      */
     public function rules(): array
     {
+        $customer = auth()->user();
+
         return [
-            'payment_id' => ['required'],
-            'payer_id' => ['required'],
-            'payer_email' => ['required'],
-            'amount' => ['required'],
-            'currency' => ['required'],
-            'payment_status' => ['required'],
+            'name' => ['required', 'max:255', 'min:3'],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($customer->id)],
+            'old_password' => ['sometimes', 'required', 'min:8'],
+            'new_password' => ['sometimes', 'required', 'min:8', 'different:old_password'],
         ];
     }
     public function failedValidation(Validator $validator)

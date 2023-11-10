@@ -19,20 +19,7 @@ class AuthCustomerController extends Controller
             $this->AuthCustomerService->login($request));
     }
 
-    public function register(RegisterRequest $request)
-    {
-          $uesr = $this->AuthCustomerService->register($request);
-        return response()->json($uesr,201);
-    }
+  
 
-    public function logout()
-    {
-            $this->AuthCustomerService->logout();
-            return response()->json(
-                [
-                    'message' => 'logout success',
-                ],
-                200,
-            );
-    }
+  
 }

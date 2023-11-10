@@ -19,9 +19,19 @@ class ProfileAdminController extends Controller
             $this->ProfileAdminService->getProfile());
     }
 
-    public function profileAdmin(Request $request)
+    public function profileAdmin(UpdateProfileRequest $request)
     {
         return  $this->ProfileAdminService->profileAdmin($request);
+    }
+    public function logout()
+    {
+            $this->ProfileAdminService->logout();
+            return response()->json(
+                [
+                    'message' => 'logout success',
+                ],
+                200,
+            );
     }
 
 

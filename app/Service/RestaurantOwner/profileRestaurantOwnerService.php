@@ -4,6 +4,7 @@ namespace App\Service\RestaurantOwner;
 use Illuminate\Http\Request;
 use App\Models\RestaurantOwner;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Frontend\UpdateProfileRestaurantOwnerRequest;
 
 class profileRestaurantOwnerService
 {
@@ -12,7 +13,7 @@ class profileRestaurantOwnerService
         return RestaurantOwner::find(auth()->user('restaurantowner')->id);
     }
 
-    public function profileRestaurantOwner(Request $request)
+    public function profileRestaurantOwner(UpdateProfileRestaurantOwnerRequest $request)
     {
         $admin = auth()->user('restaurantowner');
         $nameAndEmail = [
