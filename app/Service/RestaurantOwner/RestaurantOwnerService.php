@@ -10,7 +10,7 @@ class RestaurantOwnerService
 {
     public function login(loginRequest $request)
     {
-        $restaurantOwner = RestaurantOwner::where('email', $request->email)->first();
+        $restaurantOwner = RestaurantOwner::whereEmail($request->email)->first();
         if (!$restaurantOwner || !Hash::check($request->password, $restaurantOwner->password)) {
             throw ValidationException::withMessages([
                 'email' => ['Email or password not correct'],

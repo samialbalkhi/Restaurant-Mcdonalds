@@ -42,8 +42,8 @@ return [
             'provider' => 'users',
         ],
 
-        'restaurantowner' => [
-            'driver' => 'passport',
+        'restaurant_owner' => [
+            'driver' => 'session',
             'provider' => 'restaurant_owners',
         ],
     ],
@@ -74,7 +74,7 @@ return [
 
         'restaurant_owners' => [
             'driver' => 'eloquent',
-            'model' => RestaurantOwner::class,
+            'model' => App\Models\RestaurantOwner::class,
         ],
 
         // 'users' => [

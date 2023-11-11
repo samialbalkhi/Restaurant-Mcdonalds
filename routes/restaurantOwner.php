@@ -13,6 +13,7 @@ use App\Http\Controllers\RestaurantOwner\ShowTheOrderAccountingController;
 Route::group(['prefix' => 'AuthRestaurantOwner'], function () {
     Route::post('/login', [AuthRestaurantOwnerController::class, 'login']);
 });
+// Route::middleware(['restaurant_owner'])->group(function () {
 Route::group(['middleware' => ['auth:sanctum', 'abilities:restaurantowner']], function () {
     /////      View the branch followed by the restaurant owner////////
     Route::group(['prefix' => 'showBranchRestaurant'], function () {
@@ -58,7 +59,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:restaurantowner']], fu
     Route::post('/profileRestaurantOwner', [ProfileRestaurantOwnerController::class, 'profileRestaurantOwner']);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
-        Route::group(['prefix' => 'RestaurantOwnerLogout'], function () {
+        Route::group(['prefix' => 'RestaurantOwner'], function () {
             Route::get('logout', [ProfileRestaurantOwnerController::class, 'logout']);
         });
     });

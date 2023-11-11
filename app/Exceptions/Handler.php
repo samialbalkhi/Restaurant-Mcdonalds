@@ -37,9 +37,9 @@ class Handler extends ExceptionHandler
         if ($e instanceof NotFoundHttpException) {
             return $this->notFoundHttpResonse($e);
         }
-        if ($e instanceof AuthorizationException) {
-            return $this->authorizationResonse($e);
-        }
+        // if ($e instanceof AuthorizationException) {
+        //     return $this->authorizationResonse($e);
+        // }
         if ($e instanceof AuthenticationException) {
             return $this->authenticationResonse($e);
         }
@@ -80,14 +80,14 @@ class Handler extends ExceptionHandler
             statusCode: 404);
     }
 
-    public function authorizationResonse(AuthorizationException $e)
-    {
-        $message = $e->getMessage();
-        return response()->data(
-            key: 'error',
-            message: $message,
-            statusCode: 403);
-    }
+    // public function authorizationResonse(AuthorizationException $e)
+    // {
+    //     $message = $e->getMessage();
+    //     return response()->data(
+    //         key: 'error',
+    //         message: $message,
+    //         statusCode: 403);
+    // }
     public function authenticationResonse(AuthenticationException $e)
     {
         $message = $e->getMessage();

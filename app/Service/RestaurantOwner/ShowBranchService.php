@@ -5,7 +5,9 @@ class ShowBranchService
 {
     public function show()
     {
-        $owner = auth()->user('restaurantowner');
+        // dd('asd');
+        dd(auth()->user());
+        $owner = auth('restaurantowner')->user();
         $restaurantBranche = $owner
             ->restaurantBranche()
             ->with('city')

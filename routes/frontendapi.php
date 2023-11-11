@@ -82,11 +82,12 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:customer']], function () {
-    Route::get('/getProfileCustomer', [ProfileCustomerController::class, 'getProfileCustomer']);
-    Route::post('/profileCustomer', [ProfileCustomerController::class, 'profileCustomer']);
-    Route::get('logout', [ProfileCustomerController::class, 'logout']);
+    Route::controller(ProfileCustomerController::class)->group(function () {
+        Route::get('/getProfileCustomer', 'getProfileCustomer');
+        Route::post('/profileCustomer', 'profileCustomer');
+        Route::get('logout', 'logout');
+    });
 });
-
 Route::group(['prefix' => 'customer'], function () {
     Route::post('register', [ProfileCustomerController::class, 'register']);
 });

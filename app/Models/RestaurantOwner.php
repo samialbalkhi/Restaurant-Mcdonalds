@@ -3,18 +3,20 @@
 namespace App\Models;
 
 use App\Models\RestaurantBranche;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class RestaurantOwner extends Model
+class RestaurantOwner extends Authenticatable
 {
-    use HasFactory,HasApiTokens;
+    use HasFactory, HasApiTokens;
+
     protected $guarded = [];
+
     public function restaurantBranche()
     {
-        return  $this->belongsTo(RestaurantBranche::class);
+        return $this->belongsTo(RestaurantBranche::class);
     }
 
     public function setPasswordAttribute($value)

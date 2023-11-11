@@ -104,9 +104,11 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     Route::resource('/drivers', DriverController::class);
 
     Route::group(['prefix' => 'profile'], function () {
-        Route::get('/getProfile', [ProfileAdminController::class, 'getProfile']);
-        Route::post('/profileAdmin', [ProfileAdminController::class, 'profileAdmin']);
-        Route::get('logout', [ProfileAdminController::class, 'logout']);
+        Route::controller(ProfileAdminController::class)->group(function () {
+            Route::get('/getProfile', 'getProfile');
+            Route::post('/profileAdmin', 'profileAdmin');
+            Route::get('logout', 'logout');
+        });
     });
 
     Route::group(['prefix' => 'order'], function () {
