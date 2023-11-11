@@ -5,18 +5,18 @@ class ShowOrderService
 {
     public function allOrders()
     {
-        $owner = auth()->user('restaurantowner');
+        $owner = auth('restaurantowner')->user();
         return $owner->restaurantBranche->orders;
     }
 
     public function orderStatusTrue()
     {
-        $owner = auth()->user('restaurantowner');
+        $owner = auth('restaurantowner')->user();
         return $owner->restaurantBranche->ordersWithStatusTrue;
     }
     public function showOneOrder($id)
     {
-        $owner = auth()->user('restaurantowner');
+        $owner = auth('restaurantowner')->user();
 
         $order = $owner->restaurantBranche->orders()->find($id);
 
@@ -25,7 +25,7 @@ class ShowOrderService
 
     public function total_amount_all_orders()
     {
-        $owner = auth()->user('restaurantowner');
+        $owner = auth('restaurantowner')->user();
 
         $totalAmount = $owner->restaurantBranche->ordersWithStatusTrue->sum('total_amount');
         return $totalAmount;

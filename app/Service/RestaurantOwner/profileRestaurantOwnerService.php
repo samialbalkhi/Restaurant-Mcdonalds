@@ -15,7 +15,7 @@ class profileRestaurantOwnerService
 
     public function profileRestaurantOwner(UpdateProfileRestaurantOwnerRequest $request)
     {
-        $admin = auth()->user('restaurantowner');
+        $admin = auth('restaurantowner')->user();
         $nameAndEmail = [
             'name' => $request->name,
             'email' => $request->email,
@@ -47,8 +47,8 @@ class profileRestaurantOwnerService
     }
     public function logout()
     {
-        auth()
-        ->user('restaurantowner')
+        auth('restaurantowner')
+        ->user()
         ->tokens()
         ->delete();
     }
