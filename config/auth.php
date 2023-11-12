@@ -42,7 +42,7 @@ return [
             'provider' => 'users',
         ],
 
-        'restaurantowner' => [
+        'restaurantOwner' => [
             'driver' => 'sanctum',
             'provider' => 'restaurant_owners',
         ],

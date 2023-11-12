@@ -5,12 +5,12 @@ class ShowNumberOfOrderService
 {
     public function totalNumberoOfOrder()
     {
-        $owner = auth('restaurantowner')->user();
+        $owner = auth('restaurantOwner-api')->user();
         return $owner->restaurantBranche->orders->count();
     }
     public function totalNumberoOfOrderStatusTrue()
     {
-        $owner = auth('restaurantowner')->user();
+        $owner = auth('restaurantOwner-api')->user();
         return $owner->restaurantBranche->ordersWithStatusTrue->count();
     }
 }

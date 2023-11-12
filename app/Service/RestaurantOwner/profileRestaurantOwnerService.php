@@ -10,12 +10,12 @@ class profileRestaurantOwnerService
 {
     public function getProfileRestaurantOwner()
     {
-        return RestaurantOwner::find(auth()->user('restaurantowner')->id);
+        return RestaurantOwner::find(auth('restaurantOwner-api')->user()->id);
     }
 
     public function profileRestaurantOwner(UpdateProfileRestaurantOwnerRequest $request)
     {
-        $admin = auth('restaurantowner')->user();
+        $restaurantOwner = auth('restaurantOwner-api')->user();
         $nameAndEmail = [
             'name' => $request->name,
             'email' => $request->email,
@@ -24,7 +24,7 @@ class profileRestaurantOwnerService
             'note' => $request->note,
         ];
         if ($request->old_password) {
-            if (Hash::check($request->old_password, $admin->password) == true) {
+            if (Hash::check($request->old_password, $restaurantOwner->password) == true) {
                 $nameAndEmail = array_merge($nameAndEmail, [
                     'password' => $request->new_password,
                 ]);
@@ -47,7 +47,7 @@ class profileRestaurantOwnerService
     }
     public function logout()
     {
-        auth('restaurantowner')
+        auth('restaurantOwner-api')
         ->user()
         ->tokens()
         ->delete();

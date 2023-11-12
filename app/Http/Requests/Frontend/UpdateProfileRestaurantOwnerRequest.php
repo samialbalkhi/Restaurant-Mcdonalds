@@ -24,7 +24,7 @@ class UpdateProfileRestaurantOwnerRequest extends FormRequest
      */
     public function rules(): array
     {
-        $restaurantOwner = auth()->user('restaurantowner');
+        $restaurantOwner = auth('restaurantOwner-api')->user();
 
         return [
             'name' => ['required', 'min:3', 'max:30'],

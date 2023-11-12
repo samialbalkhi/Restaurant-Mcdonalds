@@ -7,7 +7,7 @@ class ShowItemsOrderService
 {
     public function showItemsOrder($orderId)
     {
-        $owner = auth('restaurantowner')->user();
+        $owner = auth('restaurantOwner-api')->user();
 
         $order = $owner->restaurantBranche->orders()->find($orderId)->orderItems;
 
