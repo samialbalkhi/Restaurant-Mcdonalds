@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\Home\GetSectionController;
 use App\Http\Controllers\Frontend\ProfileCustomerController;
 use App\Http\Controllers\Frontend\DeliverySection\CartController;
@@ -87,7 +88,10 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:customer']], function 
         Route::post('/profileCustomer', 'profileCustomer');
         Route::get('logout', 'logout');
     });
+
+    Route::post('/review', [ReviewController::class,'checkReview']);
 });
 Route::group(['prefix' => 'customer'], function () {
     Route::post('register', [ProfileCustomerController::class, 'register']);
 });
+

@@ -13,12 +13,12 @@ use App\Http\Controllers\RestaurantOwner\ShowTheOrderAccountingController;
 Route::group(['prefix' => 'AuthRestaurantOwner'], function () {
     Route::post('/login', [AuthRestaurantOwnerController::class, 'login']);
 });
-// Route::middleware(['restaurant_owner'])->group(function () {
 Route::group(['middleware' => ['auth:sanctum', 'abilities:restaurantowner']], function () {
-    /////      View the branch followed by the restaurant owner////////
+    /////      View the branch followed by the restaurant owner  ////////
     Route::group(['prefix' => 'showBranchRestaurant'], function () {
         Route::get('/show', ShowBranchController::class);
     });
+    // });
 
     ////        Display drivers belonging to the owner of the branch affiliated with the restaurant and to the owner of the restaurant/////////////
     Route::group(['prefix' => 'showDriverRestaurant'], function () {

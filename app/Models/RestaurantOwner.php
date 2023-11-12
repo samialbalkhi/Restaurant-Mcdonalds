@@ -13,6 +13,7 @@ class RestaurantOwner extends Authenticatable
     use HasFactory, HasApiTokens;
 
     protected $guarded = [];
+    protected $guard='restaurantowner';
 
     public function restaurantBranche()
     {

@@ -28,6 +28,7 @@ class RestaurantReviewSeeder extends Seeder
                     'rating' => rand(1, 5),
                     'review_type' => $randomValue,
                     'title' => 'Eat & Delivery',
+                    'status' => false,
                 ]);
             }
         });

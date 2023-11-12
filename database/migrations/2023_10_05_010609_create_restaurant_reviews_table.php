@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -16,19 +15,20 @@ return new class extends Migration
         Schema::create('restaurant_reviews', function (Blueprint $table) {
             $table->id();
             $table
-            ->foreignIdFor(RestaurantBranche::class)
-            // ->constrained()
-            ->cascadeOnDelete()
-            ->cascadeOnUpdate();
-        $table
-            ->foreignIdFor(User::class)
-            // ->constrained()
-            ->cascadeOnDelete()
-            ->cascadeOnUpdate();
-        $table->unsignedTinyInteger('rating')->default(1);
-        $table->longText('comment')->nullable();
-        $table->string('review_type')->nullable();
-        $table->string('title')->nullable();
+                ->foreignIdFor(RestaurantBranche::class)
+                // ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table
+                ->foreignIdFor(User::class)
+                // ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->unsignedTinyInteger('rating')->default(1);
+            $table->longText('comment')->nullable();
+            $table->string('review_type')->nullable();
+            $table->string('title')->nullable();
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

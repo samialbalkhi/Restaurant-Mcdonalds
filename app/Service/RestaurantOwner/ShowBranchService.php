@@ -5,8 +5,8 @@ class ShowBranchService
 {
     public function show()
     {
-        // dd('asd');
-        dd(auth()->user());
+        dd('asd');
+        dd(auth('restaurantowner')->user());
         $owner = auth('restaurantowner')->user();
         $restaurantBranche = $owner
             ->restaurantBranche()
