@@ -32,6 +32,7 @@ class CartService
     public function show()
     {
         return Cart::content();
+        
     }
     public function delete($rowId)
     {

@@ -2,6 +2,7 @@
 namespace App\Service\Frontend;
 
 use App\Models\RestaurantReview;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Requests\Frontend\RestaurantReviewRequest;
 
 class ReviewService
@@ -9,19 +10,22 @@ class ReviewService
     public function checkReview(RestaurantReviewRequest $request)
     {
         $userId = auth()->user()->id;
-        $restaurantBranchId = 1;
+        $products = Cart::content();
+        foreach ($products as $product) {
+            $branshId = $product->options->restaurant_branche_id;
+        }
         $hasReviewed = RestaurantReview::where('user_id', $userId)
-            ->where('restaurant_branche_id', $restaurantBranchId)
+            ->where('restaurant_branche_id', $branshId)
             ->where('status', true)
             ->exists();
 
         if ($hasReviewed) {
-            return response()->json(['error' => 'You have already reviewed this restaurant.']);
+            return response()->data(key: 'error', message: 'You have already reviewed this restaurant.', statusCode: 422);
         }
 
         RestaurantReview::create([
             'user_id' => $userId,
-            'restaurant_branche_id' => $restaurantBranchId, // Correct column name
+            'restaurant_branche_id' => $branshId, // Correct column name
             'rating' => $request->rating,
             'comment' => $request->comment,
             'review_type' => $request->review_type,
@@ -29,6 +33,6 @@ class ReviewService
             'status' => true,
         ]);
 
-        return response()->json(['success' => 'Review submitted successfully.', 'statusCode' => 200]);
+        return response()->data(key: 'error', message: 'Review submitted successfully..', statusCode: 200);
     }
 }

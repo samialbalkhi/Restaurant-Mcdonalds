@@ -13,6 +13,7 @@ use App\Http\Controllers\RestaurantOwner\ShowTheOrderAccountingController;
 Route::group(['prefix' => 'AuthRestaurantOwner'], function () {
     Route::post('/login', [AuthRestaurantOwnerController::class, 'login']);
 });
+
 Route::group(['middleware' => ['auth:restaurantOwner-api,restaurantOwner']], function () {
     /////      View the branch followed by the restaurant owner  ////////
     Route::group(['prefix' => 'showBranchRestaurant'], function () {
@@ -48,18 +49,14 @@ Route::group(['middleware' => ['auth:restaurantOwner-api,restaurantOwner']], fun
         Route::get('/show/{orderId}', ShowTheOrderAccountingController::class);
     });
 
+    Route::group(['prefix' => 'profileOwner'], function () {
+        Route::get('/getProfileRestaurantOwner', [ProfileRestaurantOwnerController::class, 'getProfileRestaurantOwner']);
+        Route::post('/profileRestaurantOwner', [ProfileRestaurantOwnerController::class, 'profileRestaurantOwner']);
+        Route::get('/logout', [ProfileRestaurantOwnerController::class, 'logout']);
+    });
     ///          View order items    /////
     Route::group(['prefix' => 'showItemsOrder'], function () {
         Route::get('/showItemsOrder/{orderId}', [ShowItemsOrderController::class, 'showItemsOrder']);
         Route::get('/showOneItemOrder/{orderItem}', [ShowItemsOrderController::class, 'showOneItemOrder']);
     });
-
-    Route::get('/getProfileRestaurantOwner', [ProfileRestaurantOwnerController::class, 'getProfileRestaurantOwner']);
-    Route::post('/profileRestaurantOwner', [ProfileRestaurantOwnerController::class, 'profileRestaurantOwner']);
-
 });
-    Route::group(['middleware' => ['auth:sanctum']], function () {
-        Route::group(['prefix' => 'RestaurantOwner'], function () {
-            Route::get('logout', [ProfileRestaurantOwnerController::class, 'logout']);
-        });
-    });
