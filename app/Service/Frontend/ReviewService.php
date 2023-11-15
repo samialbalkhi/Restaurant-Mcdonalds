@@ -2,6 +2,7 @@
 namespace App\Service\Frontend;
 
 use App\Models\RestaurantReview;
+use Illuminate\Support\Facades\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Requests\Frontend\RestaurantReviewRequest;
 
@@ -34,5 +35,11 @@ class ReviewService
         ]);
 
         return response()->data(key: 'error', message: 'Review submitted successfully..', statusCode: 200);
+    }
+    public function showReview($branshId)
+    {
+        return RestaurantReview::with('user:id,name')
+            ->where('restaurant_branche_id', $branshId)
+            ->get();
     }
 }

@@ -10,10 +10,8 @@ use App\Http\Requests\Backend\CityRequest;
 
 class CityController extends Controller
 {
-    private $cityService;
-    public function __construct(CityService $cityService)
+    public function __construct(private CityService $cityService)
     {
-        $this->cityService = $cityService;
     }
     /**
      * Display a listing of the resource.

@@ -10,12 +10,12 @@ class profileRestaurantOwnerService
 {
     public function getProfileRestaurantOwner()
     {
-        return RestaurantOwner::find(auth('restaurantOwner-api')->user()->id);
+        return RestaurantOwner::find(auth('restaurantOwner')->user()->id);
     }
 
     public function profileRestaurantOwner(UpdateProfileRestaurantOwnerRequest $request)
     {
-        $restaurantOwner = auth('restaurantOwner-api')->user();
+        $restaurantOwner = auth('restaurantOwner')->user();
         $nameAndEmail = [
             'name' => $request->name,
             'email' => $request->email,
@@ -47,7 +47,7 @@ class profileRestaurantOwnerService
     }
     public function logout()
     {
-        auth('restaurantOwner-api')
+        auth('restaurantOwner')->user()
         ->user()
         ->tokens()
         ->delete();

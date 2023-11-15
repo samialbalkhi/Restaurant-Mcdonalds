@@ -7,6 +7,8 @@ class ShowOurRestaurantService
 {
     public function ShowOurRestaurant(Section $section)
     {
-        return Section::with('ourrestaurants')->where('id', $section->id)->get();
+        return Section::with('ourrestaurants')
+            ->where('id', $section->id)
+            ->get();
     }
 }

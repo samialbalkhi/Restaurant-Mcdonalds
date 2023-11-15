@@ -12,7 +12,7 @@ class VerifyCityController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(VerifyCityRequest $request,VerifyCityService $verifyCityService)
+    public function __invoke(VerifyCityRequest $request, VerifyCityService $verifyCityService)
     {
         return response()->json($verifyCityService->VerifyCity($request));
     }

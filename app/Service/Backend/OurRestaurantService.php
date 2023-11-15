@@ -12,9 +12,7 @@ class ourRestaurantService
 
     public function index()
     {
-
-        return 
-            Ourrestaurant::with(['section:id,name'])->get();
+        return Ourrestaurant::with(['section:id,name'])->get();
     }
 
     public function store(OurRestaurantRequest $request)
@@ -34,8 +32,7 @@ class ourRestaurantService
 
     public function edit(Ourrestaurant $ourRestaurant)
     {
-        return 
-            $ourRestaurant->find($ourRestaurant->id);
+        return $ourRestaurant->find($ourRestaurant->id);
     }
 
     public function update(OurRestaurantRequest $request, Ourrestaurant $ourRestaurant)

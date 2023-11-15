@@ -7,7 +7,9 @@ class ShowOurResponsibiliyService
 {
     public function ShowOurResponsibiliy(Section $section)
     {
-        return Section::with('OurResponsibility')->where('id',$section->id)->get();
+        return Section::with('OurResponsibility')
+            ->where('id', $section->id)
+            ->get();
     }
 }
 ?>

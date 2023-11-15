@@ -14,7 +14,7 @@ Route::group(['prefix' => 'AuthRestaurantOwner'], function () {
     Route::post('/login', [AuthRestaurantOwnerController::class, 'login']);
 });
 
-Route::group(['middleware' => ['auth:restaurantOwner-api,restaurantOwner']], function () {
+Route::group(['middleware' => ['auth:restaurantOwner']], function () {
     /////      View the branch followed by the restaurant owner  ////////
     Route::group(['prefix' => 'showBranchRestaurant'], function () {
         Route::get('/show', ShowBranchController::class);

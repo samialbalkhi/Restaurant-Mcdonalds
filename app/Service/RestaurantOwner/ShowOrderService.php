@@ -5,18 +5,18 @@ class ShowOrderService
 {
     public function allOrders()
     {
-        $owner = auth('restaurantOwner-api')->user();
-        return $owner->restaurantBranche->orders;
+        $owner = auth('restaurantOwner')->user();
+        return $owner->restaurantBranche->orders()->paginate();
     }
 
     public function orderStatusTrue()
     {
-        $owner = auth('restaurantOwner-api')->user();
-        return $owner->restaurantBranche->ordersWithStatusTrue;
+        $owner = auth('restaurantOwner')->user();
+        return $owner->restaurantBranche->ordersWithStatusTrue()->paginate();
     }
     public function showOneOrder($id)
     {
-        $owner = auth('restaurantOwner-api')->user();
+        $owner = auth('restaurantOwner')->user();
 
         $order = $owner->restaurantBranche->orders()->find($id);
 

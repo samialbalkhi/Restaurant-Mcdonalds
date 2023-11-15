@@ -9,15 +9,9 @@ use App\Service\RestaurantOwner\RestaurantOwnerService;
 
 class AuthRestaurantOwnerController extends Controller
 {
-    public function __construct(private RestaurantOwnerService $restaurantOwnerService)
-    {
-    }
-
-    public function login(loginRequest $request)
+    public function login(RestaurantOwnerService $restaurantOwnerService, loginRequest $request)
     {
         return response()->json(
-            $this->restaurantOwnerService->login($request));
+            $restaurantOwnerService->login($request));
     }
-   
-
 }

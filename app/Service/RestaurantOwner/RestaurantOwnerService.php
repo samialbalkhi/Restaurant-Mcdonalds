@@ -11,14 +11,13 @@ class RestaurantOwnerService
 {
     public function login(loginRequest $request)
     {
-        if (Auth::guard('restaurantOwner')->attempt(['email' => $request->email, 'password' => $request->password])) {
-
-            $restaurantOwner = Auth::guard('restaurantOwner')->user();
-            return 
-                $restaurantOwner->createToken('token-name', ['*'])->plainTextToken;
+        $user = RestaurantOwner::whereEmail($request->email)->first();
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['Email or password not correct'],
+            ]);
         }
-        throw ValidationException::withMessages([
-            'email' => ['Email or password not correct'],
-        ]);
+
+        return ['token' => $user->createToken('token-name', ['restaurantOwner'])->plainTextToken];
     }
 }

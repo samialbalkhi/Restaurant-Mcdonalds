@@ -15,10 +15,5 @@ class ShowAllProductService
             ->where('products.restaurant_branche_id', $product->id)
             ->where('products.status', 1)
             ->get();
-
-        // return Product::with(['restaurantBranche:id,name', 'category:id,name'])
-        //     ->where('restaurant_branche_id', $product->id)
-        //     ->Active()
-        //     ->get(['id', 'name', 'image', 'price', 'description', 'category_id', 'restaurant_branche_id']);
     }
 }

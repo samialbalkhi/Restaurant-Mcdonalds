@@ -12,9 +12,7 @@ class CategoryService
 
     public function index()
     {
-        return  
-        Category::with(['section:id,name'])->paginate();
-           
+        return Category::with(['section:id,name'])->paginate();
     }
 
     public function store(CategoryRequest $request): Category
@@ -28,7 +26,6 @@ class CategoryService
             'status' => $request->status,
             'image' => $path,
         ]);
-
     }
 
     /**
@@ -36,8 +33,7 @@ class CategoryService
      */
     public function edit(Category $category)
     {
-        return 
-            $category->find($category->id);
+        return $category->find($category->id);
     }
 
     /**
@@ -54,7 +50,6 @@ class CategoryService
             'image' => $path,
             'section_id' => $request->section_id,
         ]);
-
     }
 
     /**
@@ -65,6 +60,5 @@ class CategoryService
         $this->deleteImage($category);
 
         $category->delete();
-
     }
 }

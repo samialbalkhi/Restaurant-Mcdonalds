@@ -9,7 +9,7 @@ class CityService
 
     public function index()
     {
-      return  City::all();
+      return  City::paginate();
     }
 
     public function store(CityRequest $request):City

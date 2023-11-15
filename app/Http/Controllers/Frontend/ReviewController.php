@@ -10,8 +10,17 @@ use App\Http\Requests\Frontend\RestaurantReviewRequest;
 
 class ReviewController extends Controller
 {
-    public function checkReview(ReviewService $reviewService, RestaurantReviewRequest $request)
+    public function __construct(private ReviewService $reviewService)
     {
-        return response()->json($reviewService->checkReview($request));
+    }
+    public function checkReview(RestaurantReviewRequest $request)
+    {
+        return response()->json(
+            $this->reviewService->checkReview($request));
+    }
+    public function showReview($branshId)
+    {
+        return response()->json(
+            $this->reviewService->showReview($branshId));
     }
 }

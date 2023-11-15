@@ -41,10 +41,9 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
         'restaurantOwner' => [
             'driver' => 'sanctum',
-            'provider' => 'restaurant_owners',
+            'provider' => 'restaurantOwner',
         ],
     ],
 
@@ -72,9 +71,10 @@ return [
             'table' => 'users',
         ],
 
-        'restaurant_owners' => [
+        'restaurantOwner' => [
             'driver' => 'eloquent',
             'model' => App\Models\RestaurantOwner::class,
+            'table' => 'restaurant_owners',
         ],
 
         // 'users' => [

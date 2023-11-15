@@ -12,12 +12,10 @@ use App\Http\Requests\Backend\AnsweringJobApplicationsRequest;
 
 class AnsweringJobApplicationsController extends Controller
 {
- 
-    public function sendmail(AnsweringJobApplicationsService $AnsweringJobApplicationsService,EmploymentApplication $employmentApplication, AnsweringJobApplicationsRequest $request)
+    public function sendmail(AnsweringJobApplicationsService $AnsweringJobApplicationsService, EmploymentApplication $employmentApplication, AnsweringJobApplicationsRequest $request)
     {
-        // dd($request->all());
         $AnsweringJobApplicationsService->sendmail($employmentApplication, $request);
-        $AnsweringJobApplicationsService->store($employmentApplication,$request);
+        $AnsweringJobApplicationsService->store($employmentApplication, $request);
         return response()->json(['message' => 'send mail successfully']);
     }
 }

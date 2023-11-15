@@ -19,7 +19,6 @@ class RestaurantBranche extends Model
     {
         return $this->belongsTo(City::class);
     }
-
     public function drivers()
     {
         return $this->hasMany(Driver::class);

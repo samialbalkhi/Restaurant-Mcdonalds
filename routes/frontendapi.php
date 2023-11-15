@@ -68,7 +68,7 @@ Route::get('/showAllProduct/{product}', ShowAllProductController::class);
 Route::group(['middleware' => ['web']], function () {
     Route::group(['prefix' => 'cart'], function () {
         Route::controller(CartController::class)->group(function () {
-            Route::get('/store', 'store');
+            Route::post('/store', 'store');
             Route::get('/numberOfProduct', 'numberOfProduct');
             Route::get('/show', 'show');
             Route::get('/subtotal', 'subtotal');
@@ -93,6 +93,9 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:customer']], function 
         Route::post('/review', [ReviewController::class, 'checkReview']);
     });
 });
+
+Route::get('/showreview/{branshId}', [ReviewController::class, 'showReview']);
+
 Route::group(['prefix' => 'customer'], function () {
     Route::post('register', [ProfileCustomerController::class, 'register']);
 });

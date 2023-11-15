@@ -1,11 +1,9 @@
 <?php
 namespace App\Service\Backend;
 
-
 use App\Models\Section;
 use App\Traits\ImageUploadTrait;
 use App\Http\Requests\Backend\SectionRequest;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class SectionService
 {
@@ -13,26 +11,25 @@ class SectionService
 
     public function index()
     {
-        return  Section::all();
+        return Section::all();
     }
 
     public function store(SectionRequest $request): Section
     {
         $path = $this->uploadImage('images_section');
 
-        return  Section::create([
+        return Section::create([
             'name' => $request->name,
             'description' => $request->description,
             'message' => $request->message,
             'status' => $request->status,
             'image' => $path,
         ]);
-
     }
 
     public function edit(Section $section)
-{
-    return Section::findOrFail($section->id);
+    {
+        return $section->find($section->id);
     }
 
     public function update(SectionRequest $request, Section $section)
@@ -47,7 +44,6 @@ class SectionService
             'status' => $request->status,
             'image' => $path,
         ]);
-
     }
 
     public function destroy(Section $section)

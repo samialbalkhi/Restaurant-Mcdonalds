@@ -5,8 +5,11 @@ class ShowReviewService
 {
     public function show()
     {
-        $owner = auth('restaurantOwner-api')->user();
+        $owner = auth('restaurantOwner')->user();
 
-        return $owner->restaurantBranche->restaurantReviews;
+        $owner->load('restaurantBranche.restaurantReviews.user:id,name');
+        $reviews = $owner->restaurantBranche->restaurantReviews;
+
+        return $reviews;
     }
 }

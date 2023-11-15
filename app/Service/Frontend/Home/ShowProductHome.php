@@ -1,7 +1,6 @@
 <?php
 namespace App\Service\Frontend\Home;
 
-
 use App\Models\Product;
 
 class ShowProductHome
@@ -10,16 +9,14 @@ class ShowProductHome
     {
         return Product::orderBy('id', 'desc')
             ->take(3)
-            ->get(['id','name','description','image']);
+            ->get(['id', 'name', 'description', 'image']);
     }
 
     public function FeaturedProduct()
     {
         return Product::where('featured', 1)
-        ->orderBy('id', 'desc')
-        ->take(4)
-        ->get(['id','name','description','image']);
+            ->orderBy('id', 'desc')
+            ->take(4)
+            ->get(['id', 'name', 'description', 'image']);
     }
-
-   
 }

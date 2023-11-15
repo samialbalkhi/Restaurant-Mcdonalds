@@ -9,9 +9,8 @@ class employmentApplicationsService
 {
     public function store(EmploymentApplicationRequest $request): EmploymentApplication
     {
-        
         $path = $request->resume->store('resume', 'public');
-        return  EmploymentApplication::create([
+        return EmploymentApplication::create([
             'gender' => $request->gender,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,

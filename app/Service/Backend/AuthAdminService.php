@@ -11,12 +11,12 @@ class AuthAdminService
     public function login(loginRequest $request)
     {
         $user = User::whereEmail($request->email)->first();
-        if (!$user || !Hash::check($request->password, $user->password)) 
-        throw ValidationException::withMessages([
-            'email' => ['Email or password not correct']
-        ]);
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['Email or password not correct'],
+            ]);
+        }
 
-            return $user->createToken('token-name', ['admin'])->plainTextToken;
-        
+        return ['token' => $user->createToken('token-name', ['admin'])->plainTextToken];
     }
 }

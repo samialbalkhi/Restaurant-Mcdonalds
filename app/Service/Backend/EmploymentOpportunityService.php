@@ -11,13 +11,12 @@ class employmentOpportunityService
         return EmploymentOpportunity::all();
     }
 
-    public function store(EmploymentOpportunityRequest $request) : EmploymentOpportunity
+    public function store(EmploymentOpportunityRequest $request): EmploymentOpportunity
     {
-        return   EmploymentOpportunity::create([
+        return EmploymentOpportunity::create([
             'name' => $request->name,
             'vacancies' => $request->vacancies,
         ]);
-
     }
     public function edit(EmploymentOpportunity $employmentOpportunity)
     {

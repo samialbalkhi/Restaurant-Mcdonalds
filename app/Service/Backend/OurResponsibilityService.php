@@ -12,9 +12,7 @@ class ourResponsibilityService
 
     public function index()
     {
-
-        return 
-            Ourresponsibility::with(['section:id,name'])->get();
+        return Ourresponsibility::with(['section:id,name'])->get();
     }
 
     public function store(OurResponsibilityRequest $request): Ourresponsibility
@@ -29,14 +27,11 @@ class ourResponsibilityService
             'image' => $path,
             'section_id' => $request->section_id,
         ]);
-
-        
     }
 
     public function edit(Ourresponsibility $ourResponsibility)
     {
-        return 
-            $ourResponsibility->find($ourResponsibility->id);
+        return $ourResponsibility->find($ourResponsibility->id);
     }
 
     public function update(OurResponsibilityRequest $request, Ourresponsibility $ourResponsibility)
@@ -51,7 +46,6 @@ class ourResponsibilityService
             'image' => $path,
             'section_id' => $request->section_id,
         ]);
-
     }
 
     public function destroy(Ourresponsibility $ourResponsibility)

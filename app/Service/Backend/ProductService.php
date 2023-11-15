@@ -21,7 +21,6 @@ class ProductService
     {
         $path = $this->uploadImage('images_product');
 
-
         $category = Category::find($request->category_id);
         return $category->product()->create([
             'name' => $request->name,

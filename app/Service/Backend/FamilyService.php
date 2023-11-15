@@ -12,12 +12,10 @@ class FamilyService
 
     public function index()
     {
-
-        return 
-            Family::with(['section:id,name'])->get();
+        return Family::with(['section:id,name'])->get();
     }
 
-    public function store(FamilyRequest $request) : Family
+    public function store(FamilyRequest $request): Family
     {
         $path = $this->uploadImage('image_family');
         $section = Section::find($request->section_id);
@@ -28,14 +26,11 @@ class FamilyService
             'description' => $request->description,
             'image' => $path,
         ]);
-
     }
 
     public function edit(Family $family)
     {
-
-        return 
-            $family->find($family->id);
+        return $family->find($family->id);
     }
 
     public function update(FamilyRequest $request, Family $family)
@@ -50,13 +45,11 @@ class FamilyService
             'image' => $path,
             'section_id' => $request->section_id,
         ]);
-
     }
 
     public function destroy(Family $family)
     {
         $this->deleteImage($family);
         $family->delete();
-
     }
 }

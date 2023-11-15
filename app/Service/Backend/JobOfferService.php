@@ -12,8 +12,7 @@ class jobOfferService
 
     public function index()
     {
-        return 
-            Joboffer::with(['employment_opportunitie:id,name', 'details:joboffer_id,details'])->paginate();
+        return Joboffer::with(['employment_opportunitie:id,name', 'details:joboffer_id,details'])->paginate();
     }
 
     public function store(JobOfferRequest $request)
@@ -38,24 +37,22 @@ class jobOfferService
         }
 
         $jobOfferId = Joboffer::find($Joboffer->id);
-        $worktimes = []; 
+        $worktimes = [];
 
         for ($i = 0; $i < count($request->listOfworktime); $i++) {
             $worktime = $jobOfferId->jobOfferTimes()->create([
                 'name' => $request->listOfworktime[$i]['worktime'],
             ]);
 
-            $worktimes[] = $worktime; 
+            $worktimes[] = $worktime;
         }
 
-        return ['Joboffer'=> $Joboffer,'details'=> $details,'worktimes'=>$worktimes];
+        return ['Joboffer' => $Joboffer, 'details' => $details, 'worktimes' => $worktimes];
     }
 
     public function edit(Joboffer $jobOffer)
     {
-
-        return 
-            $jobOffer->find($jobOffer->id);
+        return $jobOffer->find($jobOffer->id);
     }
 
     public function update(JobOfferRequest $request, Joboffer $jobOffer)
@@ -70,7 +67,6 @@ class jobOfferService
             'image' => $path,
             'employment_opportunity_id' => $request->employment_opportunity_id,
         ]);
-
     }
 
     public function destroy(Joboffer $jobOffer)
@@ -78,6 +74,5 @@ class jobOfferService
         $this->deleteImage($jobOffer);
 
         $jobOffer->delete();
-
     }
 }

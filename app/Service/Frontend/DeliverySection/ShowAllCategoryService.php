@@ -7,6 +7,6 @@ class ShowAllCategoryService
 {
     public function index()
     {
-        return Category::get(['id','name','section_id']);
+        return Category::get(['id', 'name', 'section_id']);
     }
 }

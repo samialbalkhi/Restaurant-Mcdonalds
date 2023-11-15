@@ -25,26 +25,32 @@ class ProfileCustomerService
 
     public function profileCustomer(UpdateProfileCustomerRequest $request)
     {
-        $admin = auth()->user();
+        $user = auth()->user();
         $nameAndEmail = [
             'name' => $request->name,
             'email' => $request->email,
         ];
 
         if ($request->old_password) {
-            if (Hash::check($request->old_password, $admin->password) == true) {
+            if (Hash::check($request->old_password, $user->password) == true) {
                 $nameAndEmail = array_merge($nameAndEmail, [
                     'password' => $request->new_password,
                 ]);
             } else {
-                return response()->data(key: 'error', message: 'old password  not correct', statusCode: 422);
+                return response()->data(
+                key: 'error',
+                message: 'old password  not correct',
+                statusCode: 422);
             }
         }
         auth()
             ->user()
             ->update($nameAndEmail);
 
-        return response()->data(key: 'success', message: 'update profile sucessfully', statusCode: 200);
+        return response()->data(
+            key: 'success',
+            message: 'update profile sucessfully',
+            statusCode: 200);
     }
 
     public function logout()

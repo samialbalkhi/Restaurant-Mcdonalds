@@ -7,6 +7,8 @@ class ShowSectionCareerService
 {
     public function ShowSectionCareer(Section $section)
     {
-        return Section::with('careers')->where('id', $section->id)->get();
+        return Section::with('careers')
+            ->where('id', $section->id)
+            ->get();
     }
 }
