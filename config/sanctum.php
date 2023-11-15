@@ -28,8 +28,8 @@ return [
     |
     */
 
-    'guard' => ['web'],
-
+    'guards' => ['web', 'restaurantOwner'],
+    
     /*
     |--------------------------------------------------------------------------
     | Expiration Minutes

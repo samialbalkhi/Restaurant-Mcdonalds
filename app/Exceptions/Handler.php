@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Throwable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -31,26 +32,28 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
-        if ($e instanceof ModelNotFoundException) {
-            return $this->modelNotFoundResponse($e);
-        }
-        if ($e instanceof NotFoundHttpException) {
-            return $this->notFoundHttpResonse($e);
-        }
-        if ($e instanceof AuthorizationException) {
-            return $this->authorizationResonse($e);
-        }
-        if ($e instanceof AuthenticationException) {
-            return $this->authenticationResonse($e);
-        }
-        if ($e instanceof ValidationException) {
-            return $this->validationResponse($e);
-        } else {
-            return response()->data(
-                key: 'error',
-                message:'An unexpected exception occurred',
-                statusCode: 500);
-        }
+            if ($e instanceof ModelNotFoundException) {
+                return $this->modelNotFoundResponse($e);
+            }
+            if ($e instanceof NotFoundHttpException) {
+                return $this->notFoundHttpResonse($e);
+            }
+            if ($e instanceof AuthorizationException) {
+                return $this->authorizationResonse($e);
+            }
+            if ($e instanceof AuthenticationException) {
+                return $this->authenticationResonse($e);
+            }
+            if ($e instanceof ValidationException) {
+                return $this->validationResponse($e);
+            } else {
+                
+                return response()->data(
+                    key: 'error',
+                    message:   $e->getMessage(),
+                    statusCode: 500
+                );
+            }
         parent::render($request, $e);
     }
 
