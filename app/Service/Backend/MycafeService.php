@@ -31,8 +31,7 @@ class MycafeService
 
     public function edit(MyCafe $mycafe)
     {
-        return
-            $mycafe->find($mycafe->id);
+        return $mycafe;
     }
 
     public function update(MycafeRequest $request, MyCafe $mycafe)

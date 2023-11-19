@@ -29,7 +29,7 @@ class SectionService
 
     public function edit(Section $section)
     {
-        return $section->find($section->id);
+        return $section;
     }
 
     public function update(SectionRequest $request, Section $section)

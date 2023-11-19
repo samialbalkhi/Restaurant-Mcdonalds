@@ -32,7 +32,7 @@ class ourRestaurantService
 
     public function edit(Ourrestaurant $ourRestaurant)
     {
-        return $ourRestaurant->find($ourRestaurant->id);
+        return $ourRestaurant;
     }
 
     public function update(OurRestaurantRequest $request, Ourrestaurant $ourRestaurant)

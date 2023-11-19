@@ -19,7 +19,7 @@ class CityService
 
     public function edit(City $city)
     {
-        return $city->find($city->id);
+        return $city;
     }
 
     public function update(CityRequest $request,City $city)

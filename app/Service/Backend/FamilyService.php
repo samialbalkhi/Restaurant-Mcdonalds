@@ -30,7 +30,7 @@ class FamilyService
 
     public function edit(Family $family)
     {
-        return $family->find($family->id);
+        return $family;
     }
 
     public function update(FamilyRequest $request, Family $family)

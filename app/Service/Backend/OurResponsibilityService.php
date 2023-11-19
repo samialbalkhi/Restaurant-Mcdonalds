@@ -31,7 +31,7 @@ class ourResponsibilityService
 
     public function edit(Ourresponsibility $ourResponsibility)
     {
-        return $ourResponsibility->find($ourResponsibility->id);
+        return $ourResponsibility;
     }
 
     public function update(OurResponsibilityRequest $request, Ourresponsibility $ourResponsibility)

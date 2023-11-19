@@ -37,7 +37,7 @@ class ProductService
 
     public function edit(Product $product)
     {
-        return $product->find($product->id);
+        return $product;
     }
 
     public function update(ProductRequest $request, Product $product)

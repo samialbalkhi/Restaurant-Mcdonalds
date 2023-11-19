@@ -31,7 +31,7 @@ class restaurantBranchesService
 
     public function edit(RestaurantBranche $restaurantBranche)
     {
-        return $restaurantBranche->find($restaurantBranche->id);
+        return $restaurantBranche;
     }
 
     public function update(RestaurantBrancheRequest $request, RestaurantBranche $restaurantBranche)

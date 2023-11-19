@@ -52,7 +52,7 @@ class jobOfferService
 
     public function edit(Joboffer $jobOffer)
     {
-        return $jobOffer->find($jobOffer->id);
+        return $jobOffer;
     }
 
     public function update(JobOfferRequest $request, Joboffer $jobOffer)

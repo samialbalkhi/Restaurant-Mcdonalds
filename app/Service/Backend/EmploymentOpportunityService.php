@@ -20,7 +20,7 @@ class employmentOpportunityService
     }
     public function edit(EmploymentOpportunity $employmentOpportunity)
     {
-        return $employmentOpportunity->find($employmentOpportunity->id);
+        return $employmentOpportunity;
     }
 
     public function update(EmploymentOpportunityRequest $request, EmploymentOpportunity $employmentOpportunity)

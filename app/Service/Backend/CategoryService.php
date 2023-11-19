@@ -33,7 +33,7 @@ class CategoryService
      */
     public function edit(Category $category)
     {
-        return $category->find($category->id);
+        return $category;
     }
 
     /**

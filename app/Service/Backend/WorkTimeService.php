@@ -21,7 +21,7 @@ class workTimeService
 
     public function edit(WorkTime $workTime)
     {
-        return $workTime->find($workTime->id);
+        return $workTime;
     }
 
     public function update(WorkTimeRequest $request, WorkTime $workTime)

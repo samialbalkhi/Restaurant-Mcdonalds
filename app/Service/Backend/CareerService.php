@@ -31,7 +31,7 @@ class CareerService
 
     public function edit(Career $career)
     {
-        return $career->find($career->id);
+        return $career;
     }
 
     public function update(CareerRequest $request, Career $career)
