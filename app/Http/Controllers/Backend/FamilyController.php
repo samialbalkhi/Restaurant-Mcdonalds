@@ -10,7 +10,6 @@ use App\Http\Requests\Backend\FamilyRequest;
 
 class FamilyController extends Controller
 {
-
     public function __construct(private FamilyService $FamilyService)
     {
     }
@@ -19,16 +18,7 @@ class FamilyController extends Controller
      */
     public function index()
     {
-        return response()->json(
-            $this->FamilyService->index());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return response()->json($this->FamilyService->index());
     }
 
     /**
@@ -36,17 +26,7 @@ class FamilyController extends Controller
      */
     public function store(FamilyRequest $request)
     {
-        
-        return response()->json(
-            $this->FamilyService->store($request), 201);   
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return response()->json($this->FamilyService->store($request), 201);
     }
 
     /**
@@ -54,8 +34,7 @@ class FamilyController extends Controller
      */
     public function edit(Family $family)
     {
-        return response()->json(
-            $this->FamilyService->edit($family));
+        return response()->json($this->FamilyService->edit($family));
     }
 
     /**
@@ -76,6 +55,4 @@ class FamilyController extends Controller
 
         return response()->json(['message' => 'deleted successfully'], 200);
     }
-
-
 }

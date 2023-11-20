@@ -19,16 +19,7 @@ class RestaurantOwnerController extends Controller
 
     public function index()
     {
-        return response()->json(
-            $this->restaurantOwnerService->index());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return response()->json($this->restaurantOwnerService->index());
     }
 
     /**
@@ -36,17 +27,7 @@ class RestaurantOwnerController extends Controller
      */
     public function store(RestaurantOwnerRequest $request)
     {
-        
-        return response()->json(
-            $this->restaurantOwnerService->store($request), 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return response()->json($this->restaurantOwnerService->store($request), 201);
     }
 
     /**
@@ -54,8 +35,7 @@ class RestaurantOwnerController extends Controller
      */
     public function edit(RestaurantOwner $restaurantOwner)
     {
-        return response()->json(
-            $this->restaurantOwnerService->edit($restaurantOwner));
+        return response()->json($this->restaurantOwnerService->edit($restaurantOwner));
     }
 
     /**

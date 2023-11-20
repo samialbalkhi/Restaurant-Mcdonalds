@@ -22,14 +22,6 @@ class DriverController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(DriverRequest $request)
@@ -38,19 +30,11 @@ class DriverController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Driver $driver)
     {
-        return response()->json( $this->driverService->edit($driver));
+        return response()->json($this->driverService->edit($driver));
     }
 
     /**
@@ -60,7 +44,6 @@ class DriverController extends Controller
     {
         $this->driverService->update($request, $driver);
         return response()->json(['message' => 'Updateed  successfully']);
-
     }
 
     /**

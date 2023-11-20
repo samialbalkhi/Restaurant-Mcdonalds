@@ -18,16 +18,7 @@ class employmentOpportunityController extends Controller
      */
     public function index()
     {
-        return response()->json(
-            $this->employmentOpportunityService->index());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return response()->json($this->employmentOpportunityService->index());
     }
 
     /**
@@ -35,16 +26,7 @@ class employmentOpportunityController extends Controller
      */
     public function store(EmploymentOpportunityRequest $request)
     {
-        return response()->json(
-            $this->employmentOpportunityService->store($request), 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return response()->json($this->employmentOpportunityService->store($request), 201);
     }
 
     /**
@@ -52,8 +34,7 @@ class employmentOpportunityController extends Controller
      */
     public function edit(EmploymentOpportunity $employmentOpportunity)
     {
-        return response()->json(
-            $this->employmentOpportunityService->edit($employmentOpportunity));
+        return response()->json($this->employmentOpportunityService->edit($employmentOpportunity));
     }
 
     /**

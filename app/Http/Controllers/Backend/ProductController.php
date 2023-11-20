@@ -10,24 +10,15 @@ use App\Http\Requests\Backend\ProductRequest;
 
 class ProductController extends Controller
 {
-public function __construct(private ProductService $ProductService)
-{
-}
+    public function __construct(private ProductService $ProductService)
+    {
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return response()->json(
-            $this->ProductService->index());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return response()->json($this->ProductService->index());
     }
 
     /**
@@ -35,16 +26,7 @@ public function __construct(private ProductService $ProductService)
      */
     public function store(ProductRequest $request)
     {
-        return response()->json(
-            $this->ProductService->store($request), 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return response()->json($this->ProductService->store($request), 201);
     }
 
     /**
@@ -52,8 +34,7 @@ public function __construct(private ProductService $ProductService)
      */
     public function edit(Product $product)
     {
-        return response()->json(
-            $this->ProductService->edit($product));
+        return response()->json($this->ProductService->edit($product));
     }
 
     /**
@@ -71,8 +52,11 @@ public function __construct(private ProductService $ProductService)
     public function destroy(Product $product)
     {
         $this->ProductService->destroy($product);
-    return response()->json([
-        'message' => 'Deleted successfully'
-    ], 200);
+        return response()->json(
+            [
+                'message' => 'Deleted successfully',
+            ],
+            200,
+        );
     }
 }

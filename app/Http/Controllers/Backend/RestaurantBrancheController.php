@@ -22,27 +22,11 @@ class RestaurantBrancheController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(RestaurantBrancheRequest $request)
     {
         return response()->json($this->restaurantBranchesService->store($request));
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**
@@ -60,7 +44,6 @@ class RestaurantBrancheController extends Controller
     {
         $this->restaurantBranchesService->update($request, $restaurantBranche);
         return response()->json(['message' => 'Updateed  successfully']);
-
     }
 
     /**

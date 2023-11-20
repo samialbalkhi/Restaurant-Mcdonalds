@@ -10,25 +10,15 @@ use App\Http\Requests\Backend\MycafeRequest;
 
 class MycafeController extends Controller
 {
-    
-public function __construct(private MycafeService $MycafeService)
-{
-}
+    public function __construct(private MycafeService $MycafeService)
+    {
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return response()->json(
-            $this->MycafeService->index());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return response()->json($this->MycafeService->index());
     }
 
     /**
@@ -36,17 +26,7 @@ public function __construct(private MycafeService $MycafeService)
      */
     public function store(MycafeRequest $request)
     {
-
-        return response()->json(
-            $this->MycafeService->store($request), 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return response()->json($this->MycafeService->store($request), 201);
     }
 
     /**
@@ -54,8 +34,7 @@ public function __construct(private MycafeService $MycafeService)
      */
     public function edit(MyCafe $mycafe)
     {
-        return response()->json(
-            $this->MycafeService->edit($mycafe));
+        return response()->json($this->MycafeService->edit($mycafe));
     }
 
     /**
@@ -75,9 +54,6 @@ public function __construct(private MycafeService $MycafeService)
     {
         $this->MycafeService->destroy($mycafe);
 
-    return response()->json(['message' => 'deleted successfully'], 200);
+        return response()->json(['message' => 'deleted successfully'], 200);
     }
 }
-
-
-

@@ -10,8 +10,6 @@ use App\Http\Requests\Backend\CategoryRequest;
 
 class CategoryController extends Controller
 {
-
-
     function __construct(private CategoryService $CategoryService)
     {
     }
@@ -20,16 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return response()->json(
-            $this->CategoryService->index());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return response()->json($this->CategoryService->index());
     }
 
     /**
@@ -37,16 +26,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        return response()->json(
-            $this->CategoryService->store($request),201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        
+        return response()->json($this->CategoryService->store($request), 201);
     }
 
     /**
@@ -54,8 +34,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return response()->json(
-            $this->CategoryService->edit($category));
+        return response()->json($this->CategoryService->edit($category));
     }
 
     /**

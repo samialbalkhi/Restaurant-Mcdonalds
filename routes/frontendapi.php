@@ -1,24 +1,26 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Frontend\ReviewController;
-use App\Http\Controllers\Frontend\Home\GetSectionController;
-use App\Http\Controllers\Frontend\ProfileCustomerController;
-use App\Http\Controllers\Frontend\DeliverySection\CartController;
-use App\Http\Controllers\Frontend\VerifyCity\VerifyCityController;
-use App\Http\Controllers\Frontend\DeliverySection\OrederController;
-use App\Http\Controllers\Frontend\Home\ShowProductsAtHomeController;
-use App\Http\Controllers\Frontend\ShowProduct\ShowProductController;
-use App\Http\Controllers\Frontend\ShowCategory\ShowCategoryController;
-use App\Http\Controllers\Frontend\DeliverySection\ShowAllProductController;
-use App\Http\Controllers\Frontend\DeliverySection\ShowAllCategoryController;
-use App\Http\Controllers\Frontend\ShowSectioMycafe\ShowSectioMycafeController;
-use App\Http\Controllers\Frontend\ShowOurRestaurant\ShowOurRestaurantController;
-use App\Http\Controllers\Frontend\ShowSectioFamily\ShowSectioMyFamilyController;
-use App\Http\Controllers\Frontend\ShowSectionCareer\ShowSectionCareerController;
-use App\Http\Controllers\Frontend\DeliverySection\ShowRestaurantBrancheController;
-use App\Http\Controllers\Frontend\ShowSectionCareer\EmploymentApplicationController;
-use App\Http\Controllers\Frontend\ShowOurResponsibiliy\ShowOurResponsibiliyController;
-use App\Http\Controllers\Frontend\ShowSectionCareer\ShowEmploymentOpportunitiesController;
+use App\Http\Controllers\Frontend\{
+    ReviewController,
+    Home\GetSectionController,
+    ProfileCustomerController,
+    DeliverySection\CartController,
+    VerifyCity\VerifyCityController,
+    DeliverySection\OrederController,
+    Home\ShowProductsAtHomeController,
+    ShowProduct\ShowProductController,
+    ShowCategory\ShowCategoryController,
+    DeliverySection\ShowAllProductController,
+    DeliverySection\ShowAllCategoryController,
+    ShowSectioMycafe\ShowSectioMycafeController,
+    ShowOurRestaurant\ShowOurRestaurantController,
+    ShowSectioFamily\ShowSectioMyFamilyController,
+    ShowSectionCareer\ShowSectionCareerController,
+    DeliverySection\ShowRestaurantBrancheController,
+    ShowSectionCareer\EmploymentApplicationController,
+    ShowOurResponsibiliy\ShowOurResponsibiliyController,
+    ShowSectionCareer\ShowEmploymentOpportunitiesController,
+};
 
 /////////////////    frontend         //////////////////////
 Route::group(['prefix' => 'Home'], function () {

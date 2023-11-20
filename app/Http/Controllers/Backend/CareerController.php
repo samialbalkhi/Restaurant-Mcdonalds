@@ -22,28 +22,11 @@ class CareerController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create(string $id)
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(CareerRequest $request)
     {
-        return response()->json(
-            $this->CareerService->store($request), 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return response()->json($this->CareerService->store($request), 201);
     }
 
     /**
@@ -51,8 +34,7 @@ class CareerController extends Controller
      */
     public function edit(Career $career)
     {
-        return response()->json(
-            $this->CareerService->edit($career));
+        return response()->json($this->CareerService->edit($career));
     }
 
     /**

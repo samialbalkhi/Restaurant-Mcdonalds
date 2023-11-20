@@ -10,7 +10,6 @@ use App\Http\Requests\Backend\OurResponsibilityRequest;
 
 class ourResponsibilityController extends Controller
 {
-    
     public function __construct(private ourResponsibilityService $ourResponsibilityService)
     {
     }
@@ -23,29 +22,12 @@ class ourResponsibilityController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(OurResponsibilityRequest $request)
     {
         // $ourResponsibility = ;
-        return response()->json(
-            $this->ourResponsibilityService->store($request), 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return response()->json($this->ourResponsibilityService->store($request), 201);
     }
 
     /**

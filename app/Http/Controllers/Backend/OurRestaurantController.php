@@ -21,29 +21,13 @@ class ourRestaurantController extends Controller
     {
         return response()->json($this->ourRestaurantService->index());
     }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(OurRestaurantRequest $request)
     {
-        return response()->json(
-            $this->ourRestaurantService->store($request), 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return response()->json($this->ourRestaurantService->store($request), 201);
     }
 
     /**
@@ -51,8 +35,7 @@ class ourRestaurantController extends Controller
      */
     public function edit(Ourrestaurant $ourRestaurant)
     {
-        return response()->json(
-            $this->ourRestaurantService->edit($ourRestaurant));
+        return response()->json($this->ourRestaurantService->edit($ourRestaurant));
     }
 
     /**

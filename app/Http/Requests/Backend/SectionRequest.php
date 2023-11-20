@@ -29,7 +29,7 @@ class SectionRequest extends FormRequest
         $rules = [];
 
         $rules = [
-            'name' => ['required', 'unique:userasd,name', 'max:30', 'min:3'],
+            'name' => ['required', 'unique:sections,name', 'max:30', 'min:3'],
             'description' => ['required', 'min:3'],
             'message' => ['required'],
             'status' => ['required'],

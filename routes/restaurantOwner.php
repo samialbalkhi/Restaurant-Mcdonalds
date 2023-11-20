@@ -1,14 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RestaurantOwner\ShowOrderController;
-use App\Http\Controllers\RestaurantOwner\ShowBranchController;
-use App\Http\Controllers\RestaurantOwner\ShowDriverController;
-use App\Http\Controllers\RestaurantOwner\ShowReviewController;
-use App\Http\Controllers\RestaurantOwner\ShowItemsOrderController;
-use App\Http\Controllers\RestaurantOwner\ShowNumberOfOrderController;
-use App\Http\Controllers\RestaurantOwner\AuthRestaurantOwnerController;
-use App\Http\Controllers\RestaurantOwner\ProfileRestaurantOwnerController;
-use App\Http\Controllers\RestaurantOwner\ShowTheOrderAccountingController;
+use App\Http\Controllers\RestaurantOwner\ReviewsAverageController;
+use App\Http\Controllers\RestaurantOwner\{ShowOrderController, ShowBranchController, ShowDriverController, ShowReviewController, ShowItemsOrderController, ShowNumberOfOrderController, AuthRestaurantOwnerController, ProfileRestaurantOwnerController, ShowTheOrderAccountingController};
 
 Route::group(['prefix' => 'AuthRestaurantOwner'], function () {
     Route::post('/login', [AuthRestaurantOwnerController::class, 'login']);
@@ -58,5 +51,8 @@ Route::group(['middleware' => ['auth:restaurantOwner']], function () {
     Route::group(['prefix' => 'showItemsOrder'], function () {
         Route::get('/showItemsOrder/{orderId}', [ShowItemsOrderController::class, 'showItemsOrder']);
         Route::get('/showOneItemOrder/{orderItem}', [ShowItemsOrderController::class, 'showOneItemOrder']);
+    });
+    Route::group(['prefix' => 'RestaurantOwner'], function () {
+        Route::get('/calculateReviewAverage', ReviewsAverageController::class);
     });
 });

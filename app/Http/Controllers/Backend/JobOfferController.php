@@ -19,16 +19,7 @@ class jobOfferController extends Controller
 
     public function index()
     {
-        return response()->json(
-            $this->jobOfferService->index());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return response()->json($this->jobOfferService->index());
     }
 
     /**
@@ -36,16 +27,7 @@ class jobOfferController extends Controller
      */
     public function store(JobOfferRequest $request)
     {
-        return response()->json( 
-            $this->jobOfferService->store($request), 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return response()->json($this->jobOfferService->store($request), 201);
     }
 
     /**
@@ -53,8 +35,7 @@ class jobOfferController extends Controller
      */
     public function edit(Joboffer $jobOffer)
     {
-        return response()->json(
-            $this->jobOfferService->edit($jobOffer));
+        return response()->json($this->jobOfferService->edit($jobOffer));
     }
 
     /**
@@ -72,7 +53,7 @@ class jobOfferController extends Controller
      */
 
     public function destroy(Joboffer $jobOffer)
-    {   
+    {
         $this->jobOfferService->destroy($jobOffer);
         return response()->json(
             [

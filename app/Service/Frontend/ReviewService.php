@@ -38,8 +38,15 @@ class ReviewService
     }
     public function showReview($branshId)
     {
-        return RestaurantReview::with('user:id,name')
+        $RestaurantReview = RestaurantReview::with('user:id,name')
             ->where('restaurant_branche_id', $branshId)
             ->get();
+
+        $averageRating = $RestaurantReview->avg('rating');
+
+        return [
+            'reviews' => $RestaurantReview,
+            'average_rating' => $averageRating,
+        ];
     }
 }
