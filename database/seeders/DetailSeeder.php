@@ -14,13 +14,11 @@ class DetailSeeder extends Seeder
      */
     public function run(): void
     {
-        $joboffer = Joboffer::pluck('id')->toArray();
         $faker = Factory::create();
         for ($i = 1; $i <= 500; $i++) {
-            $randomJobID = $joboffer[array_rand($joboffer)];
             $Detail[] = [
                 'details' => $faker->paragraph,
-                'joboffer_id' => $randomJobID,
+                'joboffer_id' => Joboffer::inRandomOrder()->first()->id,
             ];
         }
 

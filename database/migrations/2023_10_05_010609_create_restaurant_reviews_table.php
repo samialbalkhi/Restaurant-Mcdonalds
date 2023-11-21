@@ -28,7 +28,6 @@ return new class extends Migration {
             $table->longText('comment')->nullable();
             $table->string('review_type')->nullable();
             $table->string('title')->nullable();
-            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

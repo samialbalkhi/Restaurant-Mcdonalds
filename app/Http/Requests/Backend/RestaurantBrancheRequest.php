@@ -32,7 +32,7 @@ class RestaurantBrancheRequest extends FormRequest
             'deliveryprice' => ['required','numeric'],
             'arrivaltime' => ['required','numeric'],
             'image' => ['required'],
-            'status' => ['required'],
+            'status' => ['nullable'],
         ];
         if (Request::route()->getName() == 'restaurantBranche.update') {
             $rules['name'] = ['required', 'min:3', Rule::unique('restaurant_branches', 'name')->ignore($this->restaurantBranche->id)];

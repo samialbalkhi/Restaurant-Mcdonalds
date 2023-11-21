@@ -32,7 +32,7 @@ class DriverRequest extends FormRequest
             'phone' => ['required', 'numeric', 'unique:drivers,phone'],
             'email' => ['required', 'email', 'unique:drivers,email'],
             'address' => ['required'],
-            'status' => ['required'],
+            'status' => ['nullable'],
 
         ];
         if (Request::route()->getName() == 'drivers.update') {

@@ -8,9 +8,10 @@ trait ImageUploadTrait
 {
     public function uploadImage($folder)
     {
-        $request = request();
-        $path = $request->file('image')->store($folder, 'public');
-        
+        $path = request()
+            ->file('image')
+            ->store($folder, 'public');
+
         return $path;
     }
 
@@ -23,6 +24,6 @@ trait ImageUploadTrait
 
     public function updateImage($folder)
     {
-      $this->deleteImage($folder);
+        $this->deleteImage($folder);
     }
 }

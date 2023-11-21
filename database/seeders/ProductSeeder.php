@@ -16,21 +16,19 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         $faker = Factory::create();
-        $categories = Category::pluck('id');
-        $RestaurantBranche = RestaurantBranche::pluck('id');
 
         for ($i = 1; $i <= 1000; $i++) {
             $products[] = [
                 'name' => $faker->sentence(2, true),
                 'description' => $faker->paragraph,
                 'price' => $faker->numberBetween(5, 200),
-                'category_id' => $categories->random(),
+                'category_id' => Category::inRandomOrder()->first()->id,
                 'featured' => rand(0, 1),
                 'kcal' => $faker->numberBetween(150, 1000),
                 'image' => 'Burger.jpeg',
                 'status' => true,
                 'created_at' => now(),
-                'restaurant_branche_id'=>$RestaurantBranche->random(),
+                'restaurant_branche_id'=>RestaurantBranche::inRandomOrder()->first()->id,
             ];
         }
         $chunks = array_chunk($products, 100);

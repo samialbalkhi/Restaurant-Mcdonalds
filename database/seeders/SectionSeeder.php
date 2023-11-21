@@ -28,7 +28,7 @@ class SectionSeeder extends Seeder
             'description' => $faker->paragraph,
             'message' => 'In allen teilnehmenden Restaurants. Solange der Vorrat reicht. Iced Coffee Shake täglich ab 10 Uhr erhältlich (samstags, sonn- und feiertags ab 11 Uhr).',
             'image' => 'cafe.jpg',
-            'status' =>  1,
+            'status' => 1,
         ]);
 
         Section::create([
@@ -44,7 +44,7 @@ class SectionSeeder extends Seeder
             'description' => $faker->paragraph,
             'message' => 'In allen teilnehmenden Restaurants. Solange der Vorrat reicht. Iced Coffee Shake täglich ab 10 Uhr erhältlich (samstags, sonn- und feiertags ab 11 Uhr).',
             'image' => 'cafe.jpg',
-            'status' =>  1,
+            'status' => 1,
         ]);
 
         Section::create([

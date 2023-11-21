@@ -13,17 +13,19 @@ class SectionService
     {
         return Section::all();
     }
-
+    
     public function store(SectionRequest $request): Section
     {
-        $path = $this->uploadImage('images_section');
+    //   return  Section::create($request->validated() + [
+    //         'image' => $this->uploadImage('images_section'),
 
+    //     ]);
         return Section::create([
             'name' => $request->name,
             'description' => $request->description,
             'message' => $request->message,
-            'status' => $request->status,
-            'image' => $path,
+            'status' => $request->has('status'),
+            'image' => $this->uploadImage('images_section'),
         ]);
     }
 

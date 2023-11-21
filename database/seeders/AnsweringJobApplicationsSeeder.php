@@ -15,13 +15,12 @@ class AnsweringJobApplicationsSeeder extends Seeder
     public function run(): void
     {
         $faker = Factory::create();
-        $EmploymentApplication = EmploymentApplication::pluck('id');
         for ($i = 1; $i <= 100; $i++) {
             $AnsweringJob[] = [
                 'name' => $faker->userName(),
                 'description' => $faker->paragraph(),
                 'message' => $faker->text(),
-                'employment_application_id' => $EmploymentApplication->random(),
+                'employment_application_id' => EmploymentApplication::inRandomOrder()->first()->id,
             ];
         }
         $chunks = array_chunk($AnsweringJob, 10);

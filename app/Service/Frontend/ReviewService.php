@@ -31,10 +31,12 @@ class ReviewService
             'comment' => $request->comment,
             'review_type' => $request->review_type,
             'title' => $request->title,
-            'status' => true,
         ]);
 
-        return response()->data(key: 'error', message: 'Review submitted successfully..', statusCode: 200);
+        return response()->data(
+            key: 'error', 
+            message: 'Review submitted successfully..',
+            statusCode: 200);
     }
     public function showReview($branshId)
     {
