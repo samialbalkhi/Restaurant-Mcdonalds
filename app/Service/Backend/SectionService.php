@@ -13,18 +13,18 @@ class SectionService
     {
         return Section::all();
     }
-    
+
     public function store(SectionRequest $request): Section
     {
-    //   return  Section::create($request->validated() + [
-    //         'image' => $this->uploadImage('images_section'),
+        //   return  Section::create($request->validated() + [
+        //         'image' => $this->uploadImage('images_section'),
 
-    //     ]);
+        //     ]);
         return Section::create([
             'name' => $request->name,
             'description' => $request->description,
             'message' => $request->message,
-            'status' => $request->has('status'),
+            'status' => $request->filled('status'),
             'image' => $this->uploadImage('images_section'),
         ]);
     }
@@ -43,7 +43,7 @@ class SectionService
             'name' => $request->name,
             'description' => $request->description,
             'message' => $request->message,
-            'status' => $request->status,
+            'status' => $request->filled('status'),
             'image' => $path,
         ]);
     }

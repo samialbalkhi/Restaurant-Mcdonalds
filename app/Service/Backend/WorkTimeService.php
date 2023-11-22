@@ -13,9 +13,7 @@ class workTimeService
 
     public function store(WorkTimeRequest $request) : WorkTime
     {
-        return WorkTime::create([
-            'name' => $request->name,
-        ]);
+        return WorkTime::create($request->validated());
          
     }
 
@@ -26,9 +24,7 @@ class workTimeService
 
     public function update(WorkTimeRequest $request, WorkTime $workTime)
     {
-        $workTime->update([
-            'name' => $request->name,
-        ]);
+        $workTime->update($request->validated());
     }
 
     public function destroy(WorkTime $workTime)

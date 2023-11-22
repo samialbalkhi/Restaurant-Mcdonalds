@@ -24,7 +24,7 @@ class restaurantBranchesService
             'name' => $request->name,
             'deliveryprice' => $request->deliveryprice,
             'arrivaltime' => $request->arrivaltime,
-            'status' => $request->status,
+            'status' => $request->filled('status'),
             'image' => $path,
         ]);
     }
@@ -44,7 +44,7 @@ class restaurantBranchesService
             'name' => $request->name,
             'deliveryprice' => $request->deliveryprice,
             'arrivaltime' => $request->arrivaltime,
-            'status' => $request->status,
+            'status' => $request->filled('status'),
             'image' => $path,
             'city' => $request->city,
         ]);

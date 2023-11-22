@@ -14,7 +14,10 @@ class CityService
 
     public function store(CityRequest $request):City
     {
-       return City::create($request->validated());
+       return City::create($request->validated()+[
+        'status' =>$request->filled('status'),
+        
+       ]);
     }
 
     public function edit(City $city)
@@ -24,7 +27,9 @@ class CityService
 
     public function update(CityRequest $request,City $city)
     {
-        $city->update($request->validated());
+        $city->update($request->validated()+[
+            $request->filled('status')
+        ]);
     }
 
     public function destroy(City $city)

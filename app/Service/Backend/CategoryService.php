@@ -23,7 +23,7 @@ class CategoryService
 
         return $section->categories()->create([
             'name' => $request->name,
-            'status' => $request->status,
+            'status' => $request->filled('status'),
             'image' => $path,
         ]);
     }
@@ -46,7 +46,7 @@ class CategoryService
 
         $category->update([
             'name' => $request->name,
-            'status' => $request->status,
+            'status' => $request->filled('status'),
             'image' => $path,
             'section_id' => $request->section_id,
         ]);

@@ -16,7 +16,9 @@ class DriverService
     {
         $restaurantBranche = RestaurantBranche::find($request->restaurant_branche_id);
 
-        return $restaurantBranche->drivers()->create($request->validated());
+        return $restaurantBranche->drivers()->create($request->validated()+[
+            'status' =>$request->filled('status'),
+        ]);
     }
 
     public function edit(Driver $driver)
@@ -26,7 +28,9 @@ class DriverService
 
     public function update(DriverRequest $request, Driver $driver)
     {
-        $driver->update($request->validated());
+        $driver->update($request->validated()+[
+            $request->filled('status')
+        ]);
     }
 
     public function destroy(Driver $driver)

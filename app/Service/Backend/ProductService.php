@@ -28,9 +28,8 @@ class ProductService
             'price' => $request->price,
             'kcal' => $request->kcal,
             'featured' => $request->featured,
-            'status' => $request->status,
+            'status' => $request->filled('status'),
             'restaurant_branche_id' => $request->restaurant_branche_id,
-
             'image' => $path,
         ]);
     }
@@ -52,7 +51,7 @@ class ProductService
             'price' => $request->price,
             'kcal' => $request->kcal,
             'featured' => $request->featured,
-            'status' => $request->status,
+            'status' => $request->filled('status'),
             'restaurant_branche_id' => $request->restaurant_branche_id,
             'category_id' => $request->category_id,
             'image' => $path,
