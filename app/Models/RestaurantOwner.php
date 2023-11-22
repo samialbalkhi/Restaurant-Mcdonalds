@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Carbon;
 use App\Models\RestaurantBranche;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class RestaurantOwner extends Authenticatable
 {
@@ -22,5 +23,10 @@ class RestaurantOwner extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y-m-d H:i:s');
     }
 }

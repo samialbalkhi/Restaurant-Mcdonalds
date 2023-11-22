@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\RegisterRequest;
@@ -15,10 +14,10 @@ class ProfileCustomerController extends Controller
     public function __construct(private ProfileCustomerService $ProfileCustomerService)
     {
     }
-     public function register(RegisterRequest $request)
+    public function register(RegisterRequest $request)
     {
-          $uesr = $this->ProfileCustomerService->register($request);
-        return response()->json($uesr,201);
+        $uesr = $this->ProfileCustomerService->register($request);
+        return response()->json($uesr, 201);
     }
     public function getProfileCustomer()
     {
@@ -26,19 +25,17 @@ class ProfileCustomerController extends Controller
     }
     public function profileCustomer(UpdateProfileCustomerRequest $request)
     {
-       return $this->ProfileCustomerService->profileCustomer($request);
-
+        return $this->ProfileCustomerService->profileCustomer($request);
     }
 
     public function logout()
     {
-            $this->ProfileCustomerService->logout();
-            return response()->json(
-                [
-                    'message' => 'logout success',
-                ],
-                200,
-            );
+        $this->ProfileCustomerService->logout();
+        return response()->json(
+            [
+                'message' => 'logout success',
+            ],
+            200,
+        );
     }
-   
 }

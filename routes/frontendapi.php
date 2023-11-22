@@ -29,6 +29,7 @@ Route::group(['prefix' => 'Home'], function () {
     Route::get('Show_the_last_three_products', [ShowProductsAtHomeController::class, 'Show_the_last_three_products']);
     Route::get('FeaturedProduct', [ShowProductsAtHomeController::class, 'FeaturedProduct']);
 });
+
 //////////     View category information   ///////////////////////
 Route::get('getCategory/{category}', ShowCategoryController::class);
 
@@ -79,7 +80,9 @@ Route::group(['middleware' => ['web']], function () {
     });
 });
 
+
 Route::get('/showRestaurantBranche/{restaurantBranche}', ShowRestaurantBrancheController::class);
+
 Route::group(['middleware' => ['web']], function () {
     Route::post('/order', [OrederController::class, 'store']);
 });
@@ -95,8 +98,9 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:customer']], function 
         Route::post('/review', [ReviewController::class, 'checkReview']);
     });
 });
-
+////////////////       Show comments about the restaurant ////////////////////
 Route::get('/showreview/{branshId}', [ReviewController::class, 'showReview']);
+
 
 Route::group(['prefix' => 'customer'], function () {
     Route::post('register', [ProfileCustomerController::class, 'register']);

@@ -1,10 +1,36 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\{CityController, CareerController, DriverController, FamilyController, MycafeController, DetailsController, ProductController, SectionController, CategoryController, jobOfferController, workTimeController, AuthAdminController, ViewOrderController, EmailsSentController, ShowPaymentController, AuthCustomerController, ProfileAdminController, ourRestaurantController, workTimeOfferController, ShowAccountingController, RestaurantOwnerController, RestaurantReviewController, ourResponsibilityController, RestaurantBrancheController, ViewJobApplicationController, employmentOpportunityController, AnsweringJobApplicationsController};
+use App\Http\Controllers\Backend\{
+    CityController,
+    CareerController,
+    DriverController,
+    FamilyController, 
+    MycafeController, 
+    DetailsController, 
+    ProductController, 
+    SectionController, 
+    CategoryController, 
+    jobOfferController, 
+    workTimeController, 
+    AuthAdminController, 
+    ViewOrderController, 
+    EmailsSentController, 
+    ShowPaymentController, 
+    AuthCustomerController, 
+    ProfileAdminController, 
+    ourRestaurantController, 
+    workTimeOfferController, 
+    ShowAccountingController, 
+    RestaurantOwnerController, 
+    RestaurantReviewController, 
+    ourResponsibilityController, 
+    RestaurantBrancheController, 
+    ViewJobApplicationController, 
+    employmentOpportunityController, 
+    AnsweringJobApplicationsController
+};
 
-include 'frontendapi.php';
-include 'restaurantOwner.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +67,7 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
     Route::resource('/workTimeOffers', workTimeOfferController::class);
     Route::resource('/jobOffers', jobOfferController::class);
 
+    // ///////////////    Details of job offers  /////////////////////
     Route::group(['prefix' => 'Detail'], function () {
         Route::controller(DetailsController::class)->group(function () {
             Route::get('edit/{details}', 'edit');
@@ -49,9 +76,8 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () 
         });
     });
 
-    Route::group(['prefix' => 'AnsweringJobApplications'], function () {
+        ////////////         Responding to job requests      ///////////
         Route::post('sendmail/{employmentApplication}', [AnsweringJobApplicationsController::class, 'sendmail']);
-    });
 
     Route::group(['prefix' => 'EmailsSentController'], function () {
         Route::get('index', [EmailsSentController::class], 'index');
