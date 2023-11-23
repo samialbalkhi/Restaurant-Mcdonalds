@@ -16,17 +16,9 @@ class SectionService
 
     public function store(SectionRequest $request): Section
     {
-        //   return  Section::create($request->validated() + [
-        //         'image' => $this->uploadImage('images_section'),
-
-        //     ]);
-        return Section::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'message' => $request->message,
-            'status' => $request->filled('status'),
-            'image' => $this->uploadImage('images_section'),
-        ]);
+        return Section::create(['image' => $this->uploadImage('images_section'),
+         'status' => $request->filled('status')]
+          + $request->validated());
     }
 
     public function edit(Section $section)
@@ -37,15 +29,10 @@ class SectionService
     public function update(SectionRequest $request, Section $section)
     {
         $this->updateImage($section);
-        $path = $this->uploadImage('images_section');
-
-        $section->update([
-            'name' => $request->name,
-            'description' => $request->description,
-            'message' => $request->message,
-            'status' => $request->filled('status'),
-            'image' => $path,
-        ]);
+        
+        $section->update(['image' => $this->uploadImage('images_section'),
+         'status' => $request->filled('status')
+         ] + $request->validated());
     }
 
     public function destroy(Section $section)

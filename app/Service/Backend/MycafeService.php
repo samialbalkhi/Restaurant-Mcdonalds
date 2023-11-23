@@ -12,21 +12,18 @@ class MycafeService
 
     public function index()
     {
-        return 
-            MyCafe::with(['section:id,name'])->get();
+        return MyCafe::with(['section:id,name'])->get();
     }
 
-    public function store(MycafeRequest $request) : MyCafe
+    public function store(MycafeRequest $request): MyCafe
     {
         $section = Section::find($request->section_id);
-        $path = $this->uploadImage('image_mycafe');
 
         return $section->mycafes()->create([
             'name' => $request->name,
             'description' => $request->description,
-            'image' => $path,
+            'image' => $this->uploadImage('image_mycafe'),
         ]);
-
     }
 
     public function edit(MyCafe $mycafe)
@@ -38,15 +35,12 @@ class MycafeService
     {
         $this->updateImage($mycafe);
 
-        $path = $this->uploadImage('image_mycafe');
-
         $mycafe->update([
             'name' => $request->name,
             'description' => $request->description,
-            'image' => $path,
+            'image' => $this->uploadImage('image_mycafe'),
             'section_id' => $request->section_id,
         ]);
-
     }
 
     public function destroy(MyCafe $mycafe)
@@ -54,6 +48,5 @@ class MycafeService
         $this->deleteImage($mycafe);
 
         $mycafe->delete();
-
     }
 }

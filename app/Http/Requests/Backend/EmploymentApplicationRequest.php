@@ -30,7 +30,7 @@ class EmploymentApplicationRequest extends FormRequest
             'last_name' => ['required'],
             'city' => ['required'],
             'birthday' => ['required', 'date'],
-            'phone' => ['required', 'numeric', 'unique:employment_applications,phone'],
+            'phone' => ['required','regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'unique:employment_applications,phone'],
             'email' => ['required', 'email', 'unique:employment_applications,email'],
             'title' => ['required', 'min:5'],
             'company_name' => ['nullable'],

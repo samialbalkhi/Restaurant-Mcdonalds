@@ -19,13 +19,12 @@ class CategoryService
     {
         $section = Section::find($request->section_id);
 
-        $path = $this->uploadImage('images_category');
-
-        return $section->categories()->create([
-            'name' => $request->name,
-            'status' => $request->filled('status'),
-            'image' => $path,
-        ]);
+        return $section->categories()->create(
+            [
+                'image' => $this->uploadImage('images_category'),
+                'status' => $request->filled('status'),
+            ] + $request->validated(),
+        );
     }
 
     /**
@@ -42,14 +41,12 @@ class CategoryService
     public function update(CategoryRequest $request, Category $category)
     {
         $this->updateImage($category);
-        $path = $this->uploadImage('images_category');
-
-        $category->update([
-            'name' => $request->name,
-            'status' => $request->filled('status'),
-            'image' => $path,
-            'section_id' => $request->section_id,
-        ]);
+        $category->update(
+            [
+                'image' => $this->uploadImage('images_category'),
+                'status' => $request->filled('status'),
+            ] + $request->validated(),
+        );
     }
 
     /**
@@ -58,7 +55,6 @@ class CategoryService
     public function destroy(Category $category)
     {
         $this->deleteImage($category);
-
         $category->delete();
     }
 }

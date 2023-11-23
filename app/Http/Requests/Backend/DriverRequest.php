@@ -29,14 +29,13 @@ class DriverRequest extends FormRequest
         $rules = [
             'name' => ['required', 'min:3'],
             'restaurant_branche_id' => ['required'],
-            'phone' => ['required', 'numeric', 'unique:drivers,phone'],
+            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'unique:drivers,phone'],
             'email' => ['required', 'email', 'unique:drivers,email'],
             'address' => ['required'],
             'status' => ['nullable'],
-
         ];
         if (Request::route()->getName() == 'drivers.update') {
-            $rules['phone'] = ['required', 'min:3', Rule::unique('drivers', 'phone')->ignore($this->driver->id)];
+            $rules['phone'] = ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', Rule::unique('drivers', 'phone')->ignore($this->driver->id)];
             $rules['email'] = ['required', 'min:3', Rule::unique('drivers', 'email')->ignore($this->driver->id)];
         }
         return $rules;

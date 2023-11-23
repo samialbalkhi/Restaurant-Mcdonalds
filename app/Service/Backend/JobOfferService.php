@@ -17,14 +17,13 @@ class jobOfferService
 
     public function store(JobOfferRequest $request)
     {
-        $path = $this->uploadImage('image_jobOffer');
         $employmentOpportunity = EmploymentOpportunity::find($request->employment_opportunity_id);
 
         $Joboffer = $employmentOpportunity->Joboffers()->create([
             'location' => $request->location,
             'franchisee' => $request->franchisee,
             'description' => $request->description,
-            'image' => $path,
+            'image' => $this->uploadImage('image_jobOffer'),
         ]);
 
         $jobOfferId = Joboffer::find($Joboffer->id);

@@ -16,21 +16,25 @@ class DriverService
     {
         $restaurantBranche = RestaurantBranche::find($request->restaurant_branche_id);
 
-        return $restaurantBranche->drivers()->create($request->validated()+[
-            'status' =>$request->filled('status'),
-        ]);
+        return $restaurantBranche->drivers()->create(
+            [
+                'status' => $request->filled('status'),
+            ] + $request->validated(),
+        );
     }
 
     public function edit(Driver $driver)
     {
-        return $driver->find($driver->id);
+        return $driver;
     }
 
     public function update(DriverRequest $request, Driver $driver)
     {
-        $driver->update($request->validated()+[
-            $request->filled('status')
-        ]);
+        $driver->update(
+            [
+                'status' => $request->filled('status'),
+            ] + $request->validated(),
+        );
     }
 
     public function destroy(Driver $driver)

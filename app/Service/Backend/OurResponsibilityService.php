@@ -17,14 +17,13 @@ class ourResponsibilityService
 
     public function store(OurResponsibilityRequest $request): Ourresponsibility
     {
-        $path = $this->uploadImage('images_OurResponsibility');
 
         $section = Section::find($request->section_id);
 
         return $section->OurResponsibility()->create([
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $path,
+            'image' => $this->uploadImage('images_OurResponsibility'),
             'section_id' => $request->section_id,
         ]);
     }
@@ -38,12 +37,10 @@ class ourResponsibilityService
     {
         $this->updateImage($ourResponsibility);
 
-        $path = $this->uploadImage('images_ourResponsibility');
-
         $ourResponsibility->update([
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $path,
+            'image' => $this->uploadImage('images_ourResponsibility'),
             'section_id' => $request->section_id,
         ]);
     }

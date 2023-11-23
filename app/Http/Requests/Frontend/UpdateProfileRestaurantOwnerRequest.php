@@ -24,12 +24,10 @@ class UpdateProfileRestaurantOwnerRequest extends FormRequest
      */
     public function rules(): array
     {
-        $restaurantOwner = auth('restaurantOwner-api')->user();
-
         return [
             'name' => ['required', 'min:3', 'max:30'],
-            'email' => ['required', 'email', Rule::unique('restaurant_owners')->ignore($restaurantOwner->id)],
-            'phone' => ['required', 'numeric', Rule::unique('restaurant_owners')->ignore($restaurantOwner->id)],
+            'email' => ['required', 'email', Rule::unique('restaurant_owners')->ignore(auth('restaurantOwner-api')->user())],
+            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10 ', Rule::unique('restaurant_owners')->ignore(auth('restaurantOwner-api')->user())],
             'address' => ['required'],
             'note' => ['nullable'],
             'old_password' => ['sometimes', 'required', 'min:8', 'max:30'],

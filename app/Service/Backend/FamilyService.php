@@ -17,15 +17,11 @@ class FamilyService
 
     public function store(FamilyRequest $request): Family
     {
-        $path = $this->uploadImage('image_family');
         $section = Section::find($request->section_id);
-
+        
         return $section->families()->create([
-            'name' => $request->name,
-            'title' => $request->title,
-            'description' => $request->description,
-            'image' => $path,
-        ]);
+            'image' => $this->uploadImage('image_family')] 
+            + $request->validated());
     }
 
     public function edit(Family $family)
@@ -36,15 +32,10 @@ class FamilyService
     public function update(FamilyRequest $request, Family $family)
     {
         $this->updateImage($family);
-        $path = $this->uploadImage('image_family');
 
         $family->update([
-            'name' => $request->name,
-            'title' => $request->title,
-            'description' => $request->description,
-            'image' => $path,
-            'section_id' => $request->section_id,
-        ]);
+            'image' => $this->uploadImage('image_family')] 
+            + $request->validated());
     }
 
     public function destroy(Family $family)

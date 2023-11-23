@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class OrderRequest extends FormRequest
-{   
+{
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -24,15 +24,14 @@ class OrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status'=>['required'],
-            'street'=>['required'],
-            'note'=>['nullable'],
-            'house_number'=>['required'],
-            'postal_code'=>['required'],
-            'last_name'=>['required'],
-            'first_name'=>['required'],
-            'phone'=>['required'],
-            
+            'status' => ['required'],
+            'street' => ['required'],
+            'note' => ['nullable'],
+            'house_number' => ['required'],
+            'postal_code' => ['required'],
+            'last_name' => ['required'],
+            'first_name' => ['required'],
+            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10 '],
         ];
     }
     public function failedValidation(Validator $validator)

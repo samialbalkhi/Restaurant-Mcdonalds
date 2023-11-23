@@ -30,16 +30,15 @@ class RestaurantOwnerRequest extends FormRequest
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email', 'unique:restaurant_owners,email'],
             'password' => ['required', 'min:8', 'max:30'],
-            'phone' => ['required', 'unique:restaurant_owners,phone'],
+            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10 ', 'unique:restaurant_owners,phone'],
             'address' => ['required'],
             'note' => ['nullable'],
             'restaurant_branche_id' => ['required'],
         ];
         if (Request::route()->getName() == 'restaurantOwner.update') {
-            $rules['phone'] = ['required', Rule::unique('restaurant_owners', 'phone')->ignore($this->restaurantOwner->id)];
+            $rules['phone'] = ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10 ', Rule::unique('restaurant_owners', 'phone')->ignore($this->restaurantOwner->id)];
             $rules['email'] = ['required', 'email', Rule::unique('restaurant_owners', 'email')->ignore($this->restaurantOwner->id)];
             $rules['restaurant_branche_id'] = ['required', Rule::unique('restaurant_owners', 'restaurant_branche_id')->ignore($this->restaurantOwner->id)];
-
         }
 
         return $rules;
